@@ -722,17 +722,17 @@ namespace andengine.entity.scene
             // Methods
             // ===========================================================
 
-            public bool contains(/* final */ float pX, /* final */ float pY);
+            /* public */ bool contains(/* final */ float pX, /* final */ float pY);
 
-            public float[] convertSceneToLocalCoordinates(/* final */ float pX, /* final */ float pY);
-            public float[] convertLocalToSceneCoordinates(/* final */ float pX, /* final */ float pY);
+            /* public */ float[] convertSceneToLocalCoordinates(/* final */ float pX, /* final */ float pY);
+            /* public */ float[] convertLocalToSceneCoordinates(/* final */ float pX, /* final */ float pY);
 
             /**
              * This method only fires if this {@link ITouchArea} is registered to the {@link Scene} via {@link Scene#registerTouchArea(ITouchArea)} or to a {@link ILayer} via {@link ILayer#registerTouchArea(ITouchArea)}.
              * @param pSceneTouchEvent
              * @return <code>true</code> if the event was handled (that means {@link IOnAreaTouchListener} of the {@link Scene} will not be fired!), otherwise <code>false</code>.
              */
-            public bool onAreaTouched(/* final */ TouchEvent pSceneTouchEvent, /* final */ float pTouchAreaLocalX, /* final */ float pTouchAreaLocalY);
+            /* public */ bool onAreaTouched(/* final */ TouchEvent pSceneTouchEvent, /* final */ float pTouchAreaLocalX, /* final */ float pTouchAreaLocalY);
         }
 
         public /* static */ interface IOnAreaTouchListener
@@ -745,7 +745,7 @@ namespace andengine.entity.scene
             // Methods
             // ===========================================================
 
-            public bool onAreaTouched(/* final */ TouchEvent pSceneTouchEvent, /* final */ ITouchArea pTouchArea, /* final */ float pTouchAreaLocalX, /* final */ float pTouchAreaLocalY);
+            /* public */ bool onAreaTouched(/* final */ TouchEvent pSceneTouchEvent, /* final */ ITouchArea pTouchArea, /* final */ float pTouchAreaLocalX, /* final */ float pTouchAreaLocalY);
         }
 
         public /* static */ interface IOnSceneTouchListener
@@ -758,7 +758,7 @@ namespace andengine.entity.scene
             // Methods
             // ===========================================================
 
-            public bool onSceneTouchEvent(/* final */ Scene pScene, /* final */ TouchEvent pSceneTouchEvent);
+            /* public */ bool onSceneTouchEvent(/* final */ Scene pScene, /* final */ TouchEvent pSceneTouchEvent);
         }
 
     }

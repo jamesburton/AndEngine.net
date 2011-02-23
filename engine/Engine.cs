@@ -78,7 +78,7 @@ namespace andengine.engine
 
         private static /* final */ readonly float LOADING_SCREEN_DURATION_DEFAULT = 2;
 
-        private static /* final */ readonly SensorDelay SENSORDELAY_DEFAULT = SensorDelay.GAME;
+        private static /* final */ readonly SensorDelay SENSORDELAY_DEFAULT = SensorDelay.Game;
 
         // ===========================================================
         // Fields

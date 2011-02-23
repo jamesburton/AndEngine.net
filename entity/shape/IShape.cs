@@ -88,7 +88,7 @@ namespace andengine.entity.shape
         /* public */ void setCullingEnabled(/* final */ bool pCullingEnabled);
 
         /* public */ float getWidth();
-        public float getHeight();
+        /* public */ float getHeight();
 
         /* public */ float getBaseWidth();
         /* public */ float getBaseHeight();

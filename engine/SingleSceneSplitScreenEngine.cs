@@ -39,18 +39,18 @@ namespace andengine.engine
         // ===========================================================
 
         //@Deprecated
-        public override Camera getCamera()
+        public override camera.Camera getCamera()
         {
             //return super.mCamera;
             return base.mCamera;
         }
 
-        public Camera getFirstCamera()
+        public andengine.engine.camera.Camera getFirstCamera()
         {
-            return super.mCamera;
+            return base.mCamera;
         }
 
-        public Camera getSecondCamera()
+        public camera.Camera getSecondCamera()
         {
             return this.mSecondCamera;
         }

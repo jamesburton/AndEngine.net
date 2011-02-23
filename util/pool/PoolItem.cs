@@ -18,8 +18,8 @@ namespace andengine.util.pool
         // ===========================================================
 
         //Pool<? extends PoolItem> mParent;
-        Pool<PoolItem> mParent;
-        bool mRecycled = true;
+        public Pool<PoolItem> mParent;
+        public bool mRecycled = true;
 
         // ===========================================================
         // Constructors
@@ -54,12 +54,12 @@ namespace andengine.util.pool
         // Methods
         // ===========================================================
 
-        protected void onRecycle()
+        public void onRecycle()
         {
 
         }
 
-        protected void onObtain()
+        public void onObtain()
         {
 
         }

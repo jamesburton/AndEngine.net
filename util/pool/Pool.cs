@@ -89,7 +89,7 @@ namespace andengine.util.pool
         }
 
         // TODO: Check if anything should be added in place of this:- @SuppressWarnings("unchecked")
-        protected void recycle(/* final */ PoolItem pPoolItem)
+        /*protected*/public void recycle(/* final */ PoolItem pPoolItem)
         {
             this.recyclePoolItem((T)pPoolItem);
         }
