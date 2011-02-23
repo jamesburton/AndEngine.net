@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{64289D15-EC5D-4C21-863F-69EFD325B9C3}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>andengine</RootNamespace>
+    <AssemblyName>andengine.net</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MonoDroidLinkMode>Full</MonoDroidLinkMode>
+    <TargetFrameworkVersion>v2.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="OpenTK" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="engine\Engine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="audio\BaseAudioEntity.cs" />
+    <Compile Include="audio\IAudioManager.cs" />
+    <Content Include="audio\BaseAudioManager.cs" />
+    <Content Include="audio\IAudioEntity.cs" />
+    <Compile Include="collision\BaseCollisionChecker.cs" />
+    <Compile Include="collision\LineCollisionChecker.cs" />
+    <Compile Include="collision\RectangularShapeCollisionChecker.cs" />
+    <Compile Include="collision\ShapeCollisionChecker.cs" />
+    <Content Include="engine\camera\BoundCamera.java" />
+    <Compile Include="engine\camera\Camera.cs" />
+    <Content Include="engine\camera\CameraFactory.java" />
+    <Content Include="engine\camera\SmoothCamera.java" />
+    <Content Include="engine\camera\ZoomCamera.java" />
+    <Content Include="engine\DoubleSceneSplitScreenEngine.java" />
+    <Content Include="engine\FixedStepEngine.java" />
+    <Compile Include="engine\handler\IUpdateHandler.cs" />
+    <Content Include="engine\handler\UpdateHandlerList.java" />
+    <Content Include="engine\LimitedFPSEngine.java" />
+    <Content Include="engine\options\EngineOptions.java" />
+    <Content Include="engine\options\RenderOptions.java" />
+    <Content Include="engine\options\TouchOptions.java" />
+    <Content Include="engine\options\WakeLockOptions.java" />
+    <Compile Include="engine\SingleSceneSplitScreenEngine.cs" />
+    <Compile Include="entity\Entity.cs" />
+    <Compile Include="entity\IEntity.cs" />
+    <Content Include="entity\layer\BaseLayer.java" />
+    <Content Include="entity\layer\DynamicCapacityLayer.java" />
+    <Content Include="entity\layer\FixedCapacityLayer.java" />
+    <Content Include="entity\layer\ILayer.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXLayer.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXLayerProperty.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXLoader.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXObject.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXObjectGroup.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXObjectGroupProperty.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXObjectProperty.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXParser.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXProperties.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXProperty.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXTile.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXTiledMap.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXTiledMapProperty.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXTileProperty.java" />
+    <Content Include="entity\layer\tiled\tmx\TMXTileSet.java" />
+    <Content Include="entity\layer\tiled\tmx\TSXLoader.java" />
+    <Content Include="entity\layer\tiled\tmx\TSXParser.java" />
+    <Content Include="entity\layer\tiled\tmx\util\constants\TMXConstants.java" />
+    <Content Include="entity\layer\tiled\tmx\util\exception\TMXException.java" />
+    <Content Include="entity\layer\tiled\tmx\util\exception\TMXLoadException.java" />
+    <Content Include="entity\layer\tiled\tmx\util\exception\TMXParseException.java" />
+    <Content Include="entity\layer\tiled\tmx\util\exception\TSXLoadException.java" />
+    <Content Include="entity\layer\tiled\tmx\util\exception\TSXParseException.java" />
+    <Content Include="entity\layer\ZIndexSorter.java" />
+    <Content Include="entity\particle\emitter\BaseCircleParticleEmitter.java" />
+    <Content Include="entity\particle\emitter\BaseParticleEmitter.java" />
+    <Content Include="entity\particle\emitter\BaseRectangleParticleEmitter.java" />
+    <Content Include="entity\particle\emitter\CircleOutlineParticleEmitter.java" />
+    <Content Include="entity\particle\emitter\CircleParticleEmitter.java" />
+    <Content Include="entity\particle\emitter\IParticleEmitter.java" />
+    <Content Include="entity\particle\emitter\PointParticleEmitter.java" />
+    <Content Include="entity\particle\emitter\RectangleOutlineParticleEmitter.java" />
+    <Content Include="entity\particle\emitter\RectangleParticleEmitter.java" />
+    <Content Include="entity\particle\modifier\AccelerationInitializer.java" />
+    <Content Include="entity\particle\modifier\AlphaInitializer.java" />
+    <Content Include="entity\particle\modifier\AlphaModifier.java" />
+    <Content Include="entity\particle\modifier\BaseDoubleValueInitializer.java" />
+    <Content Include="entity\particle\modifier\BaseDoubleValueSpanModifier.java" />
+    <Content Include="entity\particle\modifier\BaseSingleValueInitializer.java" />
+    <Content Include="entity\particle\modifier\BaseSingleValueSpanModifier.java" />
+    <Content Include="entity\particle\modifier\BaseTripleValueInitializer.java" />
+    <Content Include="entity\particle\modifier\BaseTripleValueSpanModifier.java" />
+    <Content Include="entity\particle\modifier\ColorInitializer.java" />
+    <Content Include="entity\particle\modifier\ColorModifier.java" />
+    <Content Include="entity\particle\modifier\ExpireModifier.java" />
+    <Content Include="entity\particle\modifier\GravityInitializer.java" />
+    <Content Include="entity\particle\modifier\IParticleInitializer.java" />
+    <Content Include="entity\particle\modifier\IParticleModifier.java" />
+    <Content Include="entity\particle\modifier\OffCameraExpireModifier.java" />
+    <Content Include="entity\particle\modifier\RotationInitializer.java" />
+    <Content Include="entity\particle\modifier\RotationModifier.java" />
+    <Content Include="entity\particle\modifier\ScaleModifier.java" />
+    <Content Include="entity\particle\modifier\VelocityInitializer.java" />
+    <Content Include="entity\particle\Particle.java" />
+    <Content Include="entity\particle\ParticleSystem.java" />
+    <Content Include="entity\primitive\BaseRectangle.java" />
+    <Content Include="entity\primitive\Line.java" />
+    <Content Include="entity\primitive\Rectangle.java" />
+    <Content Include="entity\scene\background\AutoParallaxBackground.java" />
+    <Content Include="entity\scene\background\BaseBackground.java" />
+    <Content Include="entity\scene\background\ColorBackground.java" />
+    <Content Include="entity\scene\background\EntityBackground.java" />
+    <Content Include="entity\scene\background\IBackground.java" />
+    <Content Include="entity\scene\background\modifier\ColorModifier.java" />
+    <Content Include="entity\scene\background\modifier\IBackgroundModifier.java" />
+    <Content Include="entity\scene\background\modifier\LoopBackgroundModifier.java" />
+    <Content Include="entity\scene\background\modifier\ParallelBackgroundModifier.java" />
+    <Content Include="entity\scene\background\modifier\SequenceBackgroundModifier.java" />
+    <Content Include="entity\scene\background\ParallaxBackground.java" />
+    <Content Include="entity\scene\background\RepeatingSpriteBackground.java" />
+    <Content Include="entity\scene\background\SpriteBackground.java" />
+    <Content Include="entity\scene\CameraScene.java" />
+    <Content Include="entity\scene\menu\animator\AlphaMenuAnimator.java" />
+    <Content Include="entity\scene\menu\animator\BaseMenuAnimator.java" />
+    <Content Include="entity\scene\menu\animator\DirectMenuAnimator.java" />
+    <Content Include="entity\scene\menu\animator\IMenuAnimator.java" />
+    <Content Include="entity\scene\menu\animator\SlideMenuAnimator.java" />
+    <Content Include="entity\scene\menu\item\AnimatedSpriteMenuItem.java" />
+    <Content Include="entity\scene\menu\item\decorator\BaseMenuItemDecorator.java" />
+    <Content Include="entity\scene\menu\item\decorator\ColorMenuItemDecorator.java" />
+    <Content Include="entity\scene\menu\item\decorator\ScaleMenuItemDecorator.java" />
+    <Content Include="entity\scene\menu\item\IMenuItem.java" />
+    <Content Include="entity\scene\menu\item\SpriteMenuItem.java" />
+    <Content Include="entity\scene\menu\item\TextMenuItem.java" />
+    <Content Include="entity\scene\menu\MenuScene.java" />
+    <Content Include="entity\scene\popup\PopupScene.java" />
+    <Content Include="entity\scene\popup\TextPopupScene.java" />
+    <Compile Include="entity\scene\Scene.cs" />
+    <Content Include="entity\scene\SplashScene.java" />
+    <Content Include="entity\shape\GLShape.java" />
+    <Compile Include="entity\shape\IShape.cs" />
+    <Content Include="entity\shape\modifier\AlphaModifier.java" />
+    <Content Include="entity\shape\modifier\ColorModifier.java" />
+    <Content Include="entity\shape\modifier\DelayModifier.java" />
+    <Content Include="entity\shape\modifier\DoubleValueSpanShapeModifier.java" />
+    <Content Include="entity\shape\modifier\DurationShapeModifier.java" />
+    <Content Include="entity\shape\modifier\FadeInModifier.java" />
+    <Content Include="entity\shape\modifier\FadeOutModifier.java" />
+    <Content Include="entity\shape\modifier\IShapeModifier.java" />
+    <Content Include="entity\shape\modifier\LoopShapeModifier.java" />
+    <Content Include="entity\shape\modifier\MoveModifier.java" />
+    <Content Include="entity\shape\modifier\MoveXModifier.java" />
+    <Content Include="entity\shape\modifier\MoveYModifier.java" />
+    <Content Include="entity\shape\modifier\ParallelShapeModifier.java" />
+    <Content Include="entity\shape\modifier\PathModifier.java" />
+    <Content Include="entity\shape\modifier\RotationAtModifier.java" />
+    <Content Include="entity\shape\modifier\RotationByModifier.java" />
+    <Content Include="entity\shape\modifier\RotationModifier.java" />
+    <Content Include="entity\shape\modifier\ScaleAtModifier.java" />
+    <Content Include="entity\shape\modifier\ScaleModifier.java" />
+    <Content Include="entity\shape\modifier\SequenceShapeModifier.java" />
+    <Content Include="entity\shape\modifier\ShapeModifier.java" />
+    <Content Include="entity\shape\modifier\SingleValueChangeShapeModifier.java" />
+    <Content Include="entity\shape\modifier\SingleValueSpanShapeModifier.java" />
+    <Content Include="entity\shape\modifier\TripleValueSpanShapeModifier.java" />
+    <Content Include="entity\shape\RectangularShape.java" />
+    <Compile Include="entity\shape\Shape.cs" />
+    <Content Include="entity\shape\util\ShapeUtils.java" />
+    <Content Include="entity\sprite\AnimatedSprite.java" />
+    <Content Include="entity\sprite\BaseSprite.java" />
+    <Content Include="entity\sprite\Sprite.java" />
+    <Content Include="entity\sprite\TiledSprite.java" />
+    <Content Include="entity\text\ChangeableText.java" />
+    <Content Include="entity\text\Text.java" />
+    <Content Include="entity\text\TickerText.java" />
+    <Content Include="entity\util\AverageFPSCounter.java" />
+    <Content Include="entity\util\FPSCounter.java" />
+    <Content Include="entity\util\FPSLogger.java" />
+    <Content Include="entity\util\FrameCountCrasher.java" />
+    <Content Include="entity\util\FrameCounter.java" />
+    <Content Include="entity\util\ScreenCapture.java" />
+    <Content Include="entity\util\ScreenGrabber.java" />
+    <Content Include="input\touch\controller\BaseTouchController.java" />
+    <Content Include="input\touch\controller\ITouchController.java" />
+    <Content Include="input\touch\controller\SingleTouchControler.java" />
+    <Content Include="input\touch\detector\BaseDetector.java" />
+    <Content Include="input\touch\detector\ClickDetector.java" />
+    <Content Include="input\touch\detector\HoldDetector.java" />
+    <Content Include="input\touch\detector\ScrollDetector.java" />
+    <Content Include="input\touch\detector\SurfaceGestureDetector.java" />
+    <Content Include="input\touch\detector\SurfaceScrollDetector.java" />
+    <Compile Include="input\touch\TouchEvent.cs" />
+    <Content Include="level\LevelLoader.java" />
+    <Content Include="level\LevelParser.java" />
+    <Content Include="level\util\constants\LevelConstants.java" />
+    <Content Include="opengl\buffer\BufferObject.java" />
+    <Content Include="opengl\buffer\BufferObjectManager.java" />
+    <Content Include="opengl\font\Font.java" />
+    <Content Include="opengl\font\FontFactory.java" />
+    <Content Include="opengl\font\FontLibrary.java" />
+    <Content Include="opengl\font\FontManager.java" />
+    <Content Include="opengl\font\Letter.java" />
+    <Content Include="opengl\font\Size.java" />
+    <Content Include="opengl\font\StrokeFont.java" />
+    <Compile Include="opengl\IDrawable.cs" />
+    <Content Include="opengl\texture\buffer\TextTextureBuffer.java" />
+    <Content Include="opengl\texture\BuildableTexture.java" />
+    <Content Include="opengl\texture\builder\BlackPawnTextureBuilder.java" />
+    <Content Include="opengl\texture\builder\ITextureBuilder.java" />
+    <Content Include="opengl\texture\region\BaseTextureRegion.java" />
+    <Content Include="opengl\texture\region\buffer\BaseTextureRegionBuffer.java" />
+    <Content Include="opengl\texture\region\buffer\TextureRegionBuffer.java" />
+    <Content Include="opengl\texture\region\buffer\TiledTextureRegionBuffer.java" />
+    <Content Include="opengl\texture\region\TextureRegion.java" />
+    <Content Include="opengl\texture\region\TextureRegionFactory.java" />
+    <Content Include="opengl\texture\region\TextureRegionLibrary.java" />
+    <Content Include="opengl\texture\region\TiledTextureRegion.java" />
+    <Content Include="opengl\texture\source\AssetTextureSource.java" />
+    <Content Include="opengl\texture\source\decorator\BaseShapeTextureSourceDecorator.java" />
+    <Content Include="opengl\texture\source\decorator\BaseTextureSourceDecorator.java" />
+    <Content Include="opengl\texture\source\decorator\ColorKeyTextureSourceDecorator.java" />
+    <Content Include="opengl\texture\source\decorator\FillTextureSourceDecorator.java" />
+    <Content Include="opengl\texture\source\decorator\LinearGradientFillTextureSourceDecorator.java" />
+    <Content Include="opengl\texture\source\decorator\OutlineTextureSourceDecorator.java" />
+    <Content Include="opengl\texture\source\decorator\RadialGradientFillTextureSourceDecorator.java" />
+    <Content Include="opengl\texture\source\EmptyBitmapTextureSource.java" />
+    <Content Include="opengl\texture\source\FileTextureSource.java" />
+    <Content Include="opengl\texture\source\ITextureSource.java" />
+    <Content Include="opengl\texture\source\ResourceTextureSource.java" />
+    <Content Include="opengl\texture\Texture.java" />
+    <Content Include="opengl\texture\TextureFactory.java" />
+    <Content Include="opengl\texture\TextureManager.java" />
+    <Content Include="opengl\texture\TextureOptions.java" />
+    <Content Include="opengl\util\FastFloatBuffer.java" />
+    <Content Include="opengl\util\GLHelper.java" />
+    <Content Include="opengl\vertex\LineVertexBuffer.java" />
+    <Content Include="opengl\vertex\RectangleVertexBuffer.java" />
+    <Content Include="opengl\vertex\TextVertexBuffer.java" />
+    <Content Include="opengl\vertex\VertexBuffer.java" />
+    <Content Include="opengl\view\BaseConfigChooser.java" />
+    <Content Include="opengl\view\ComponentSizeChooser.java" />
+    <Content Include="opengl\view\EGLConfigChooser.java" />
+    <Content Include="opengl\view\GLSurfaceView.java" />
+    <Content Include="opengl\view\GLWrapper.java" />
+    <Content Include="opengl\view\LogWriter.java" />
+    <Content Include="opengl\view\RenderSurfaceView.java" />
+    <Content Include="opengl\view\SimpleEGLConfigChooser.java" />
+    <Content Include="sensor\accelerometer\AccelerometerData.java" />
+    <Content Include="sensor\accelerometer\AccelerometerSensorOptions.java" />
+    <Content Include="sensor\accelerometer\IAccelerometerListener.java" />
+    <Content Include="sensor\BaseSensorData.java" />
+    <Content Include="sensor\location\ILocationListener.java" />
+    <Content Include="sensor\location\LocationProviderStatus.java" />
+    <Content Include="sensor\location\LocationSensorOptions.java" />
+    <Content Include="sensor\orientation\IOrientationListener.java" />
+    <Content Include="sensor\orientation\OrientationData.java" />
+    <Content Include="sensor\orientation\OrientationSensorOptions.java" />
+    <Content Include="sensor\SensorDelay.java" />
+    <Content Include="ui\activity\BaseActivity.java" />
+    <Content Include="ui\activity\BaseGameActivity.java" />
+    <Content Include="ui\activity\BaseSplashActivity.java" />
+    <Content Include="ui\activity\LayoutGameActivity.java" />
+    <Content Include="ui\dialog\GenericInputDialogBuilder.java" />
+    <Content Include="ui\dialog\StringInputDialogBuilder.java" />
+    <Content Include="ui\IGameInterface.java" />
+    <Content Include="util\AsyncCallable.java" />
+    <Content Include="util\Base64.java" />
+    <Content Include="util\Base64InputStream.java" />
+    <Content Include="util\BetaUtils.java" />
+    <Content Include="util\Callable.java" />
+    <Content Include="util\Callback.java" />
+    <Content Include="util\ColorUtils.java" />
+    <Compile Include="util\constants\ColorConstants.cs" />
+    <Compile Include="util\constants\Constants.cs" />
+    <Compile Include="util\constants\MathConstants.cs" />
+    <Content Include="util\constants\TimeConstants.java" />
+    <Compile Include="util\Debug.cs" />
+    <Content Include="util\FileUtils.java" />
+    <Content Include="util\HorizontalAlign.java" />
+    <Content Include="util\IEntityMatcher.java" />
+    <Content Include="util\levelstats\LevelStatsDBConnector.java" />
+    <Content Include="util\Library.java" />
+    <Content Include="util\ListUtils.java" />
+    <Content Include="util\MathUtils.java" />
+    <Content Include="util\modifier\BaseDoubleValueSpanModifier.java" />
+    <Content Include="util\modifier\BaseDurationModifier.java" />
+    <Content Include="util\modifier\BaseModifier.java" />
+    <Content Include="util\modifier\BaseSingleValueChangeModifier.java" />
+    <Content Include="util\modifier\BaseSingleValueSpanModifier.java" />
+    <Content Include="util\modifier\BaseTripleValueSpanModifier.java" />
+    <Content Include="util\modifier\ease\EaseBackIn.java" />
+    <Content Include="util\modifier\ease\EaseBackInOut.java" />
+    <Content Include="util\modifier\ease\EaseBackOut.java" />
+    <Content Include="util\modifier\ease\EaseBounceIn.java" />
+    <Content Include="util\modifier\ease\EaseBounceInOut.java" />
+    <Content Include="util\modifier\ease\EaseBounceOut.java" />
+    <Content Include="util\modifier\ease\EaseCircularIn.java" />
+    <Content Include="util\modifier\ease\EaseCircularInOut.java" />
+    <Content Include="util\modifier\ease\EaseCircularOut.java" />
+    <Content Include="util\modifier\ease\EaseCubicIn.java" />
+    <Content Include="util\modifier\ease\EaseCubicInOut.java" />
+    <Content Include="util\modifier\ease\EaseCubicOut.java" />
+    <Content Include="util\modifier\ease\EaseElasticIn.java" />
+    <Content Include="util\modifier\ease\EaseElasticInOut.java" />
+    <Content Include="util\modifier\ease\EaseElasticOut.java" />
+    <Content Include="util\modifier\ease\EaseExponentialIn.java" />
+    <Content Include="util\modifier\ease\EaseExponentialInOut.java" />
+    <Content Include="util\modifier\ease\EaseExponentialOut.java" />
+    <Content Include="util\modifier\ease\EaseLinear.java" />
+    <Content Include="util\modifier\ease\EaseQuadIn.java" />
+    <Content Include="util\modifier\ease\EaseQuadInOut.java" />
+    <Content Include="util\modifier\ease\EaseQuadOut.java" />
+    <Content Include="util\modifier\ease\EaseQuartIn.java" />
+    <Content Include="util\modifier\ease\EaseQuartInOut.java" />
+    <Content Include="util\modifier\ease\EaseQuartOut.java" />
+    <Content Include="util\modifier\ease\EaseQuintIn.java" />
+    <Content Include="util\modifier\ease\EaseQuintInOut.java" />
+    <Content Include="util\modifier\ease\EaseQuintOut.java" />
+    <Content Include="util\modifier\ease\EaseSineIn.java" />
+    <Content Include="util\modifier\ease\EaseSineInOut.java" />
+    <Content Include="util\modifier\ease\EaseSineOut.java" />
+    <Content Include="util\modifier\ease\EaseStrongIn.java" />
+    <Content Include="util\modifier\ease\EaseStrongInOut.java" />
+    <Content Include="util\modifier\ease\EaseStrongOut.java" />
+    <Content Include="util\modifier\ease\IEaseFunction.java" />
+    <Compile Include="util\modifier\IModifier.cs" />
+    <Content Include="util\modifier\LoopModifier.java" />
+    <Compile Include="util\modifier\ModifierList.cs" />
+    <Content Include="util\modifier\ParallelModifier.java" />
+    <Content Include="util\modifier\SequenceModifier.java" />
+    <Content Include="util\modifier\util\ModifierUtils.java" />
+    <Content Include="util\MultiKey.java" />
+    <Content Include="util\MultiKeyHashMap.java" />
+    <Content Include="util\path\astar\AStarPathFinder.java" />
+    <Content Include="util\path\astar\EuclideanHeuristic.java" />
+    <Content Include="util\path\astar\IAStarHeuristic.java" />
+    <Content Include="util\path\astar\ManhattanHeuristic.java" />
+    <Content Include="util\path\astar\NullHeuristic.java" />
+    <Content Include="util\path\Direction.java" />
+    <Content Include="util\path\IPathFinder.java" />
+    <Content Include="util\path\ITiledMap.java" />
+    <Content Include="util\path\Path.java" />
+    <Content Include="util\pool\EntityRemoveRunnablePoolItem.java" />
+    <Content Include="util\pool\EntityRemoveRunnablePoolUpdateHandler.java" />
+    <Compile Include="util\pool\GenericPool.cs" />
+    <Compile Include="util\pool\Pool.cs" />
+    <Compile Include="util\pool\PoolItem.cs" />
+    <Content Include="util\pool\PoolUpdateHandler.java" />
+    <Content Include="util\pool\RunnablePoolItem.java" />
+    <Content Include="util\pool\RunnablePoolUpdateHandler.java" />
+    <Content Include="util\ProgressCallable.java" />
+    <Content Include="util\SAXUtils.java" />
+    <Content Include="util\SimplePreferences.java" />
+    <Content Include="util\SocketUtils.java" />
+    <Content Include="util\sort\InsertionSorter.java" />
+    <Content Include="util\sort\Sorter.java" />
+    <Content Include="util\StreamUtils.java" />
+    <Content Include="util\StringUtils.java" />
+    <Content Include="util\SystemUtils.java" />
+    <Content Include="util\VerticalAlign.java" />
+    <Content Include="util\ViewUtils.java" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
