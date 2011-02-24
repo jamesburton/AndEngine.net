@@ -3,14 +3,23 @@ namespace andengine.entity.shape
 
     //import javax.microedition.khronos.opengles.GL10;
     //TODO Check this conversion
-    using OpenTK.Graphics.ES11;
+    //using OpenTK.Graphics.ES11;
+    using GL10 = Javax.Microedition.Khronos.Opengles.GL10Consts;
 
-    using andengine.engine.camera/*.Camera*/;
-    using andengine.entity/*.Entity*/;
-    using andengine.input.touch/*.TouchEvent*/;
-    using andengine.opengl.util/*.GLHelper*/;
-    using andengine.util.modifier/*.IModifier;
-    using andengine.util.modifier.ModifierList*/;
+    //using andengine.engine.camera/*.Camera*/;
+    using Camera = andengine.engine.camera.Camera;
+    //using andengine.entity/*.Entity*/;
+    using Entity = andengine.entity.Entity;
+    //using andengine.input.touch/*.TouchEvent*/;
+    using TouchEvent = andengine.input.touch.TouchEvent;
+    //using andengine.opengl.util/*.GLHelper*/;
+    using GLHelper = andengine.opengl.util.GLHelper;
+
+    /*using andengine.util.modifier.IModifier;
+    using andengine.util.modifier.ModifierList;*/
+    //using IModifier = andengine.util.modifier.IModifier;
+    //using ModifierList = andengine.util.modifier.ModifierList;
+    using andengine.util.modifier;
 
     /**
      * @author Nicolas Gramlich
@@ -22,11 +31,11 @@ namespace andengine.entity.shape
         // Constants
         // ===========================================================
 
-        public static /* final */ sealed int BLENDFUNCTION_SOURCE_DEFAULT = GL10.GL_SRC_ALPHA;
-        public static /* final */ sealed int BLENDFUNCTION_DESTINATION_DEFAULT = GL10.GL_ONE_MINUS_SRC_ALPHA;
+        public static /* final */ readonly int BLENDFUNCTION_SOURCE_DEFAULT = GL10.GlSrcAlpha;
+        public static /* final */ readonly int BLENDFUNCTION_DESTINATION_DEFAULT = GL10.GlOneMinusSrcAlpha;
 
-        public static /* final */ sealed int BLENDFUNCTION_SOURCE_PREMULTIPLYALPHA_DEFAULT = GL10.GL_ONE;
-        public static /* final */ sealed int BLENDFUNCTION_DESTINATION_PREMULTIPLYALPHA_DEFAULT = GL10.GL_ONE_MINUS_SRC_ALPHA;
+        public static /* final */ readonly int BLENDFUNCTION_SOURCE_PREMULTIPLYALPHA_DEFAULT = GL10.GlOne;
+        public static /* final */ readonly int BLENDFUNCTION_DESTINATION_PREMULTIPLYALPHA_DEFAULT = GL10.GlOneMinusSrcAlpha;
 
         // ===========================================================
         // Fields
@@ -37,8 +46,8 @@ namespace andengine.entity.shape
         protected float mBlue = 1f;
         protected float mAlpha = 1f;
 
-        private /* final */ sealed float mBaseX;
-        private /* final */ sealed float mBaseY;
+        private /* final */ readonly float mBaseX;
+        private /* final */ readonly float mBaseY;
 
         protected float mX;
         protected float mY;
@@ -67,7 +76,7 @@ namespace andengine.entity.shape
         protected int mSourceBlendFunction = BLENDFUNCTION_SOURCE_DEFAULT;
         protected int mDestinationBlendFunction = BLENDFUNCTION_DESTINATION_DEFAULT;
 
-        private /* final */ sealed ModifierList<IShape> mShapeModifiers = new ModifierList<IShape>(this);
+        private /* final */ readonly ModifierList<IShape> mShapeModifiers = new ModifierList<IShape>(this);
 
         private bool mCullingEnabled = false;
 
@@ -87,6 +96,11 @@ namespace andengine.entity.shape
         // ===========================================================
         // Getter & Setter
         // ===========================================================
+
+        public float Red { get { return getRed(); } }
+        public float Green { get { return getGreen(); } }
+        public float Blue { get { return getBlue(); } }
+        public float Alpha { get { return getAlpha(); } set { setAlpha(value); } }
 
         public override float getRed()
         {
@@ -142,6 +156,11 @@ namespace andengine.entity.shape
             this.mAlpha = pAlpha;
         }
 
+        public float X { get { return getX(); } }
+        public float Y { get { return getY(); } }
+        public float BaseX { get { return getBaseX(); } }
+        public float BaseY { get { return getBaseY(); } }
+
         public override float getX()
         {
             return this.mX;
@@ -181,6 +200,9 @@ namespace andengine.entity.shape
             this.onPositionChanged();
         }
 
+        public float VelocityX { get { return getVelocityX(); } set { setVelocityX(value); } }
+        public float VelocityY { get { return getVelocityY(); } set { setVelocityY(value); } }
+
         public override float getVelocityX()
         {
             return this.mVelocityX;
@@ -212,6 +234,9 @@ namespace andengine.entity.shape
             this.mVelocityX = pVelocityX;
             this.mVelocityY = pVelocityY;
         }
+
+        public float AccelerationX { get { return getAccelerationX(); } set { setAccelerationX(value); } }
+        public float AccelerationY { get { return getAccelerationY(); } set { setAccelerationY(value); } }
 
         public override float getAccelerationX()
         {
@@ -251,6 +276,8 @@ namespace andengine.entity.shape
             this.mAccelerationY += pAccelerationY;
         }
 
+        public float Rotation { get { return getRotation(); } set { setRotation(value); } }
+
         public override float getRotation()
         {
             return this.mRotation;
@@ -261,6 +288,8 @@ namespace andengine.entity.shape
             this.mRotation = pRotation;
         }
 
+        public float AngularVelocity { get { return getAngularVelocity(); } set { setAngularVelocity(value); } }
+
         public override float getAngularVelocity()
         {
             return this.mAngularVelocity;
@@ -270,6 +299,9 @@ namespace andengine.entity.shape
         {
             this.mAngularVelocity = pAngularVelocity;
         }
+
+        public float RotationCenterX { get { return getRotationCenterX(); } set { setRotationCenterX(value); } }
+        public float RotationCenterY { get { return getRotationCenterY(); } set { setRotationCenterY(value); } }
 
         public override float getRotationCenterX()
         {
@@ -301,6 +333,9 @@ namespace andengine.entity.shape
         {
             return this.mScaleX != 1 || this.mScaleY != 1;
         }
+
+        public float ScaleX { get { return getScaleX(); } set { setScaleX(value); } }
+        public float ScaleY { get { return getScaleY(); } set { setScaleY(value); } }
 
         public override float getScaleX()
         {
@@ -334,6 +369,9 @@ namespace andengine.entity.shape
             this.mScaleY = pScaleY;
         }
 
+        public float ScaleCenterX { get { return getScaleCenterX(); } set { setScaleCenterX(value); } }
+        public float ScaleCenterY { get { return getScaleCenterY(); } set { setScaleCenterY(value); } }
+
         public override float getScaleCenterX()
         {
             return this.mScaleCenterX;
@@ -360,6 +398,8 @@ namespace andengine.entity.shape
             this.mScaleCenterY = pScaleCenterY;
         }
 
+        public bool UpdatePhysics { get { return isUpdatePhysics(); } set { setUpdatePhysics(value); } }
+
         public override bool isUpdatePhysics()
         {
             return this.mUpdatePhysics;
@@ -373,6 +413,8 @@ namespace andengine.entity.shape
         {
             this.mUpdatePhysics = pUpdatePhysics;
         }
+
+        public bool CullingEnabled { get { return isCullingEnabled(); } set { setCullingEnabled(value); } }
 
         public override bool isCullingEnabled()
         {
@@ -390,14 +432,18 @@ namespace andengine.entity.shape
             this.mDestinationBlendFunction = pDestinationBlendFunction;
         }
 
+        public float WidthScaled { get { return getWidthScaled(); } }
+
         public override float getWidthScaled()
         {
-            return this.getWidth() * this.mScaleX;
+            return this./*getWidth()*/Width * this.mScaleX;
         }
+
+        public float HeightScaled { get { return getHeightScaled(); } }
 
         public override float getHeightScaled()
         {
-            return this.getHeight() * this.mScaleY;
+            return this./*getHeight()*/Height * this.mScaleY;
         }
 
         public override void addShapeModifier(/* final */ IModifier<IShape> pShapeModifier)

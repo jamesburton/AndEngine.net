@@ -4,10 +4,11 @@ namespace andengine.collision
     //import static org.anddev.andengine.util.constants.Constants.VERTEX_INDEX_X;
     //import static org.anddev.andengine.util.constants.Constants.VERTEX_INDEX_Y;
     // TODO: Check this conversion
-    using andegine.util.constants;
+    using Constants = andengine.util.constants.Constants;
 
     //using andengine.entity.shape.RectangularShape;
-    using andengine.util.MathUtils;
+    using RectangularShape = andengine.entity.shape.RectangularShape;
+    using MathUtil = andengine.util.MathUtils;
 
     /**
      * @author Nicolas Gramlich
@@ -19,11 +20,11 @@ namespace andengine.collision
         // Constants
         // ===========================================================
 
-        private static /* final */ sealed int RECTANGULARSHAPE_VERTEX_COUNT = 4;
+        private static /* final */ readonly int RECTANGULARSHAPE_VERTEX_COUNT = 4;
 
-        private static /* final */ sealed float[] VERTICES_CONTAINS_TMP = new float[2 * RECTANGULARSHAPE_VERTEX_COUNT];
-        private static /* final */ sealed float[] VERTICES_COLLISION_TMP_A = new float[2 * RECTANGULARSHAPE_VERTEX_COUNT];
-        private static /* final */ sealed float[] VERTICES_COLLISION_TMP_B = new float[2 * RECTANGULARSHAPE_VERTEX_COUNT];
+        private static /* final */ readonly float[] VERTICES_CONTAINS_TMP = new float[2 * RECTANGULARSHAPE_VERTEX_COUNT];
+        private static /* final */ readonly float[] VERTICES_COLLISION_TMP_A = new float[2 * RECTANGULARSHAPE_VERTEX_COUNT];
+        private static /* final */ readonly float[] VERTICES_COLLISION_TMP_B = new float[2 * RECTANGULARSHAPE_VERTEX_COUNT];
 
         // ===========================================================
         // Fields

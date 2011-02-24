@@ -6,7 +6,8 @@ namespace andengine.entity.scene
     //import static org.anddev.andengine.util.constants.Constants.VERTEX_INDEX_Y;
 
     //import java.util.ArrayList;
-    using Android.Util;
+    //using ArrayList = Android.Util.ArrayList;
+    using System.Collections.Generic;
 
     //import javax.microedition.khronos.opengles.GL10;
     //using Android.Opengl;
@@ -35,9 +36,10 @@ namespace andengine.entity.scene
     //using andengine.opengl.util.GLHelper;
 
     //import android.util.SparseArray;
+    //using SparseArray = Android.Util.SparseArray;
     using Android.Util;
     //import android.view.MotionEvent;
-    using Android.Views;
+    using MotionEvent = Android.Views.MotionEvent;
 
     /**
      * @author Nicolas Gramlich
@@ -208,17 +210,17 @@ namespace andengine.entity.scene
 
         public void clearUpdateHandlers()
         {
-            this.mUpdateHandlers.clear();
+            this.mUpdateHandlers.Clear();
         }
 
         public void registerUpdateHandler(/* final */ IUpdateHandler pUpdateHandler)
         {
-            this.mUpdateHandlers.add(pUpdateHandler);
+            this.mUpdateHandlers.Add(pUpdateHandler);
         }
 
         public void unregisterUpdateHandler(/* final */ IUpdateHandler pUpdateHandler)
         {
-            this.mUpdateHandlers.remove(pUpdateHandler);
+            this.mUpdateHandlers.Remove(pUpdateHandler);
         }
 
         public void setOnSceneTouchListener(/* final */ IOnSceneTouchListener pOnSceneTouchListener)

@@ -11,7 +11,7 @@ namespace andengine.util.constants
         // Final Fields
         // ===========================================================
 
-        public static /* final */ sealed float COLOR_FACTOR_INT_TO_FLOAT = 255.0f;
+        public static /* final sealed */ float COLOR_FACTOR_INT_TO_FLOAT = 255.0f;
 
         // ===========================================================
         // Methods

@@ -4,8 +4,11 @@ namespace andengine.engine
     //import javax.microedition.khronos.opengles.GL10;
 
     //using andengine.engine.camera.Camera;
+    using Camera = andengine.engine.camera.Camera;
     //using andengine.engine.options.EngineOptions;
+    using EngineOptions = andengine.engine.options.EngineOptions;
     //using andengine.input.touch.TouchEvent;
+    using TouchEvent = andengine.input.touch.TouchEvent;
 
     /**
      * @author Nicolas Gramlich

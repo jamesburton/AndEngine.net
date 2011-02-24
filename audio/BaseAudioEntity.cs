@@ -16,7 +16,7 @@ namespace andengine.audio
         // ===========================================================
 
         //private final IAudioManager<? extends IAudioEntity> mAudioManager;
-        private sealed IAudioManager<IAudioEntity> mAudioManager;
+        private readonly IAudioManager<IAudioEntity> mAudioManager;
 
         protected float mLeftVolume = 1.0f;
         protected float mRightVolume = 1.0f;

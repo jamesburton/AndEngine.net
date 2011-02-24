@@ -3,10 +3,10 @@ namespace andengine.collision
 
     //import static org.anddev.andengine.util.constants.Constants.VERTEX_INDEX_X;
     //import static org.anddev.andengine.util.constants.Constants.VERTEX_INDEX_Y;
-    using andengine.util.constants;
+    using Constants = andengine.util.constants.Constants;
 
-    using andengine.entity.shape/*.Shape*/;
-    using andengine.util/*.MathUtils*/;
+    using Shape = andengine.entity.shape.Shape;
+    using MathUtils = andengine.util.MathUtils;
 
 
     /**
@@ -19,8 +19,8 @@ namespace andengine.collision
         // Constants
         // ===========================================================
 
-        private static /* final */ sealed float[] VERTICES_SCENE_TO_LOCAL_TMP = new float[2];
-        private static /* final */ sealed float[] VERTICES_LOCAL_TO_SCENE_TMP = new float[2];
+        private static /* final */ readonly float[] VERTICES_SCENE_TO_LOCAL_TMP = new float[2];
+        private static /* final */ readonly float[] VERTICES_LOCAL_TO_SCENE_TMP = new float[2];
 
         // ===========================================================
         // Fields
@@ -92,11 +92,11 @@ namespace andengine.collision
             {
                 /* At last check if one polygon 'contains' the other one by checking 
                  * if one vertex of the one vertices is contained by all of the other vertices. */
-                if (ShapeCollisionChecker.checkContains(pVerticesA, pVerticesALength, pVerticesB[VERTEX_INDEX_X], pVerticesB[VERTEX_INDEX_Y]))
+                if (ShapeCollisionChecker.checkContains(pVerticesA, pVerticesALength, pVerticesB[Constants.VERTEX_INDEX_X], pVerticesB[VERTEX_INDEX_Y]))
                 {
                     return true;
                 }
-                else if (ShapeCollisionChecker.checkContains(pVerticesB, pVerticesBLength, pVerticesA[VERTEX_INDEX_X], pVerticesA[VERTEX_INDEX_Y]))
+                else if (ShapeCollisionChecker.checkContains(pVerticesB, pVerticesBLength, pVerticesA[Constants.VERTEX_INDEX_X], pVerticesA[VERTEX_INDEX_Y]))
                 {
                     return true;
                 }
@@ -139,12 +139,13 @@ namespace andengine.collision
 
         public static bool checkContains(/* final */ float[] pVertices, /* final */ int pVerticesLength, /* final */ float pX, /* final */ float pY)
         {
+            int edgeResult;
             int edgeResultSum = 0;
 
             for (int i = pVerticesLength - 4; i >= 0; i -= 2)
             {
                 /* final */
-                int edgeResult = relativeCCW(pVertices[i], pVertices[i + 1], pVertices[i + 2], pVertices[i + 3], pX, pY);
+                edgeResult = relativeCCW(pVertices[i], pVertices[i + 1], pVertices[i + 2], pVertices[i + 3], pX, pY);
                 if (edgeResult == 0)
                 {
                     return true;
@@ -156,7 +157,7 @@ namespace andengine.collision
             }
             /* Also check the 'around the corner of the array' line. */
             /* final */
-            int edgeResult = relativeCCW(pVertices[pVerticesLength - 2], pVertices[pVerticesLength - 1], pVertices[VERTEX_INDEX_X], pVertices[VERTEX_INDEX_Y], pX, pY);
+            edgeResult = relativeCCW(pVertices[pVerticesLength - 2], pVertices[pVerticesLength - 1], pVertices[VERTEX_INDEX_X], pVertices[VERTEX_INDEX_Y], pX, pY);
             if (edgeResult == 0)
             {
                 return true;

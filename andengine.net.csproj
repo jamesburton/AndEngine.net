@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="engine\Engine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SparseArray.cs" />
+    <Compile Include="SparseMatrix.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="audio\BaseAudioEntity.cs" />
@@ -65,12 +67,12 @@
     <Content Include="engine\DoubleSceneSplitScreenEngine.java" />
     <Content Include="engine\FixedStepEngine.java" />
     <Compile Include="engine\handler\IUpdateHandler.cs" />
-    <Content Include="engine\handler\UpdateHandlerList.java" />
+    <Compile Include="engine\handler\UpdateHandlerList.cs" />
     <Content Include="engine\LimitedFPSEngine.java" />
-    <Content Include="engine\options\EngineOptions.java" />
-    <Content Include="engine\options\RenderOptions.java" />
-    <Content Include="engine\options\TouchOptions.java" />
-    <Content Include="engine\options\WakeLockOptions.java" />
+    <Compile Include="engine\options\EngineOptions.cs" />
+    <Compile Include="engine\options\RenderOptions.cs" />
+    <Compile Include="engine\options\TouchOptions.cs" />
+    <Compile Include="engine\options\WakeLockOptions.cs" />
     <Compile Include="engine\SingleSceneSplitScreenEngine.cs" />
     <Compile Include="entity\Entity.cs" />
     <Compile Include="entity\IEntity.cs" />
@@ -167,7 +169,7 @@
     <Content Include="entity\scene\popup\TextPopupScene.java" />
     <Compile Include="entity\scene\Scene.cs" />
     <Content Include="entity\scene\SplashScene.java" />
-    <Content Include="entity\shape\GLShape.java" />
+    <Compile Include="entity\shape\GLShape.cs" />
     <Compile Include="entity\shape\IShape.cs" />
     <Content Include="entity\shape\modifier\AlphaModifier.java" />
     <Content Include="entity\shape\modifier\ColorModifier.java" />
@@ -193,7 +195,7 @@
     <Content Include="entity\shape\modifier\SingleValueChangeShapeModifier.java" />
     <Content Include="entity\shape\modifier\SingleValueSpanShapeModifier.java" />
     <Content Include="entity\shape\modifier\TripleValueSpanShapeModifier.java" />
-    <Content Include="entity\shape\RectangularShape.java" />
+    <Compile Include="entity\shape\RectangularShape.cs" />
     <Compile Include="entity\shape\Shape.cs" />
     <Content Include="entity\shape\util\ShapeUtils.java" />
     <Content Include="entity\sprite\AnimatedSprite.java" />
@@ -211,7 +213,7 @@
     <Content Include="entity\util\ScreenCapture.java" />
     <Content Include="entity\util\ScreenGrabber.java" />
     <Content Include="input\touch\controller\BaseTouchController.java" />
-    <Content Include="input\touch\controller\ITouchController.java" />
+    <Compile Include="input\touch\controller\ITouchController.cs" />
     <Content Include="input\touch\controller\SingleTouchControler.java" />
     <Content Include="input\touch\detector\BaseDetector.java" />
     <Content Include="input\touch\detector\ClickDetector.java" />
@@ -262,7 +264,7 @@
     <Content Include="opengl\texture\TextureManager.java" />
     <Content Include="opengl\texture\TextureOptions.java" />
     <Content Include="opengl\util\FastFloatBuffer.java" />
-    <Content Include="opengl\util\GLHelper.java" />
+    <Compile Include="opengl\util\GLHelper.cs" />
     <Content Include="opengl\vertex\LineVertexBuffer.java" />
     <Content Include="opengl\vertex\RectangleVertexBuffer.java" />
     <Content Include="opengl\vertex\TextVertexBuffer.java" />
@@ -303,15 +305,15 @@
     <Compile Include="util\constants\ColorConstants.cs" />
     <Compile Include="util\constants\Constants.cs" />
     <Compile Include="util\constants\MathConstants.cs" />
-    <Content Include="util\constants\TimeConstants.java" />
+    <Compile Include="util\constants\TimeConstants.cs" />
     <Compile Include="util\Debug.cs" />
     <Content Include="util\FileUtils.java" />
     <Content Include="util\HorizontalAlign.java" />
     <Content Include="util\IEntityMatcher.java" />
     <Content Include="util\levelstats\LevelStatsDBConnector.java" />
-    <Content Include="util\Library.java" />
+    <Compile Include="util\Library.cs" />
     <Content Include="util\ListUtils.java" />
-    <Content Include="util\MathUtils.java" />
+    <Compile Include="util\MathUtils.cs" />
     <Content Include="util\modifier\BaseDoubleValueSpanModifier.java" />
     <Content Include="util\modifier\BaseDurationModifier.java" />
     <Content Include="util\modifier\BaseModifier.java" />
@@ -358,7 +360,7 @@
     <Compile Include="util\modifier\ModifierList.cs" />
     <Content Include="util\modifier\ParallelModifier.java" />
     <Content Include="util\modifier\SequenceModifier.java" />
-    <Content Include="util\modifier\util\ModifierUtils.java" />
+    <Compile Include="util\modifier\util\ModifierUtils.cs" />
     <Content Include="util\MultiKey.java" />
     <Content Include="util\MultiKeyHashMap.java" />
     <Content Include="util\path\astar\AStarPathFinder.java" />
@@ -380,7 +382,7 @@
     <Content Include="util\pool\RunnablePoolUpdateHandler.java" />
     <Content Include="util\ProgressCallable.java" />
     <Content Include="util\SAXUtils.java" />
-    <Content Include="util\SimplePreferences.java" />
+    <Compile Include="util\SimplePreferences.cs" />
     <Content Include="util\SocketUtils.java" />
     <Content Include="util\sort\InsertionSorter.java" />
     <Content Include="util\sort\Sorter.java" />

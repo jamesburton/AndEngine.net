@@ -70,7 +70,8 @@ namespace andengine.engine
      * @author Nicolas Gramlich
      * @since 12:21:31 - 08.03.2010
      */
-    public class Engine : SensorEventListener, OnTouchListener, ITouchEventCallback, TimeConstants, LocationListener
+    // TODO: Check the implications of removing class(es) from the list (TimeConstants - no longer an interface, so add class to usage)
+    public class Engine : SensorEventListener, OnTouchListener, ITouchEventCallback, /* TimeConstants, */ LocationListener
     {
         // ===========================================================
         // Constants
@@ -301,17 +302,17 @@ namespace andengine.engine
 
         public void clearUpdateHandlers()
         {
-            this.mUpdateHandlers.clear();
+            this.mUpdateHandlers.Clear();
         }
 
         public void registerUpdateHandler(/* final */ IUpdateHandler pUpdateHandler)
         {
-            this.mUpdateHandlers.add(pUpdateHandler);
+            this.mUpdateHandlers.Add(pUpdateHandler);
         }
 
         public void unregisterUpdateHandler(/* final */ IUpdateHandler pUpdateHandler)
         {
-            this.mUpdateHandlers.remove(pUpdateHandler);
+            this.mUpdateHandlers.Remove(pUpdateHandler);
         }
 
         public bool isMethodTracing()
@@ -345,9 +346,9 @@ namespace andengine.engine
         {
             if (this.mRunning)
             {
-                switch (pSensor.getType())
+                switch (pSensor.Type)
                 {
-                    case Sensor.TYPE_ACCELEROMETER:
+                    case SensorType.Accelerometer:
                         this.mAccelerometerData.setAccuracy(pAccuracy);
                         this.mAccelerometerListener.onAccelerometerChanged(this.mAccelerometerData);
                         break;
@@ -359,14 +360,14 @@ namespace andengine.engine
         {
             if (this.mRunning)
             {
-                switch (pEvent.sensor.getType())
+                switch (pEvent.Sensor.Type)
                 {
-                    case Sensor.TYPE_ACCELEROMETER:
-                        this.mAccelerometerData.setValues(pEvent.values);
+                    case SensorType.Accelerometer:
+                        this.mAccelerometerData.setValues(pEvent.Values);
                         this.mAccelerometerListener.onAccelerometerChanged(this.mAccelerometerData);
                         break;
-                    case Sensor.TYPE_ORIENTATION:
-                        this.mOrientationData.setValues(pEvent.values);
+                    case SensorType.Orientation:
+                        this.mOrientationData.setValues(pEvent.Values);
                         this.mOrientationListener.onOrientationChanged(this.mOrientationData);
                         break;
                 }
@@ -388,19 +389,19 @@ namespace andengine.engine
                 else
                 {
                     this.mLocation = pLocation;
-                    this.mLocationListener.onLocationChanged(pLocation);
+                    this.mLocationListener.OnLocationChanged(pLocation);
                 }
             }
         }
 
         public override void onProviderDisabled(/* final */ String pProvider)
         {
-            this.mLocationListener.onLocationProviderDisabled();
+            this.mLocationListener.OnProviderDisabled(pProvider);
         }
 
         public override void onProviderEnabled(/* final */ String pProvider)
         {
-            this.mLocationListener.onLocationProviderEnabled();
+            this.mLocationListener.OnProviderEnabled(pProvider);
         }
 
         public void onStatusChanged(/* final */ String pProvider, /* final */ int pStatus, /* final */ Bundle pExtras)
@@ -408,13 +409,13 @@ namespace andengine.engine
             switch (pStatus)
             {
                 case LocationProvider.AVAILABLE:
-                    this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.AVAILABLE, pExtras);
+                    this.mLocationListener.OnStatusChanged(LocationProviderStatus.AVAILABLE, pExtras);
                     break;
                 case LocationProvider.OUT_OF_SERVICE:
-                    this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.OUT_OF_SERVICE, pExtras);
+                    this.mLocationListener.OnStatusChanged(LocationProviderStatus.OUT_OF_SERVICE, pExtras);
                     break;
                 case LocationProvider.TEMPORARILY_UNAVAILABLE:
-                    this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.TEMPORARILY_UNAVAILABLE, pExtras);
+                    this.mLocationListener.OnStatusChanged(LocationProviderStatus.TEMPORARILY_UNAVAILABLE, pExtras);
                     break;
             }
         }
@@ -676,7 +677,7 @@ namespace andengine.engine
 
         public bool enableVibrator(/* final */ Context pContext)
         {
-            this.mVibrator = (Vibrator)pContext.getSystemService(Context.VIBRATOR_SERVICE);
+            this.mVibrator = (Vibrator)pContext.getSystemService(Context.VibratorService);
             return this.mVibrator != null;
         }
 
@@ -707,7 +708,7 @@ namespace andengine.engine
             this.mLocationListener = pLocationListener;
 
             /* final */
-            LocationManager locationManager = (LocationManager)pContext.getSystemService(Context.LOCATION_SERVICE);
+            LocationManager locationManager = (LocationManager)pContext.getSystemService(Context.LocationService);
             /* final */
             String locationProvider = locationManager.getBestProvider(pLocationSensorOptions, pLocationSensorOptions.isEnabledOnly());
             locationManager.requestLocationUpdates(locationProvider, pLocationSensorOptions.getMinimumTriggerTime(), pLocationSensorOptions.getMinimumTriggerDistance(), this);
@@ -718,7 +719,7 @@ namespace andengine.engine
         public void disableLocationSensor(/* final */ Context pContext)
         {
             /* final */
-            LocationManager locationManager = (LocationManager)pContext.getSystemService(Context.LOCATION_SERVICE);
+            LocationManager locationManager = (LocationManager)pContext.getSystemService(Context.LocationService);
             locationManager.removeUpdates(this);
         }
 
