@@ -37,7 +37,7 @@ namespace andengine.input.touch
         protected float mX;
         protected float mY;
 
-        protected int mAction;
+        protected /* int */ MotionEventActions mAction;
 
         protected MotionEvent mMotionEvent;
 
@@ -45,7 +45,7 @@ namespace andengine.input.touch
         // Constructors
         // ===========================================================
 
-        public static TouchEvent obtain(/* final */ float pX, /* final */ float pY, /* final */ int pAction, /* final */ int pPointerID, /* final */ MotionEvent pMotionEvent)
+        public static TouchEvent obtain(/* final */ float pX, /* final */ float pY, /* final int */ MotionEventActions pAction, /* final */ int pPointerID, /* final */ MotionEvent pMotionEvent)
         {
             /* final */
             TouchEvent touchEvent = TOUCHEVENT_POOL.obtainPoolItem();
@@ -53,7 +53,7 @@ namespace andengine.input.touch
             return touchEvent;
         }
 
-        private void set(/* final */ float pX, /* final */ float pY, /* final */ int pAction, /* final */ int pPointerID, /* final */ MotionEvent pMotionEvent)
+        private void set(/* final */ float pX, /* final */ float pY, /* final int */ MotionEventActions pAction, /* final */ int pPointerID, /* final */ MotionEvent pMotionEvent)
         {
             this.mX = pX;
             this.mY = pY;
@@ -103,7 +103,7 @@ namespace andengine.input.touch
             return this.mPointerID;
         }
 
-        public int getAction()
+        public /* int */ MotionEventActions getAction()
         {
             return this.mAction;
         }

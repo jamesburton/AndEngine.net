@@ -3,6 +3,8 @@ namespace andengine.util
 {
 
     using andengine.util.constants/*.Constants*/;
+    using Android.Util;
+    using Java.Lang;
 
     //import android.util.Log;
 
@@ -104,7 +106,7 @@ namespace andengine.util
         {
             if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.VERBOSE))
             {
-                Log.v(DEBUGTAG, pMessage, pThrowable);
+                Log.Verbose(DEBUGTAG, pMessage, pThrowable);
             }
         }
 
@@ -117,7 +119,7 @@ namespace andengine.util
         {
             if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.DEBUG))
             {
-                Log.d(DEBUGTAG, pMessage, pThrowable);
+                Log.Debug(DEBUGTAG, pMessage, pThrowable);
             }
         }
 

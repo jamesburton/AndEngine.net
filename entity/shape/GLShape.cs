@@ -2,9 +2,11 @@ namespace andengine.entity.shape
 {
 
     //import javax.microedition.khronos.opengles.GL10;
-    using GL10 = Javax.Microedition.Khronos.Opengles.GL10Consts;
+    //using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
+    using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
     //import javax.microedition.khronos.opengles.GL11;
-    using GL11 = Javax.Microedition.Khronos.Opengles.GL11Consts;
+    //using GL11 = Javax.Microedition.Khronos.Opengles.IGL11;
+    using GL11 = Javax.Microedition.Khronos.Opengles.IGL11;
 
     //using andengine.opengl.util.GLHelper;
     using GLHelper = andengine.opengl.util.GLHelper;

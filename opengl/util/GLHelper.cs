@@ -2,30 +2,19 @@ namespace andengine.opengl.util
 {
     using Java.Nio;
     using Buffer = Java.Nio.Buffer;
-    //import java.nio.Buffer;
-    //import java.nio.ByteBuffer;
     using ByteBuffer = Java.Nio.ByteBuffer;
-    //import java.nio.ByteOrder;
     using ByteOrder = Java.Nio.ByteOrder;
 
-    //import java.nio.IntBuffer;
     using IntBuffer = Java.Nio.IntBuffer;
 
-    //import javax.microedition.khronos.opengles.GL10;
-    using GL10 = Javax.Microedition.Khronos.Opengles.GL10Consts;
-    //import javax.microedition.khronos.opengles.GL11;
-    using GL11 = Javax.Microedition.Khronos.Opengles.GL11Consts;
+    using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
+    using GL11 = Javax.Microedition.Khronos.Opengles.IGL11;
 
-    //using andengine.engine.options.RenderOptions;
     using RenderOptions = andengine.engine.options.RenderOptions;
-    //using andengine.util.Debug;
     using Debug = andengine.util.Debug;
 
-    //import android.graphics.Bitmap;
     using Bitmap = Android.Graphics.Bitmap;
-    //import android.opengl.GLUtils;
-    // TODO Consider possibly some reference like this:- using GLUtils = OpenTK.Graphics.ES20.GL;
-    //import android.os.Build;
+    using GLUtils = Android.Opengl.GLUtils;
     using Build = Android.OS.Build;
     using System;
 
@@ -42,7 +31,7 @@ namespace andengine.opengl.util
         public static /* final */ readonly int BYTES_PER_FLOAT = 4;
         public static /* final */ readonly int BYTES_PER_PIXEL_RGBA = 4;
 
-        private static /* final */ readonly bool IS_LITTLE_ENDIAN = (ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN);
+        private static /* final */ readonly bool IS_LITTLE_ENDIAN = (ByteOrder.NativeOrder() == ByteOrder.LittleEndian);
 
         private static /* final */ readonly int[] HARDWARETEXTUREID_CONTAINER = new int[1];
         private static /* final */ readonly int[] HARDWAREBUFFERID_CONTAINER = new int[1];

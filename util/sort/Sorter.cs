@@ -1,15 +1,16 @@
-namespace andengine.util.modifier.util
+namespace andengine.util.sort
 {
 
-    //using IModifier = andengine.util.modifier.IModifier;
-    using andengine.util.modifier;
-    //using IModifier<T> = andengine.util.modifier.IModifier<T>;
+    //using java.util.Comparator;
+    //import java.util.List;
+    using System.Collections.Generic;
 
     /**
      * @author Nicolas Gramlich
-     * @since 11:16:36 - 03.09.2010
+     * @since 14:14:39 - 06.08.2010
+     * @param <T>
      */
-    public class ModifierUtils
+    public abstract class Sorter<T>
     {
         // ===========================================================
         // Constants
@@ -31,40 +32,22 @@ namespace andengine.util.modifier.util
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
+        public abstract void sort(T[] pArray, int pStart, int pEnd, /* Comparator<T> */ IComparer<T> pComparator);
+
+        public abstract void sort(List<T> pList, int pStart, int pEnd, /* Comparator<T> */ IComparer<T> pComparator);
+
         // ===========================================================
         // Methods
         // ===========================================================
 
-        public static IModifier<T> getModifierWithLongestDuration<T>(/* final */ IModifier<T>[] pModifiers)
+        public void sort(T[] pArray, /* Comparator<T> */ IComparer<T> pComparator)
         {
-            IModifier<T> retVal = null;
-            float longestDuration = float.MinValue;
-
-            for (int i = pModifiers.Length - 1; i >= 0; i--)
-            {
-                /* final */
-                float duration = pModifiers[i].getDuration();
-                if (duration > longestDuration)
-                {
-                    longestDuration = duration;
-                    retVal = pModifiers[i];
-                }
-            }
-
-            return retVal;
+            sort(pArray, 0, pArray.Length, pComparator);
         }
 
-        //public static float getSequenceDurationOfModifier(/* final */ IModifier<?>[] pModifiers){
-        public static float getSequenceDurationOfModifier<T>(/* final */ IModifier<T>[] pModifiers)
+        public void sort(List<T> pList, /* Comparator<T> */ IComparer<T> pComparator)
         {
-            float duration = float.MinValue;
-
-            for (int i = pModifiers.Length - 1; i >= 0; i--)
-            {
-                duration += pModifiers[i].getDuration();
-            }
-
-            return duration;
+            sort(pList, 0, pList.Count, pComparator);
         }
 
         // ===========================================================

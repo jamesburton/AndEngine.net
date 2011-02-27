@@ -1,5 +1,6 @@
 namespace andengine.audio
 {
+    //using IAudioEntity = andengine.audio.IAudioEntity;
 
     /**
      * @author Nicolas Gramlich

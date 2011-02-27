@@ -44,17 +44,17 @@ namespace andengine.util
         // Methods
         // ===========================================================
 
-        public static sealed float radToDeg(/* final */ float pRad)
+        public static /* sealed */ float radToDeg(/* final */ float pRad)
         {
             return MathConstants.RAD_TO_DEG * pRad;
         }
 
-        public static sealed float degToRad(float pDegree)
+        public static /* sealed */ float degToRad(float pDegree)
         {
             return MathConstants.DEG_TO_RAD * pDegree;
         }
 
-        public static sealed int randomSign()
+        public static /* sealed */ int randomSign()
         {
             //if(RANDOM.nextBoolean()) {
             if (RANDOM.Next(0, 2) == 1)
@@ -67,7 +67,7 @@ namespace andengine.util
             }
         }
 
-        public static sealed float random(float pMin, float pMax)
+        public static /* sealed */ float random(float pMin, float pMax)
         {
             return pMin + ((float)RANDOM.NextDouble()) * (pMax - pMin);
         }
@@ -77,17 +77,17 @@ namespace andengine.util
          * @param pMax inclusive!
          * @return
          */
-        public static sealed int random(int pMin, int pMax)
+        public static /* sealed */ int random(int pMin, int pMax)
         {
             return pMin + RANDOM.Next(pMax - pMin + 1);
         }
 
-        public static sealed bool isPowerOfTwo(int n)
+        public static /* sealed */ bool isPowerOfTwo(int n)
         {
             return ((n != 0) && (n & (n - 1)) == 0);
         }
 
-        public static sealed int nextPowerOfTwo(int n)
+        public static /* sealed */ int nextPowerOfTwo(int n)
         {
             int k = n;
 
@@ -106,7 +106,7 @@ namespace andengine.util
             return k + 1;
         }
 
-        public static sealed int sum(int[] pValues)
+        public static /* sealed */ int sum(int[] pValues)
         {
             int sum = 0;
             for (int i = pValues.Length - 1; i >= 0; i--)
@@ -117,7 +117,7 @@ namespace andengine.util
             return sum;
         }
 
-        public static sealed void arraySumInternal(int[] pValues)
+        public static /* sealed */ void arraySumInternal(int[] pValues)
         {
             int valueCount = pValues.Length;
             for (int i = 1; i < valueCount; i++)
@@ -126,7 +126,7 @@ namespace andengine.util
             }
         }
 
-        public static sealed void arraySumInternal(long[] pValues)
+        public static /* sealed */ void arraySumInternal(long[] pValues)
         {
             int valueCount = pValues.Length;
             for (int i = 1; i < valueCount; i++)
@@ -135,7 +135,7 @@ namespace andengine.util
             }
         }
 
-        public static sealed void arraySumInternal(long[] pValues, long pFactor)
+        public static /* sealed */ void arraySumInternal(long[] pValues, long pFactor)
         {
             pValues[0] = pValues[0] * pFactor;
             int valueCount = pValues.Length;
@@ -145,7 +145,7 @@ namespace andengine.util
             }
         }
 
-        public static sealed void arraySumInto(long[] pValues, long[] pTargetValues, long pFactor)
+        public static /* sealed */ void arraySumInto(long[] pValues, long[] pTargetValues, long pFactor)
         {
             pTargetValues[0] = pValues[0] * pFactor;
             int valueCount = pValues.Length;
@@ -155,7 +155,7 @@ namespace andengine.util
             }
         }
 
-        public static sealed float arraySum(float[] pValues)
+        public static /* sealed */ float arraySum(float[] pValues)
         {
             float sum = 0;
             int valueCount = pValues.Length;
@@ -166,7 +166,7 @@ namespace andengine.util
             return sum;
         }
 
-        public static sealed float arrayAverage(float[] pValues)
+        public static /* sealed */ float arrayAverage(float[] pValues)
         {
             return MathUtils.arraySum(pValues) / pValues.Length;
         }
@@ -228,19 +228,19 @@ namespace andengine.util
 
         public static int bringToBounds(int pMinValue, int pMaxValue, int pValue)
         {
-            return Math.max(pMinValue, Math.min(pMaxValue, pValue));
+            return Math.Max(pMinValue, Math.Min(pMaxValue, pValue));
         }
 
         public static float bringToBounds(float pMinValue, float pMaxValue, float pValue)
         {
-            return Math.max(pMinValue, Math.min(pMaxValue, pValue));
+            return Math.Max(pMinValue, Math.Min(pMaxValue, pValue));
         }
 
         public static float distance(float pX1, float pY1, float pX2, float pY2)
         {
             float dX = pX2 - pX1;
             float dY = pY2 - pY1;
-            return FloatMath.sqrt((dX * dX) + (dY * dY));
+            return FloatMath.Sqrt((dX * dX) + (dY * dY));
         }
 
         // ===========================================================

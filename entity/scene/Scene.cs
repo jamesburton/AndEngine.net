@@ -11,29 +11,44 @@ namespace andengine.entity.scene
 
     //import javax.microedition.khronos.opengles.GL10;
     //using Android.Opengl;
-    using OpenTK.Graphics.ES20;
+    //using OpenTK.Graphics.ES20;
+    using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
 
-    using andengine.engine.handler;
+    //using andengine.engine.handler;
     //using andengine.engine.camera.Camera;
+    using Camera = andengine.engine.camera.Camera;
     //using andengine.engine.handler.IUpdateHandler;
+    using IUpdateHandler = andengine.engine.handler.IUpdateHandler;
     //using andengine.engine.handler.UpdateHandlerList;
+    using UpdateHandlerList = andengine.engine.handler.UpdateHandlerList;
     //using andengine.engine.handler.runnable.RunnableHandler;
-    using andengine.entity;
+    using RunnableHandler = andengine.engine.handler.runnable.RunnableHandler;
+    //using andengine.entity;
     //using andengine.entity.Entity;
-    using andengine.entity.layer;
+    using Entity = andengine.entity.Entity;
+    //using andengine.entity.layer;
     //using andengine.entity.layer.DynamicCapacityLayer;
+    using DynamicCapacityLayer = andengine.entity.layer.DynamicCapacityLayer;
     //using andengine.entity.layer.FixedCapacityLayer;
+    using FixedCapacityLayer = andengine.entity.layer.FixedCapacityLayer;
     //using andengine.entity.layer.ILayer;
+    using ILayer = andengine.entity.layer.ILayer;
     //using andengine.entity.layer.ZIndexSorter;
-    using andengine.entity.scene.background;
+    using IndexSorter = andengine.entity.layer.ZIndexSorter;
+    //using andengine.entity.scene.background;
     //using andengine.entity.scene.background.ColorBackground;
+    using ColorBackground = andengine.entity.scene.background.ColorBackground;
     //using andengine.entity.scene.background.IBackground;
-    using andengine.entity.shape;
+    using IBackground = andengine.entity.scene.background.IBackground;
+    //using andengine.entity.shape;
     //using andengine.entity.shape.Shape;
-    using andengine.input.touch;
+    using Shape = andengine.entity.shape.Shape;
+    //using andengine.input.touch;
     //using andengine.input.touch.TouchEvent;
-    using andengine.opengl.util;
+    using TouchEvent = andengine.input.touch.TouchEvent;
+    //using andengine.opengl.util;
     //using andengine.opengl.util.GLHelper;
+    using GLHelper = andengine.opengl.util.GLHelper;
 
     //import android.util.SparseArray;
     //using SparseArray = Android.Util.SparseArray;
@@ -66,7 +81,8 @@ namespace andengine.entity.scene
         private /* final */ readonly int mLayerCount;
         private /* final */ readonly ILayer[] mLayers;
 
-        private /* final */ readonly ArrayList<ITouchArea> mTouchAreas = new ArrayList<ITouchArea>();
+        //private /* final */ readonly ArrayList<ITouchArea> mTouchAreas = new ArrayList<ITouchArea>();
+        private /* final */ readonly List<ITouchArea> mTouchAreas = new List<ITouchArea>();
 
         private /* final */ readonly RunnableHandler mRunnableHandler = new RunnableHandler();
 
@@ -82,7 +98,7 @@ namespace andengine.entity.scene
         private bool mOnAreaTouchTraversalBackToFront = true;
 
         private bool mTouchAreaBindingEnabled = false;
-        private /* final */ readonly SparseArray<ITouchArea> mTouchAreaBindings = new SparseArray<ITouchArea>();
+        private /* final */ readonly System.Collections.Generic.SparseArray<ITouchArea> mTouchAreaBindings = new SparseArray<ITouchArea>();
 
         // ===========================================================
         // Constructors
@@ -402,8 +418,9 @@ namespace andengine.entity.scene
                     /* Check if boundTouchArea needs to be removed. */
                     switch (action)
                     {
-                        case MotionEvent.ACTION_UP:
-                        case MotionEvent.ACTION_CANCEL:
+                        case MotionEvent.ActionPointer1Up: //ACTION_UP:
+                        // TODO: Check Action mappings from MotionEvent ... missing values in MonoDroid?
+                        //case MotionEvent.ACTION_CANCEL:
                             touchAreaBindings.remove(pSceneTouchEvent.getPointerID());
                     }
                     /* final */
@@ -449,15 +466,16 @@ namespace andengine.entity.scene
                         /* final */
                         ILayer layer = layers[i];
                         /* final */
-                        ArrayList<ITouchArea> layerTouchAreas = layer.getTouchAreas();
+                        //ArrayList<ITouchArea> layerTouchAreas = layer.getTouchAreas();
+                        List<ITouchArea> layerTouchAreas = layer.getTouchAreas();
                         /* final */
-                        int layerTouchAreaCount = layerTouchAreas.size();
+                        int layerTouchAreaCount = layerTouchAreas.Count;
                         if (layerTouchAreaCount > 0)
                         {
                             for (int j = 0; j < layerTouchAreaCount; j++)
                             {
                                 /* final */
-                                ITouchArea layerTouchArea = layerTouchAreas.get(j);
+                                ITouchArea layerTouchArea = layerTouchAreas[j];
                                 if (layerTouchArea.contains(sceneTouchEventX, sceneTouchEventY))
                                 {
                                     /* final */
@@ -468,7 +486,7 @@ namespace andengine.entity.scene
                                          *  bind this ITouchArea to the PointerID. */
                                         if (this.mTouchAreaBindingEnabled && isDownAction)
                                         {
-                                            this.mTouchAreaBindings.put(pSceneTouchEvent.getPointerID(), layerTouchArea);
+                                            this.mTouchAreaBindings[pSceneTouchEvent.getPointerID()] = layerTouchArea;
                                         }
                                         return true;
                                     }
@@ -484,15 +502,16 @@ namespace andengine.entity.scene
                         /* final */
                         ILayer layer = layers[i];
                         /* final */
-                        ArrayList<ITouchArea> layerTouchAreas = layer.getTouchAreas();
+                        //ArrayList<ITouchArea> layerTouchAreas = layer.getTouchAreas();
+                        List<ITouchArea> layerTouchAreas = layer.getTouchAreas();
                         /* final */
-                        int layerTouchAreaCount = layerTouchAreas.size();
+                        int layerTouchAreaCount = layerTouchAreas.Count;
                         if (layerTouchAreaCount > 0)
                         {
                             for (int j = layerTouchAreaCount - 1; j >= 0; j--)
                             {
                                 /* final */
-                                ITouchArea layerTouchArea = layerTouchAreas.get(j);
+                                ITouchArea layerTouchArea = layerTouchAreas[j];
                                 if (layerTouchArea.contains(sceneTouchEventX, sceneTouchEventY))
                                 {
                                     /* final */
@@ -503,7 +522,7 @@ namespace andengine.entity.scene
                                          *  bind this ITouchArea to the PointerID. */
                                         if (this.mTouchAreaBindingEnabled && isDownAction)
                                         {
-                                            this.mTouchAreaBindings.put(pSceneTouchEvent.getPointerID(), layerTouchArea);
+                                            this.mTouchAreaBindings[pSceneTouchEvent.getPointerID()] = layerTouchArea;
                                         }
                                         return true;
                                     }
@@ -515,7 +534,7 @@ namespace andengine.entity.scene
             }
 
             /* final */
-            ArrayList<ITouchArea> touchAreas = this.mTouchAreas;
+            //ArrayList<ITouchArea> touchAreas = this.mTouchAreas;
             /* final */
             int touchAreaCount = touchAreas.size();
             if (touchAreaCount > 0)

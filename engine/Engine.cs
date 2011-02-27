@@ -2,76 +2,80 @@ namespace andengine.engine
 {
 
     //import javax.microedition.khronos.opengles.GL10;
+    using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
     //import javax.microedition.khronos.opengles.GL11;
+    using GL11 = Javax.Microedition.Khronos.Opengles.IGL11;
 
-    using andengine.audio.music/*.MusicFactory;
-    using andengine.audio.music.MusicManager*/;
+    using MusicFactory = andengine.audio.music.MusicFactory;
+    using MusicManager = andengine.audio.music.MusicManager;
     using System.Runtime.CompilerServices;
-    using andengine.audio.sound/*.SoundFactory;
-    using andengine.audio.sound.SoundManager*/;
-    using andengine.engine.camera/*.Camera*/;
-    using andengine.engine.handler/*.IUpdateHandler;
-    using andengine.engine.handler.UpdateHandlerList*/;
-    using andengine.engine.handler.runnable/*.RunnableHandler*/;
-    using andengine.engine.handler.timer/*.ITimerCallback;
-    using andengine.engine.handler.timer.TimerHandler*/;
-    using andengine.engine.options/*.EngineOptions*/;
-    using andengine.entity.scene/*.Scene;
-    using andengine.entity.scene.SplashScene*/;
-    using andengine.input.touch/*.TouchEvent*/;
-    using andengine.input.touch.controller/*.ITouchController;
-    using andengine.input.touch.controller.SingleTouchControler;
-    using andengine.input.touch.controller.ITouchController.ITouchEventCallback*/;
-    using andengine.opengl.buffer/*.BufferObjectManager*/;
-    using andengine.opengl.font/*.FontFactory;
-    using andengine.opengl.font.FontManager*/;
-    using andengine.opengl.texture/*.Texture;
+    using SoundFactory = andengine.audio.sound.SoundFactory;
+    using SoundManager = andengine.audio.sound.SoundManager;
+    using Camera = andengine.engine.camera.Camera;
+    using IUpdateHandler = andengine.engine.handler.IUpdateHandler;
+    using UpdateHandlerList = andengine.engine.handler.UpdateHandlerList;
+    using RunnableHandler = andengine.engine.handler.runnable.RunnableHandler;
+    using ITimerCallback = andengine.engine.handler.timer.ITimerCallback;
+    using TimerHandler = andengine.engine.handler.timer.TimerHandler;
+    using EngineOptions = andengine.engine.options.EngineOptions;
+    using Scene = andengine.entity.scene.Scene;
+    using SplashScene = andengine.entity.scene.SplashScene;
+    using TouchEvent = andengine.input.touch.TouchEvent;
+    using ITouchController = andengine.input.touch.controller.ITouchController;
+    using SingleTouchController = andengine.input.touch.controller.SingleTouchControler;
+    using ITouchEventCallback = andengine.input.touch.controller./*ITouchController.*/ITouchEventCallback;
+    using BufferObjectManager = andengine.opengl.buffer.BufferObjectManager;
+    using FontFactory = andengine.opengl.font.FontFactory;
+    using FontManager = andengine.opengl.font.FontManager;
+    using Texture = andengine.opengl.texture.Texture;
     using andengine.opengl.texture.TextureFactory;
-    using andengine.opengl.texture.TextureManager*/;
-    using andengine.opengl.texture.region/*.TextureRegion;
-    using andengine.opengl.texture.region.TextureRegionFactory*/;
-    using andengine.opengl.texture.source/*.ITextureSource*/;
-    using andengine.opengl.util/*.GLHelper*/;
-    using andengine.sensor/*.SensorDelay*/;
-    using andengine.sensor.accelerometer/*.AccelerometerData;
-    using andengine.sensor.accelerometer.AccelerometerSensorOptions;
-    using andengine.sensor.accelerometer.IAccelerometerListener*/;
-    using andengine.sensor.location/*.ILocationListener;
-    using andengine.sensor.location.LocationProviderStatus;
-    using andengine.sensor.location.LocationSensorOptions*/;
-    using andengine.sensor.orientation/*.IOrientationListener;
-    using andengine.sensor.orientation.OrientationData;
-    using andengine.sensor.orientation.OrientationSensorOptions*/;
-    using andengine.util/*.Debug*/;
-    using andengine.util.constants/*.TimeConstants*/;
+    using TextureManager = andengine.opengl.texture.TextureManager;
+    using TextureRegion = andengine.opengl.texture.region.TextureRegion;
+    using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
+    using ITextureSource = andengine.opengl.texture.source.ITextureSource;
+    using GLHelper = andengine.opengl.util.GLHelper;
+    using SensorDelay = andengine.sensor.SensorDelay;
+    using AccelerometerData = andengine.sensor.accelerometer.AccelerometerData;
+    using AccelerometerSensorOptions = andengine.sensor.accelerometer.AccelerometerSensorOptions;
+    using IAccelerometerListener = andengine.sensor.accelerometer.IAccelerometerListener;
+    using ILocationListener = andengine.sensor.location.ILocationListener;
+    using LocationProviderStatus = andengine.sensor.location.LocationProviderStatus;
+    using LocationSensorOptions = andengine.sensor.location.LocationSensorOptions;
+    using IOrientationListener = andengine.sensor.orientation.IOrientationListener;
+    using OrientationData = andengine.sensor.orientation.OrientationData;
+    using OrientationSensorOptions = andengine.sensor.orientation.OrientationSensorOptions;
+    using Debug = andengine.util.Debug;
+    using TimeConstants = andengine.util.constants.TimeConstants;
 
-    //import android.content.Context;
-    using Android.Content;
-    //import android.hardware.Sensor;
-    using Android.Hardware;
-    //import android.hardware.SensorEvent;
-    //import android.hardware.SensorEventListener;
-    //import android.hardware.SensorManager;
-    using Android.Locations;
-    //import android.location.Location;
-    //import android.location.LocationListener;
-    //import android.location.LocationManager;
-    //import android.location.LocationProvider;
-    using Android.OS;
-    //import android.os.Bundle;
-    //import android.os.Vibrator;
-    using Android.Views;
+    using Context = Android.Content.Context;
+    //using Android.Content;
+    using Sensor = Android.Hardware.Sensor;
+    using SensorEvent = Android.Hardware.SensorEvent;
+    using SensorEventListener = Android.Hardware.ISensorEventListener;
+    using SensorManager = Android.Hardware.SensorManager;
+    //using Android.Locations;
+    using Location = Android.Locations.Location;
+    using LocationListener = Android.Locations.ILocationListener;
+    using LocationManager = Android.Locations.LocationManager;
+    using LocationProvider = Android.Locations.LocationProvider;
+    //using Android.OS;
+    using Bundle = Android.OS.Bundle;
+    using Vibrator = Android.OS.Vibrator;
+    //using Android.Views;
     using Java.Lang;
     //import android.view.MotionEvent;
     //import android.view.View;
     //import android.view.View.OnTouchListener;
+    using MotionEvent = Android.Views.MotionEvent;
+    using View = Android.Views.View;
+    using OnTouchListener = Android.Views.View.IOnTouchListener;
 
     /**
      * @author Nicolas Gramlich
      * @since 12:21:31 - 08.03.2010
      */
     // TODO: Check the implications of removing class(es) from the list (TimeConstants - no longer an interface, so add class to usage)
-    public class Engine : SensorEventListener, OnTouchListener, ITouchEventCallback, /* TimeConstants, */ LocationListener
+    public class Engine : SensorEventListener, OnTouchListener /* NB: Is actually IOnTouchListener */, ITouchEventCallback, /* TimeConstants, */ LocationListener
     {
         // ===========================================================
         // Constants
@@ -79,7 +83,7 @@ namespace andengine.engine
 
         private static /* final */ readonly float LOADING_SCREEN_DURATION_DEFAULT = 2;
 
-        private static /* final */ readonly SensorDelay SENSORDELAY_DEFAULT = SensorDelay.Game;
+        private static /* final */ readonly Android.Hardware.SensorDelay SENSORDELAY_DEFAULT = Android.Hardware.SensorDelay.Game;
 
         // ===========================================================
         // Fields
@@ -831,21 +835,21 @@ namespace andengine.engine
 
         private bool isSensorSupported(/* final */ SensorManager pSensorManager, /* final */ int pType)
         {
-            return pSensorManager.getSensorList(pType).size() > 0;
+            return pSensorManager.GetSensorList(pType).Count > 0;
         }
 
-        private void registerSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final */ int pType, /* final */ SensorDelay pSensorDelay)
+        private void registerSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final */ int pType, /* final */ Android.Hardware.SensorDelay pSensorDelay)
         {
             /* final */
-            Sensor sensor = pSensorManager.getSensorList(pType).get(0);
-            pSensorManager.registerListener(this, sensor, pSensorDelay.getDelay());
+            Sensor sensor = pSensorManager.GetSensorList(pType)[0];
+            pSensorManager.RegisterListener(this, sensor, pSensorDelay.getDelay());
         }
 
         private void unregisterSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final */ int pType)
         {
             /* final */
-            Sensor sensor = pSensorManager.getSensorList(pType).get(0);
-            pSensorManager.unregisterListener(this, sensor);
+            Sensor sensor = pSensorManager.GetSensorList(pType)[0];
+            pSensorManager.UnregisterListener(this, sensor);
         }
 
         // ===========================================================
@@ -854,10 +858,12 @@ namespace andengine.engine
 
         private class UpdateThread : Thread
         {
+            Thread thread;
             public UpdateThread()
+                : base("UpdateThread")
             {
                 //super("UpdateThread");
-                base("UpdateThread");
+                thread = new Thread(new ThreadStart(run));
             }
 
             public override void run()
@@ -873,7 +879,8 @@ namespace andengine.engine
                 catch (/* final */ InterruptedException e)
                 {
                     Debug.d("UpdateThread interrupted. Don't worry - this Exception is most likely expected!", e);
-                    this.interrupt();
+                    //this.interrupt();
+                    Interrupt();
                 }
             }
         }
@@ -886,7 +893,7 @@ namespace andengine.engine
             public static /* synchronized */ void notifyCanDraw()
             {
                 // Debug.d(">>> notifyCanDraw");
-                this.mDrawing = true;
+                mDrawing = true;
                 this.notifyAll();
                 // Debug.d("<<< notifyCanDraw");
             }
@@ -895,7 +902,7 @@ namespace andengine.engine
             public static /* synchronized */ void notifyCanUpdate()
             {
                 // Debug.d(">>> notifyCanUpdate");
-                this.mDrawing = false;
+                mDrawing = false;
                 this.notifyAll();
                 // Debug.d("<<< notifyCanUpdate");
             }
@@ -903,7 +910,7 @@ namespace andengine.engine
             [MethodImpl(MethodImplOptions.Synchronized)]
             public static /* synchronized */ void waitUntilCanDraw() /* throws InterruptedException */ {
                 // Debug.d(">>> waitUntilCanDraw");
-                while (this.mDrawing == false)
+                while (mDrawing == false)
                 {
                     this.wait();
                 }
@@ -913,7 +920,7 @@ namespace andengine.engine
             [MethodImpl(MethodImplOptions.Synchronized)]
             public static /* synchronized */ void waitUntilCanUpdate() /* throws InterruptedException */ {
                 // Debug.d(">>> waitUntilCanUpdate");
-                while (this.mDrawing == true)
+                while (mDrawing == true)
                 {
                     this.wait();
                 }

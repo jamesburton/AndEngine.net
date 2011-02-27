@@ -4,7 +4,7 @@ namespace andengine.entity.shape
     //import javax.microedition.khronos.opengles.GL10;
     //TODO Check this conversion
     //using OpenTK.Graphics.ES11;
-    using GL10 = Javax.Microedition.Khronos.Opengles.GL10Consts;
+    using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
 
     //using andengine.engine.camera/*.Camera*/;
     using Camera = andengine.engine.camera.Camera;
@@ -31,11 +31,11 @@ namespace andengine.entity.shape
         // Constants
         // ===========================================================
 
-        public static /* final */ readonly int BLENDFUNCTION_SOURCE_DEFAULT = GL10.GlSrcAlpha;
-        public static /* final */ readonly int BLENDFUNCTION_DESTINATION_DEFAULT = GL10.GlOneMinusSrcAlpha;
+        public static /* final */ readonly int BLENDFUNCTION_SOURCE_DEFAULT = Javax.Microedition.Khronos.Opengles.GL10Consts.GlSrcAlpha;
+        public static /* final */ readonly int BLENDFUNCTION_DESTINATION_DEFAULT = Javax.Microedition.Khronos.Opengles.GL10Consts.GlOneMinusSrcAlpha;
 
-        public static /* final */ readonly int BLENDFUNCTION_SOURCE_PREMULTIPLYALPHA_DEFAULT = GL10.GlOne;
-        public static /* final */ readonly int BLENDFUNCTION_DESTINATION_PREMULTIPLYALPHA_DEFAULT = GL10.GlOneMinusSrcAlpha;
+        public static /* final */ readonly int BLENDFUNCTION_SOURCE_PREMULTIPLYALPHA_DEFAULT = Javax.Microedition.Khronos.Opengles.GL10Consts.GlOne;
+        public static /* final */ readonly int BLENDFUNCTION_DESTINATION_PREMULTIPLYALPHA_DEFAULT = Javax.Microedition.Khronos.Opengles.GL10Consts.GlOneMinusSrcAlpha;
 
         // ===========================================================
         // Fields

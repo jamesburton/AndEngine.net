@@ -1,15 +1,17 @@
-namespace andengine.util.modifier.util
+namespace andengine.opengl.font
 {
 
-    //using IModifier = andengine.util.modifier.IModifier;
-    using andengine.util.modifier;
-    //using IModifier<T> = andengine.util.modifier.IModifier<T>;
+    //using Library = andengine.util.Library;
 
+    //import android.util.SparseArray;
+
+    using System.Collections.Generic;
     /**
      * @author Nicolas Gramlich
-     * @since 11:16:36 - 03.09.2010
+     * @since 11:52:26 - 20.08.2010
      */
-    public class ModifierUtils
+    //public class FontLibrary : Library<Font>
+    public class FontLibrary : andengine.util.Library<Font>
     {
         // ===========================================================
         // Constants
@@ -23,6 +25,16 @@ namespace andengine.util.modifier.util
         // Constructors
         // ===========================================================
 
+        public FontLibrary()
+            : base()
+        {
+        }
+
+        public FontLibrary(int pInitialCapacity)
+            : base(pInitialCapacity)
+        {
+        }
+
         // ===========================================================
         // Getter & Setter
         // ===========================================================
@@ -35,36 +47,13 @@ namespace andengine.util.modifier.util
         // Methods
         // ===========================================================
 
-        public static IModifier<T> getModifierWithLongestDuration<T>(/* final */ IModifier<T>[] pModifiers)
+        void loadFonts(FontManager pFontManager)
         {
-            IModifier<T> retVal = null;
-            float longestDuration = float.MinValue;
-
-            for (int i = pModifiers.Length - 1; i >= 0; i--)
+            SparseArray<Font> items = this.mItems;
+            for (int i = items.Count - 1; i >= 0; i--)
             {
-                /* final */
-                float duration = pModifiers[i].getDuration();
-                if (duration > longestDuration)
-                {
-                    longestDuration = duration;
-                    retVal = pModifiers[i];
-                }
+                pFontManager.loadFont(items[i]);
             }
-
-            return retVal;
-        }
-
-        //public static float getSequenceDurationOfModifier(/* final */ IModifier<?>[] pModifiers){
-        public static float getSequenceDurationOfModifier<T>(/* final */ IModifier<T>[] pModifiers)
-        {
-            float duration = float.MinValue;
-
-            for (int i = pModifiers.Length - 1; i >= 0; i--)
-            {
-                duration += pModifiers[i].getDuration();
-            }
-
-            return duration;
         }
 
         // ===========================================================

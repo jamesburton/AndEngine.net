@@ -6,7 +6,7 @@ namespace andengine.entity.shape
     using Constants = andengine.util.constants.Constants;
 
     //import javax.microedition.khronos.opengles.GL10;
-    using GL10 = Javax.Microedition.Khronos.Opengles.GL10Consts;
+    using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
 
     using RectangularShapeCollisionChecker = andengine.collision.RectangularShapeCollisionChecker;
     using ShapeCollisionChecker = andengine.collision.ShapeCollisionChecker;

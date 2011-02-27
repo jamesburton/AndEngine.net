@@ -1,7 +1,7 @@
 namespace andengine.audio
 {
     using System.Collections.Generic;
-    public class ArrayList<T> : List<T> { public ArrayList() : base() { } }
+    //public class ArrayList<T> : List<T> { public ArrayList() : base() { } }
 
     //import java.util.ArrayList;
 
@@ -20,7 +20,8 @@ namespace andengine.audio
         // Fields
         // ===========================================================
 
-        protected /* final */ sealed ArrayList<T> mAudioEntities = new ArrayList<T>();
+        //protected /* final */ sealed ArrayList<T> mAudioEntities = new ArrayList<T>();
+        protected readonly List<T> mAudioEntities = new List<T>();
 
         protected float mMasterVolume = 1.0f;
 
@@ -46,11 +47,12 @@ namespace andengine.audio
             this.mMasterVolume = pMasterVolume;
 
             /* final */
-            ArrayList<T> audioEntities = this.mAudioEntities;
-            for (int i = audioEntities.size() - 1; i >= 0; i--)
+            //ArrayList<T> audioEntities = this.mAudioEntities;
+            List<T> audioEntities = this.mAudioEntities;
+            for (int i = audioEntities.Count - 1; i >= 0; i--)
             {
                 /* final */
-                T audioEntity = audioEntities.get(i);
+                T audioEntity = audioEntities[i];
 
                 audioEntity.onMasterVolumeChanged(pMasterVolume);
             }
@@ -58,17 +60,17 @@ namespace andengine.audio
 
         public void add(/* final */ T pAudioEntity)
         {
-            this.mAudioEntities.add(pAudioEntity);
+            this.mAudioEntities.Add(pAudioEntity);
         }
 
         public override void releaseAll()
         {
             /* final */
             ArrayList<T> audioEntities = this.mAudioEntities;
-            for (int i = audioEntities.size() - 1; i >= 0; i--)
+            for (int i = audioEntities.Count - 1; i >= 0; i--)
             {
                 /* final */
-                T audioEntity = audioEntities.get(i);
+                T audioEntity = audioEntities[i];
 
                 audioEntity.stop();
                 audioEntity.release();
