@@ -1,18 +1,20 @@
-namespace andengine.opengl.font
+namespace andengine.sensor.location
 {
 
-    //using Library = andengine.util.Library;
-
-    //import android.util.SparseArray;
-
-    using System.Collections.Generic;
     /**
      * @author Nicolas Gramlich
-     * @since 11:52:26 - 20.08.2010
+     * @since 10:55:57 - 31.10.2010
      */
-    //public class FontLibrary : Library<Font>
-    public class FontLibrary : andengine.util.Library<Font>
+    public enum LocationProviderStatus
     {
+        // ===========================================================
+        // Elements
+        // ===========================================================
+
+        AVAILABLE,
+        OUT_OF_SERVICE,
+        TEMPORARILY_UNAVAILABLE
+
         // ===========================================================
         // Constants
         // ===========================================================
@@ -25,36 +27,17 @@ namespace andengine.opengl.font
         // Constructors
         // ===========================================================
 
-        public FontLibrary()
-            : base()
-        {
-        }
-
-        public FontLibrary(int pInitialCapacity)
-            : base(pInitialCapacity)
-        {
-        }
-
         // ===========================================================
         // Getter & Setter
         // ===========================================================
 
         // ===========================================================
-        // Methods for/from SuperClass/Interfaces
+        // Methods from SuperClass/Interfaces
         // ===========================================================
 
         // ===========================================================
         // Methods
         // ===========================================================
-
-        protected void loadFonts(FontManager pFontManager)
-        {
-            SparseArray<Font> items = this.mItems;
-            for (int i = items.Count - 1; i >= 0; i--)
-            {
-                pFontManager.loadFont(items[i]);
-            }
-        }
 
         // ===========================================================
         // Inner and Anonymous Classes

@@ -55,7 +55,8 @@ namespace andengine.opengl.font
             return result;
         }
 
-        public override bool equals(Object obj)
+        //public override bool equals(Object obj)
+        public override bool equals(object obj)
         {
             if (this == obj)
             {

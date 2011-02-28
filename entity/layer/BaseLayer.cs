@@ -1,17 +1,17 @@
-namespace andengine.opengl.font
+namespace andengine.entity.layer
 {
 
-    //using Library = andengine.util.Library;
-
-    //import android.util.SparseArray;
-
+    //import java.util.ArrayList;
     using System.Collections.Generic;
+
+    using Entity = andengine.entity.Entity;
+    using ITouchArea = andengine.entity.scene.Scene.ITouchArea;
+
     /**
      * @author Nicolas Gramlich
-     * @since 11:52:26 - 20.08.2010
+     * @since 00:13:59 - 23.07.2010
      */
-    //public class FontLibrary : Library<Font>
-    public class FontLibrary : andengine.util.Library<Font>
+    public abstract class BaseLayer : Entity, ILayer
     {
         // ===========================================================
         // Constants
@@ -21,17 +21,20 @@ namespace andengine.opengl.font
         // Fields
         // ===========================================================
 
+        //private final ArrayList<ITouchArea> mTouchAreas = new ArrayList<ITouchArea>();
+        private readonly List<ITouchArea> mTouchAreas = new List<ITouchArea>();
+
         // ===========================================================
         // Constructors
         // ===========================================================
 
-        public FontLibrary()
-            : base()
+        public BaseLayer()
         {
+
         }
 
-        public FontLibrary(int pInitialCapacity)
-            : base(pInitialCapacity)
+        public BaseLayer(int pZIndex)
+            : base(pZIndex)
         {
         }
 
@@ -43,18 +46,25 @@ namespace andengine.opengl.font
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
+        public override void registerTouchArea(ITouchArea pTouchArea)
+        {
+            this.mTouchAreas.Add(pTouchArea);
+        }
+
+        public override void unregisterTouchArea(ITouchArea pTouchArea)
+        {
+            this.mTouchAreas.Remove(pTouchArea);
+        }
+
+        //public ArrayList<ITouchArea> getTouchAreas() {
+        public List<ITouchArea> getTouchAreas()
+        {
+            return this.mTouchAreas;
+        }
+
         // ===========================================================
         // Methods
         // ===========================================================
-
-        protected void loadFonts(FontManager pFontManager)
-        {
-            SparseArray<Font> items = this.mItems;
-            for (int i = items.Count - 1; i >= 0; i--)
-            {
-                pFontManager.loadFont(items[i]);
-            }
-        }
 
         // ===========================================================
         // Inner and Anonymous Classes

@@ -3,26 +3,28 @@ namespace andengine.engine.camera
 
     //import static org.anddev.andengine.util.constants.Constants.VERTEX_INDEX_X;
     //import static org.anddev.andengine.util.constants.Constants.VERTEX_INDEX_Y;
-    using andengine.util.constants;
+    using Constants = andengine.util.constants.Constants;
 
     //import javax.microedition.khronos.opengles.GL10;
-    using OpenTK.Graphics.ES20;
+    using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
+    using GL10Consts = Javax.Microedition.Khronos.Opengles.GL10Consts;
 
     //using andengine.collision.BaseCollisionChecker;
-    using andengine.collision;
+    using BaseCollisionChecker = andengine.collision.BaseCollisionChecker;
     //using andengine.engine.camera.hud.HUD;
-    using andengine.engine.camera.hud;
+    using HUD = andengine.engine.camera.hud.HUD;
     //using andengine.engine.handler.IUpdateHandler;
-    using andengine.engine.handler;
+    using IUpdateHandler = andengine.engine.handler.IUpdateHandler;
     //using andengine.entity.shape.IShape;
-    using andengine.entity.shape;
+    using IShape = andengine.entity.shape.IShape;
     //using andengine.entity.shape.RectangularShape;
+    using RectangularShape = andengine.entity.shape.RectangularShape;
     //using andengine.input.touch.TouchEvent;
-    using andengine.input.touch;
+    using TouchEvent = andengine.input.touch.TouchEvent;
     //using andengine.opengl.util.GLHelper;
-    using andengine.opengl.util;
+    using GLHelper = andengine.opengl.util.GLHelper;
     //using andengine.util.MathUtils;
-    using andengine.util;
+    using MathUtils = andengine.util.MathUtils;
 
     /**
      * @author Nicolas Gramlich

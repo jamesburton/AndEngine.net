@@ -1,17 +1,11 @@
-namespace andengine.opengl
+namespace andengine.sensor.orientation
 {
-
-    //import javax.microedition.khronos.opengles.GL10;
-    using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
-
-    //using andengine.engine.camera.Camera;
-    using Camera = andengine.engine.camera.Camera;
 
     /**
      * @author Nicolas Gramlich
-     * @since 10:50:58 - 08.08.2010
+     * @since 11:30:42 - 25.05.2010
      */
-    public interface IDrawable
+    public interface IOrientationListener
     {
         // ===========================================================
         // Final Fields
@@ -21,6 +15,6 @@ namespace andengine.opengl
         // Methods
         // ===========================================================
 
-        /* public */ void onDraw(/* final */ GL10 pGL, /* final */ Camera pCamera);
+        void onOrientationChanged(OrientationData pOrientationData);
     }
 }

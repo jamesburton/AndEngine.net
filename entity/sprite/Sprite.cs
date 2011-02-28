@@ -1,17 +1,14 @@
-namespace andengine.opengl.font
+namespace andengine.entity.sprite
 {
 
-    //using Library = andengine.util.Library;
+    using TextureRegion = andengine.opengl.texture.region.TextureRegion;
+    using RectangleVertexBuffer = andengine.opengl.vertex.RectangleVertexBuffer;
 
-    //import android.util.SparseArray;
-
-    using System.Collections.Generic;
     /**
      * @author Nicolas Gramlich
-     * @since 11:52:26 - 20.08.2010
+     * @since 19:22:38 - 09.03.2010
      */
-    //public class FontLibrary : Library<Font>
-    public class FontLibrary : andengine.util.Library<Font>
+    public class Sprite : BaseSprite
     {
         // ===========================================================
         // Constants
@@ -25,13 +22,23 @@ namespace andengine.opengl.font
         // Constructors
         // ===========================================================
 
-        public FontLibrary()
-            : base()
+        public Sprite(float pX, float pY, TextureRegion pTextureRegion)
+            : base(pX, pY, pTextureRegion.getWidth(), pTextureRegion.getHeight(), pTextureRegion)
         {
         }
 
-        public FontLibrary(int pInitialCapacity)
-            : base(pInitialCapacity)
+        public Sprite(float pX, float pY, float pWidth, float pHeight, TextureRegion pTextureRegion)
+            : base(pX, pY, pWidth, pHeight, pTextureRegion)
+        {
+        }
+
+        public Sprite(float pX, float pY, TextureRegion pTextureRegion, RectangleVertexBuffer pRectangleVertexBuffer)
+            : base(pX, pY, pTextureRegion.getWidth(), pTextureRegion.getHeight(), pTextureRegion, pRectangleVertexBuffer)
+        {
+        }
+
+        public Sprite(float pX, float pY, float pWidth, float pHeight, TextureRegion pTextureRegion, RectangleVertexBuffer pRectangleVertexBuffer)
+            : base(pX, pY, pWidth, pHeight, pTextureRegion, pRectangleVertexBuffer)
         {
         }
 
@@ -43,18 +50,14 @@ namespace andengine.opengl.font
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
+        public override TextureRegion getTextureRegion()
+        {
+            return (TextureRegion)this.mTextureRegion;
+        }
+
         // ===========================================================
         // Methods
         // ===========================================================
-
-        protected void loadFonts(FontManager pFontManager)
-        {
-            SparseArray<Font> items = this.mItems;
-            for (int i = items.Count - 1; i >= 0; i--)
-            {
-                pFontManager.loadFont(items[i]);
-            }
-        }
 
         // ===========================================================
         // Inner and Anonymous Classes

@@ -8,6 +8,7 @@ namespace andengine.entity.layer
     using IEntity = andengine.entity.IEntity;
     //using InsertionSorter = andengine.util.sort.InsertionSorter;
     using System.Collections.Generic;
+using System;
 
     public class ZIndexSorter : andengine.util.sort.InsertionSorter<IEntity>
     {
@@ -21,6 +22,7 @@ namespace andengine.entity.layer
         // Fields
         // ===========================================================
 
+        /*
         public interface IComparator<T>
         {
             int compare(T pEntityA, T pEntityB);
@@ -34,6 +36,15 @@ namespace andengine.entity.layer
             }
         };
         private static readonly IComparator<IEntity> mZIndexComparator = new ZIndexComparator();
+        */
+        private sealed class ZIndexComparator : IComparator
+        {
+            public override int compare(Object pEntityA, Object pEntityB)
+            {
+                return ((IEntity)pEntityA).getZIndex() - ((IEntity)pEntityB).getZIndex();
+            }
+        }
+        private static readonly IComparator mZIndexComparator = new ZIndexComparator();
 
         // ===========================================================
         // Constructors

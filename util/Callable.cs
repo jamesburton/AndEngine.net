@@ -1,17 +1,11 @@
-namespace andengine.opengl
+namespace andengine.util
 {
-
-    //import javax.microedition.khronos.opengles.GL10;
-    using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
-
-    //using andengine.engine.camera.Camera;
-    using Camera = andengine.engine.camera.Camera;
 
     /**
      * @author Nicolas Gramlich
-     * @since 10:50:58 - 08.08.2010
+     * @since 20:52:44 - 03.01.2010
      */
-    public interface IDrawable
+    public interface Callable<T>
     {
         // ===========================================================
         // Final Fields
@@ -21,6 +15,12 @@ namespace andengine.opengl
         // Methods
         // ===========================================================
 
-        /* public */ void onDraw(/* final */ GL10 pGL, /* final */ Camera pCamera);
+        /**
+         * Computes a result, or throws an exception if unable to do so.
+         *
+         * @return computed result
+         * @throws Exception if unable to compute a result
+         */
+        T call() /* throws Exception */;
     }
 }

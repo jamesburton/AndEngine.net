@@ -1,17 +1,18 @@
-namespace andengine.opengl.font
+namespace andengine.engine.camera.hud
 {
 
-    //using Library = andengine.util.Library;
+    using Camera = andengine.engine.camera.Camera;
+    using CameraScene = andengine.entity.scene.CameraScene;
+    using Scene = andengine.entity.scene.Scene;
 
-    //import android.util.SparseArray;
-
-    using System.Collections.Generic;
     /**
+     * While you can add a {@link HUD} to {@link Scene}, you should not do so.
+     * {@link HUD}s are meant to be added to {@link Camera}s via {@link Camera#setHUD(HUD)}.
+     * 
      * @author Nicolas Gramlich
-     * @since 11:52:26 - 20.08.2010
+     * @since 14:13:13 - 01.04.2010
      */
-    //public class FontLibrary : Library<Font>
-    public class FontLibrary : andengine.util.Library<Font>
+    public class HUD : CameraScene
     {
         // ===========================================================
         // Constants
@@ -25,14 +26,18 @@ namespace andengine.opengl.font
         // Constructors
         // ===========================================================
 
-        public FontLibrary()
-            : base()
+        public HUD()
+            : this(1)
         {
+
+            this.setBackgroundEnabled(false);
         }
 
-        public FontLibrary(int pInitialCapacity)
-            : base(pInitialCapacity)
+        public HUD(int pLayerCount)
+            : base(pLayerCount)
         {
+
+            this.setBackgroundEnabled(false);
         }
 
         // ===========================================================
@@ -46,15 +51,6 @@ namespace andengine.opengl.font
         // ===========================================================
         // Methods
         // ===========================================================
-
-        protected void loadFonts(FontManager pFontManager)
-        {
-            SparseArray<Font> items = this.mItems;
-            for (int i = items.Count - 1; i >= 0; i--)
-            {
-                pFontManager.loadFont(items[i]);
-            }
-        }
 
         // ===========================================================
         // Inner and Anonymous Classes

@@ -1,17 +1,13 @@
-namespace andengine.opengl.font
+namespace andengine.opengl.texture.region
 {
 
     //using Library = andengine.util.Library;
 
-    //import android.util.SparseArray;
-
-    using System.Collections.Generic;
     /**
      * @author Nicolas Gramlich
      * @since 11:52:26 - 20.08.2010
      */
-    //public class FontLibrary : Library<Font>
-    public class FontLibrary : andengine.util.Library<Font>
+    public class TextureRegionLibrary : andengine.util.Library<BaseTextureRegion>
     {
         // ===========================================================
         // Constants
@@ -25,12 +21,12 @@ namespace andengine.opengl.font
         // Constructors
         // ===========================================================
 
-        public FontLibrary()
+        public TextureRegionLibrary()
             : base()
         {
         }
 
-        public FontLibrary(int pInitialCapacity)
+        public TextureRegionLibrary(int pInitialCapacity)
             : base(pInitialCapacity)
         {
         }
@@ -39,6 +35,17 @@ namespace andengine.opengl.font
         // Getter & Setter
         // ===========================================================
 
+        public override TextureRegion get(int pID)
+        {
+            return (TextureRegion)base.get(pID);
+        }
+
+        public TiledTextureRegion getTiled(int pID)
+        {
+            //return (TiledTextureRegion) this.mItems.get(pID);
+            return (TiledTextureRegion)this.mItems[pID];
+        }
+
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
@@ -46,15 +53,6 @@ namespace andengine.opengl.font
         // ===========================================================
         // Methods
         // ===========================================================
-
-        protected void loadFonts(FontManager pFontManager)
-        {
-            SparseArray<Font> items = this.mItems;
-            for (int i = items.Count - 1; i >= 0; i--)
-            {
-                pFontManager.loadFont(items[i]);
-            }
-        }
 
         // ===========================================================
         // Inner and Anonymous Classes

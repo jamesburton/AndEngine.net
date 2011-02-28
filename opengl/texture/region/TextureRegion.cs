@@ -1,17 +1,19 @@
-namespace andengine.opengl.font
+namespace andengine.opengl.texture.region
 {
 
-    //using Library = andengine.util.Library;
+    //import javax.microedition.khronos.opengles.GL11;
+    using GL11 = Javax.Microedition.Khronos.Opengles.IGL11;
+    using GL11Consts = Javax.Microedition.Khronos.Opengles.GL11Consts;
 
-    //import android.util.SparseArray;
+    using Texture = andengine.opengl.texture.Texture;
+    using BaseTextureRegionBuffer = andengine.opengl.texture.region.buffer.BaseTextureRegionBuffer;
+    using TextureRegionBuffer = andengine.opengl.texture.region.buffer.TextureRegionBuffer;
 
-    using System.Collections.Generic;
     /**
      * @author Nicolas Gramlich
-     * @since 11:52:26 - 20.08.2010
+     * @since 14:29:59 - 08.03.2010
      */
-    //public class FontLibrary : Library<Font>
-    public class FontLibrary : andengine.util.Library<Font>
+    public class TextureRegion : BaseTextureRegion
     {
         // ===========================================================
         // Constants
@@ -25,13 +27,8 @@ namespace andengine.opengl.font
         // Constructors
         // ===========================================================
 
-        public FontLibrary()
-            : base()
-        {
-        }
-
-        public FontLibrary(int pInitialCapacity)
-            : base(pInitialCapacity)
+        public TextureRegion(Texture pTexture, int pTexturePositionX, int pTexturePositionY, int pWidth, int pHeight)
+            : base(pTexture, pTexturePositionX, pTexturePositionY, pWidth, pHeight)
         {
         }
 
@@ -39,21 +36,27 @@ namespace andengine.opengl.font
         // Getter & Setter
         // ===========================================================
 
+        public TextureRegionBuffer getTextureBuffer()
+        {
+            return (TextureRegionBuffer)this.mTextureRegionBuffer;
+        }
+
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
+
+        public override TextureRegion clone()
+        {
+            return new TextureRegion(this.mTexture, this.mTexturePositionX, this.mTexturePositionY, this.mWidth, this.mHeight);
+        }
 
         // ===========================================================
         // Methods
         // ===========================================================
 
-        protected void loadFonts(FontManager pFontManager)
+        protected BaseTextureRegionBuffer onCreateTextureRegionBuffer()
         {
-            SparseArray<Font> items = this.mItems;
-            for (int i = items.Count - 1; i >= 0; i--)
-            {
-                pFontManager.loadFont(items[i]);
-            }
+            return new TextureRegionBuffer(this, GL11Consts.GlStaticDraw);
         }
 
         // ===========================================================

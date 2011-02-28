@@ -1,17 +1,11 @@
-namespace andengine.opengl.font
+namespace andengine.util.modifier.ease
 {
 
-    //using Library = andengine.util.Library;
-
-    //import android.util.SparseArray;
-
-    using System.Collections.Generic;
     /**
-     * @author Nicolas Gramlich
-     * @since 11:52:26 - 20.08.2010
+     * @author Gil, Nicolas Gramlich
+     * @since 16:50:40 - 26.07.2010
      */
-    //public class FontLibrary : Library<Font>
-    public class FontLibrary : andengine.util.Library<Font>
+    public class EaseLinear : IEaseFunction
     {
         // ===========================================================
         // Constants
@@ -21,18 +15,23 @@ namespace andengine.opengl.font
         // Fields
         // ===========================================================
 
+        private static EaseLinear INSTANCE;
+
         // ===========================================================
         // Constructors
         // ===========================================================
 
-        public FontLibrary()
-            : base()
+        private EaseLinear()
         {
         }
 
-        public FontLibrary(int pInitialCapacity)
-            : base(pInitialCapacity)
+        public static EaseLinear getInstance()
         {
+            if (INSTANCE == null)
+            {
+                INSTANCE = new EaseLinear();
+            }
+            return INSTANCE;
         }
 
         // ===========================================================
@@ -43,18 +42,14 @@ namespace andengine.opengl.font
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
+        public override float getPercentageDone(float pSecondsElapsed, float pDuration, float pMinValue, float pMaxValue)
+        {
+            return pMaxValue * pSecondsElapsed / pDuration + pMinValue;
+        }
+
         // ===========================================================
         // Methods
         // ===========================================================
-
-        protected void loadFonts(FontManager pFontManager)
-        {
-            SparseArray<Font> items = this.mItems;
-            for (int i = items.Count - 1; i >= 0; i--)
-            {
-                pFontManager.loadFont(items[i]);
-            }
-        }
 
         // ===========================================================
         // Inner and Anonymous Classes

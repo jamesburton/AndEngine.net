@@ -4,6 +4,7 @@ namespace andengine.util
     //import java.util.Arrays;
     using System.Collections;
     using System.Collections.Generic;
+    using Java.Lang;
 
     public class MultiKey<K>
     {
@@ -69,7 +70,7 @@ namespace andengine.util
             {
                 if (key != null)
                 {
-                    hashCode ^= key.hashCode();
+                    hashCode ^= key.GetHashCode();
                 }
             }
             return hashCode;

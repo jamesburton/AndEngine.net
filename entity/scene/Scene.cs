@@ -55,6 +55,7 @@ namespace andengine.entity.scene
     using Android.Util;
     //import android.view.MotionEvent;
     using MotionEvent = Android.Views.MotionEvent;
+    using andengine.engine.handler.runnable;
 
     /**
      * @author Nicolas Gramlich
@@ -448,10 +449,8 @@ namespace andengine.entity.scene
                 }
             }
 
-            /* final */
-            float sceneTouchEventX = pSceneTouchEvent.getX();
-            /* final */
-            float sceneTouchEventY = pSceneTouchEvent.getY();
+            // final float sceneTouchEventX = pSceneTouchEvent.getX();
+            // final float sceneTouchEventY = pSceneTouchEvent.getY();
 
             /* First give the layers a chance to handle their TouchAreas. */
             {

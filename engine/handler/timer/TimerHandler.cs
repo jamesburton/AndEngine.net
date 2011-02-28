@@ -29,14 +29,20 @@ namespace andengine.engine.handler.timer
 
         public TimerHandler(float pTimerSeconds, ITimerCallback pTimerCallback)
         {
-            this(pTimerSeconds, false, pTimerCallback);
+            Init(pTimerSeconds, false);
+            this.mTimerCallback = pTimerCallback;
         }
 
-        public TimerHandler(float pTimerSeconds, boolean pAutoReset, ITimerCallback pTimerCallback)
+        public TimerHandler(float pTimerSeconds, bool pAutoReset, ITimerCallback pTimerCallback)
+        {
+            Init(pTimerSeconds, pAutoReset/*, pTimerCallback*/);
+        }
+
+        protected void Init(float pTimerSeconds, bool pAutoReset/*, ITimerCallback pTimerCallback*/)
         {
             this.mTimerSeconds = pTimerSeconds;
             this.mAutoReset = pAutoReset;
-            this.mTimerCallback = pTimerCallback;
+            //this.mTimerCallback = pTimerCallback;
         }
 
         // ===========================================================

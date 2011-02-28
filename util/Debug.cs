@@ -97,17 +97,26 @@ namespace andengine.util
         // Methods
         // ===========================================================
 
+        public static void v(System.String pMessage) { v(new Java.Lang.String(pMessage)); }
         public static void v(/* final */ String pMessage)
         {
             Debug.v(pMessage, null);
         }
 
+        public static void v(/* final */ System.String pMessage, /* final */ Throwable pThrowable)
+        { v(new Java.Lang.String(pMessage), pThrowable); }
         public static void v(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
             if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.VERBOSE))
             {
-                Log.Verbose(DEBUGTAG, pMessage, pThrowable);
+                //Log.Verbose(DEBUGTAG, pMessage, pThrowable);
+                Log.Verbose(DEBUGTAG, pThrowable, pMessage);
             }
+        }
+
+        public static void d(System.String pMessage)
+        {
+            d(new Java.Lang.String(pMessage));
         }
 
         public static void d(/* final */ String pMessage)

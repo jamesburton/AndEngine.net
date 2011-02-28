@@ -28,7 +28,7 @@ namespace andengine.engine
     using FontFactory = andengine.opengl.font.FontFactory;
     using FontManager = andengine.opengl.font.FontManager;
     using Texture = andengine.opengl.texture.Texture;
-    using andengine.opengl.texture.TextureFactory;
+    using TextureFactory = andengine.opengl.texture.TextureFactory;
     using TextureManager = andengine.opengl.texture.TextureManager;
     using TextureRegion = andengine.opengl.texture.region.TextureRegion;
     using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
@@ -69,6 +69,8 @@ namespace andengine.engine
     using MotionEvent = Android.Views.MotionEvent;
     using View = Android.Views.View;
     using OnTouchListener = Android.Views.View.IOnTouchListener;
+    using Android.Hardware;
+    using System.Threading;
 
     /**
      * @author Nicolas Gramlich
@@ -393,7 +395,7 @@ namespace andengine.engine
                 else
                 {
                     this.mLocation = pLocation;
-                    this.mLocationListener.OnLocationChanged(pLocation);
+                    this.mLocationListener.onLocationChanged(pLocation);
                 }
             }
         }
@@ -408,17 +410,25 @@ namespace andengine.engine
             this.mLocationListener.OnProviderEnabled(pProvider);
         }
 
-        public void onStatusChanged(/* final */ String pProvider, /* final */ int pStatus, /* final */ Bundle pExtras)
+        public void onStatusChanged(/* final */ String pProvider, /* final */ int  pStatus, /* final */ Bundle pExtras)
+        {
+            onStatusChanged(pProvider, (LocationProviderStatus)pStatus, pExtras);
+        }
+
+        public void onStatusChanged(/* final */ String pProvider, /* final int */ LocationProviderStatus pStatus, /* final */ Bundle pExtras)
         {
             switch (pStatus)
             {
-                case LocationProvider.AVAILABLE:
+                //case LocationProvider.AVAILABLE:
+                case LocationProviderStatus.AVAILABLE:
                     this.mLocationListener.OnStatusChanged(LocationProviderStatus.AVAILABLE, pExtras);
                     break;
-                case LocationProvider.OUT_OF_SERVICE:
+                //case LocationProvider.OUT_OF_SERVICE:
+                case LocationProviderStatus.OUT_OF_SERVICE:
                     this.mLocationListener.OnStatusChanged(LocationProviderStatus.OUT_OF_SERVICE, pExtras);
                     break;
-                case LocationProvider.TEMPORARILY_UNAVAILABLE:
+                //case LocationProvider.TEMPORARILY_UNAVAILABLE:
+                case LocationProviderStatus.TEMPORARILY_UNAVAILABLE:
                     this.mLocationListener.OnStatusChanged(LocationProviderStatus.TEMPORARILY_UNAVAILABLE, pExtras);
                     break;
             }
@@ -436,7 +446,7 @@ namespace andengine.engine
                      * As a human cannot interact 1000x per second, we pause the
                      * UI-Thread for a little.
                      */
-                    Thread.sleep(20); // TODO Maybe this can be removed, when TouchEvents are handled on the UpdateThread!
+                    Thread.Sleep(20); // TODO Maybe this can be removed, when TouchEvents are handled on the UpdateThread!
                 }
                 catch (/* final */ InterruptedException e)
                 {
@@ -502,7 +512,7 @@ namespace andengine.engine
         // Methods
         // ===========================================================
 
-        public void runOnUpdateThread(/* final */ Runnable pRunnable)
+        public void runOnUpdateThread(/* final */ IRunnable pRunnable)
         {
             this.mUpdateThreadRunnableHandler.postRunnable(pRunnable);
         }
@@ -669,7 +679,8 @@ namespace andengine.engine
         private long getNanosecondsElapsed()
         {
             /* final */
-            long now = System.nanoTime();
+            //long now = System.nanoTime();
+            long now = System.DateTime.Now.Ticks;
 
             return this.calculateNanosecondsElapsed(now, this.mLastTick);
         }
@@ -681,14 +692,14 @@ namespace andengine.engine
 
         public bool enableVibrator(/* final */ Context pContext)
         {
-            this.mVibrator = (Vibrator)pContext.getSystemService(Context.VibratorService);
+            this.mVibrator = (Vibrator)pContext.GetSystemService(Context.VibratorService);
             return this.mVibrator != null;
         }
 
         public void vibrate(/* final */ long pMilliseconds) /* throws IllegalStateException */ {
             if (this.mVibrator != null)
             {
-                this.mVibrator.vibrate(pMilliseconds);
+                this.mVibrator.Vibrate(pMilliseconds);
             }
             else
             {
@@ -699,7 +710,7 @@ namespace andengine.engine
         public void vibrate(/* final */ long[] pPattern, /* final */ int pRepeat) /* throws IllegalStateException */ {
             if (this.mVibrator != null)
             {
-                this.mVibrator.vibrate(pPattern, pRepeat);
+                this.mVibrator.Vibrate(pPattern, pRepeat);
             }
             else
             {
@@ -712,19 +723,19 @@ namespace andengine.engine
             this.mLocationListener = pLocationListener;
 
             /* final */
-            LocationManager locationManager = (LocationManager)pContext.getSystemService(Context.LocationService);
+            LocationManager locationManager = (LocationManager)pContext.GetSystemService(Context.LocationService);
             /* final */
-            String locationProvider = locationManager.getBestProvider(pLocationSensorOptions, pLocationSensorOptions.isEnabledOnly());
-            locationManager.requestLocationUpdates(locationProvider, pLocationSensorOptions.getMinimumTriggerTime(), pLocationSensorOptions.getMinimumTriggerDistance(), this);
+            String locationProvider = locationManager.GetBestProvider(pLocationSensorOptions, pLocationSensorOptions.isEnabledOnly());
+            locationManager.RequestLocationUpdates(locationProvider, pLocationSensorOptions.getMinimumTriggerTime(), pLocationSensorOptions.getMinimumTriggerDistance(), this);
 
-            this.onLocationChanged(locationManager.getLastKnownLocation(locationProvider));
+            this.onLocationChanged(locationManager.GetLastKnownLocation(locationProvider));
         }
 
         public void disableLocationSensor(/* final */ Context pContext)
         {
             /* final */
-            LocationManager locationManager = (LocationManager)pContext.getSystemService(Context.LocationService);
-            locationManager.removeUpdates(this);
+            LocationManager locationManager = (LocationManager)pContext.GetSystemService(Context.LocationService);
+            locationManager.RemoveUpdates(this);
         }
 
         /**
@@ -741,8 +752,8 @@ namespace andengine.engine
         public bool enableAccelerometerSensor(/* final */ Context pContext, /* final */ IAccelerometerListener pAccelerometerListener, /* final */ AccelerometerSensorOptions pAccelerometerSensorOptions)
         {
             /* final */
-            SensorManager sensorManager = (SensorManager)pContext.getSystemService(Context.SENSOR_SERVICE);
-            if (this.isSensorSupported(sensorManager, Sensor.TYPE_ACCELEROMETER))
+            SensorManager sensorManager = (SensorManager)pContext.GetSystemService(Context.SensorService);
+            if (this.isSensorSupported(sensorManager, SensorType.Accelerometer))
             {
                 this.mAccelerometerListener = pAccelerometerListener;
 
@@ -751,7 +762,7 @@ namespace andengine.engine
                     this.mAccelerometerData = new AccelerometerData();
                 }
 
-                this.registerSelfAsSensorListener(sensorManager, Sensor.TYPE_ACCELEROMETER, pAccelerometerSensorOptions.getSensorDelay());
+                this.registerSelfAsSensorListener(sensorManager, SensorType.Accelerometer, pAccelerometerSensorOptions.getSensorDelay());
 
                 return true;
             }
@@ -768,10 +779,10 @@ namespace andengine.engine
         public bool disableAccelerometerSensor(/* final */ Context pContext)
         {
             /* final */
-            SensorManager sensorManager = (SensorManager)pContext.getSystemService(Context.SENSOR_SERVICE);
-            if (this.isSensorSupported(sensorManager, Sensor.TYPE_ACCELEROMETER))
+            SensorManager sensorManager = (SensorManager)pContext.GetSystemService(Context.SensorService);
+            if (this.isSensorSupported(sensorManager, SensorType.Accelerometer))
             {
-                this.unregisterSelfAsSensorListener(sensorManager, Sensor.TYPE_ACCELEROMETER);
+                this.unregisterSelfAsSensorListener(sensorManager, SensorType.Accelerometer);
                 return true;
             }
             else
@@ -794,8 +805,8 @@ namespace andengine.engine
         public bool enableOrientationSensor(/* final */ Context pContext, /* final */ IOrientationListener pOrientationListener, /* final */ OrientationSensorOptions pOrientationSensorOptions)
         {
             /* final */
-            SensorManager sensorManager = (SensorManager)pContext.getSystemService(Context.SENSOR_SERVICE);
-            if (this.isSensorSupported(sensorManager, Sensor.TYPE_ORIENTATION))
+            SensorManager sensorManager = (SensorManager)pContext.GetSystemService(Context.SensorService);
+            if (this.isSensorSupported(sensorManager, SensorType.Orientation))
             {
                 this.mOrientationListener = pOrientationListener;
 
@@ -804,7 +815,7 @@ namespace andengine.engine
                     this.mOrientationData = new OrientationData();
                 }
 
-                this.registerSelfAsSensorListener(sensorManager, Sensor.TYPE_ORIENTATION, pOrientationSensorOptions.getSensorDelay());
+                this.registerSelfAsSensorListener(sensorManager, SensorType.Orientation, pOrientationSensorOptions.getSensorDelay());
 
                 return true;
             }
@@ -821,10 +832,10 @@ namespace andengine.engine
         public bool disableOrientationSensor(/* final */ Context pContext)
         {
             /* final */
-            SensorManager sensorManager = (SensorManager)pContext.getSystemService(Context.SENSOR_SERVICE);
-            if (this.isSensorSupported(sensorManager, Sensor.TYPE_ORIENTATION))
+            SensorManager sensorManager = (SensorManager)pContext.GetSystemService(Context.SensorService);
+            if (this.isSensorSupported(sensorManager, SensorType.Orientation))
             {
-                this.unregisterSelfAsSensorListener(sensorManager, Sensor.TYPE_ORIENTATION);
+                this.unregisterSelfAsSensorListener(sensorManager, SensorType.Orientation);
                 return true;
             }
             else
@@ -833,19 +844,19 @@ namespace andengine.engine
             }
         }
 
-        private bool isSensorSupported(/* final */ SensorManager pSensorManager, /* final */ int pType)
+        private bool isSensorSupported(/* final */ SensorManager pSensorManager, /* final int */ SensorType pType)
         {
             return pSensorManager.GetSensorList(pType).Count > 0;
         }
 
-        private void registerSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final */ int pType, /* final */ Android.Hardware.SensorDelay pSensorDelay)
+        private void registerSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final int */ SensorType pType, /* final */ Android.Hardware.SensorDelay pSensorDelay)
         {
             /* final */
             Sensor sensor = pSensorManager.GetSensorList(pType)[0];
-            pSensorManager.RegisterListener(this, sensor, pSensorDelay.getDelay());
+            pSensorManager.RegisterListener(this, sensor, pSensorDelay/*.getDelay()*/);
         }
 
-        private void unregisterSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final */ int pType)
+        private void unregisterSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final int */ SensorType pType)
         {
             /* final */
             Sensor sensor = pSensorManager.GetSensorList(pType)[0];
@@ -856,14 +867,14 @@ namespace andengine.engine
         // Inner and Anonymous Classes
         // ===========================================================
 
-        private class UpdateThread : Thread
+        private class UpdateThread : Java.Lang.Thread
         {
-            Thread thread;
+            Java.Lang.Thread thread;
             public UpdateThread()
                 : base("UpdateThread")
             {
-                //super("UpdateThread");
-                thread = new Thread(new ThreadStart(run));
+                thread = new Java.Lang.Thread(run);
+                //thread = new Thread(new ThreadStart(run));
             }
 
             public override void run()
