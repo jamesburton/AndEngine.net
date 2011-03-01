@@ -327,6 +327,7 @@ namespace System.Collections.Generic
             public bool MoveNext() { return dict.MoveNext(); }
             public T2 Current { get { return (T2)dict.Value; } }
             public int[] Index { get { return parent.HashToIndex((string)dict.Key); } }
+            public void Dispose() { }
         }
 
         public System.Collections.Generic.IEnumerator<T> GetEnumerator()

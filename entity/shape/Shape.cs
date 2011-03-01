@@ -2,24 +2,18 @@ namespace andengine.entity.shape
 {
 
     //import javax.microedition.khronos.opengles.GL10;
-    //TODO Check this conversion
-    //using OpenTK.Graphics.ES11;
     using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
+    using GL10Consts = Javax.Microedition.Khronos.Opengles.GL10Consts;
 
-    //using andengine.engine.camera/*.Camera*/;
     using Camera = andengine.engine.camera.Camera;
-    //using andengine.entity/*.Entity*/;
     using Entity = andengine.entity.Entity;
-    //using andengine.input.touch/*.TouchEvent*/;
     using TouchEvent = andengine.input.touch.TouchEvent;
-    //using andengine.opengl.util/*.GLHelper*/;
     using GLHelper = andengine.opengl.util.GLHelper;
 
-    /*using andengine.util.modifier.IModifier;
-    using andengine.util.modifier.ModifierList;*/
+    //using IModifier = andengine.util.modifier.IModifier;
     //using IModifier = andengine.util.modifier.IModifier;
     //using ModifierList = andengine.util.modifier.ModifierList;
-    using andengine.util.modifier;
+    //using andengine.util.modifier;
 
     /**
      * @author Nicolas Gramlich
@@ -76,7 +70,8 @@ namespace andengine.entity.shape
         protected int mSourceBlendFunction = BLENDFUNCTION_SOURCE_DEFAULT;
         protected int mDestinationBlendFunction = BLENDFUNCTION_DESTINATION_DEFAULT;
 
-        private /* final */ readonly ModifierList<IShape> mShapeModifiers = new ModifierList<IShape>(this);
+        //private /* final */ readonly ModifierList<IShape> mShapeModifiers = new ModifierList<IShape>(this);
+        private readonly andengine.util.modifier.ModifierList<IShape> mShapeModifiers;
 
         private bool mCullingEnabled = false;
 
@@ -91,6 +86,8 @@ namespace andengine.entity.shape
 
             this.mX = pX;
             this.mY = pY;
+
+            mShapeModifiers = new andengine.util.modifier.ModifierList<IShape>(this);
         }
 
         // ===========================================================
@@ -337,17 +334,17 @@ namespace andengine.entity.shape
         public float ScaleX { get { return getScaleX(); } set { setScaleX(value); } }
         public float ScaleY { get { return getScaleY(); } set { setScaleY(value); } }
 
-        public override float getScaleX()
+        public /* override */ float getScaleX()
         {
             return this.mScaleX;
         }
 
-        public override float getScaleY()
+        public /* override */ float getScaleY()
         {
             return this.mScaleY;
         }
 
-        public override void setScaleX(/* final */ float pScaleX)
+        public /* override */ void setScaleX(/* final */ float pScaleX)
         {
             this.mScaleX = pScaleX;
         }
@@ -409,7 +406,7 @@ namespace andengine.entity.shape
          * Enable or disable the AndEngine <b>internal</b> physics, you usually call this once you use the AndEnginePhysicsBox2dExtension.
          * @param pUpdatePhysics
          */
-        public override void setUpdatePhysics(/* final */ bool pUpdatePhysics)
+        public void setUpdatePhysics(/* final */ bool pUpdatePhysics)
         {
             this.mUpdatePhysics = pUpdatePhysics;
         }
@@ -446,12 +443,14 @@ namespace andengine.entity.shape
             return this./*getHeight()*/Height * this.mScaleY;
         }
 
-        public override void addShapeModifier(/* final */ IModifier<IShape> pShapeModifier)
+        //public override void addShapeModifier(/* final */ IModifier<IShape> pShapeModifier)
+        public override void addShapeModifier(andengine.util.modifier.IModifier<IShape> pShapeModifier)
         {
             this.mShapeModifiers.Add(pShapeModifier);
         }
 
-        public override bool removeShapeModifier(/* final */ IModifier<IShape> pShapeModifier)
+        //public override bool removeShapeModifier(/* final */ IModifier<IShape> pShapeModifier)
+        public override bool removeShapeModifier(andengine.util.modifier.IModifier<IShape> pShapeModifier)
         {
             return this.mShapeModifiers.Remove(pShapeModifier);
         }
@@ -574,9 +573,9 @@ namespace andengine.entity.shape
                 /* final */
                 float rotationCenterY = this.mRotationCenterY;
 
-                pGL.glTranslatef(rotationCenterX, rotationCenterY, 0);
-                pGL.glRotatef(rotation, 0, 0, 1);
-                pGL.glTranslatef(-rotationCenterX, -rotationCenterY, 0);
+                pGL.GlTranslatef(rotationCenterX, rotationCenterY, 0);
+                pGL.GlRotatef(rotation, 0, 0, 1);
+                pGL.GlTranslatef(-rotationCenterX, -rotationCenterY, 0);
             }
         }
 
@@ -594,9 +593,9 @@ namespace andengine.entity.shape
                 /* final */
                 float scaleCenterY = this.mScaleCenterY;
 
-                pGL.glTranslatef(scaleCenterX, scaleCenterY, 0);
-                pGL.glScalef(scaleX, scaleY, 1);
-                pGL.glTranslatef(-scaleCenterX, -scaleCenterY, 0);
+                pGL.GlTranslatef(scaleCenterX, scaleCenterY, 0);
+                pGL.GlScalef(scaleX, scaleY, 1);
+                pGL.GlTranslatef(-scaleCenterX, -scaleCenterY, 0);
             }
         }
 

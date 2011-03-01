@@ -43,6 +43,7 @@ namespace andengine.engine
     using LocationSensorOptions = andengine.sensor.location.LocationSensorOptions;
     using IOrientationListener = andengine.sensor.orientation.IOrientationListener;
     using OrientationData = andengine.sensor.orientation.OrientationData;
+    //using OrientationSensorOptions = andengine.sensor.orientation.OrientationSensorOptions;
     using OrientationSensorOptions = andengine.sensor.orientation.OrientationSensorOptions;
     using Debug = andengine.util.Debug;
     using TimeConstants = andengine.util.constants.TimeConstants;
@@ -96,7 +97,7 @@ namespace andengine.engine
         private long mLastTick = -1;
         private float mSecondsElapsedTotal = 0;
 
-        private /* final */ readonly State mThreadLocker = new State();
+        //private /* final */ readonly State mThreadLocker = new State();
 
         private /* final */ readonly UpdateThread mUpdateThread = new UpdateThread();
 
@@ -150,7 +151,7 @@ namespace andengine.engine
             BufferObjectManager.setActiveInstance(this.mBufferObjectManager);
 
             this.mEngineOptions = pEngineOptions;
-            this.setTouchController(new SingleTouchControler());
+            this.setTouchController(new SingleTouchController());
             this.mCamera = pEngineOptions.getCamera();
 
             if (this.mEngineOptions.needsSound())
@@ -185,7 +186,8 @@ namespace andengine.engine
         {
             if (!this.mRunning)
             {
-                this.mLastTick = System.nanoTime();
+                //this.mLastTick = System.nanoTime();
+                this.mLastTick = System.DateTime.Now.Ticks;
                 this.mRunning = true;
             }
         }
@@ -331,7 +333,7 @@ namespace andengine.engine
             if (!this.mIsMethodTracing)
             {
                 this.mIsMethodTracing = true;
-                android.os.Debug.startMethodTracing(pTraceFileName);
+                Android.OS.Debug.StartMethodTracing(new Java.Lang.String(pTraceFileName));
             }
         }
 
@@ -339,7 +341,7 @@ namespace andengine.engine
         {
             if (this.mIsMethodTracing)
             {
-                android.os.Debug.stopMethodTracing();
+                Android.OS.Debug.StopMethodTracing();
                 this.mIsMethodTracing = false;
             }
         }
@@ -615,10 +617,13 @@ namespace andengine.engine
         }
 
         private void yieldDraw() /* throws InterruptedException */ {
-            /* final */
-            State threadLocker = this.mThreadLocker;
+            /* TODO: Verify this change ... maybe the static class needs to become non-static
+            // final State threadLocker = this.mThreadLocker;
             threadLocker.notifyCanDraw();
             threadLocker.waitUntilCanUpdate();
+            */
+            State.notifyCanDraw();
+            State.waitUntilCanUpdate();
         }
 
         protected void onUpdate(/* final */ long pNanosecondsElapsed) /* throws InterruptedException */ {
@@ -649,10 +654,12 @@ namespace andengine.engine
         }
 
         public void onDrawFrame(/* final */ GL10 pGL) /* throws InterruptedException */ {
-            /* final */
-            State threadLocker = this.mThreadLocker;
+            /*
+            final State threadLocker = this.mThreadLocker;
 
             threadLocker.waitUntilCanDraw();
+            //*/
+            State.waitUntilCanDraw();
 
             this.mTextureManager.updateTextures(pGL);
             this.mFontManager.updateFonts(pGL);

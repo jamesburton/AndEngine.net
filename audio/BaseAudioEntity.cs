@@ -61,27 +61,27 @@ namespace andengine.audio
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override float getVolume()
+        public /* override */ float getVolume()
         {
             return (this.mLeftVolume + this.mRightVolume) * 0.5f;
         }
 
-        public override float getLeftVolume()
+        public /* override */ float getLeftVolume()
         {
             return this.mLeftVolume;
         }
 
-        public override float getRightVolume()
+        public /* override */ float getRightVolume()
         {
             return this.mRightVolume;
         }
 
-        public override /* final */ sealed void setVolume(/* final */ float pVolume)
+        public /* override final */ void setVolume(/* final */ float pVolume)
         {
             this.setVolume(pVolume, pVolume);
         }
 
-        public override void setVolume(/* final */ float pLeftVolume, /* final */ float pRightVolume)
+        public /* override */ void setVolume(/* final */ float pLeftVolume, /* final */ float pRightVolume)
         {
             this.mLeftVolume = pLeftVolume;
             this.mRightVolume = pRightVolume;
@@ -94,5 +94,14 @@ namespace andengine.audio
         // ===========================================================
         // Inner and Anonymous Classes
         // ===========================================================
+
+        // NB: Filling in missing interface methods with abstract stubs
+        public abstract void onMasterVolumeChanged(float volume);
+        public abstract void pause();
+        public abstract void play();
+        public abstract void release();
+        public abstract void resume();
+        public abstract void setLooping(bool looping);
+        public abstract void stop();
     }
 }

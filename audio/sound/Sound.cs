@@ -27,7 +27,7 @@ namespace andengine.audio.sound
         // Constructors
         // ===========================================================
 
-        Sound(SoundManager pSoundManager, int pSoundID)
+        public Sound(SoundManager pSoundManager, int pSoundID)
             : base(pSoundManager)
         {
             this.mSoundID = pSoundID;
@@ -42,7 +42,7 @@ namespace andengine.audio.sound
             this.mLoopCount = pLoopCount;
             if (this.mStreamID != 0)
             {
-                this.getAudioManager().getSoundPool().setLoop(this.mStreamID, pLoopCount);
+                this.getAudioManager().getSoundPool().SetLoop(this.mStreamID, pLoopCount);
             }
         }
 
@@ -51,7 +51,7 @@ namespace andengine.audio.sound
             this.mRate = pRate;
             if (this.mStreamID != 0)
             {
-                this.getAudioManager().getSoundPool().setRate(this.mStreamID, pRate);
+                this.getAudioManager().getSoundPool().SetRate(this.mStreamID, pRate);
             }
         }
 
@@ -63,7 +63,7 @@ namespace andengine.audio.sound
         // Methods
         // ===========================================================
 
-        protected override SoundManager getAudioManager()
+        protected new SoundManager getAudioManager()
         {
             return (SoundManager)base.getAudioManager();
         }
@@ -80,7 +80,7 @@ namespace andengine.audio.sound
         {
             if (this.mStreamID != 0)
             {
-                this.getAudioManager().getSoundPool().stop(this.mStreamID);
+                this.getAudioManager().getSoundPool().Stop(this.mStreamID);
             }
         }
 
@@ -88,7 +88,7 @@ namespace andengine.audio.sound
         {
             if (this.mStreamID != 0)
             {
-                this.getAudioManager().getSoundPool().resume(this.mStreamID);
+                this.getAudioManager().getSoundPool().Resume(this.mStreamID);
             }
         }
 
@@ -96,7 +96,7 @@ namespace andengine.audio.sound
         {
             if (this.mStreamID != 0)
             {
-                this.getAudioManager().getSoundPool().pause(this.mStreamID);
+                this.getAudioManager().getSoundPool().Pause(this.mStreamID);
             }
         }
 
@@ -105,12 +105,12 @@ namespace andengine.audio.sound
 
         }
 
-        public void setLooping(bool pLooping)
+        public override void setLooping(bool pLooping)
         {
             this.setLoopCount((pLooping) ? -1 : 0);
         }
 
-        public override void setVolume(float pLeftVolume, float pRightVolume)
+        public new void setVolume(float pLeftVolume, float pRightVolume)
         {
             base.setVolume(pLeftVolume, pRightVolume);
             if (this.mStreamID != 0)

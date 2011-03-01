@@ -181,7 +181,7 @@ namespace andengine.util
                 {
                     if (pBytesLeftToRead > read)
                     {
-                        output.write(b, 0, read);
+                        output.Write(b, 0, read);
                         pBytesLeftToRead -= read;
                     }
                     else

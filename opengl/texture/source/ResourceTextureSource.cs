@@ -80,7 +80,7 @@ namespace andengine.opengl.texture.source
             return this.mWidth;
         }
 
-        public override Bitmap onLoadBitmap()
+        public /* override */ Bitmap onLoadBitmap()
         {
             BitmapFactory.Options decodeOptions = new BitmapFactory.Options();
             decodeOptions.InPreferredConfig = Config.Argb8888;
@@ -88,10 +88,12 @@ namespace andengine.opengl.texture.source
             return BitmapFactory.DecodeResource(this.mContext.Resources, this.mDrawableResourceID, decodeOptions);
         }
 
-        public override String toString()
+        //public override String toString()
+        public override System.String ToString()
         {
             //return this.getClass().getSimpleName() + "(" + this.mDrawableResourceID + ")";
-            return new Java.Lang.String(this.GetType().Name + "(" + this.mDrawableResourceID.ToString() + ")");
+            //return new Java.Lang.String(this.GetType().Name + "(" + this.mDrawableResourceID.ToString() + ")");
+            return this.GetType().Name + "(" + this.mDrawableResourceID.ToString() + ")";
         }
 
         // ===========================================================

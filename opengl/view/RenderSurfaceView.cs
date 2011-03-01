@@ -12,7 +12,7 @@ namespace andengine.opengl.view
     using Debug = andengine.util.Debug;
 
     using Context = Android.Content.Context;
-    using AttributeSet = Android.Util.AttributeSet;
+    using AttributeSet = Android.Util.IAttributeSet;
     using Java.Lang;
 
     /**
@@ -47,7 +47,7 @@ namespace andengine.opengl.view
 
         public void setRenderer(Engine pEngine)
         {
-            this.setOnTouchListener(pEngine);
+            this.SetOnTouchListener(pEngine);
             this.mRenderer = new Renderer(pEngine);
             this.setRenderer(this.mRenderer);
         }
@@ -62,7 +62,7 @@ namespace andengine.opengl.view
 
         public void setMeasuredDimensionProxy(int pMeasuredWidth, int pMeasuredHeight)
         {
-            this.setMeasuredDimension(pMeasuredWidth, pMeasuredHeight);
+            this.SetMeasuredDimension(pMeasuredWidth, pMeasuredHeight);
         }
 
         // ===========================================================
@@ -85,8 +85,9 @@ namespace andengine.opengl.view
          * @author Nicolas Gramlich
          * @since 11:45:59 - 08.03.2010
          */
-        public static class Renderer : GLSurfaceView.Renderer
+        public /* static */ class Renderer : GLSurfaceView.Renderer
         {
+            public static Renderer Instance;
             // ===========================================================
             // Constants
             // ===========================================================
@@ -95,7 +96,8 @@ namespace andengine.opengl.view
             // Fields
             // ===========================================================
 
-            private readonly Engine mEngine;
+            //private readonly Engine mEngine;
+            public readonly Engine mEngine;
 
             // ===========================================================
             // Constructors
@@ -103,6 +105,8 @@ namespace andengine.opengl.view
 
             public Renderer(Engine pEngine)
             {
+                Renderer.Instance = this;
+
                 this.mEngine = pEngine;
             }
 
@@ -162,7 +166,7 @@ namespace andengine.opengl.view
                 }
                 catch (InterruptedException e)
                 {
-                    Debug.e("GLThread interrupted!", e);
+                    Debug.e(new Java.Lang.String("GLThread interrupted!"), e);
                 }
             }
 

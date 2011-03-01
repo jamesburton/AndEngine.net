@@ -88,7 +88,7 @@ namespace andengine.engine.handler.timer
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void onUpdate(float pSecondsElapsed)
+        public virtual void onUpdate(float pSecondsElapsed)
         {
             if (this.mAutoReset)
             {

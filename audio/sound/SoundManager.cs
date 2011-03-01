@@ -55,11 +55,11 @@ namespace andengine.audio.sound
         // Methods
         // ===========================================================
 
-        public override void releaseAll()
+        public new void releaseAll()
         {
             base.releaseAll();
 
-            this.mSoundPool.release();
+            this.mSoundPool.Release();
         }
 
         // ===========================================================

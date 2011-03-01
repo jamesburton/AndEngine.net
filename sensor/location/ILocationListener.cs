@@ -2,7 +2,7 @@ namespace andengine.sensor.location
 {
 
     using Location = Android.Locations.Location;
-    using LocationListener = Android.Locations.LocationListener;
+    using LocationListener = Android.Locations.ILocationListener;
     using Bundle = Android.OS.Bundle;
 
     /**

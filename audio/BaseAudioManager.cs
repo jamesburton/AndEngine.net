@@ -63,10 +63,10 @@ namespace andengine.audio
             this.mAudioEntities.Add(pAudioEntity);
         }
 
-        public override void releaseAll()
+        public /* override */ void releaseAll()
         {
-            /* final */
-            ArrayList<T> audioEntities = this.mAudioEntities;
+            // final ArrayList<T> audioEntities = this.mAudioEntities;
+            List<T> audioEntities = this.mAudioEntities;
             for (int i = audioEntities.Count - 1; i >= 0; i--)
             {
                 /* final */

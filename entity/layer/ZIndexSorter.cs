@@ -39,7 +39,7 @@ using System;
         */
         private sealed class ZIndexComparator : IComparator
         {
-            public override int compare(Object pEntityA, Object pEntityB)
+            public /* override */ int compare(Object pEntityA, Object pEntityB)
             {
                 return ((IEntity)pEntityA).getZIndex() - ((IEntity)pEntityB).getZIndex();
             }

@@ -1,12 +1,13 @@
-using andengine.engine.handler.runnable;
-namespace andengine.util.pool
+namespace andengine.sensor.orientation
 {
+
+    using SensorDelay = andengine.sensor.SensorDelay;
 
     /**
      * @author Nicolas Gramlich
-     * @since 23:46:50 - 27.08.2010
+     * @since 11:12:36 - 31.10.2010
      */
-    public abstract class RunnablePoolItem : PoolItem, Runnable
+    public class OrientationSensorOptions
     {
         // ===========================================================
         // Constants
@@ -16,13 +17,25 @@ namespace andengine.util.pool
         // Fields
         // ===========================================================
 
+        readonly SensorDelay mSensorDelay;
+
         // ===========================================================
         // Constructors
         // ===========================================================
 
+        public OrientationSensorOptions(SensorDelay pSensorDelay)
+        {
+            this.mSensorDelay = pSensorDelay;
+        }
+
         // ===========================================================
         // Getter & Setter
         // ===========================================================
+
+        public SensorDelay getSensorDelay()
+        {
+            return this.mSensorDelay;
+        }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
@@ -35,8 +48,5 @@ namespace andengine.util.pool
         // ===========================================================
         // Inner and Anonymous Classes
         // ===========================================================
-
-        // NB: Pass-thru abstract methods for interface methods
-        public abstract void run();
     }
 }

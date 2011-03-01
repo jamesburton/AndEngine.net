@@ -206,7 +206,7 @@ namespace andengine.engine.camera
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void onUpdate(/* final */ float pSecondsElapsed)
+        public /* override */ void onUpdate(/* final */ float pSecondsElapsed)
         {
             if (this.mHUD != null)
             {
@@ -221,7 +221,7 @@ namespace andengine.engine.camera
             }
         }
 
-        public override void reset()
+        public /* override */ void reset()
         {
 
         }
@@ -424,13 +424,13 @@ namespace andengine.engine.camera
             }
             else
             {
-                VERTICES_TOUCH_TMP[VERTEX_INDEX_X] = pSurfaceTouchEvent.getX();
-                VERTICES_TOUCH_TMP[VERTEX_INDEX_Y] = pSurfaceTouchEvent.getY();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pSurfaceTouchEvent.getX();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pSurfaceTouchEvent.getY();
 
                 MathUtils.rotateAroundCenter(VERTICES_TOUCH_TMP, rotation, pSurfaceWidth / 2, pSurfaceHeight / 2);
 
-                relativeX = VERTICES_TOUCH_TMP[VERTEX_INDEX_X] / pSurfaceWidth;
-                relativeY = VERTICES_TOUCH_TMP[VERTEX_INDEX_Y] / pSurfaceHeight;
+                relativeX = VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] / pSurfaceWidth;
+                relativeY = VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] / pSurfaceHeight;
             }
 
             this.convertAxisAlignedSurfaceToSceneTouchEvent(pSurfaceTouchEvent, relativeX, relativeY);

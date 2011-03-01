@@ -335,7 +335,7 @@ namespace andengine.entity.scene
             this.mTouchAreaBindingEnabled = pTouchAreaBindingEnabled;
             if (this.mTouchAreaBindingEnabled == false)
             {
-                this.mTouchAreaBindings.clear();
+                this.mTouchAreaBindings.Clear();
             }
         }
 
@@ -406,7 +406,7 @@ namespace andengine.entity.scene
                 /* final */
                 SparseArray<ITouchArea> touchAreaBindings = this.mTouchAreaBindings;
                 /* final */
-                ITouchArea boundTouchArea = touchAreaBindings.get(pSceneTouchEvent.getPointerID());
+                ITouchArea boundTouchArea = touchAreaBindings[pSceneTouchEvent.getPointerID()];
                 /* In the case a ITouchArea has been bound to this PointerID,
                  * we'll pass this this TouchEvent to the same ITouchArea. */
                 if (boundTouchArea != null)
@@ -422,7 +422,7 @@ namespace andengine.entity.scene
                         case MotionEvent.ActionPointer1Up: //ACTION_UP:
                         // TODO: Check Action mappings from MotionEvent ... missing values in MonoDroid?
                         //case MotionEvent.ACTION_CANCEL:
-                            touchAreaBindings.remove(pSceneTouchEvent.getPointerID());
+                            touchAreaBindings.RemoveAt(pSceneTouchEvent.getPointerID());
                     }
                     /* final */
                     bool handled = this.onAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, boundTouchArea);
@@ -534,8 +534,9 @@ namespace andengine.entity.scene
 
             /* final */
             //ArrayList<ITouchArea> touchAreas = this.mTouchAreas;
+            List<ITouchArea> touchAreas = this.mTouchAreas;
             /* final */
-            int touchAreaCount = touchAreas.size();
+            int touchAreaCount = touchAreas.Count;
             if (touchAreaCount > 0)
             {
                 if (this.mOnAreaTouchTraversalBackToFront)
@@ -543,7 +544,7 @@ namespace andengine.entity.scene
                     for (int i = 0; i < touchAreaCount; i++)
                     {
                         /* final */
-                        ITouchArea touchArea = touchAreas.get(i);
+                        ITouchArea touchArea = touchAreas[i];
                         if (touchArea.contains(sceneTouchEventX, sceneTouchEventY))
                         {
                             /* final */
@@ -554,7 +555,7 @@ namespace andengine.entity.scene
                                  *  bind this ITouchArea to the PointerID. */
                                 if (this.mTouchAreaBindingEnabled && isDownAction)
                                 {
-                                    this.mTouchAreaBindings.put(pSceneTouchEvent.getPointerID(), touchArea);
+                                    this.mTouchAreaBindings[pSceneTouchEvent.getPointerID()] = touchArea;
                                 }
                                 return true;
                             }
@@ -577,7 +578,7 @@ namespace andengine.entity.scene
                                  *  bind this ITouchArea to the PointerID. */
                                 if (this.mTouchAreaBindingEnabled && isDownAction)
                                 {
-                                    this.mTouchAreaBindings.put(pSceneTouchEvent.getPointerID(), touchArea);
+                                    this.mTouchAreaBindings[pSceneTouchEvent.getPointerID()] = touchArea;
                                 }
                                 return true;
                             }

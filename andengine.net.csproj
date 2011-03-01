@@ -48,7 +48,6 @@
     <Compile Include="Cloneable.cs" />
     <Compile Include="engine\Engine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SensorManager.Extension.cs" />
     <Compile Include="SoftReference.cs" />
     <Compile Include="SparseArray.cs" />
     <Compile Include="SparseMatrix.cs" />
@@ -294,14 +293,14 @@
     <Compile Include="opengl\vertex\RectangleVertexBuffer.cs" />
     <Content Include="opengl\vertex\TextVertexBuffer.java" />
     <Compile Include="opengl\vertex\VertexBuffer.cs" />
-    <Content Include="opengl\view\BaseConfigChooser.java" />
-    <Content Include="opengl\view\ComponentSizeChooser.java" />
-    <Content Include="opengl\view\EGLConfigChooser.java" />
+    <Compile Include="opengl\view\BaseConfigChooser.cs" />
+    <Compile Include="opengl\view\ComponentSizeChooser.cs" />
+    <Compile Include="opengl\view\EGLConfigChooser.cs" />
     <Compile Include="opengl\view\GLSurfaceView.cs" />
-    <Content Include="opengl\view\GLWrapper.java" />
-    <Content Include="opengl\view\LogWriter.java" />
+    <Compile Include="opengl\view\GLWrapper.cs" />
+    <Compile Include="opengl\view\LogWriter.cs" />
     <Compile Include="opengl\view\RenderSurfaceView.cs" />
-    <Content Include="opengl\view\SimpleEGLConfigChooser.java" />
+    <Compile Include="opengl\view\SimpleEGLConfigChooser.cs" />
     <Compile Include="sensor\accelerometer\AccelerometerData.cs" />
     <Compile Include="sensor\accelerometer\AccelerometerSensorOptions.cs" />
     <Compile Include="sensor\accelerometer\IAccelerometerListener.cs" />
@@ -311,7 +310,7 @@
     <Compile Include="sensor\location\LocationSensorOptions.cs" />
     <Compile Include="sensor\orientation\IOrientationListener.cs" />
     <Compile Include="sensor\orientation\OrientationData.cs" />
-    <Content Include="sensor\orientation\OrientationSensorOptions.java" />
+    <Compile Include="sensor\orientation\OrientationSensorOptions.cs" />
     <Compile Include="sensor\SensorDelay.cs" />
     <Content Include="ui\activity\BaseActivity.java" />
     <Content Include="ui\activity\BaseGameActivity.java" />

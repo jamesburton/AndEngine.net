@@ -4,7 +4,7 @@ namespace andengine.audio.music
     using BaseAudioEntity = andengine.audio.BaseAudioEntity;
 
     using MediaPlayer = Android.Media.MediaPlayer;
-    //using OnCompletionListener = Android.Media.MediaPlayer.OnCompletionListener;
+    using OnCompletionListener = Android.Media.MediaPlayer.IOnCompletionListener;
 
     /**
      * @author Nicolas Gramlich
@@ -50,42 +50,42 @@ namespace andengine.audio.music
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected override MusicManager getAudioManager()
+        protected new MusicManager getAudioManager()
         {
             return (MusicManager)base.getAudioManager();
         }
 
         public override void play()
         {
-            this.mMediaPlayer.start();
+            this.mMediaPlayer.Start();
         }
 
         public override void stop()
         {
-            this.mMediaPlayer.stop();
+            this.mMediaPlayer.Stop();
         }
 
         public override void resume()
         {
-            this.mMediaPlayer.start();
+            this.mMediaPlayer.Start();
         }
 
         public override void pause()
         {
-            this.mMediaPlayer.pause();
+            this.mMediaPlayer.Pause();
         }
 
         public override void release()
         {
-            this.mMediaPlayer.release();
+            this.mMediaPlayer.Release();
         }
 
         public override void setLooping(bool pLooping)
         {
-            this.mMediaPlayer.setLooping(pLooping);
+            this.mMediaPlayer.Looping = pLooping;
         }
 
-        public override void setVolume(float pLeftVolume, float pRightVolume)
+        public new void setVolume(float pLeftVolume, float pRightVolume)
         {
             base.setVolume(pLeftVolume, pRightVolume);
 
@@ -93,7 +93,7 @@ namespace andengine.audio.music
             float actualLeftVolume = pLeftVolume * masterVolume;
             float actualRightVolume = pRightVolume * masterVolume;
 
-            this.mMediaPlayer.setVolume(actualLeftVolume, actualRightVolume);
+            this.mMediaPlayer.SetVolume(actualLeftVolume, actualRightVolume);
         }
 
         public override void onMasterVolumeChanged(float pMasterVolume)
@@ -107,12 +107,12 @@ namespace andengine.audio.music
 
         public void seekTo(int pMilliseconds)
         {
-            this.mMediaPlayer.seekTo(pMilliseconds);
+            this.mMediaPlayer.SeekTo(pMilliseconds);
         }
 
         public void setOnCompletionListener(OnCompletionListener pOnCompletionListener)
         {
-            this.mMediaPlayer.setOnCompletionListener(pOnCompletionListener);
+            this.mMediaPlayer.SetOnCompletionListener(pOnCompletionListener);
         }
 
         // ===========================================================
