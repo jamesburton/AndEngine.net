@@ -32,7 +32,7 @@ namespace andengine.entity.layer
         // ===========================================================
 
         //private final ArrayList<IEntity> mEntities;
-        private readonly List<IEntity> mEntities;
+        private readonly IList<IEntity> mEntities;
 
         // ===========================================================
         // Constructors
@@ -56,77 +56,80 @@ namespace andengine.entity.layer
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override IEntity getEntity(int pIndex)
+        public override IEntity GetEntity(int pIndex)
         {
             return this.mEntities[pIndex];
         }
 
-        public override int getEntityCount()
+        public override int GetEntityCount()
         {
             return this.mEntities.Count;
         }
+        public int EntityCount { get { return GetEntityCount(); } }
 
-        protected override void onManagedDraw(GL10 pGL, Camera pCamera)
+        protected override void OnManagedDraw(GL10 pGL, Camera pCamera)
         {
             //final ArrayList<IEntity> entities = this.mEntities;
-            List<IEntity> entities = mEntities;
+            IList<IEntity> entities = mEntities;
             int entityCount = entities.Count;
             for (int i = 0; i < entityCount; i++)
             {
-                entities[i].onDraw(pGL, pCamera);
+                entities[i].OnDraw(pGL, pCamera);
             }
         }
 
-        protected override void onManagedUpdate(float pSecondsElapsed)
+        protected override void OnManagedUpdate(float pSecondsElapsed)
         {
             //final ArrayList<IEntity> entities = this.mEntities;
-            List<IEntity> entities = mEntities;
+            IList<IEntity> entities = mEntities;
             int entityCount = entities.Count;
             for (int i = 0; i < entityCount; i++)
             {
-                entities[i].onUpdate(pSecondsElapsed);
+                entities[i].OnUpdate(pSecondsElapsed);
             }
         }
 
-        public override void reset()
+        public override void Reset()
         {
-            base.reset();
+            base.Reset();
 
             //final ArrayList<IEntity> entities = this.mEntities;
-            List<IEntity> entities = this.mEntities;
+            IList<IEntity> entities = this.mEntities;
             for (int i = entities.Count - 1; i >= 0; i--)
             {
-                entities[i].reset();
+                entities[i].Reset();
             }
         }
 
-        public override void clear()
+        public override void Clear()
         {
             this.mEntities.Clear();
         }
 
-        public override void addEntity(IEntity pEntity)
+        public override void AddEntity(IEntity pEntity)
         {
             this.mEntities.Add(pEntity);
         }
 
-        public override bool removeEntity(IEntity pEntity)
+        public override bool RemoveEntity(IEntity pEntity)
         {
             return this.mEntities.Remove(pEntity);
         }
 
-        public override IEntity removeEntity(int pIndex)
+        public override IEntity RemoveEntity(int pIndex)
         {
-            return this.mEntities.RemoveAt(pIndex);
+            IEntity entity = this.mEntities[pIndex];
+            this.mEntities.RemoveAt(pIndex);
+            return entity;
         }
 
-        public override bool removeEntity(IEntityMatcher pEntityMatcher)
+        public override bool RemoveEntity(IEntityMatcher pEntityMatcher)
         {
             //final ArrayList<IEntity> entities = this.mEntities;
-            List<IEntity> entities = this.mEntities;
+            IList<IEntity> entities = this.mEntities;
             for (int i = entities.Count - 1; i >= 0; i--)
             {
-                if (pEntityMatcher.matches(entities[i]))
+                if (pEntityMatcher.Matches(entities[i]))
                 {
                     entities.RemoveAt(i);
                     return true;
@@ -135,14 +138,14 @@ namespace andengine.entity.layer
             return false;
         }
 
-        public override IEntity findEntity(IEntityMatcher pEntityMatcher)
+        public override IEntity FindEntity(IEntityMatcher pEntityMatcher)
         {
             //final ArrayList<IEntity> entities = this.mEntities;
-            List<IEntity> entities = this.mEntities;
+            IList<IEntity> entities = this.mEntities;
             for (int i = entities.Count - 1; i >= 0; i--)
             {
                 IEntity entity = entities[i];
-                if (pEntityMatcher.matches(entity))
+                if (pEntityMatcher.Matches(entity))
                 {
                     return entity;
                 }
@@ -150,29 +153,31 @@ namespace andengine.entity.layer
             return null;
         }
 
-        public override void sortEntities()
+        public override void SortEntities()
         {
-            ZIndexSorter.getInstance().sort(this.mEntities);
+            //ZIndexSorter.GetInstance().sort(this.mEntities);
+            ZIndexSorter.Instance.Sort(this.mEntities);
         }
 
-        public override void sortEntities(/*Comparator<IEntity>*/ Comparer<IEntity> pEntityComparator)
+        public override void SortEntities(/*Comparator<IEntity>*/ Comparer<IEntity> pEntityComparator)
         {
-            ZIndexSorter.getInstance().sort(this.mEntities, pEntityComparator);
+            //ZIndexSorter.getInstance().sort(this.mEntities, pEntityComparator);
+            ZIndexSorter.Instance.Sort(this.mEntities, pEntityComparator);
         }
 
-        public override IEntity replaceEntity(int pEntityIndex, IEntity pEntity)
+        public override IEntity ReplaceEntity(int pEntityIndex, IEntity pEntity)
         {
             //final ArrayList<IEntity> entities = this.mEntities;
-            List<IEntity> entities = this.mEntities;
+            IList<IEntity> entities = this.mEntities;
             IEntity oldEntity = entities[pEntityIndex] = pEntity;
             return oldEntity;
         }
 
-        public override void setEntity(int pEntityIndex, IEntity pEntity)
+        public override void SetEntity(int pEntityIndex, IEntity pEntity)
         {
             if (pEntityIndex == this.mEntities.Count)
             {
-                this.addEntity(pEntity);
+                this.AddEntity(pEntity);
             }
             else
             {
@@ -180,10 +185,10 @@ namespace andengine.entity.layer
             }
         }
 
-        public override void swapEntities(int pEntityIndexA, int pEntityIndexB)
+        public override void SwapEntities(int pEntityIndexA, int pEntityIndexB)
         {
             //final ArrayList<IEntity> entities = this.mEntities;
-            List<IEntity> entities = this.mEntities;
+            IList<IEntity> entities = this.mEntities;
             IEntity entityA = entities[pEntityIndexA];
             IEntity entityB = entities[pEntityIndexB] = entityA;
             entities[pEntityIndexA] = entityB;

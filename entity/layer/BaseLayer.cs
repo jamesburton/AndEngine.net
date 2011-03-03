@@ -6,6 +6,8 @@ namespace andengine.entity.layer
 
     using Entity = andengine.entity.Entity;
     using ITouchArea = andengine.entity.scene.Scene.ITouchArea;
+    using IComparator = Java.Util.IComparator;
+    using IEntityMatcher = andengine.util.IEntityMatcher;
 
     /**
      * @author Nicolas Gramlich
@@ -22,7 +24,7 @@ namespace andengine.entity.layer
         // ===========================================================
 
         //private final ArrayList<ITouchArea> mTouchAreas = new ArrayList<ITouchArea>();
-        private readonly List<ITouchArea> mTouchAreas = new List<ITouchArea>();
+        private readonly IList<ITouchArea> mTouchAreas = new List<ITouchArea>();
 
         // ===========================================================
         // Constructors
@@ -46,21 +48,37 @@ namespace andengine.entity.layer
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void RegisterTouchArea(ITouchArea pTouchArea)
+        public /* override */ virtual void RegisterTouchArea(ITouchArea pTouchArea)
         {
             this.mTouchAreas.Add(pTouchArea);
         }
 
-        public override void UnregisterTouchArea(ITouchArea pTouchArea)
+        public /* override */ virtual void UnregisterTouchArea(ITouchArea pTouchArea)
         {
             this.mTouchAreas.Remove(pTouchArea);
         }
 
         //public ArrayList<ITouchArea> getTouchAreas() {
-        public List<ITouchArea> GetTouchAreas()
+        public IList<ITouchArea> GetTouchAreas()
         {
             return this.mTouchAreas;
         }
+
+        public abstract void SetEntity(int pEntityIndex, IEntity pEntity);
+        public abstract void SwapEntities(int pEntityIndexA, int pEntityIndexB);
+        public abstract IEntity ReplaceEntity(int pEntityIndex, IEntity pEntity);
+        public abstract void SortEntities();
+        // TODO: Check this substitution:- public abstract void SortEntities(/* final */ IComparator pEntityComparator);
+        public abstract void SortEntities(Comparer<IEntity> entityComparer);
+        public abstract IEntity GetEntity(/* final */ int pIndex);
+        public abstract void AddEntity(/* final */ IEntity pEntity);
+        public abstract IEntity FindEntity(/* final */ IEntityMatcher pEntityMatcher);
+        public abstract IEntity RemoveEntity(/* final */ int pIndex);
+        public abstract bool RemoveEntity(/* final */ IEntity pEntity);
+        public abstract bool RemoveEntity(/* final */ IEntityMatcher pEntityMatcher);
+        public abstract int GetEntityCount();
+        public abstract void Clear();
+
 
         // ===========================================================
         // Methods
