@@ -37,7 +37,7 @@ namespace andengine.util
         // Getter & Setter
         // ===========================================================
 
-        public K[] getKeys()
+        public K[] GetKeys()
         {
             return this.mKeys;
         }
@@ -45,8 +45,8 @@ namespace andengine.util
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
-
-        public override bool equals(/* final */ object pOther)
+        //public override bool equals(/* final */ object pOther)
+        public override bool Equals(/* final */ object pOther)
         {
             if (pOther == this)
             {
@@ -62,7 +62,7 @@ namespace andengine.util
             return false;
         }
 
-        public static int hash(/*final Object ... pKeys*/ params object[] pKeys)
+        public static int Hash(/*final Object ... pKeys*/ params object[] pKeys)
         {
             int hashCode = 0;
             //for(Object key : pKeys) {
@@ -76,28 +76,37 @@ namespace andengine.util
             return hashCode;
         }
 
-
-        public override int hashCode()
+        /* public override int hashCode()
+        {
+            return this.mCachedHashCode;
+        } */
+        public override int GetHashCode()
         {
             return this.mCachedHashCode;
         }
 
-        public override String ToString()
+        public override System.String ToString()
         {
             //return "MultiKey" + Arrays.asList(this.mKeys).toString();
             return "MultiKey" + new List<K>(this.mKeys).ToString();
+        }
+
+        public /* override */ String toString()
+        {
+            //return "MultiKey" + Arrays.asList(this.mKeys).toString();
+            return new Java.Lang.String("MultiKey" + new List<K>(this.mKeys).ToString());
         }
 
         // ===========================================================
         // Methods
         // ===========================================================
 
-        public K getKey(/*final*/ int pIndex)
+        public K GetKey(/*final*/ int pIndex)
         {
             return this.mKeys[pIndex];
         }
 
-        public int size()
+        public int Size()
         {
             return this.mKeys.Length;
         }

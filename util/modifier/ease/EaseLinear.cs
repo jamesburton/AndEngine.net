@@ -25,7 +25,7 @@ namespace andengine.util.modifier.ease
         {
         }
 
-        public static EaseLinear getInstance()
+        public static EaseLinear GetInstance()
         {
             if (INSTANCE == null)
             {
@@ -42,7 +42,7 @@ namespace andengine.util.modifier.ease
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override float getPercentageDone(float pSecondsElapsed, float pDuration, float pMinValue, float pMaxValue)
+        public override float GetPercentageDone(float pSecondsElapsed, float pDuration, float pMinValue, float pMaxValue)
         {
             return pMaxValue * pSecondsElapsed / pDuration + pMinValue;
         }

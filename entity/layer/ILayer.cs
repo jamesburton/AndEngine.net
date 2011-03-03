@@ -28,9 +28,9 @@ namespace andengine.entity.layer
         // Methods
         // ===========================================================
 
-        /* public */ void setEntity(/* final */ int pEntityIndex, /* final */ IEntity pEntity);
+        /* public */ void SetEntity(/* final */ int pEntityIndex, /* final */ IEntity pEntity);
 
-        /* public */ void swapEntities(/* final */ int pEntityIndexA, /* final */ int pEntityIndexB);
+        /* public */ void SwapEntities(/* final */ int pEntityIndexA, /* final */ int pEntityIndexB);
 
         /**
          * Similar to {@link ILayer#setEntity(int, ILayer)} but returns the {@link IEntity} that would be overwritten.
@@ -39,25 +39,25 @@ namespace andengine.entity.layer
          * @param pEntity
          * @return the layer that has been replaced.
          */
-        /* public */ IEntity replaceEntity(/* final */ int pEntityIndex, /* final */ IEntity pEntity);
+        /* public */ IEntity ReplaceEntity(/* final */ int pEntityIndex, /* final */ IEntity pEntity);
 
         /**
          * Sorts the {@link IEntity}s based on their ZIndex. Sort is stable. 
          */
-        /* public */ void sortEntities();
+        /* public */ void SortEntities();
 
         /**
          * Sorts the {@link IEntity}s based on the {@link Comparator} supplied. Sort is stable.
          * @param pEntityComparator
          */
         // public void sortEntities(/* final */ Comparator<IEntity> pEntityComparator);
-        void sortEntities(/* final */ IComparator pEntityComparator);
+        void SortEntities(/* final */ IComparator pEntityComparator);
 
-        /* public */ IEntity getEntity(/* final */ int pIndex);
+        /* public */ IEntity GetEntity(/* final */ int pIndex);
 
-        /* public */ void addEntity(/* final */ IEntity pEntity);
+        /* public */ void AddEntity(/* final */ IEntity pEntity);
 
-        /* public */ IEntity findEntity(/* final */ IEntityMatcher pEntityMatcher);
+        /* public */ IEntity FindEntity(/* final */ IEntityMatcher pEntityMatcher);
 
         /**
          * <b><i>WARNING:</i> This function should be called from within
@@ -66,7 +66,7 @@ namespace andengine.entity.layer
          * it may throw an {@link ArrayIndexOutOfBoundsException} in the
          * Update-Thread or the GL-Thread!</b>
          */
-        /* public */ IEntity removeEntity(/* final */ int pIndex);
+        /* public */ IEntity RemoveEntity(/* final */ int pIndex);
         /**
          * <b><i>WARNING:</i> This function should be called from within
          * {@link RunnableHandler#postRunnable(Runnable)} which is registered
@@ -74,7 +74,7 @@ namespace andengine.entity.layer
          * it may throw an {@link ArrayIndexOutOfBoundsException} in the
          * Update-Thread or the GL-Thread!</b>
          */
-        /* public */ bool removeEntity(/* final */ IEntity pEntity);
+        /* public */ bool RemoveEntity(/* final */ IEntity pEntity);
         /**
          * <b><i>WARNING:</i> This function should be called from within
          * {@link RunnableHandler#postRunnable(Runnable)} which is registered
@@ -82,17 +82,17 @@ namespace andengine.entity.layer
          * it may throw an {@link ArrayIndexOutOfBoundsException} in the
          * Update-Thread or the GL-Thread!</b>
          */
-        /* public */ bool removeEntity(/* final */ IEntityMatcher pEntityMatcher);
+        /* public */ bool RemoveEntity(/* final */ IEntityMatcher pEntityMatcher);
 
         //public ArrayList<ITouchArea> getTouchAreas();
-        /* public */ IList<ITouchArea> getTouchAreas();
+        /* public */ IList<ITouchArea> GetTouchAreas();
 
-        /* public */ void registerTouchArea(/* final */ ITouchArea pTouchArea);
+        /* public */ void RegisterTouchArea(/* final */ ITouchArea pTouchArea);
 
-        /* public */ void unregisterTouchArea(/* final */ ITouchArea pTouchArea);
+        /* public */ void UnregisterTouchArea(/* final */ ITouchArea pTouchArea);
 
-        /* public */ int getEntityCount();
+        /* public */ int GetEntityCount();
 
-        /* public */ /* abstract */ void clear();
+        /* public */ /* abstract */ void Clear();
     }
 }

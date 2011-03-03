@@ -259,9 +259,9 @@
     <Compile Include="opengl\font\Size.cs" />
     <Compile Include="opengl\font\StrokeFont.cs" />
     <Compile Include="opengl\IDrawable.cs" />
-    <Content Include="opengl\texture\buffer\TextTextureBuffer.java" />
+    <Compile Include="opengl\texture\buffer\TextTextureBuffer.cs" />
     <Compile Include="opengl\texture\BuildableTexture.cs" />
-    <Content Include="opengl\texture\builder\BlackPawnTextureBuilder.java" />
+    <Compile Include="opengl\texture\builder\BlackPawnTextureBuilder.cs" />
     <Compile Include="opengl\texture\builder\ITextureBuilder.cs" />
     <Compile Include="opengl\texture\region\BaseTextureRegion.cs" />
     <Compile Include="opengl\texture\region\buffer\BaseTextureRegionBuffer.cs" />

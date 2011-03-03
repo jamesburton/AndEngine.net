@@ -3,6 +3,7 @@ namespace andengine.engine
 
     //import javax.microedition.khronos.opengles.GL10;
     using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
+    using GL10Consts = Javax.Microedition.Khronos.Opengles.GL10Consts;
 
     //using andengine.engine.camera.Camera;
     using Camera = andengine.engine.camera.Camera;
@@ -43,32 +44,36 @@ namespace andengine.engine
         // ===========================================================
 
         //@Deprecated
-        public override camera.Camera getCamera()
+        public override Camera GetCamera()
         {
             //return super.mCamera;
             return base.mCamera;
         }
 
-        public andengine.engine.camera.Camera getFirstCamera()
+        public Camera GetFirstCamera()
         {
             return base.mCamera;
         }
 
-        public camera.Camera getSecondCamera()
+        public Camera GetSecondCamera()
         {
             return this.mSecondCamera;
         }
+
+        public Camera FirstCamera { get { return GetFirstCamera(); } }
+        public Camera SecondCamera { get { return GetSecondCamera(); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected override void onDrawScene(/* final */ GL10 pGL)
+        protected override void OnDrawScene(/* final */ GL10 pGL)
         {
             /* final */
-            Camera firstCamera = this.getFirstCamera();
+            //Camera firstCamera = this.GetFirstCamera();
+            Camera firstCamera = this.FirstCamera;
             /* final */
-            Camera secondCamera = this.getSecondCamera();
+            Camera secondCamera = this.SecondCamera;
 
             /* final */
             int surfaceWidth = this.mSurfaceWidth;
@@ -78,64 +83,70 @@ namespace andengine.engine
             /* final */
             int surfaceHeight = this.mSurfaceHeight;
 
-            pGL.glEnable(GL10.GL_SCISSOR_TEST); // TODO --> GLHelper
+            //pGL.glEnable(GL10.GL_SCISSOR_TEST); // TODO --> GLHelper
+            pGL.GlEnable(GL10Consts.GlScissorTest); // TODO --> GLHelper
 
             /* First Screen. With first camera, on the left half of the screens width. */
             {
-                pGL.glScissor(0, 0, surfaceWidthHalf, surfaceHeight);
-                pGL.glViewport(0, 0, surfaceWidthHalf, surfaceHeight);
+                pGL.GlScissor(0, 0, surfaceWidthHalf, surfaceHeight);
+                pGL.GlViewport(0, 0, surfaceWidthHalf, surfaceHeight);
 
                 //super.mScene.onDraw(pGL, firstCamera);
-                base.mScene.onDraw(pGL, firstCamera);
-                firstCamera.onDrawHUD(pGL);
+                base.mScene.OnDraw(pGL, firstCamera);
+                firstCamera.OnDrawHUD(pGL);
             }
 
             /* Second Screen. With second camera, on the right half of the screens width. */
             {
-                pGL.glScissor(surfaceWidthHalf, 0, surfaceWidthHalf, surfaceHeight);
-                pGL.glViewport(surfaceWidthHalf, 0, surfaceWidthHalf, surfaceHeight);
+                pGL.GlScissor(surfaceWidthHalf, 0, surfaceWidthHalf, surfaceHeight);
+                pGL.GlViewport(surfaceWidthHalf, 0, surfaceWidthHalf, surfaceHeight);
 
                 //super.mScene.onDraw(pGL, secondCamera);
-                base.mScene.onDraw(pGL, secondCamera);
-                secondCamera.onDrawHUD(pGL);
+                base.mScene.OnDraw(pGL, secondCamera);
+                secondCamera.OnDrawHUD(pGL);
             }
 
-            pGL.glDisable(GL10.GL_SCISSOR_TEST);
+            pGL.GlDisable(GL10Consts.GlScissorTest);
         }
 
-        protected override Camera getCameraFromSurfaceTouchEvent(/* final */ TouchEvent pTouchEvent)
+        protected override Camera GetCameraFromSurfaceTouchEvent(/* final */ TouchEvent pTouchEvent)
         {
-            if (pTouchEvent.getX() <= this.mSurfaceWidth >> 1)
+            //if (pTouchEvent.getX() <= this.mSurfaceWidth >> 1)
+            if (pTouchEvent.X <= this.mSurfaceWidth >> 1)
             {
-                return this.getFirstCamera();
+                //return this.getFirstCamera();
+                return this.FirstCamera;
             }
             else
             {
-                return this.getSecondCamera();
+                //return this.getSecondCamera();
+                return this.SecondCamera;
             }
         }
 
-        protected override void convertSurfaceToSceneTouchEvent(/* final */ Camera pCamera, /* final */ TouchEvent pSurfaceTouchEvent)
+        protected override void ConvertSurfaceToSceneTouchEvent(/* final */ Camera pCamera, /* final */ TouchEvent pSurfaceTouchEvent)
         {
             /* final */
             int surfaceWidthHalf = this.mSurfaceWidth >> 1;
 
-            if (pCamera == this.getFirstCamera())
+            //if (pCamera == this.getFirstCamera())
+            if (pCamera == this.FirstCamera)
             {
-                pCamera.convertSurfaceToSceneTouchEvent(pSurfaceTouchEvent, surfaceWidthHalf, this.mSurfaceHeight);
+                pCamera.ConvertSurfaceToSceneTouchEvent(pSurfaceTouchEvent, surfaceWidthHalf, this.mSurfaceHeight);
             }
             else
             {
-                pSurfaceTouchEvent.offset(-surfaceWidthHalf, 0);
-                pCamera.convertSurfaceToSceneTouchEvent(pSurfaceTouchEvent, surfaceWidthHalf, this.mSurfaceHeight);
+                pSurfaceTouchEvent.Offset(-surfaceWidthHalf, 0);
+                pCamera.ConvertSurfaceToSceneTouchEvent(pSurfaceTouchEvent, surfaceWidthHalf, this.mSurfaceHeight);
             }
         }
 
-        protected override void updateUpdateHandlers(/* final */ float pSecondsElapsed)
+        protected override void UpdateUpdateHandlers(/* final */ float pSecondsElapsed)
         {
             //super.updateUpdateHandlers(pSecondsElapsed);
-            base.updateUpdateHandlers(pSecondsElapsed);
-            this.getSecondCamera().onUpdate(pSecondsElapsed);
+            base.UpdateUpdateHandlers(pSecondsElapsed);
+            //this.getSecondCamera().onUpdate(pSecondsElapsed);
+            this.SecondCamera.OnUpdate(pSecondsElapsed);
         }
 
         // ===========================================================

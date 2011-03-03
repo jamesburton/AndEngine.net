@@ -43,19 +43,19 @@ namespace andengine.util.pool
         }
         */
         public static PoolUpdateHandler<T> Instance;
-        public class PoolUpdateHandlerPool<T2> : Pool<T> where T2 : T
+        public class PoolUpdateHandlerPool : Pool<T>
         {
             // TODO: Consider if this class should also be a generic class (using a where T2 : T clause)
-            protected override T2 onAllocatePoolItem()
+            protected override T OnAllocatePoolItem()
             {
                 //return PoolUpdateHandler<T>.this.onAllocatePoolItem();
-                return PoolUpdateHandler<T2>.Instance.onAllocatePoolItem();
+                return PoolUpdateHandler<T>.Instance.onAllocatePoolItem();
             }
             public PoolUpdateHandlerPool() : base() { }
             public PoolUpdateHandlerPool(int pInitialPoolSize) : base(pInitialPoolSize) { }
             public PoolUpdateHandlerPool(int pInitialPoolSize, int pGrowth) : base(pInitialPoolSize, pGrowth) { }
         }
-        public PoolUpdateHandler() { Instance = this; this.mPool = new PoolUpdateHandlerPool<T>(); }
+        public PoolUpdateHandler() { Instance = this; this.mPool = new PoolUpdateHandlerPool(); }
 
         /*
         public PoolUpdateHandler(int pInitialPoolSize) {
@@ -67,7 +67,7 @@ namespace andengine.util.pool
             };
         }
         */
-        public PoolUpdateHandler(int pInitialPoolSize) { this.mPool = new PoolUpdateHandlerPool<T>(pInitialPoolSize); }
+        public PoolUpdateHandler(int pInitialPoolSize) { this.mPool = new PoolUpdateHandlerPool(pInitialPoolSize); }
 
         /*
         public PoolUpdateHandler(final int pInitialPoolSize, final int pGrowth) {
@@ -79,7 +79,7 @@ namespace andengine.util.pool
             };
         }
         */
-        public PoolUpdateHandler(int pInitialPoolSize, int pGrowth) { this.mPool = new PoolUpdateHandlerPool<T>(pInitialPoolSize, pGrowth); }
+        public PoolUpdateHandler(int pInitialPoolSize, int pGrowth) { this.mPool = new PoolUpdateHandlerPool(pInitialPoolSize, pGrowth); }
 
         // ===========================================================
         // Getter & Setter
@@ -93,7 +93,7 @@ namespace andengine.util.pool
 
         protected abstract void onHandlePoolItem(T pPoolItem);
 
-        public override void onUpdate(float pSecondsElapsed)
+        public /* override */ void OnUpdate(float pSecondsElapsed)
         {
             //final ArrayList<T> scheduledPoolItems = this.mScheduledPoolItems;
             List<T> scheduledPoolItems = this.mScheduledPoolItems;
@@ -120,7 +120,7 @@ namespace andengine.util.pool
             }
         }
 
-        public override void reset()
+        public /* override */ void Reset()
         {
             //final ArrayList<T> scheduledPoolItems = this.mScheduledPoolItems;
             List<T> scheduledPoolItems = this.mScheduledPoolItems;
@@ -143,12 +143,12 @@ namespace andengine.util.pool
         // Methods
         // ===========================================================
 
-        public T obtainPoolItem()
+        public T ObtainPoolItem()
         {
-            return this.mPool.obtainPoolItem();
+            return this.mPool.ObtainPoolItem();
         }
 
-        public void postPoolItem(T pPoolItem)
+        public void PostPoolItem(T pPoolItem)
         {
             //synchronized (this.mScheduledPoolItems) {
             lock (this.mScheduledPoolItems)
@@ -157,7 +157,7 @@ namespace andengine.util.pool
                 {
                     throw new IllegalArgumentException("PoolItem already recycled!");
                 }
-                else if (!this.mPool.ownsPoolItem(pPoolItem))
+                else if (!this.mPool.OwnsPoolItem(pPoolItem))
                 {
                     throw new IllegalArgumentException("PoolItem from another pool!");
                 }

@@ -9,6 +9,24 @@ namespace andengine.util.modifier
      */
     public abstract class BaseModifier<T> : IModifier<T>
     {
+        // TODO: Check having add the line below to fulfill the interface requirements from Java.Runtime.IJavaObject
+        //public System.IntPtr Handle;
+        System.IntPtr Android.Runtime.IJavaObject.Handle
+        {
+            get
+            {
+                //return base.Android.Runtime.IJavaObject.Handle;
+                return this.Handle;
+            }
+        }
+        public System.IntPtr Handle;
+        public abstract void Reset();
+        void IModifier<T>.Reset() { this.Reset(); }
+        public abstract float Duration { get; }
+        float IModifier<T>.Duration { get { return this.Duration; } }
+        public abstract void OnUpdate(float pSecondsElapsed, T pItem);
+        void IModifier<T>.OnUpdate(float pSecondsElapsed, T pItem) { this.OnUpdate(pSecondsElapsed, pItem); }
+
         // ===========================================================
         // Constants
         // ===========================================================
@@ -48,22 +66,30 @@ namespace andengine.util.modifier
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override bool isFinished()
+        public bool Finished { get { return this.mFinished; } }
+        /*
+        public override bool IsFinished()
         {
             return this.mFinished;
         }
+        //*/
 
-        public override sealed bool isRemoveWhenFinished()
+        public bool RemoveWhenFinished { get { return this.mRemoveWhenFinished; } set { this.mRemoveWhenFinished = value; } }
+        /*
+        public override sealed bool IsRemoveWhenFinished()
         {
             return this.mRemoveWhenFinished;
         }
 
-        public /* final */ void setRemoveWhenFinished(bool pRemoveWhenFinished)
+        public /* final * / void SetRemoveWhenFinished(bool pRemoveWhenFinished)
         {
             this.mRemoveWhenFinished = pRemoveWhenFinished;
         }
+        //*/
 
-        public IModifierListener<T> getModifierListener()
+        public IModifierListener<T> ModifierListener { get { return mModifierListener; } set { mModifierListener = value; } }
+        /*
+        public IModifierListener<T> GetModifierListener()
         {
             return this.mModifierListener;
         }
@@ -72,8 +98,9 @@ namespace andengine.util.modifier
         {
             this.mModifierListener = pModifierListener;
         }
+        //*/
 
-        public override abstract IModifier<T> clone();
+        public /* override */ abstract IModifier<T> Clone();
 
         // ===========================================================
         // Methods

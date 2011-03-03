@@ -17,20 +17,24 @@ namespace andengine.util.modifier
         // Methods
         // ===========================================================
 
-        /* public */ void reset();
+        /* public */ void Reset();
 
-        /* public */ bool isFinished();
-        /* public */ bool isRemoveWhenFinished();
-        /* public */ void setRemoveWhenFinished(/* final */ bool pRemoveWhenFinished);
+        bool Finished { get; }
+        //* public */ bool IsFinished();
+        bool RemoveWhenFinished { get; set; }
+        //* public */ bool isRemoveWhenFinished();
+        //* public */ void setRemoveWhenFinished(/* final */ bool pRemoveWhenFinished);
 
-        /* public */ IModifier<T> clone();
+        /* public */ IModifier<T> Clone();
 
-        /* public */ float getDuration();
+        float Duration { get; }
+        //* public */ float getDuration();
 
-        /* public */ void onUpdate(/* final */ float pSecondsElapsed, /* final */ T pItem);
+        /* public */ void OnUpdate(/* final */ float pSecondsElapsed, /* final */ T pItem);
 
-        /* public */ IModifierListener<T> getModifierListener();
-        /* public */ void setModifierListener(/* final */ IModifierListener<T> pModifierListener);
+        IModifierListener<T> ModifierListener { get; set; }
+        //* public */ IModifierListener<T> getModifierListener();
+        //* public */ void setModifierListener(/* final */ IModifierListener<T> pModifierListener);
 
         // ===========================================================
         // Inner and Anonymous Classes
@@ -63,6 +67,6 @@ namespace andengine.util.modifier
         // Methods
         // ===========================================================
 
-        /* public */ void onModifierFinished(/* final */ IModifier<T> pModifier, /* final */ T pItem);
+        /* public */ void OnModifierFinished(/* final */ IModifier<T> pModifier, /* final */ T pItem);
     }
 }

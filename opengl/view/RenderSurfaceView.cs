@@ -118,20 +118,20 @@ namespace andengine.opengl.view
             // Methods for/from SuperClass/Interfaces
             // ===========================================================
 
-            public override void onSurfaceChanged(GL10 pGL, int pWidth, int pHeight)
+            public /* override */ void OnSurfaceChanged(GL10 pGL, int pWidth, int pHeight)
             {
                 Debug.d("onSurfaceChanged: pWidth=" + pWidth + "  pHeight=" + pHeight);
-                this.mEngine.setSurfaceSize(pWidth, pHeight);
+                this.mEngine.SetSurfaceSize(pWidth, pHeight);
                 pGL.GlViewport(0, 0, pWidth, pHeight);
                 pGL.GlLoadIdentity();
             }
 
-            public override void onSurfaceCreated(GL10 pGL, EGLConfig pConfig)
+            public /* override */ void OnSurfaceCreated(GL10 pGL, EGLConfig pConfig)
             {
                 Debug.d("onSurfaceCreated");
-                GLHelper.reset(pGL);
+                GLHelper.Reset(pGL);
 
-                GLHelper.setPerspectiveCorrectionHintFastest(pGL);
+                GLHelper.SetPerspectiveCorrectionHintFastest(pGL);
                 //			pGL.glEnable(GL10.GL_POLYGON_SMOOTH);
                 //			pGL.glHint(GL10.GL_POLYGON_SMOOTH_HINT, GL10.GL_NICEST);
                 //			pGL.glEnable(GL10.GL_LINE_SMOOTH);
@@ -139,30 +139,30 @@ namespace andengine.opengl.view
                 //			pGL.glEnable(GL10.GL_POINT_SMOOTH);
                 //			pGL.glHint(GL10.GL_POINT_SMOOTH_HINT, GL10.GL_NICEST);
 
-                GLHelper.setShadeModelFlat(pGL);
+                GLHelper.SetShadeModelFlat(pGL);
 
-                GLHelper.disableLightning(pGL);
-                GLHelper.disableDither(pGL);
-                GLHelper.disableDepthTest(pGL);
-                GLHelper.disableMultisample(pGL);
+                GLHelper.DisableLightning(pGL);
+                GLHelper.DisableDither(pGL);
+                GLHelper.DisableDepthTest(pGL);
+                GLHelper.DisableMultisample(pGL);
 
-                GLHelper.enableBlend(pGL);
-                GLHelper.enableTextures(pGL);
-                GLHelper.enableTexCoordArray(pGL);
-                GLHelper.enableVertexArray(pGL);
+                GLHelper.EnableBlend(pGL);
+                GLHelper.EnableTextures(pGL);
+                GLHelper.EnableTexCoordArray(pGL);
+                GLHelper.EnableVertexArray(pGL);
 
-                GLHelper.enableCulling(pGL);
+                GLHelper.EnableCulling(pGL);
                 pGL.GlFrontFace(GL10Consts.GlCcw);
                 pGL.GlCullFace(GL10Consts.GlBack);
 
-                GLHelper.enableExtensions(pGL, this.mEngine.getEngineOptions().getRenderOptions());
+                GLHelper.EnableExtensions(pGL, this.mEngine.getEngineOptions().getRenderOptions());
             }
 
-            public override void onDrawFrame(GL10 pGL)
+            public /* override */ void OnDrawFrame(GL10 pGL)
             {
                 try
                 {
-                    this.mEngine.onDrawFrame(pGL);
+                    this.mEngine.OnDrawFrame(pGL);
                 }
                 catch (InterruptedException e)
                 {

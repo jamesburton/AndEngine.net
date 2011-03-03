@@ -63,7 +63,13 @@ namespace andengine.engine
     using Bundle = Android.OS.Bundle;
     using Vibrator = Android.OS.Vibrator;
     //using Android.Views;
-    using Java.Lang;
+
+    //using Java.Lang;
+    using String = System.String;
+    using IllegalStateException = Java.Lang.IllegalStateException;
+    using IRunnable = Java.Lang.IRunnable;
+    using InterruptedException = Java.Lang.InterruptedException;
+
     //import android.view.MotionEvent;
     //import android.view.View;
     //import android.view.View.OnTouchListener;
@@ -80,6 +86,16 @@ namespace andengine.engine
     // TODO: Check the implications of removing class(es) from the list (TimeConstants - no longer an interface, so add class to usage)
     public class Engine : SensorEventListener, OnTouchListener /* NB: Is actually IOnTouchListener */, ITouchEventCallback, /* TimeConstants, */ LocationListener
     {
+        #region Interface bindings
+        void ITouchEventCallback.OnTouchEvent(TouchEvent pSurfaceTouchEvent) { OnTouchEvent(pSurfaceTouchEvent); }
+        void Android.Locations.ILocationListener.OnLocationChanged(Location pLocation) { OnLocationChanged(pLocation); }
+        //void ILocationListener.OnProviderDisabled(System.String pProvider) { OnProviderDisabled(pProvider); }
+        //void Android.Locations.ILocationListener.OnProviderDisabled(System.String pProvider) { OnProviderDisabled(pProvider); }
+        void Android.Locations.ILocationListener.OnProviderDisabled(System.String pProvider) { OnProviderDisabled(new Java.Lang.String(pProvider)); }
+        void Android.Locations.ILocationListener.OnProviderEnabled(System.String pProvider) { OnProviderEnabled(new Java.Lang.String(pProvider)); }
+        void Android.Locations.ILocationListener.OnStatusChanged(string pProvider, int pStatus, Bundle pExtras) { OnStatusChanged(pProvider, pStatus, pExtras); }
+        #endregion
+
         // ===========================================================
         // Constants
         // ===========================================================
@@ -98,6 +114,7 @@ namespace andengine.engine
         private float mSecondsElapsedTotal = 0;
 
         //private /* final */ readonly State mThreadLocker = new State();
+        private readonly State mThreadLocker = new State();
 
         private /* final */ readonly UpdateThread mUpdateThread = new UpdateThread();
 
@@ -143,30 +160,37 @@ namespace andengine.engine
         {
             Engine.Instance = this;
 
-            TextureRegionFactory.setAssetBasePath("");
-            SoundFactory.setAssetBasePath("");
-            MusicFactory.setAssetBasePath("");
-            FontFactory.setAssetBasePath("");
+            //TextureRegionFactory.setAssetBasePath("");
+            TextureRegionFactory.SetAssetBasePath("");
+            //SoundFactory.setAssetBasePath("");
+            SoundFactory.SetAssetBasePath("");
+            //MusicFactory.setAssetBasePath("");
+            MusicFactory.SetAssetBasePath("");
+            //FontFactory.setAssetBasePath("");
+            FontFactory.SetAssetBasePath("");
 
-            BufferObjectManager.setActiveInstance(this.mBufferObjectManager);
+            //BufferObjectManager.setActiveInstance(this.mBufferObjectManager);
+            BufferObjectManager.SetActiveInstance(this.mBufferObjectManager);
 
             this.mEngineOptions = pEngineOptions;
-            this.setTouchController(new SingleTouchController());
-            this.mCamera = pEngineOptions.getCamera();
+            //this.SetTouchController(new SingleTouchController());
+            this.TouchController = new SingleTouchController();
+            //this.mCamera = pEngineOptions.getCamera();
+            this.mCamera = pEngineOptions.GetCamera();
 
-            if (this.mEngineOptions.needsSound())
+            if (this.mEngineOptions.NeedsSound())
             {
                 this.mSoundManager = new SoundManager();
             }
 
-            if (this.mEngineOptions.needsMusic())
+            if (this.mEngineOptions.NeedsMusic())
             {
                 this.mMusicManager = new MusicManager();
             }
 
-            if (this.mEngineOptions.hasLoadingScreen())
+            if (this.mEngineOptions.HasLoadingScreen())
             {
-                this.initLoadingScreen();
+                this.InitLoadingScreen();
             }
 
             this.mUpdateThread.Start();
@@ -176,13 +200,14 @@ namespace andengine.engine
         // Getter & Setter
         // ===========================================================
 
-        public bool isRunning()
+        public bool IsRunning()
         {
             return this.mRunning;
         }
+        public bool Running { get { return IsRunning(); } }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public /* synchronized */ void start()
+        public /* synchronized */ void Start()
         {
             if (!this.mRunning)
             {
@@ -194,7 +219,7 @@ namespace andengine.engine
 
         //public synchronized void stop() {
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void stop()
+        public void Stop()
         {
             if (this.mRunning)
             {
@@ -202,76 +227,95 @@ namespace andengine.engine
             }
         }
 
-        public Scene getScene()
+        public Scene GetScene()
         {
             return this.mScene;
         }
 
-        public void setScene(/* final */ Scene pScene)
+        public void SetScene(/* final */ Scene pScene)
         {
             this.mScene = pScene;
         }
 
-        public EngineOptions getEngineOptions()
+        public Scene Scene { get { return GetScene(); } set { SetScene(value); } }
+
+        public EngineOptions GetEngineOptions()
         {
             return this.mEngineOptions;
         }
 
-        public andengine.engine.camera.Camera getCamera()
+        public EngineOptions EngineOptions { get { return GetEngineOptions(); } }
+
+        public virtual Camera GetCamera()
         {
             return this.mCamera;
         }
 
-        public float getSecondsElapsedTotal()
+        public Camera Camera { get { return GetCamera(); } }
+
+        public float GetSecondsElapsedTotal()
         {
             return this.mSecondsElapsedTotal;
         }
 
-        public void setSurfaceSize(/* final */ int pSurfaceWidth, /* final */ int pSurfaceHeight)
+        public float SecondsElapsedTotal { get { return GetSecondsElapsedTotal(); } }
+
+        public void SetSurfaceSize(/* final */ int pSurfaceWidth, /* final */ int pSurfaceHeight)
         {
             //		Debug.w("SurfaceView size changed to (width x height): " + pSurfaceWidth + " x " + pSurfaceHeight, new Exception());
             this.mSurfaceWidth = pSurfaceWidth;
             this.mSurfaceHeight = pSurfaceHeight;
         }
 
-        public int getSurfaceWidth()
+        public int GetSurfaceWidth()
         {
             return this.mSurfaceWidth;
         }
 
-        public int getSurfaceHeight()
+        public int SurfaceWidth { get { return GetSurfaceWidth(); } }
+
+        public int GetSurfaceHeight()
         {
             return this.mSurfaceHeight;
         }
 
-        public ITouchController getTouchController()
+        public int SurfaceHeight { get { return GetSurfaceHeight(); } }
+
+        public ITouchController TouchController { get { return GetTouchController(); } set { SetTouchController(value); } }
+
+        public ITouchController GetTouchController()
         {
             return this.mTouchController;
         }
 
-        public void setTouchController(/* final */ ITouchController pTouchController)
+        public void SetTouchController(/* final */ ITouchController pTouchController)
         {
             this.mTouchController = pTouchController;
-            this.mTouchController.applyTouchOptions(this.mEngineOptions.getTouchOptions());
-            this.mTouchController.setTouchEventCallback(this);
+            this.mTouchController.ApplyTouchOptions(this.mEngineOptions.GetTouchOptions());
+            this.mTouchController.SetTouchEventCallback(this);
         }
 
-        public AccelerometerData getAccelerometerData()
+        public AccelerometerData AccelerometerData { get { return GetAccelerometerData(); } }
+
+        public AccelerometerData GetAccelerometerData()
         {
             return this.mAccelerometerData;
         }
 
-        public OrientationData getOrientationData()
+        public OrientationData OrientationData { get { return GetOrientationData(); } }
+
+        public OrientationData GetOrientationData()
         {
             return this.mOrientationData;
         }
 
+        public SoundManager SoundManager { get { return GetSoundManager(); } }
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         /// <exception cref="IllegalStateException" />
-        public SoundManager getSoundManager() /* throws IllegalStateException */ {
+        public SoundManager GetSoundManager() /* throws IllegalStateException */ {
             if (this.mSoundManager != null)
             {
                 return this.mSoundManager;
@@ -282,12 +326,13 @@ namespace andengine.engine
             }
         }
 
+        public MusicManager MusicManager { get { return GetMusicManager(); } }
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         /// <exception cref="IllegalStateException" />
-        public MusicManager getMusicManager() /* throws IllegalStateException */ {
+        public MusicManager GetMusicManager() /* throws IllegalStateException */ {
             if (this.mMusicManager != null)
             {
                 return this.mMusicManager;
@@ -298,46 +343,50 @@ namespace andengine.engine
             }
         }
 
-        public TextureManager getTextureManager()
+        public TextureManager TextureManager { get { return GetTextureManager(); } }
+        public TextureManager GetTextureManager()
         {
             return this.mTextureManager;
         }
 
-        public FontManager getFontManager()
+        public FontManager FontManager { get { return GetFontManager(); } }
+        public FontManager GetFontManager()
         {
             return this.mFontManager;
         }
 
-        public void clearUpdateHandlers()
+        public void ClearUpdateHandlers()
         {
             this.mUpdateHandlers.Clear();
         }
 
-        public void registerUpdateHandler(/* final */ IUpdateHandler pUpdateHandler)
+        public void RegisterUpdateHandler(/* final */ IUpdateHandler pUpdateHandler)
         {
             this.mUpdateHandlers.Add(pUpdateHandler);
         }
 
-        public void unregisterUpdateHandler(/* final */ IUpdateHandler pUpdateHandler)
+        public void UnregisterUpdateHandler(/* final */ IUpdateHandler pUpdateHandler)
         {
             this.mUpdateHandlers.Remove(pUpdateHandler);
         }
 
-        public bool isMethodTracing()
+        public bool IsMethodTracing()
         {
             return this.mIsMethodTracing;
         }
+        public bool MethodTracing { get { return IsMethodTracing(); } }
 
-        public void startMethodTracing(/* final */ String pTraceFileName)
+        public void StartMethodTracing(/* final */ String pTraceFileName)
         {
             if (!this.mIsMethodTracing)
             {
                 this.mIsMethodTracing = true;
-                Android.OS.Debug.StartMethodTracing(new Java.Lang.String(pTraceFileName));
+                //Android.OS.Debug.StartMethodTracing(new Java.Lang.String(pTraceFileName));
+                Android.OS.Debug.StartMethodTracing(pTraceFileName.ToString());
             }
         }
 
-        public void stopMethodTracing()
+        public void StopMethodTracing()
         {
             if (this.mIsMethodTracing)
             {
@@ -350,7 +399,7 @@ namespace andengine.engine
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void onAccuracyChanged(/* final */ Sensor pSensor, /* final */ int pAccuracy)
+        public /* override */ void OnAccuracyChanged(/* final */ Sensor pSensor, /* final */ int pAccuracy)
         {
             if (this.mRunning)
             {
@@ -364,25 +413,25 @@ namespace andengine.engine
             }
         }
 
-        public override void onSensorChanged(/* final */ SensorEvent pEvent)
+        public /* override */ void OnSensorChanged(/* final */ SensorEvent pEvent)
         {
             if (this.mRunning)
             {
                 switch (pEvent.Sensor.Type)
                 {
                     case SensorType.Accelerometer:
-                        this.mAccelerometerData.setValues(pEvent.Values);
-                        this.mAccelerometerListener.onAccelerometerChanged(this.mAccelerometerData);
+                        this.mAccelerometerData.SetValues(pEvent.Values);
+                        this.mAccelerometerListener.OnAccelerometerChanged(this.mAccelerometerData);
                         break;
                     case SensorType.Orientation:
-                        this.mOrientationData.setValues(pEvent.Values);
-                        this.mOrientationListener.onOrientationChanged(this.mOrientationData);
+                        this.mOrientationData.SetValues(pEvent.Values);
+                        this.mOrientationListener.OnOrientationChanged(this.mOrientationData);
                         break;
                 }
             }
         }
 
-        public override void onLocationChanged(/* final */ Location pLocation)
+        public /* override */ void OnLocationChanged(/* final */ Location pLocation)
         {
             if (this.mLocation == null)
             {
@@ -392,32 +441,32 @@ namespace andengine.engine
             {
                 if (pLocation == null)
                 {
-                    this.mLocationListener.onLocationLost();
+                    this.mLocationListener.OnLocationLost();
                 }
                 else
                 {
                     this.mLocation = pLocation;
-                    this.mLocationListener.onLocationChanged(pLocation);
+                    this.mLocationListener.OnLocationChanged(pLocation);
                 }
             }
         }
 
-        public override void onProviderDisabled(/* final */ String pProvider)
+        public /* override */ void OnProviderDisabled(/* final */ String pProvider)
         {
             this.mLocationListener.OnProviderDisabled(pProvider);
         }
 
-        public override void onProviderEnabled(/* final */ String pProvider)
+        public /* override */ void OnProviderEnabled(/* final */ String pProvider)
         {
             this.mLocationListener.OnProviderEnabled(pProvider);
         }
 
-        public void onStatusChanged(/* final */ String pProvider, /* final */ int  pStatus, /* final */ Bundle pExtras)
+        public void OnStatusChanged(/* final */ String pProvider, /* final */ int  pStatus, /* final */ Bundle pExtras)
         {
-            onStatusChanged(pProvider, (LocationProviderStatus)pStatus, pExtras);
+            OnStatusChanged(pProvider, (LocationProviderStatus)pStatus, pExtras);
         }
 
-        public void onStatusChanged(/* final */ String pProvider, /* final int */ LocationProviderStatus pStatus, /* final */ Bundle pExtras)
+        public void OnStatusChanged(/* final */ String pProvider, /* final int */ LocationProviderStatus pStatus, /* final */ Bundle pExtras)
         {
             switch (pStatus)
             {
@@ -436,12 +485,12 @@ namespace andengine.engine
             }
         }
 
-        public bool onTouch(/* final */ View pView, /* final */ MotionEvent pSurfaceMotionEvent)
+        public bool OnTouch(/* final */ View pView, /* final */ MotionEvent pSurfaceMotionEvent)
         {
             if (this.mRunning)
             {
                 /* final */
-                bool handled = this.mTouchController.onHandleMotionEvent(pSurfaceMotionEvent);
+                bool handled = this.mTouchController.OnHandleMotionEvent(pSurfaceMotionEvent);
                 try
                 {
                     /*
@@ -462,47 +511,45 @@ namespace andengine.engine
             }
         }
 
-        public override bool onTouchEvent(/* final */ TouchEvent pSurfaceTouchEvent)
+        public /* override */ bool OnTouchEvent(/* final */ TouchEvent pSurfaceTouchEvent)
         {
             /*
              * Let the engine determine which scene and camera this event should be
              * handled by.
              */
             /* final */
-            Scene scene = this.getSceneFromSurfaceTouchEvent(pSurfaceTouchEvent);
+            Scene scene = this.GetSceneFromSurfaceTouchEvent(pSurfaceTouchEvent);
             /* final */
-            Camera camera = this.getCameraFromSurfaceTouchEvent(pSurfaceTouchEvent);
+            Camera camera = this.GetCameraFromSurfaceTouchEvent(pSurfaceTouchEvent);
 
-            this.convertSurfaceToSceneTouchEvent(camera, pSurfaceTouchEvent);
+            this.ConvertSurfaceToSceneTouchEvent(camera, pSurfaceTouchEvent);
 
-            if (this.onTouchHUD(camera, pSurfaceTouchEvent))
+            if (this.OnTouchHUD(camera, pSurfaceTouchEvent))
             {
                 return true;
             }
             else
             {
                 /* If HUD didn't handle it, Scene may handle it. */
-                return this.onTouchScene(scene, pSurfaceTouchEvent);
+                return this.OnTouchScene(scene, pSurfaceTouchEvent);
             }
         }
 
-        protected bool onTouchHUD(/* final */ andengine.engine.camera.Camera pCamera, /* final */ TouchEvent pSceneTouchEvent)
+        protected bool OnTouchHUD(/* final */ Camera pCamera, /* final */ TouchEvent pSceneTouchEvent)
         {
-            if (pCamera.hasHUD())
-            {
-                return pCamera.getHUD().onSceneTouchEvent(pSceneTouchEvent);
-            }
+            if (pCamera.HasHUD())
+                return pCamera.GetHUD().OnSceneTouchEvent(pSceneTouchEvent);
             else
             {
                 return false;
             }
         }
 
-        protected bool onTouchScene(/* final */ Scene pScene, /* final */ TouchEvent pSceneTouchEvent)
+        protected bool OnTouchScene(/* final */ Scene pScene, /* final */ TouchEvent pSceneTouchEvent)
         {
             if (pScene != null)
             {
-                return pScene.onSceneTouchEvent(pSceneTouchEvent);
+                return pScene.OnSceneTouchEvent(pSceneTouchEvent);
             }
             else
             {
@@ -514,28 +561,28 @@ namespace andengine.engine
         // Methods
         // ===========================================================
 
-        public void runOnUpdateThread(/* final */ IRunnable pRunnable)
+        public void RunOnUpdateThread(/* final */ IRunnable pRunnable)
         {
-            this.mUpdateThreadRunnableHandler.postRunnable(pRunnable);
+            this.mUpdateThreadRunnableHandler.PostRunnable(pRunnable);
         }
 
-        public void interruptUpdateThread()
+        public void InterruptUpdateThread()
         {
             this.mUpdateThread.Interrupt();
         }
 
-        private void initLoadingScreen()
+        private void InitLoadingScreen()
         {
             /* final */
-            ITextureSource loadingScreenTextureSource = this.mEngineOptions.getLoadingScreenTextureSource();
+            ITextureSource loadingScreenTextureSource = this.mEngineOptions.GetLoadingScreenTextureSource();
             /* final */
-            Texture loadingScreenTexture = TextureFactory.createForTextureSourceSize(loadingScreenTextureSource);
+            Texture loadingScreenTexture = TextureFactory.CreateForTextureSourceSize(loadingScreenTextureSource);
             /* final */
-            TextureRegion loadingScreenTextureRegion = TextureRegionFactory.createFromSource(loadingScreenTexture, loadingScreenTextureSource, 0, 0);
-            this.setScene(new SplashScene(this.getCamera(), loadingScreenTextureRegion));
+            TextureRegion loadingScreenTextureRegion = TextureRegionFactory.CreateFromSource(loadingScreenTexture, loadingScreenTextureSource, 0, 0);
+            this.SetScene(new SplashScene(this.GetCamera(), loadingScreenTextureRegion));
         }
 
-        public void onResume()
+        public void OnResume()
         {
             this.mTextureManager.reloadTextures();
             this.mFontManager.reloadFonts();
@@ -543,30 +590,30 @@ namespace andengine.engine
             this.mBufferObjectManager.reloadBufferObjects();
         }
 
-        public void onPause()
+        public void OnPause()
         {
 
         }
 
-        protected andengine.engine.camera.Camera getCameraFromSurfaceTouchEvent(/* final */ TouchEvent pTouchEvent)
+        protected virtual Camera GetCameraFromSurfaceTouchEvent(/* final */ TouchEvent pTouchEvent)
         {
-            return this.getCamera();
+            return this.GetCamera();
         }
 
-        protected Scene getSceneFromSurfaceTouchEvent(/* final */ TouchEvent pTouchEvent)
+        protected Scene GetSceneFromSurfaceTouchEvent(/* final */ TouchEvent pTouchEvent)
         {
             return this.mScene;
         }
 
-        protected void convertSurfaceToSceneTouchEvent(/* final */ andengine.engine.camera.Camera pCamera, /* final */ TouchEvent pSurfaceTouchEvent)
+        protected virtual void ConvertSurfaceToSceneTouchEvent(/* final */ Camera pCamera, /* final */ TouchEvent pSurfaceTouchEvent)
         {
-            pCamera.convertSurfaceToSceneTouchEvent(pSurfaceTouchEvent, this.mSurfaceWidth, this.mSurfaceHeight);
+            pCamera.ConvertSurfaceToSceneTouchEvent(pSurfaceTouchEvent, this.mSurfaceWidth, this.mSurfaceHeight);
         }
 
-        public void onLoadComplete(/* final */ Scene pScene)
+        public void OnLoadComplete(/* final */ Scene pScene)
         {
             /* TODO Unload texture from loading-screen. */
-            if (this.mEngineOptions.hasLoadingScreen())
+            if (this.mEngineOptions.HasLoadingScreen())
             {
                 /*
                 this.registerUpdateHandler(new TimerHandler(LOADING_SCREEN_DURATION_DEFAULT, new ITimerCallback() {
@@ -579,11 +626,11 @@ namespace andengine.engine
                 */
                 IUpdateHandler EngineTimerUpdateHandler = new TimerHandler(LOADING_SCREEN_DURATION_DEFAULT,
                     new EngineTimer(this));
-                this.registerUpdateHandler(EngineTimerUpdateHandler);
+                this.RegisterUpdateHandler(EngineTimerUpdateHandler);
             }
             else
             {
-                this.setScene(pScene);
+                this.SetScene(pScene);
             }
         }
 
@@ -591,119 +638,121 @@ namespace andengine.engine
         {
             protected Engine Engine;
             public EngineTimer(Engine Engine) { this.Engine = Engine; }
-            public override void onTimePassed(/* final */ TimerHandler pTimerHandler)
+            public /* override */ void OnTimePassed(/* final */ TimerHandler pTimerHandler)
             {
-                this.Engine.unregisterUpdateHandler(pTimerHandler);
-                this.Engine.setScene(pScene);
+                this.Engine.UnregisterUpdateHandler(pTimerHandler);
+                this.Engine.SetScene(pScene);
             }
         }
 
-        void onTickUpdate() /* throws InterruptedException */ {
+        void OnTickUpdate() /* throws InterruptedException */ {
             if (this.mRunning)
             {
                 /* final */
-                long secondsElapsed = this.getNanosecondsElapsed();
+                long secondsElapsed = this.GetNanosecondsElapsed();
 
-                this.onUpdate(secondsElapsed);
+                this.OnUpdate(secondsElapsed);
 
-                this.yieldDraw();
+                this.YieldDraw();
             }
             else
             {
-                this.yieldDraw();
+                this.YieldDraw();
 
-                Thread.sleep(16);
+                Thread.Sleep(16);
             }
         }
 
-        private void yieldDraw() /* throws InterruptedException */ {
+        private void YieldDraw() /* throws InterruptedException */ {
             /* TODO: Verify this change ... maybe the static class needs to become non-static
             // final State threadLocker = this.mThreadLocker;
             threadLocker.notifyCanDraw();
             threadLocker.waitUntilCanUpdate();
             */
-            State.notifyCanDraw();
-            State.waitUntilCanUpdate();
+            State.NotifyCanDraw();
+            State.WaitUntilCanUpdate();
         }
 
-        protected void onUpdate(/* final */ long pNanosecondsElapsed) /* throws InterruptedException */ {
+        protected void OnUpdate(/* final */ long pNanosecondsElapsed) /* throws InterruptedException */ {
             /* final */
             float pSecondsElapsed = (float)pNanosecondsElapsed / TimeConstants.NANOSECONDSPERSECOND;
 
             this.mSecondsElapsedTotal += pSecondsElapsed;
             this.mLastTick += pNanosecondsElapsed;
 
-            this.mTouchController.onUpdate(pSecondsElapsed);
-            this.updateUpdateHandlers(pSecondsElapsed);
-            this.onUpdateScene(pSecondsElapsed);
+            this.mTouchController.OnUpdate(pSecondsElapsed);
+            this.UpdateUpdateHandlers(pSecondsElapsed);
+            this.OnUpdateScene(pSecondsElapsed);
         }
 
-        protected void onUpdateScene(/* final */ float pSecondsElapsed)
+        protected void OnUpdateScene(/* final */ float pSecondsElapsed)
         {
             if (this.mScene != null)
             {
-                this.mScene.onUpdate(pSecondsElapsed);
+                this.mScene.OnUpdate(pSecondsElapsed);
             }
         }
 
-        protected void updateUpdateHandlers(/* final */ float pSecondsElapsed)
+        protected virtual void UpdateUpdateHandlers(/* final */ float pSecondsElapsed)
         {
-            this.mUpdateThreadRunnableHandler.onUpdate(pSecondsElapsed);
-            this.mUpdateHandlers.onUpdate(pSecondsElapsed);
-            this.getCamera().onUpdate(pSecondsElapsed);
+            this.mUpdateThreadRunnableHandler.OnUpdate(pSecondsElapsed);
+            this.mUpdateHandlers.OnUpdate(pSecondsElapsed);
+            this.GetCamera().OnUpdate(pSecondsElapsed);
         }
 
-        public void onDrawFrame(/* final */ GL10 pGL) /* throws InterruptedException */ {
+        public void OnDrawFrame(/* final */ GL10 pGL) /* throws InterruptedException */ {
             /*
             final State threadLocker = this.mThreadLocker;
 
             threadLocker.waitUntilCanDraw();
             //*/
-            State.waitUntilCanDraw();
+            //State.WaitUntilCanDraw();
+            State threadLocker = this.mThreadLocker;
 
-            this.mTextureManager.updateTextures(pGL);
-            this.mFontManager.updateFonts(pGL);
+            this.mTextureManager.UpdateTextures(pGL);
+            this.mFontManager.UpdateFonts(pGL);
             if (GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS)
             {
-                this.mBufferObjectManager.updateBufferObjects((GL11)pGL);
+                this.mBufferObjectManager.UpdateBufferObjects((GL11)pGL);
             }
 
-            this.onDrawScene(pGL);
+            this.OnDrawScene(pGL);
 
-            threadLocker.notifyCanUpdate();
+            threadLocker.NotifyCanUpdate();
+            threadLocker.NotifyCanUpdate();
         }
 
-        protected void onDrawScene(/* final */ GL10 pGL)
+        protected virtual void OnDrawScene(/* final */ GL10 pGL)
         {
             /* final */
-            Camera camera = this.getCamera();
+            Camera camera = this.GetCamera();
 
-            this.mScene.onDraw(pGL, camera);
+            this.mScene.OnDraw(pGL, camera);
 
-            camera.onDrawHUD(pGL);
+            camera.OnDrawHUD(pGL);
         }
 
-        private long getNanosecondsElapsed()
+        private long GetNanosecondsElapsed()
         {
             /* final */
             //long now = System.nanoTime();
             long now = System.DateTime.Now.Ticks;
 
-            return this.calculateNanosecondsElapsed(now, this.mLastTick);
+            return this.CalculateNanosecondsElapsed(now, this.mLastTick);
         }
 
-        protected long calculateNanosecondsElapsed(/* final */ long pNow, /* final */ long pLastTick)
+        protected long CalculateNanosecondsElapsed(/* final */ long pNow, /* final */ long pLastTick)
         {
             return pNow - pLastTick;
         }
 
-        public bool enableVibrator(/* final */ Context pContext)
+        public bool EnableVibrator(/* final */ Context pContext)
         {
             this.mVibrator = (Vibrator)pContext.GetSystemService(Context.VibratorService);
             return this.mVibrator != null;
         }
 
-        public void vibrate(/* final */ long pMilliseconds) /* throws IllegalStateException */ {
+        public void Vibrate(/* final */ long pMilliseconds) /* throws IllegalStateException */ {
             if (this.mVibrator != null)
             {
                 this.mVibrator.Vibrate(pMilliseconds);
@@ -714,7 +763,7 @@ namespace andengine.engine
             }
         }
 
-        public void vibrate(/* final */ long[] pPattern, /* final */ int pRepeat) /* throws IllegalStateException */ {
+        public void Vibrate(/* final */ long[] pPattern, /* final */ int pRepeat) /* throws IllegalStateException */ {
             if (this.mVibrator != null)
             {
                 this.mVibrator.Vibrate(pPattern, pRepeat);
@@ -725,7 +774,7 @@ namespace andengine.engine
             }
         }
 
-        public void enableLocationSensor(/* final */ Context pContext, /* final */ ILocationListener pLocationListener, /* final */ LocationSensorOptions pLocationSensorOptions)
+        public void EnableLocationSensor(/* final */ Context pContext, /* final */ ILocationListener pLocationListener, /* final */ LocationSensorOptions pLocationSensorOptions)
         {
             this.mLocationListener = pLocationListener;
 
@@ -735,10 +784,10 @@ namespace andengine.engine
             String locationProvider = locationManager.GetBestProvider(pLocationSensorOptions, pLocationSensorOptions.isEnabledOnly());
             locationManager.RequestLocationUpdates(locationProvider, pLocationSensorOptions.getMinimumTriggerTime(), pLocationSensorOptions.getMinimumTriggerDistance(), this);
 
-            this.onLocationChanged(locationManager.GetLastKnownLocation(locationProvider));
+            this.OnLocationChanged(locationManager.GetLastKnownLocation(locationProvider));
         }
 
-        public void disableLocationSensor(/* final */ Context pContext)
+        public void DisableLocationSensor(/* final */ Context pContext)
         {
             /* final */
             LocationManager locationManager = (LocationManager)pContext.GetSystemService(Context.LocationService);
@@ -748,19 +797,20 @@ namespace andengine.engine
         /**
          * @see {@link Engine#enableAccelerometerSensor(Context, IAccelerometerListener, AccelerometerSensorOptions)}
          */
-        public bool enableAccelerometerSensor(/* final */ Context pContext, /* final */ IAccelerometerListener pAccelerometerListener)
+        public bool EnableAccelerometerSensor(/* final */ Context pContext, /* final */ IAccelerometerListener pAccelerometerListener)
         {
-            return this.enableAccelerometerSensor(pContext, pAccelerometerListener, new AccelerometerSensorOptions(SENSORDELAY_DEFAULT));
+            return this.EnableAccelerometerSensor(pContext, pAccelerometerListener, new AccelerometerSensorOptions(SENSORDELAY_DEFAULT));
         }
 
         /**
          * @return <code>true</code> when the sensor was successfully enabled, <code>false</code> otherwise.
          */
-        public bool enableAccelerometerSensor(/* final */ Context pContext, /* final */ IAccelerometerListener pAccelerometerListener, /* final */ AccelerometerSensorOptions pAccelerometerSensorOptions)
+        public bool EnableAccelerometerSensor(/* final */ Context pContext, /* final */ IAccelerometerListener pAccelerometerListener, /* final */ AccelerometerSensorOptions pAccelerometerSensorOptions)
         {
             /* final */
             SensorManager sensorManager = (SensorManager)pContext.GetSystemService(Context.SensorService);
-            if (this.isSensorSupported(sensorManager, SensorType.Accelerometer))
+            //if (this.isSensorSupported(sensorManager, SensorType.Accelerometer))
+            if (this.IsSensorSupported(sensorManager, SensorType.Accelerometer))
             {
                 this.mAccelerometerListener = pAccelerometerListener;
 
@@ -769,7 +819,7 @@ namespace andengine.engine
                     this.mAccelerometerData = new AccelerometerData();
                 }
 
-                this.registerSelfAsSensorListener(sensorManager, SensorType.Accelerometer, pAccelerometerSensorOptions.getSensorDelay());
+                this.RegisterSelfAsSensorListener(sensorManager, SensorType.Accelerometer, pAccelerometerSensorOptions.getSensorDelay());
 
                 return true;
             }
@@ -783,13 +833,13 @@ namespace andengine.engine
         /**
          * @return <code>true</code> when the sensor was successfully disabled, <code>false</code> otherwise.
          */
-        public bool disableAccelerometerSensor(/* final */ Context pContext)
+        public bool DisableAccelerometerSensor(/* final */ Context pContext)
         {
             /* final */
             SensorManager sensorManager = (SensorManager)pContext.GetSystemService(Context.SensorService);
-            if (this.isSensorSupported(sensorManager, SensorType.Accelerometer))
+            if (this.IsSensorSupported(sensorManager, SensorType.Accelerometer))
             {
-                this.unregisterSelfAsSensorListener(sensorManager, SensorType.Accelerometer);
+                this.UnregisterSelfAsSensorListener(sensorManager, SensorType.Accelerometer);
                 return true;
             }
             else
@@ -801,19 +851,19 @@ namespace andengine.engine
         /**
          * @see {@link Engine#enableOrientationSensor(Context, IOrientationListener, OrientationSensorOptions)}
          */
-        public bool enableOrientationSensor(/* final */ Context pContext, /* final */ IOrientationListener pOrientationListener)
+        public bool EnableOrientationSensor(/* final */ Context pContext, /* final */ IOrientationListener pOrientationListener)
         {
-            return this.enableOrientationSensor(pContext, pOrientationListener, new OrientationSensorOptions(SENSORDELAY_DEFAULT));
+            return this.EnableOrientationSensor(pContext, pOrientationListener, new OrientationSensorOptions(SENSORDELAY_DEFAULT));
         }
 
         /**
          * @return <code>true</code> when the sensor was successfully enabled, <code>false</code> otherwise.
          */
-        public bool enableOrientationSensor(/* final */ Context pContext, /* final */ IOrientationListener pOrientationListener, /* final */ OrientationSensorOptions pOrientationSensorOptions)
+        public bool EnableOrientationSensor(/* final */ Context pContext, /* final */ IOrientationListener pOrientationListener, /* final */ OrientationSensorOptions pOrientationSensorOptions)
         {
             /* final */
             SensorManager sensorManager = (SensorManager)pContext.GetSystemService(Context.SensorService);
-            if (this.isSensorSupported(sensorManager, SensorType.Orientation))
+            if (this.IsSensorSupported(sensorManager, SensorType.Orientation))
             {
                 this.mOrientationListener = pOrientationListener;
 
@@ -822,7 +872,7 @@ namespace andengine.engine
                     this.mOrientationData = new OrientationData();
                 }
 
-                this.registerSelfAsSensorListener(sensorManager, SensorType.Orientation, pOrientationSensorOptions.getSensorDelay());
+                this.RegisterSelfAsSensorListener(sensorManager, SensorType.Orientation, pOrientationSensorOptions.getSensorDelay());
 
                 return true;
             }
@@ -836,13 +886,13 @@ namespace andengine.engine
         /**
          * @return <code>true</code> when the sensor was successfully disabled, <code>false</code> otherwise.
          */
-        public bool disableOrientationSensor(/* final */ Context pContext)
+        public bool DisableOrientationSensor(/* final */ Context pContext)
         {
             /* final */
             SensorManager sensorManager = (SensorManager)pContext.GetSystemService(Context.SensorService);
-            if (this.isSensorSupported(sensorManager, SensorType.Orientation))
+            if (this.IsSensorSupported(sensorManager, SensorType.Orientation))
             {
-                this.unregisterSelfAsSensorListener(sensorManager, SensorType.Orientation);
+                this.UnregisterSelfAsSensorListener(sensorManager, SensorType.Orientation);
                 return true;
             }
             else
@@ -851,19 +901,19 @@ namespace andengine.engine
             }
         }
 
-        private bool isSensorSupported(/* final */ SensorManager pSensorManager, /* final int */ SensorType pType)
+        private bool IsSensorSupported(/* final */ SensorManager pSensorManager, /* final int */ SensorType pType)
         {
             return pSensorManager.GetSensorList(pType).Count > 0;
         }
 
-        private void registerSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final int */ SensorType pType, /* final */ Android.Hardware.SensorDelay pSensorDelay)
+        private void RegisterSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final int */ SensorType pType, /* final */ Android.Hardware.SensorDelay pSensorDelay)
         {
             /* final */
             Sensor sensor = pSensorManager.GetSensorList(pType)[0];
             pSensorManager.RegisterListener(this, sensor, pSensorDelay/*.getDelay()*/);
         }
 
-        private void unregisterSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final int */ SensorType pType)
+        private void UnregisterSelfAsSensorListener(/* final */ SensorManager pSensorManager, /* final int */ SensorType pType)
         {
             /* final */
             Sensor sensor = pSensorManager.GetSensorList(pType)[0];
@@ -884,14 +934,14 @@ namespace andengine.engine
                 //thread = new Thread(new ThreadStart(run));
             }
 
-            public override void run()
+            public override void Run()
             {
                 try
                 {
                     while (true)
                     {
                         //Engine.this.onTickUpdate();
-                        Engine.Instance.onTickUpdate();
+                        Engine.Instance.OnTickUpdate();
                     }
                 }
                 catch (/* final */ InterruptedException e)
@@ -903,44 +953,44 @@ namespace andengine.engine
             }
         }
 
-        private static class State
+        private /* static */ class State /* Adding Java.Lang.Object base class to add threaded functionality from it */ : Java.Lang.Object
         {
             static bool mDrawing = false;
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public static /* synchronized */ void notifyCanDraw()
+            public /* synchronized */ void NotifyCanDraw()
             {
                 // Debug.d(">>> notifyCanDraw");
                 mDrawing = true;
-                this.notifyAll();
+                this.NotifyAll();
                 // Debug.d("<<< notifyCanDraw");
             }
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public static /* synchronized */ void notifyCanUpdate()
+            public /* synchronized */ void NotifyCanUpdate()
             {
                 // Debug.d(">>> notifyCanUpdate");
                 mDrawing = false;
-                this.notifyAll();
+                this.NotifyAll();
                 // Debug.d("<<< notifyCanUpdate");
             }
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public static /* synchronized */ void waitUntilCanDraw() /* throws InterruptedException */ {
+            public /* synchronized */ void WaitUntilCanDraw() /* throws InterruptedException */ {
                 // Debug.d(">>> waitUntilCanDraw");
                 while (mDrawing == false)
                 {
-                    this.wait();
+                    this.Wait();
                 }
                 // Debug.d("<<< waitUntilCanDraw");
             }
 
             [MethodImpl(MethodImplOptions.Synchronized)]
-            public static /* synchronized */ void waitUntilCanUpdate() /* throws InterruptedException */ {
+            public /* synchronized */ void WaitUntilCanUpdate() /* throws InterruptedException */ {
                 // Debug.d(">>> waitUntilCanUpdate");
                 while (mDrawing == true)
                 {
-                    this.wait();
+                    this.Wait();
                 }
                 // Debug.d("<<< waitUntilCanUpdate");
             }

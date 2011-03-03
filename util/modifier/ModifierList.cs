@@ -40,7 +40,7 @@ namespace andengine.util.modifier
         // Getter & Setter
         // ===========================================================
 
-        public T getTarget()
+        public T GetTarget()
         {
             return this.mTarget;
         }
@@ -49,34 +49,34 @@ namespace andengine.util.modifier
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void onUpdate(/* final */ float pSecondsElapsed)
+        public /* override */ void OnUpdate(/* final */ float pSecondsElapsed)
         {
-            /* final */
-            ArrayList<IModifier<T>> modifiers = this;
-            /* final */
-            int modifierCount = this.Count;
+            // final ArrayList<IModifier<T>> modifiers = this;
+            List<IModifier<T>> modifiers = this;
+            /* final */ int modifierCount = this.Count;
             if (modifierCount > 0)
             {
                 for (int i = modifierCount - 1; i >= 0; i--)
                 {
                     /* final */
-                    IModifier<T> modifier = modifiers.get(i);
-                    modifier.onUpdate(pSecondsElapsed, this.mTarget);
-                    if (modifier.isFinished() && modifier.isRemoveWhenFinished())
+                    IModifier<T> modifier = modifiers[i];
+                    modifier.OnUpdate(pSecondsElapsed, this.mTarget);
+                    //if (modifier.isFinished() && modifier.isRemoveWhenFinished())
+                    if (modifier.Finished && modifier.RemoveWhenFinished)
                     {
-                        modifiers.remove(i);
+                        modifiers.RemoveAt(i);
                     }
                 }
             }
         }
 
-        public override void reset()
+        public /* override */ void Reset()
         {
-            /* final */
-            ArrayList<IModifier<T>> modifiers = this;
-            for (int i = modifiers.size() - 1; i >= 0; i--)
+            // final ArrayList<IModifier<T>> modifiers = this;
+            List<IModifier<T>> modifiers = this;
+            for (int i = modifiers.Count - 1; i >= 0; i--)
             {
-                modifiers.get(i).reset();
+                modifiers[i].Reset();
             }
         }
 

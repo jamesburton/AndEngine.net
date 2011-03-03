@@ -37,51 +37,67 @@ namespace andengine.audio
         // ===========================================================
 
         //protected IAudioManager<? extends IAudioEntity> getAudioManager() {
-        protected IAudioManager<IAudioEntity> getAudioManager()
+        protected IAudioManager<IAudioEntity> GetAudioManager()
         {
             return this.mAudioManager;
         }
+        public IAudioManager<IAudioEntity> AudioManager { get { return GetAudioManager(); } }
 
-        public float getActualLeftVolume()
+        public float GetActualLeftVolume()
         {
-            return this.mLeftVolume * this.getMasterVolume();
+            //return this.mLeftVolume * this.getMasterVolume();
+            return this.mLeftVolume * this.MasterVolume;
         }
 
-        public float getActualRightVolume()
+        public float ActualLeftVolume { get { return GetActualLeftVolume(); } }
+
+        public float GetActualRightVolume()
         {
-            return this.mRightVolume * this.getMasterVolume();
+            //return this.mRightVolume * this.getMasterVolume();
+            return this.mRightVolume * this.MasterVolume;
         }
 
-        protected float getMasterVolume()
+        public float ActualRightVolume { get { return GetActualRightVolume(); } }
+
+        protected float GetMasterVolume()
         {
-            return this.mAudioManager.getMasterVolume();
+            //return this.mAudioManager.GetMasterVolume();
+            return this.mAudioManager.MasterVolume;
         }
+
+        protected float MasterVolume { get { return GetMasterVolume(); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public /* override */ float getVolume()
+        public /* override */ float GetVolume()
         {
             return (this.mLeftVolume + this.mRightVolume) * 0.5f;
         }
 
-        public /* override */ float getLeftVolume()
+        public float Volume { get { return GetVolume(); } set { SetVolume(value); } }
+
+        public /* override */ float GetLeftVolume()
         {
             return this.mLeftVolume;
         }
 
-        public /* override */ float getRightVolume()
+        public float LeftVolume { get { return GetLeftVolume(); } }
+
+        public /* override */ float GetRightVolume()
         {
             return this.mRightVolume;
         }
 
-        public /* override final */ void setVolume(/* final */ float pVolume)
+        public float RightVolume { get { return GetRightVolume(); } }
+
+        public /* override final */ void SetVolume(/* final */ float pVolume)
         {
-            this.setVolume(pVolume, pVolume);
+            this.SetVolume(pVolume, pVolume);
         }
 
-        public /* override */ void setVolume(/* final */ float pLeftVolume, /* final */ float pRightVolume)
+        public /* override */ void SetVolume(/* final */ float pLeftVolume, /* final */ float pRightVolume)
         {
             this.mLeftVolume = pLeftVolume;
             this.mRightVolume = pRightVolume;
@@ -96,12 +112,12 @@ namespace andengine.audio
         // ===========================================================
 
         // NB: Filling in missing interface methods with abstract stubs
-        public abstract void onMasterVolumeChanged(float volume);
-        public abstract void pause();
-        public abstract void play();
-        public abstract void release();
-        public abstract void resume();
-        public abstract void setLooping(bool looping);
-        public abstract void stop();
+        public abstract void OnMasterVolumeChanged(float volume);
+        public abstract void Pause();
+        public abstract void Play();
+        public abstract void Release();
+        public abstract void Resume();
+        public abstract void SetLooping(bool looping);
+        public abstract void Stop();
     }
 }

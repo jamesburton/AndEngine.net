@@ -21,6 +21,6 @@ namespace andengine.opengl
         // Methods
         // ===========================================================
 
-        /* public */ void onDraw(/* final */ GL10 pGL, /* final */ Camera pCamera);
+        /* public */ void OnDraw(/* final */ GL10 pGL, /* final */ Camera pCamera);
     }
 }

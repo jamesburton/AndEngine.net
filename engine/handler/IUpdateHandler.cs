@@ -16,8 +16,8 @@ namespace andengine.engine.handler
         // ===========================================================
 
         /* public */
-        void onUpdate(/* final */ float pSecondsElapsed);
+        void OnUpdate(/* final */ float pSecondsElapsed);
         /* public */
-        void reset();
+        void Reset();
     }
 }

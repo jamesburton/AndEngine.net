@@ -37,23 +37,28 @@ namespace andengine.audio.sound
         // Getter & Setter
         // ===========================================================
 
-        public void setLoopCount(int pLoopCount)
+        public void SetLoopCount(int pLoopCount)
         {
             this.mLoopCount = pLoopCount;
             if (this.mStreamID != 0)
             {
-                this.getAudioManager().getSoundPool().SetLoop(this.mStreamID, pLoopCount);
+                //this.getAudioManager().getSoundPool().SetLoop(this.mStreamID, pLoopCount);
+                this.AudioManager.SoundPool.SetLoop(this.mStreamID, pLoopCount);
             }
         }
+        public int LoopCount { set { SetLoopCount(value); } }
 
-        public void setRate(float pRate)
+        public void SetRate(float pRate)
         {
             this.mRate = pRate;
             if (this.mStreamID != 0)
             {
-                this.getAudioManager().getSoundPool().SetRate(this.mStreamID, pRate);
+                //this.getAudioManager().getSoundPool().SetRate(this.mStreamID, pRate);
+                this.AudioManager.SoundPool.SetRate(this.mStreamID, pRate);
             }
         }
+
+        public float Rate { set { SetRate(value); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
@@ -63,69 +68,77 @@ namespace andengine.audio.sound
         // Methods
         // ===========================================================
 
-        protected new SoundManager getAudioManager()
+        protected new SoundManager GetAudioManager()
         {
-            return (SoundManager)base.getAudioManager();
+            return (SoundManager)base.GetAudioManager();
         }
+        protected new SoundManager AudioManager { get { return GetAudioManager(); } }
 
-        public override void play()
+        public override void Play()
         {
-            float masterVolume = this.getMasterVolume();
+            //float masterVolume = this.getMasterVolume();
+            float masterVolume = this.MasterVolume;
             float leftVolume = this.mLeftVolume * masterVolume;
             float rightVolume = this.mRightVolume * masterVolume;
-            this.mStreamID = this.getAudioManager().getSoundPool().play(this.mSoundID, leftVolume, rightVolume, 1, this.mLoopCount, this.mRate);
+            //this.mStreamID = this.getAudioManager().getSoundPool().play(this.mSoundID, leftVolume, rightVolume, 1, this.mLoopCount, this.mRate);
+            this.mStreamID = this.AudioManager.SoundPool.Play(this.mSoundID, leftVolume, rightVolume, 1, this.mLoopCount, this.mRate);
         }
 
-        public override void stop()
+        public override void Stop()
         {
             if (this.mStreamID != 0)
             {
-                this.getAudioManager().getSoundPool().Stop(this.mStreamID);
+                //this.getAudioManager().getSoundPool().Stop(this.mStreamID);
+                this.AudioManager.SoundPool.Stop(this.mStreamID);
             }
         }
 
-        public override void resume()
+        public override void Resume()
         {
             if (this.mStreamID != 0)
             {
-                this.getAudioManager().getSoundPool().Resume(this.mStreamID);
+                //this.getAudioManager().getSoundPool().Resume(this.mStreamID);
+                this.AudioManager.SoundPool.Resume(this.mStreamID);
             }
         }
 
-        public override void pause()
+        public override void Pause()
         {
             if (this.mStreamID != 0)
             {
-                this.getAudioManager().getSoundPool().Pause(this.mStreamID);
+                //this.getAudioManager().getSoundPool().Pause(this.mStreamID);
+                this.AudioManager.SoundPool.Pause(this.mStreamID);
             }
         }
 
-        public override void release()
+        public override void Release()
         {
 
         }
 
-        public override void setLooping(bool pLooping)
+        public override void SetLooping(bool pLooping)
         {
-            this.setLoopCount((pLooping) ? -1 : 0);
+            this.SetLoopCount((pLooping) ? -1 : 0);
         }
 
-        public new void setVolume(float pLeftVolume, float pRightVolume)
+        public new void SetVolume(float pLeftVolume, float pRightVolume)
         {
-            base.setVolume(pLeftVolume, pRightVolume);
+            base.SetVolume(pLeftVolume, pRightVolume);
             if (this.mStreamID != 0)
             {
-                float masterVolume = this.getMasterVolume();
+                //float masterVolume = this.getMasterVolume();
+                float masterVolume = this.MasterVolume;
                 float leftVolume = this.mLeftVolume * masterVolume;
                 float rightVolume = this.mRightVolume * masterVolume;
 
-                this.getAudioManager().getSoundPool().setVolume(this.mStreamID, leftVolume, rightVolume);
+                //this.getAudioManager().getSoundPool().setVolume(this.mStreamID, leftVolume, rightVolume);
+                this.AudioManager.SoundPool.SetVolume(this.mStreamID, leftVolume, rightVolume);
             }
         }
 
-        public override void onMasterVolumeChanged(float pMasterVolume)
+        public override void OnMasterVolumeChanged(float pMasterVolume)
         {
-            this.setVolume(this.mLeftVolume, this.mRightVolume);
+            this.SetVolume(this.mLeftVolume, this.mRightVolume);
         }
 
         // ===========================================================

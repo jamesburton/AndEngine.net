@@ -15,6 +15,6 @@ namespace andengine.engine.handler.timer
         // Methods
         // ===========================================================
 
-        void onTimePassed(TimerHandler pTimerHandler);
+        void OnTimePassed(TimerHandler pTimerHandler);
     }
 }

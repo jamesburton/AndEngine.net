@@ -23,13 +23,13 @@ namespace andengine.input.touch.controller
         // ===========================================================
 
         /* public */
-        void setTouchEventCallback(/* final */ ITouchEventCallback pTouchEventCallback);
+        void SetTouchEventCallback(/* final */ ITouchEventCallback pTouchEventCallback);
 
         /* public */
-        void applyTouchOptions(/* final */ TouchOptions pTouchOptions);
+        void ApplyTouchOptions(/* final */ TouchOptions pTouchOptions);
 
         /* public */
-        bool onHandleMotionEvent(/* final */ MotionEvent pMotionEvent);
+        bool OnHandleMotionEvent(/* final */ MotionEvent pMotionEvent);
 
         // ===========================================================
         // Inner and Anonymous Classes
@@ -44,6 +44,6 @@ namespace andengine.input.touch.controller
     // Moved from within interface
     public interface ITouchEventCallback
     {
-        /* public */ bool onTouchEvent(/* final */ TouchEvent pTouchEvent);
+        /* public */ bool OnTouchEvent(/* final */ TouchEvent pTouchEvent);
     }
 }

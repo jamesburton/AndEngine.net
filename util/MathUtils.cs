@@ -44,17 +44,17 @@ namespace andengine.util
         // Methods
         // ===========================================================
 
-        public static /* sealed */ float radToDeg(/* final */ float pRad)
+        public static /* sealed */ float RadToDeg(/* final */ float pRad)
         {
             return MathConstants.RAD_TO_DEG * pRad;
         }
 
-        public static /* sealed */ float degToRad(float pDegree)
+        public static /* sealed */ float DegToRad(float pDegree)
         {
             return MathConstants.DEG_TO_RAD * pDegree;
         }
 
-        public static /* sealed */ int randomSign()
+        public static /* sealed */ int RandomSign()
         {
             //if(RANDOM.nextBoolean()) {
             if (RANDOM.Next(0, 2) == 1)
@@ -67,7 +67,7 @@ namespace andengine.util
             }
         }
 
-        public static /* sealed */ float random(float pMin, float pMax)
+        public static /* sealed */ float Random(float pMin, float pMax)
         {
             return pMin + ((float)RANDOM.NextDouble()) * (pMax - pMin);
         }
@@ -77,17 +77,17 @@ namespace andengine.util
          * @param pMax inclusive!
          * @return
          */
-        public static /* sealed */ int random(int pMin, int pMax)
+        public static /* sealed */ int Random(int pMin, int pMax)
         {
             return pMin + RANDOM.Next(pMax - pMin + 1);
         }
 
-        public static /* sealed */ bool isPowerOfTwo(int n)
+        public static /* sealed */ bool IsPowerOfTwo(int n)
         {
             return ((n != 0) && (n & (n - 1)) == 0);
         }
 
-        public static /* sealed */ int nextPowerOfTwo(int n)
+        public static /* sealed */ int NextPowerOfTwo(int n)
         {
             int k = n;
 
@@ -106,7 +106,7 @@ namespace andengine.util
             return k + 1;
         }
 
-        public static /* sealed */ int sum(int[] pValues)
+        public static /* sealed */ int Sum(int[] pValues)
         {
             int sum = 0;
             for (int i = pValues.Length - 1; i >= 0; i--)
@@ -117,7 +117,7 @@ namespace andengine.util
             return sum;
         }
 
-        public static /* sealed */ void arraySumInternal(int[] pValues)
+        public static /* sealed */ void ArraySumInternal(int[] pValues)
         {
             int valueCount = pValues.Length;
             for (int i = 1; i < valueCount; i++)
@@ -126,7 +126,7 @@ namespace andengine.util
             }
         }
 
-        public static /* sealed */ void arraySumInternal(long[] pValues)
+        public static /* sealed */ void ArraySumInternal(long[] pValues)
         {
             int valueCount = pValues.Length;
             for (int i = 1; i < valueCount; i++)
@@ -135,7 +135,7 @@ namespace andengine.util
             }
         }
 
-        public static /* sealed */ void arraySumInternal(long[] pValues, long pFactor)
+        public static /* sealed */ void ArraySumInternal(long[] pValues, long pFactor)
         {
             pValues[0] = pValues[0] * pFactor;
             int valueCount = pValues.Length;
@@ -145,7 +145,7 @@ namespace andengine.util
             }
         }
 
-        public static /* sealed */ void arraySumInto(long[] pValues, long[] pTargetValues, long pFactor)
+        public static /* sealed */ void ArraySumInto(long[] pValues, long[] pTargetValues, long pFactor)
         {
             pTargetValues[0] = pValues[0] * pFactor;
             int valueCount = pValues.Length;
@@ -155,7 +155,7 @@ namespace andengine.util
             }
         }
 
-        public static /* sealed */ float arraySum(float[] pValues)
+        public static /* sealed */ float ArraySum(float[] pValues)
         {
             float sum = 0;
             int valueCount = pValues.Length;
@@ -166,18 +166,18 @@ namespace andengine.util
             return sum;
         }
 
-        public static /* sealed */ float arrayAverage(float[] pValues)
+        public static /* sealed */ float ArrayAverage(float[] pValues)
         {
-            return MathUtils.arraySum(pValues) / pValues.Length;
+            return MathUtils.ArraySum(pValues) / pValues.Length;
         }
 
-        public static float[] rotateAroundCenter(float[] pVertices, float pRotation, float pRotationCenterX, float pRotationCenterY)
+        public static float[] RotateAroundCenter(float[] pVertices, float pRotation, float pRotationCenterX, float pRotationCenterY)
         {
             if (pRotation != 0)
             {
-                float rotationRad = MathUtils.degToRad(pRotation);
-                float sinRotationRad = FloatMath.sin(rotationRad);
-                float cosRotationInRad = FloatMath.cos(rotationRad);
+                float rotationRad = MathUtils.DegToRad(pRotation);
+                float sinRotationRad = FloatMath.Sin(rotationRad);
+                float cosRotationInRad = FloatMath.Cos(rotationRad);
 
                 for (int i = pVertices.Length - 2; i >= 0; i -= 2)
                 {
@@ -190,11 +190,11 @@ namespace andengine.util
             return pVertices;
         }
 
-        public static float[] scaleAroundCenter(float[] pVertices, float pScaleX, float pScaleY, float pScaleCenterX, float pScaleCenterY)
+        public static float[] ScaleAroundCenter(float[] pVertices, float pScaleX, float pScaleY, float pScaleCenterX, float pScaleCenterY)
         {
             if (pScaleX != 1 || pScaleY != 1)
             {
-                for (int i = pVertices.length - 2; i >= 0; i -= 2)
+                for (int i = pVertices.Length - 2; i >= 0; i -= 2)
                 {
                     pVertices[i] = pScaleCenterX + (pVertices[i] - pScaleCenterX) * pScaleX;
                     pVertices[i + 1] = pScaleCenterY + (pVertices[i + 1] - pScaleCenterY) * pScaleY;
@@ -204,39 +204,39 @@ namespace andengine.util
             return pVertices;
         }
 
-        public static float[] rotateAndScaleAroundCenter(float[] pVertices, float pRotation, float pRotationCenterX, float pRotationCenterY, float pScaleX, float pScaleY, float pScaleCenterX, float pScaleCenterY)
+        public static float[] RotateAndScaleAroundCenter(float[] pVertices, float pRotation, float pRotationCenterX, float pRotationCenterY, float pScaleX, float pScaleY, float pScaleCenterX, float pScaleCenterY)
         {
-            MathUtils.rotateAroundCenter(pVertices, pRotation, pRotationCenterX, pRotationCenterY);
-            return MathUtils.scaleAroundCenter(pVertices, pScaleX, pScaleY, pScaleCenterX, pScaleCenterY);
+            MathUtils.RotateAroundCenter(pVertices, pRotation, pRotationCenterX, pRotationCenterY);
+            return MathUtils.ScaleAroundCenter(pVertices, pScaleX, pScaleY, pScaleCenterX, pScaleCenterY);
         }
 
-        public static float[] revertScaleAroundCenter(float[] pVertices, float pScaleX, float pScaleY, float pScaleCenterX, float pScaleCenterY)
+        public static float[] RevertScaleAroundCenter(float[] pVertices, float pScaleX, float pScaleY, float pScaleCenterX, float pScaleCenterY)
         {
-            return MathUtils.scaleAroundCenter(pVertices, 1 / pScaleX, 1 / pScaleY, pScaleCenterX, pScaleCenterY);
+            return MathUtils.ScaleAroundCenter(pVertices, 1 / pScaleX, 1 / pScaleY, pScaleCenterX, pScaleCenterY);
         }
 
-        public static float[] revertRotateAroundCenter(float[] pVertices, float pRotation, float pRotationCenterX, float pRotationCenterY)
+        public static float[] RevertRotateAroundCenter(float[] pVertices, float pRotation, float pRotationCenterX, float pRotationCenterY)
         {
-            return MathUtils.rotateAroundCenter(pVertices, -pRotation, pRotationCenterX, pRotationCenterY);
+            return MathUtils.RotateAroundCenter(pVertices, -pRotation, pRotationCenterX, pRotationCenterY);
         }
 
-        public static float[] revertRotateAndScaleAroundCenter(float[] pVertices, float pRotation, float pRotationCenterX, float pRotationCenterY, float pScaleX, float pScaleY, float pScaleCenterX, float pScaleCenterY)
+        public static float[] RevertRotateAndScaleAroundCenter(float[] pVertices, float pRotation, float pRotationCenterX, float pRotationCenterY, float pScaleX, float pScaleY, float pScaleCenterX, float pScaleCenterY)
         {
-            MathUtils.revertScaleAroundCenter(pVertices, pScaleX, pScaleY, pScaleCenterX, pScaleCenterY);
-            return MathUtils.revertRotateAroundCenter(pVertices, pRotation, pRotationCenterX, pRotationCenterY);
+            MathUtils.RevertScaleAroundCenter(pVertices, pScaleX, pScaleY, pScaleCenterX, pScaleCenterY);
+            return MathUtils.RevertRotateAroundCenter(pVertices, pRotation, pRotationCenterX, pRotationCenterY);
         }
 
-        public static int bringToBounds(int pMinValue, int pMaxValue, int pValue)
-        {
-            return Math.Max(pMinValue, Math.Min(pMaxValue, pValue));
-        }
-
-        public static float bringToBounds(float pMinValue, float pMaxValue, float pValue)
+        public static int BringToBounds(int pMinValue, int pMaxValue, int pValue)
         {
             return Math.Max(pMinValue, Math.Min(pMaxValue, pValue));
         }
 
-        public static float distance(float pX1, float pY1, float pX2, float pY2)
+        public static float BringToBounds(float pMinValue, float pMaxValue, float pValue)
+        {
+            return Math.Max(pMinValue, Math.Min(pMaxValue, pValue));
+        }
+
+        public static float Distance(float pX1, float pY1, float pX2, float pY2)
         {
             float dX = pX2 - pX1;
             float dY = pY2 - pY1;

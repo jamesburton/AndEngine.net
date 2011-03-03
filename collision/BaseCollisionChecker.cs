@@ -31,7 +31,7 @@ namespace andengine.collision
         // Methods
         // ===========================================================
 
-        public static bool checkAxisAlignedRectangleCollision(/* final */ float pLeftA, /* final */ float pTopA, /* final */ float pRightA, /* final */ float pBottomA, /* final */ float pLeftB, /* final */ float pTopB, /* final */ float pRightB, /* final */ float pBottomB)
+        public static bool CheckAxisAlignedRectangleCollision(/* final */ float pLeftA, /* final */ float pTopA, /* final */ float pRightA, /* final */ float pBottomA, /* final */ float pLeftB, /* final */ float pTopB, /* final */ float pRightB, /* final */ float pBottomB)
         {
             return (pLeftA < pRightB &&
                     pLeftB < pRightA &&
@@ -76,7 +76,7 @@ namespace andengine.collision
          *         coordinates with respect to the line segment formed by the first
          *         two specified coordinates.
          */
-        public static int relativeCCW(/* final */ float pX1, /* final */ float pY1, float pX2, float pY2, float pPX, float pPY)
+        public static int RelativeCCW(/* final */ float pX1, /* final */ float pY1, float pX2, float pY2, float pPX, float pPY)
         {
             pX2 -= pX1;
             pY2 -= pY1;

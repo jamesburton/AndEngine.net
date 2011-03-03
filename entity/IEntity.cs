@@ -19,7 +19,7 @@ namespace andengine.entity
         // Methods
         // ===========================================================
 
-        /* public */ int getZIndex();
-        /* public */ void setZIndex(/* final */ int pZIndex);
+        /* public */ int GetZIndex();
+        /* public */ void SetZIndex(/* final */ int pZIndex);
     }
 }

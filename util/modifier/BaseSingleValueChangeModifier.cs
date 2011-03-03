@@ -48,16 +48,16 @@ namespace andengine.util.modifier
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected abstract void onChangeValue(T pItem, float pValue);
+        protected abstract void OnChangeValue(T pItem, float pValue);
 
-        protected override void onManagedInitialize(T pItem)
+        protected override void OnManagedInitialize(T pItem)
         {
 
         }
 
-        protected override void onManagedUpdate(float pSecondsElapsed, T pItem)
+        protected override void OnManagedUpdate(float pSecondsElapsed, T pItem)
         {
-            this.onChangeValue(pItem, this.mValueChangePerSecond * pSecondsElapsed);
+            this.OnChangeValue(pItem, this.mValueChangePerSecond * pSecondsElapsed);
         }
 
         // ===========================================================

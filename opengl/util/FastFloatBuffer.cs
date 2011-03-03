@@ -119,6 +119,7 @@ namespace andengine.opengl.util
             floatBuffer.Position(floatBuffer.Position() + length);
             this.mIntBuffer.Put(ia, 0, length);
         }
+        public void Put(float data) { float[] dataArray = new float[1]; dataArray[0] = data; Put(dataArray); }
 
         /**
          * For use with pre-converted data. This is 50x faster than
@@ -137,6 +138,7 @@ namespace andengine.opengl.util
             floatBuffer.Position(floatBuffer.Position() + data.Length);
             this.mIntBuffer.Put(data, 0, data.Length);
         }
+        public void Put(int data) { int[] dataArray = new int[1]; dataArray[0] = data; Put(dataArray); }
 
         /**
          * Converts float data to a format that can be quickly added to the buffer

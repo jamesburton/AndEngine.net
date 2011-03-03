@@ -14,11 +14,12 @@ namespace andengine.audio
         // Methods
         // ===========================================================
 
-        /* public */ float getMasterVolume();
-        /* public */ void setMasterVolume(/* final */ float pMasterVolume);
+        // public float getMasterVolume();
+        // public void setMasterVolume(/* final */ float pMasterVolume);
+        float MasterVolume { get; set; }
 
-        /* public */ void add(/* final */ T pAudioEntity);
+        /* public */ void Add(/* final */ T pAudioEntity);
 
-        /* public */ void releaseAll();
+        /* public */ void ReleaseAll();
     }
 }

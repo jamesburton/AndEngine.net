@@ -10,7 +10,9 @@ namespace andengine.opengl.texture.region
     //using Callback = andengine.util.Callback;
 
     using Context = Android.Content.Context;
-    using Java.Lang;
+    //using Java.Lang;
+
+    using String = System.String;
 
     /**
      * @author Nicolas Gramlich
@@ -39,7 +41,7 @@ namespace andengine.opengl.texture.region
         /**
          * @param pAssetBasePath must end with '<code>/</code>' or have <code>.length() == 0</code>. 
          */
-        public static void setAssetBasePath(String pAssetBasePath)
+        public static void SetAssetBasePath(String pAssetBasePath)
         {
             if (pAssetBasePath.EndsWith("/") || pAssetBasePath.Length() == 0)
             {
@@ -59,7 +61,7 @@ namespace andengine.opengl.texture.region
         // Methods
         // ===========================================================
 
-        public static TextureRegion extractFromTexture(Texture pTexture, int pTexturePositionX, int pTexturePositionY, int pWidth, int pHeight)
+        public static TextureRegion ExtractFromTexture(Texture pTexture, int pTexturePositionX, int pTexturePositionY, int pWidth, int pHeight)
         {
             return new TextureRegion(pTexture, pTexturePositionX, pTexturePositionY, pWidth, pHeight);
         }
@@ -68,43 +70,43 @@ namespace andengine.opengl.texture.region
         // Methods using Texture
         // ===========================================================
 
-        public static TextureRegion createFromAsset(Texture pTexture, Context pContext, String pAssetPath, int pTexturePositionX, int pTexturePositionY)
+        public static TextureRegion CreateFromAsset(Texture pTexture, Context pContext, String pAssetPath, int pTexturePositionX, int pTexturePositionY)
         {
             ITextureSource textureSource = new AssetTextureSource(pContext, TextureRegionFactory.sAssetBasePath + pAssetPath);
             return TextureRegionFactory.createFromSource(pTexture, textureSource, pTexturePositionX, pTexturePositionY);
         }
 
-        public static TiledTextureRegion createTiledFromAsset(Texture pTexture, Context pContext, String pAssetPath, int pTexturePositionX, int pTexturePositionY, int pTileColumns, int pTileRows)
+        public static TiledTextureRegion CreateTiledFromAsset(Texture pTexture, Context pContext, String pAssetPath, int pTexturePositionX, int pTexturePositionY, int pTileColumns, int pTileRows)
         {
             ITextureSource textureSource = new AssetTextureSource(pContext, TextureRegionFactory.sAssetBasePath + pAssetPath);
             return TextureRegionFactory.createTiledFromSource(pTexture, textureSource, pTexturePositionX, pTexturePositionY, pTileColumns, pTileRows);
         }
 
 
-        public static TextureRegion createFromResource(Texture pTexture, Context pContext, int pDrawableResourceID, int pTexturePositionX, int pTexturePositionY)
+        public static TextureRegion CreateFromResource(Texture pTexture, Context pContext, int pDrawableResourceID, int pTexturePositionX, int pTexturePositionY)
         {
             ITextureSource textureSource = new ResourceTextureSource(pContext, pDrawableResourceID);
             return TextureRegionFactory.createFromSource(pTexture, textureSource, pTexturePositionX, pTexturePositionY);
         }
 
-        public static TiledTextureRegion createTiledFromResource(Texture pTexture, Context pContext, int pDrawableResourceID, int pTexturePositionX, int pTexturePositionY, int pTileColumns, int pTileRows)
+        public static TiledTextureRegion CreateTiledFromResource(Texture pTexture, Context pContext, int pDrawableResourceID, int pTexturePositionX, int pTexturePositionY, int pTileColumns, int pTileRows)
         {
             ITextureSource textureSource = new ResourceTextureSource(pContext, pDrawableResourceID);
             return TextureRegionFactory.createTiledFromSource(pTexture, textureSource, pTexturePositionX, pTexturePositionY, pTileColumns, pTileRows);
         }
 
 
-        public static TextureRegion createFromSource(Texture pTexture, ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY)
+        public static TextureRegion CreateFromSource(Texture pTexture, ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY)
         {
             TextureRegion textureRegion = new TextureRegion(pTexture, pTexturePositionX, pTexturePositionY, pTextureSource.getWidth(), pTextureSource.getHeight());
             pTexture.addTextureSource(pTextureSource, textureRegion.getTexturePositionX(), textureRegion.getTexturePositionY());
             return textureRegion;
         }
 
-        public static TiledTextureRegion createTiledFromSource(Texture pTexture, ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY, int pTileColumns, int pTileRows)
+        public static TiledTextureRegion CreateTiledFromSource(Texture pTexture, ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY, int pTileColumns, int pTileRows)
         {
             TiledTextureRegion tiledTextureRegion = new TiledTextureRegion(pTexture, pTexturePositionX, pTexturePositionY, pTextureSource.getWidth(), pTextureSource.getHeight(), pTileColumns, pTileRows);
-            pTexture.addTextureSource(pTextureSource, tiledTextureRegion.getTexturePositionX(), tiledTextureRegion.getTexturePositionY());
+            pTexture.AddTextureSource(pTextureSource, tiledTextureRegion.getTexturePositionX(), tiledTextureRegion.getTexturePositionY());
             return tiledTextureRegion;
         }
 
@@ -112,29 +114,29 @@ namespace andengine.opengl.texture.region
         // Methods using BuildableTexture
         // ===========================================================
 
-        public static TextureRegion createFromAsset(BuildableTexture pBuildableTexture, Context pContext, String pAssetPath)
+        public static TextureRegion CreateFromAsset(BuildableTexture pBuildableTexture, Context pContext, String pAssetPath)
         {
             ITextureSource textureSource = new AssetTextureSource(pContext, TextureRegionFactory.sAssetBasePath + pAssetPath);
-            return TextureRegionFactory.createFromSource(pBuildableTexture, textureSource);
+            return TextureRegionFactory.CreateFromSource(pBuildableTexture, textureSource);
         }
 
-        public static TiledTextureRegion createTiledFromAsset(BuildableTexture pBuildableTexture, Context pContext, String pAssetPath, int pTileColumns, int pTileRows)
+        public static TiledTextureRegion CreateTiledFromAsset(BuildableTexture pBuildableTexture, Context pContext, String pAssetPath, int pTileColumns, int pTileRows)
         {
             ITextureSource textureSource = new AssetTextureSource(pContext, TextureRegionFactory.sAssetBasePath + pAssetPath);
-            return TextureRegionFactory.createTiledFromSource(pBuildableTexture, textureSource, pTileColumns, pTileRows);
+            return TextureRegionFactory.CreateTiledFromSource(pBuildableTexture, textureSource, pTileColumns, pTileRows);
         }
 
 
-        public static TextureRegion createFromResource(BuildableTexture pBuildableTexture, Context pContext, int pDrawableResourceID)
+        public static TextureRegion CreateFromResource(BuildableTexture pBuildableTexture, Context pContext, int pDrawableResourceID)
         {
             ITextureSource textureSource = new ResourceTextureSource(pContext, pDrawableResourceID);
-            return TextureRegionFactory.createFromSource(pBuildableTexture, textureSource);
+            return TextureRegionFactory.CreateFromSource(pBuildableTexture, textureSource);
         }
 
-        public static TiledTextureRegion createTiledFromResource(BuildableTexture pBuildableTexture, Context pContext, int pDrawableResourceID, int pTileColumns, int pTileRows)
+        public static TiledTextureRegion CreateTiledFromResource(BuildableTexture pBuildableTexture, Context pContext, int pDrawableResourceID, int pTileColumns, int pTileRows)
         {
             ITextureSource textureSource = new ResourceTextureSource(pContext, pDrawableResourceID);
-            return TextureRegionFactory.createTiledFromSource(pBuildableTexture, textureSource, pTileColumns, pTileRows);
+            return TextureRegionFactory.CreateTiledFromSource(pBuildableTexture, textureSource, pTileColumns, pTileRows);
         }
 
         /*
@@ -162,9 +164,10 @@ namespace andengine.opengl.texture.region
         {
             protected TextureSourceWithLocation _TextureSourceWithLocation;
             public TextureSourceWithLocationCallback(TextureSourceWithLocation textureSourceWithLocation) { _TextureSourceWithLocation = textureSourceWithLocation; }
-            public override void onCallback(TextureSourceWithLocation pCallbackValue)
+            public override void OnCallback(TextureSourceWithLocation pCallbackValue)
             {
-                _TextureSourceWithLocation.setTexturePosition(pCallbackValue.getTexturePositionX(), pCallbackValue.getTexturePositionY());
+                //_TextureSourceWithLocation.setTexturePosition(pCallbackValue.getTexturePositionX(), pCallbackValue.getTexturePositionY());
+                _TextureSourceWithLocation.SetTexturePosition(pCallbackValue.TexturePositionX, pCallbackValue.TexturePositionY);
             }
         }
         public static TextureRegion createFromSource(BuildableTexture pBuildableTexture, ITextureSource pTextureSource)
@@ -187,10 +190,11 @@ namespace andengine.opengl.texture.region
             return tiledTextureRegion;
         }
         */
-        public static TiledTextureRegion createTiledFromSource(BuildableTexture pBuildableTexture, ITextureSource pTextureSource, int pTileColumns, int pTileRows)
+        public static TiledTextureRegion CreateTiledFromSource(BuildableTexture pBuildableTexture, ITextureSource pTextureSource, int pTileColumns, int pTileRows)
         {
-            TiledTextureRegion tiledTextureRegion = new TiledTextureRegion(pBuildableTexture, 0, 0, pTextureSource.getWidth(), pTextureSource.getHeight(), pTileColumns, pTileRows);
-            pBuildableTexture.addTextureSource(pTextureSource, new TextureSourceWithLocationCallback((TextureSourceWithLocation)tiledTextureRegion));
+            //TiledTextureRegion tiledTextureRegion = new TiledTextureRegion(pBuildableTexture, 0, 0, pTextureSource.getWidth(), pTextureSource.getHeight(), pTileColumns, pTileRows);
+            TiledTextureRegion tiledTextureRegion = new TiledTextureRegion(pBuildableTexture, 0, 0, pTextureSource.Width, pTextureSource.Height, pTileColumns, pTileRows);
+            pBuildableTexture.AddTextureSource(pTextureSource, new TextureSourceWithLocationCallback((TextureSourceWithLocation)tiledTextureRegion));
             return tiledTextureRegion;
         }
 

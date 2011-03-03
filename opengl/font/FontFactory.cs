@@ -5,7 +5,9 @@ namespace andengine.opengl.font
 
     using Context = Android.Content.Context;
     using Typeface = Android.Graphics.Typeface;
-    using Java.Lang;
+    //using Java.Lang;
+    using String = System.String;
+    using IllegalStateException = Java.Lang.IllegalStateException;
 
     /**
      * @author Nicolas Gramlich
@@ -36,7 +38,8 @@ namespace andengine.opengl.font
          */
         public static void setAssetBasePath(String pAssetBasePath)
         {
-            if (pAssetBasePath.EndsWith("/") || pAssetBasePath.Length() == 0)
+            //if (pAssetBasePath.EndsWith("/") || pAssetBasePath.Length() == 0)
+            if (pAssetBasePath.EndsWith("/") || pAssetBasePath.Length == 0)
             {
                 FontFactory.sAssetBasePath = pAssetBasePath;
             }
@@ -54,34 +57,34 @@ namespace andengine.opengl.font
         // Methods
         // ===========================================================
 
-        public static Font create(Texture pTexture, Typeface pTypeface, float pSize, bool pAntiAlias, int pColor)
+        public static Font Create(Texture pTexture, Typeface pTypeface, float pSize, bool pAntiAlias, int pColor)
         {
             return new Font(pTexture, pTypeface, pSize, pAntiAlias, pColor);
         }
 
-        public static StrokeFont createStroke(Texture pTexture, Typeface pTypeface, float pSize, bool pAntiAlias, int pColor, int pStrokeWidth, int pStrokeColor)
+        public static StrokeFont CreateStroke(Texture pTexture, Typeface pTypeface, float pSize, bool pAntiAlias, int pColor, int pStrokeWidth, int pStrokeColor)
         {
             return new StrokeFont(pTexture, pTypeface, pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor);
         }
 
-        public static StrokeFont createStroke(Texture pTexture, Typeface pTypeface, float pSize, bool pAntiAlias, int pColor, int pStrokeWidth, int pStrokeColor, bool pStrokeOnly)
+        public static StrokeFont CreateStroke(Texture pTexture, Typeface pTypeface, float pSize, bool pAntiAlias, int pColor, int pStrokeWidth, int pStrokeColor, bool pStrokeOnly)
         {
             return new StrokeFont(pTexture, pTypeface, pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor, pStrokeOnly);
         }
 
-        public static Font createFromAsset(Texture pTexture, Context pContext, String pAssetPath, float pSize, bool pAntiAlias, int pColor)
+        public static Font CreateFromAsset(Texture pTexture, Context pContext, String pAssetPath, float pSize, bool pAntiAlias, int pColor)
         {
             return new Font(pTexture, Typeface.CreateFromAsset(pContext.getAssets(), FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor);
         }
 
-        public static StrokeFont createStrokeFromAsset(Texture pTexture, Context pContext, String pAssetPath, float pSize, bool pAntiAlias, int pColor, int pStrokeWidth, int pStrokeColor)
+        public static StrokeFont CreateStrokeFromAsset(Texture pTexture, Context pContext, String pAssetPath, float pSize, bool pAntiAlias, int pColor, int pStrokeWidth, int pStrokeColor)
         {
             return new StrokeFont(pTexture, Typeface.CreateFromAsset(pContext.getAssets(), FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor);
         }
 
-        public static StrokeFont createStrokeFromAsset(Texture pTexture, Context pContext, String pAssetPath, float pSize, bool pAntiAlias, int pColor, int pStrokeWidth, int pStrokeColor, bool pStrokeOnly)
+        public static StrokeFont CreateStrokeFromAsset(Texture pTexture, Context pContext, String pAssetPath, float pSize, bool pAntiAlias, int pColor, int pStrokeWidth, int pStrokeColor, bool pStrokeOnly)
         {
-            return new StrokeFont(pTexture, Typeface.createFromAsset(pContext.getAssets(), FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor, pStrokeOnly);
+            return new StrokeFont(pTexture, Typeface.CreateFromAsset(pContext.getAssets(), FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor, pStrokeOnly);
         }
 
         // ===========================================================

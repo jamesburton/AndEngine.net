@@ -239,6 +239,11 @@ namespace System.Collections.Generic
             return sb.ToString();
         }
 
+        void ICollection<T>.CopyTo(T[] array, int arrayIndex)
+        {
+            this.CopyTo(array, arrayIndex);
+        }
+
         protected int[] HashToIndex(string hash)
         {
             string[] subs = hash.Split(',');
@@ -283,7 +288,9 @@ namespace System.Collections.Generic
             string key = IndexToHash(indices);
             if (hashtable.Contains(key))
                 return (T)hashtable[key];
-            return (T)null;
+            //return (T)null;
+            // NB: Above is not valid as T is considered non-nullable ... could have used (where T : class) but default(T) will return null where suitable or 0, etc. for reference types.
+            return default(T);
         }
 
         public T GetValue(int index)
@@ -318,21 +325,37 @@ namespace System.Collections.Generic
             SetValue(value, new int[] { index1, index2 });
         }
 
-        private class SparseArrayEnumerator<T2> : IEnumerator<T2>
+        //private class SparseArrayEnumerator<T2> : IEnumerator<T2>
+        private class SparseArrayEnumerable<T2> : IEnumerable<T2>
         {
             private IDictionaryEnumerator dict;
             private SparseArray<T2> parent;
-            public SparseArrayEnumerator(SparseArray<T2> array) { parent = array; dict = array.hashtable.GetEnumerator(); }
+            //public SparseArrayEnumerator(SparseArray<T2> array) { parent = array; dict = array.hashtable.GetEnumerator(); }
+            public SparseArrayEnumerable(SparseArray<T2> array) { parent = array; dict = array.hashtable.GetEnumerator(); }
             public void Reset() { dict.Reset(); }
             public bool MoveNext() { return dict.MoveNext(); }
-            public T2 Current { get { return (T2)dict.Value; } }
+            //public T2 Current { get { return (T2)dict.Value; } }
+            public object Current { get { return dict.Value; } }
             public int[] Index { get { return parent.HashToIndex((string)dict.Key); } }
             public void Dispose() { }
+            public IEnumerator<T2> GetEnumerator()
+            {
+                foreach (T2 item in parent)
+                    yield return item;
+            }
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
         }
 
         public System.Collections.Generic.IEnumerator<T> GetEnumerator()
         {
-            return new SparseArrayEnumerator<T>(this);
+            return new SparseArrayEnumerable<T>(this).GetEnumerator();
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         public void RemoveAt(int index)
@@ -345,9 +368,19 @@ namespace System.Collections.Generic
             throw new NotImplementedException();
         }
 
-        public void Remove(T value)
+        //public void Remove(T value)
+        public bool Remove(T value)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            try
+            {
+                hashtable.Remove(value);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool Contains(T value)
@@ -367,10 +400,14 @@ namespace System.Collections.Generic
             return 0;
         }
 
+        /*
         public int Add(T value)
         {
             throw new NotImplementedException();
         }
+        */
+        public void Add(int key, T value) { hashtable.Add(key, value); }
+        void ICollection<T>.Add(T value) { throw new NotImplementedException("Add(T value) has not been implemented, use Add(int key, T value) instead"); }
 
         public T this[int[] indicies]
         {

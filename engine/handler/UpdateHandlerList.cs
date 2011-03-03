@@ -34,23 +34,23 @@ namespace andengine.engine.handler
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void onUpdate(/* final */ float pSecondsElapsed)
+        public /* override */ void OnUpdate(/* final */ float pSecondsElapsed)
         {
             /* final */
             int handlerCount = this.Count;
             for (int i = handlerCount - 1; i >= 0; i--)
             {
-                this[i].onUpdate(pSecondsElapsed);
+                this[i].OnUpdate(pSecondsElapsed);
             }
         }
 
-        public override void reset()
+        public /* override */ void Reset()
         {
             /* final */
             int handlerCount = this.Count;
             for (int i = handlerCount - 1; i >= 0; i--)
             {
-                this[i].reset();
+                this[i].Reset();
             }
         }
 

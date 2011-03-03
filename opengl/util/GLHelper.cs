@@ -8,7 +8,9 @@ namespace andengine.opengl.util
     using IntBuffer = Java.Nio.IntBuffer;
 
     using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
+    using GL10Consts = Javax.Microedition.Khronos.Opengles.GL10Consts;
     using GL11 = Javax.Microedition.Khronos.Opengles.IGL11;
+    using GL11Consts = Javax.Microedition.Khronos.Opengles.GL11Consts;
 
     using RenderOptions = andengine.engine.options.RenderOptions;
     using Debug = andengine.util.Debug;
@@ -75,7 +77,7 @@ namespace andengine.opengl.util
         // Methods
         // ===========================================================
 
-        public static void reset(/* final */ GL10 pGL)
+        public static void Reset(/* final */ GL10 pGL)
         {
             GLHelper.sCurrentHardwareBufferID = -1;
             GLHelper.sCurrentHardwareTextureID = -1;
@@ -87,16 +89,16 @@ namespace andengine.opengl.util
             GLHelper.sCurrentTextureFloatBuffer = null;
             GLHelper.sCurrentVertexFloatBuffer = null;
 
-            GLHelper.enableDither(pGL);
-            GLHelper.enableLightning(pGL);
-            GLHelper.enableDepthTest(pGL);
-            GLHelper.enableMultisample(pGL);
+            GLHelper.EnableDither(pGL);
+            GLHelper.EnableLightning(pGL);
+            GLHelper.EnableDepthTest(pGL);
+            GLHelper.EnableMultisample(pGL);
 
-            GLHelper.disableBlend(pGL);
-            GLHelper.disableCulling(pGL);
-            GLHelper.disableTextures(pGL);
-            GLHelper.disableTexCoordArray(pGL);
-            GLHelper.disableVertexArray(pGL);
+            GLHelper.DisableBlend(pGL);
+            GLHelper.DisableCulling(pGL);
+            GLHelper.DisableTextures(pGL);
+            GLHelper.DisableTexCoordArray(pGL);
+            GLHelper.DisableVertexArray(pGL);
 
             GLHelper.sLineWidth = 1;
 
@@ -109,14 +111,14 @@ namespace andengine.opengl.util
             GLHelper.EXTENSIONS_DRAWTEXTURE = false;
         }
 
-        public static void enableExtensions(/* final */ GL10 pGL, /* final */ RenderOptions pRenderOptions)
+        public static void EnableExtensions(/* final */ GL10 pGL, /* final */ RenderOptions pRenderOptions)
         {
             /* final */
-            String version = pGL.glGetString(GL10.GL_VERSION);
+            String version = pGL.glGetString(GL10Consts.GlVersion);
             /* final */
-            String renderer = pGL.glGetString(GL10.GL_RENDERER);
+            String renderer = pGL.glGetString(GL10Consts.GlRenderer);
             /* final */
-            String extensions = pGL.glGetString(GL10.GL_EXTENSIONS);
+            String extensions = pGL.glGetString(GL10Consts.GlExtensions);
 
             Debug.d("RENDERER: " + renderer);
             Debug.d("VERSION: " + version);
@@ -131,15 +133,16 @@ namespace andengine.opengl.util
             /* final */
             bool isDrawTextureCapable = extensions.Contains("draw_texture");
 
-            GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS = !pRenderOptions.isDisableExtensionVertexBufferObjects() && !isSoftwareRenderer && (isVBOCapable || !isOpenGL10);
+            //GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS = !pRenderOptions.isDisableExtensionVertexBufferObjects() && !isSoftwareRenderer && (isVBOCapable || !isOpenGL10);
+            GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS = !pRenderOptions.DisableExtensionVertexBufferObjects && !isSoftwareRenderer && (isVBOCapable || !isOpenGL10);
             GLHelper.EXTENSIONS_DRAWTEXTURE = isDrawTextureCapable;
 
-            GLHelper.hackBrokenDevices();
+            GLHelper.HackBrokenDevices();
             Debug.d("EXTENSIONS_VERXTEXBUFFEROBJECTS = " + GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS);
             Debug.d("EXTENSIONS_DRAWTEXTURE = " + GLHelper.EXTENSIONS_DRAWTEXTURE);
         }
 
-        private static void hackBrokenDevices()
+        private static void HackBrokenDevices()
         {
             if (Build.Product.Contains("morrison"))
             {
@@ -153,7 +156,7 @@ namespace andengine.opengl.util
             }
         }
 
-        public static void setColor(/* final */ GL10 pGL, /* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue, /* final */ float pAlpha)
+        public static void SetColor(/* final */ GL10 pGL, /* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue, /* final */ float pAlpha)
         {
             if (pAlpha != GLHelper.sAlpha || pRed != GLHelper.sRed || pGreen != GLHelper.sGreen || pBlue != GLHelper.sBlue)
             {
@@ -161,287 +164,289 @@ namespace andengine.opengl.util
                 GLHelper.sRed = pRed;
                 GLHelper.sGreen = pGreen;
                 GLHelper.sBlue = pBlue;
-                pGL.glColor4f(pRed, pGreen, pBlue, pAlpha);
+                pGL.GlColor4f(pRed, pGreen, pBlue, pAlpha);
             }
         }
 
-        public static void enableVertexArray(/* final */ GL10 pGL)
+        public static void EnableVertexArray(/* final */ GL10 pGL)
         {
             if (!GLHelper.sEnableVertexArray)
             {
                 GLHelper.sEnableVertexArray = true;
-                pGL.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+                pGL.GlEnableClientState(GL10Consts.GlVertexArray);
             }
         }
-        public static void disableVertexArray(/* final */ GL10 pGL)
+        public static void DisableVertexArray(/* final */ GL10 pGL)
         {
             if (GLHelper.sEnableVertexArray)
             {
                 GLHelper.sEnableVertexArray = false;
-                pGL.glDisableClientState(GL10.GL_VERTEX_ARRAY);
+                pGL.glDisableClientState(GL10Consts.GlVertexArray);
             }
         }
 
-        public static void enableTexCoordArray(/* final */ GL10 pGL)
+        public static void EnableTexCoordArray(/* final */ GL10 pGL)
         {
             if (!GLHelper.sEnableTexCoordArray)
             {
                 GLHelper.sEnableTexCoordArray = true;
-                pGL.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+                pGL.GlEnableClientState(GL10Consts.GlTextureCoordArray);
             }
         }
-        public static void disableTexCoordArray(/* final */ GL10 pGL)
+        public static void DisableTexCoordArray(/* final */ GL10 pGL)
         {
             if (GLHelper.sEnableTexCoordArray)
             {
                 GLHelper.sEnableTexCoordArray = false;
-                pGL.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+                pGL.GlDisableClientState(GL10Consts.GlTextureCoordArray);
             }
         }
 
-        public static void enableBlend(/* final */ GL10 pGL)
+        public static void EnableBlend(/* final */ GL10 pGL)
         {
             if (!GLHelper.sEnableBlend)
             {
                 GLHelper.sEnableBlend = true;
-                pGL.glEnable(GL10.GL_BLEND);
+                pGL.GlEnable(GL10Consts.GlBlend);
             }
         }
-        public static void disableBlend(/* final */ GL10 pGL)
+        public static void DisableBlend(/* final */ GL10 pGL)
         {
             if (GLHelper.sEnableBlend)
             {
                 GLHelper.sEnableBlend = false;
-                pGL.glDisable(GL10.GL_BLEND);
+                pGL.GlDisable(GL10Consts.GlBlend);
             }
         }
 
-        public static void enableCulling(/* final */ GL10 pGL)
+        public static void EnableCulling(/* final */ GL10 pGL)
         {
             if (!GLHelper.sEnableCulling)
             {
                 GLHelper.sEnableCulling = true;
-                pGL.glEnable(GL10.GL_CULL_FACE);
+                //pGL.GlEnable(GL10.GL_CULL_FACE);
+                pGL.GlEnable(GL11Consts.GlCullFaceMode);
             }
         }
-        public static void disableCulling(/* final */ GL10 pGL)
+        public static void DisableCulling(/* final */ GL10 pGL)
         {
             if (GLHelper.sEnableCulling)
             {
                 GLHelper.sEnableCulling = false;
-                pGL.glDisable(GL10.GL_CULL_FACE);
+                //pGL.glDisable(GL10.GL_CULL_FACE);
+                pGL.GlDisable(GL11Consts.GlCullFaceMode);
             }
         }
 
-        public static void enableTextures(/* final */ GL10 pGL)
+        public static void EnableTextures(/* final */ GL10 pGL)
         {
             if (!GLHelper.sEnableTextures)
             {
                 GLHelper.sEnableTextures = true;
-                pGL.glEnable(GL10.GL_TEXTURE_2D);
+                pGL.GlEnable(GL10Consts.GlTexture2d);
             }
         }
-        public static void disableTextures(/* final */ GL10 pGL)
+        public static void DisableTextures(/* final */ GL10 pGL)
         {
             if (GLHelper.sEnableTextures)
             {
                 GLHelper.sEnableTextures = false;
-                pGL.glDisable(GL10.GL_TEXTURE_2D);
+                pGL.GlDisable(GL10Consts.GlTexture2d);
             }
         }
 
-        public static void enableLightning(/* final */ GL10 pGL)
+        public static void EnableLightning(/* final */ GL10 pGL)
         {
             if (!GLHelper.sEnableLightning)
             {
                 GLHelper.sEnableLightning = true;
-                pGL.glEnable(GL10.GL_LIGHTING);
+                pGL.GlEnable(GL10Consts.GlLighting);
             }
         }
-        public static void disableLightning(/* final */ GL10 pGL)
+        public static void DisableLightning(/* final */ GL10 pGL)
         {
             if (GLHelper.sEnableLightning)
             {
                 GLHelper.sEnableLightning = false;
-                pGL.glDisable(GL10.GL_LIGHTING);
+                pGL.GlDisable(GL10Consts.GlLighting);
             }
         }
 
-        public static void enableDither(/* final */ GL10 pGL)
+        public static void EnableDither(/* final */ GL10 pGL)
         {
             if (!GLHelper.sEnableDither)
             {
                 GLHelper.sEnableDither = true;
-                pGL.glEnable(GL10.GL_DITHER);
+                pGL.GlEnable(GL10Consts.GlDither);
             }
         }
-        public static void disableDither(/* final */ GL10 pGL)
+        public static void DisableDither(/* final */ GL10 pGL)
         {
             if (GLHelper.sEnableDither)
             {
                 GLHelper.sEnableDither = false;
-                pGL.glDisable(GL10.GL_DITHER);
+                pGL.GlDisable(GL10Consts.GlDither);
             }
         }
 
-        public static void enableDepthTest(/* final */ GL10 pGL)
+        public static void EnableDepthTest(/* final */ GL10 pGL)
         {
             if (!GLHelper.sEnableDepthTest)
             {
                 GLHelper.sEnableDepthTest = true;
-                pGL.glEnable(GL10.GL_DEPTH_TEST);
+                pGL.GlEnable(GL10Consts.GlDepthTest);
             }
         }
-        public static void disableDepthTest(/* final */ GL10 pGL)
+        public static void DisableDepthTest(/* final */ GL10 pGL)
         {
             if (GLHelper.sEnableDepthTest)
             {
                 GLHelper.sEnableDepthTest = false;
-                pGL.glDisable(GL10.GL_DEPTH_TEST);
+                pGL.GlDisable(GL10Consts.GlDepthTest);
             }
         }
 
-        public static void enableMultisample(/* final */ GL10 pGL)
+        public static void EnableMultisample(/* final */ GL10 pGL)
         {
             if (!GLHelper.sEnableMultisample)
             {
                 GLHelper.sEnableMultisample = true;
-                pGL.glEnable(GL10.GL_MULTISAMPLE);
+                pGL.GlEnable(GL10Consts.GlMultisample);
             }
         }
-        public static void disableMultisample(/* final */ GL10 pGL)
+        public static void DisableMultisample(/* final */ GL10 pGL)
         {
             if (GLHelper.sEnableMultisample)
             {
                 GLHelper.sEnableMultisample = false;
-                pGL.glDisable(GL10.GL_MULTISAMPLE);
+                pGL.GlDisable(GL10Consts.GlMultisample);
             }
         }
 
-        public static void bindBuffer(/* final */ GL11 pGL11, /* final */ int pHardwareBufferID)
+        public static void BindBuffer(/* final */ GL11 pGL11, /* final */ int pHardwareBufferID)
         {
             /* Reduce unnecessary buffer switching calls. */
             if (GLHelper.sCurrentHardwareBufferID != pHardwareBufferID)
             {
                 GLHelper.sCurrentHardwareBufferID = pHardwareBufferID;
-                pGL11.glBindBuffer(GL11.GL_ARRAY_BUFFER, pHardwareBufferID);
+                pGL11.GlBindBuffer(GL11Consts.GlArrayBuffer, pHardwareBufferID);
             }
         }
 
-        public static void deleteBuffer(/* final */ GL11 pGL11, /* final */ int pHardwareBufferID)
+        public static void DeleteBuffer(/* final */ GL11 pGL11, /* final */ int pHardwareBufferID)
         {
             GLHelper.HARDWAREBUFFERID_CONTAINER[0] = pHardwareBufferID;
-            pGL11.glDeleteBuffers(1, GLHelper.HARDWAREBUFFERID_CONTAINER, 0);
+            pGL11.GlDeleteBuffers(1, GLHelper.HARDWAREBUFFERID_CONTAINER, 0);
         }
 
-        public static void bindTexture(/* final */ GL10 pGL, /* final */ int pHardwareTextureID)
+        public static void BindTexture(/* final */ GL10 pGL, /* final */ int pHardwareTextureID)
         {
             /* Reduce unnecessary texture switching calls. */
             if (GLHelper.sCurrentHardwareTextureID != pHardwareTextureID)
             {
                 GLHelper.sCurrentHardwareTextureID = pHardwareTextureID;
-                pGL.glBindTexture(GL10.GL_TEXTURE_2D, pHardwareTextureID);
+                pGL.GlBindTexture(GL10Consts.GlTexture2d, pHardwareTextureID);
             }
         }
 
-        public static void deleteTexture(/* final */ GL10 pGL, /* final */ int pHardwareTextureID)
+        public static void DeleteTexture(/* final */ GL10 pGL, /* final */ int pHardwareTextureID)
         {
             GLHelper.HARDWARETEXTUREID_CONTAINER[0] = pHardwareTextureID;
-            pGL.glDeleteTextures(1, GLHelper.HARDWARETEXTUREID_CONTAINER, 0);
+            pGL.GlDeleteTextures(1, GLHelper.HARDWARETEXTUREID_CONTAINER, 0);
         }
 
-        public static void texCoordPointer(/* final */ GL10 pGL, /* final */ FastFloatBuffer pTextureFloatBuffer)
+        public static void TexCoordPointer(/* final */ GL10 pGL, /* final */ FastFloatBuffer pTextureFloatBuffer)
         {
             if (GLHelper.sCurrentTextureFloatBuffer != pTextureFloatBuffer)
             {
                 GLHelper.sCurrentTextureFloatBuffer = pTextureFloatBuffer;
-                pGL.glTexCoordPointer(2, GL10.GL_FLOAT, 0, pTextureFloatBuffer.mByteBuffer);
+                pGL.GlTexCoordPointer(2, GL10Consts.GlFloat, 0, pTextureFloatBuffer.mByteBuffer);
             }
         }
 
-        public static void texCoordZeroPointer(/* final */ GL11 pGL11)
+        public static void TexCoordZeroPointer(/* final */ GL11 pGL11)
         {
-            pGL11.glTexCoordPointer(2, GL10.GL_FLOAT, 0, 0);
+            pGL11.GlTexCoordPointer(2, GL10Consts.GlFloat, 0, 0);
         }
 
-        public static void vertexPointer(/* final */ GL10 pGL, /* final */ FastFloatBuffer pVertexFloatBuffer)
+        public static void VertexPointer(/* final */ GL10 pGL, /* final */ FastFloatBuffer pVertexFloatBuffer)
         {
             if (GLHelper.sCurrentVertexFloatBuffer != pVertexFloatBuffer)
             {
                 GLHelper.sCurrentVertexFloatBuffer = pVertexFloatBuffer;
-                pGL.glVertexPointer(2, GL10.GL_FLOAT, 0, pVertexFloatBuffer.mByteBuffer);
+                pGL.GlVertexPointer(2, GL10Consts.GlFloat, 0, pVertexFloatBuffer.mByteBuffer);
             }
         }
 
-        public static void vertexZeroPointer(/* final */ GL11 pGL11)
+        public static void VertexZeroPointer(/* final */ GL11 pGL11)
         {
-            pGL11.glVertexPointer(2, GL10.GL_FLOAT, 0, 0);
+            pGL11.GlVertexPointer(2, GL10Consts.GlFloat, 0, 0);
         }
 
-        public static void blendFunction(/* final */ GL10 pGL, /* final */ int pSourceBlendMode, /* final */ int pDestinationBlendMode)
+        public static void BlendFunction(/* final */ GL10 pGL, /* final */ int pSourceBlendMode, /* final */ int pDestinationBlendMode)
         {
             if (GLHelper.sCurrentSourceBlendMode != pSourceBlendMode || GLHelper.sCurrentDestinationBlendMode != pDestinationBlendMode)
             {
                 GLHelper.sCurrentSourceBlendMode = pSourceBlendMode;
                 GLHelper.sCurrentDestinationBlendMode = pDestinationBlendMode;
-                pGL.glBlendFunc(pSourceBlendMode, pDestinationBlendMode);
+                pGL.GlBlendFunc(pSourceBlendMode, pDestinationBlendMode);
             }
         }
 
-        public static void lineWidth(/* final */ GL10 pGL, /* final */ float pLineWidth)
+        public static void LineWidth(/* final */ GL10 pGL, /* final */ float pLineWidth)
         {
             if (GLHelper.sLineWidth != pLineWidth)
             {
                 GLHelper.sLineWidth = pLineWidth;
-                pGL.glLineWidth(pLineWidth);
+                pGL.GlLineWidth(pLineWidth);
             }
         }
 
-        public static void switchToModelViewMatrix(/* final */ GL10 pGL)
+        public static void SwitchToModelViewMatrix(/* final */ GL10 pGL)
         {
             /* Reduce unnecessary matrix switching calls. */
-            if (GLHelper.sCurrentMatrix != GL10.GL_MODELVIEW)
+            if (GLHelper.sCurrentMatrix != GL10Consts.GlModelview)
             {
-                GLHelper.sCurrentMatrix = GL10.GL_MODELVIEW;
-                pGL.glMatrixMode(GL10.GL_MODELVIEW);
+                GLHelper.sCurrentMatrix = GL10Consts.GlModelview;
+                pGL.GlMatrixMode(GL10Consts.GlModelview);
             }
         }
 
-        public static void switchToProjectionMatrix(/* final */ GL10 pGL)
+        public static void SwitchToProjectionMatrix(/* final */ GL10 pGL)
         {
             /* Reduce unnecessary matrix switching calls. */
-            if (GLHelper.sCurrentMatrix != GL10.GL_PROJECTION)
+            if (GLHelper.sCurrentMatrix != GL10Consts.GlProjection)
             {
-                GLHelper.sCurrentMatrix = GL10.GL_PROJECTION;
-                pGL.glMatrixMode(GL10.GL_PROJECTION);
+                GLHelper.sCurrentMatrix = GL10Consts.GlProjection;
+                pGL.GlMatrixMode(GL10Consts.GlProjection);
             }
         }
 
-        public static void setProjectionIdentityMatrix(/* final */ GL10 pGL)
+        public static void SetProjectionIdentityMatrix(/* final */ GL10 pGL)
         {
-            GLHelper.switchToProjectionMatrix(pGL);
-            pGL.glLoadIdentity();
+            GLHelper.SwitchToProjectionMatrix(pGL);
+            pGL.GlLoadIdentity();
         }
 
-        public static void setModelViewIdentityMatrix(/* final */ GL10 pGL)
+        public static void SetModelViewIdentityMatrix(/* final */ GL10 pGL)
         {
-            GLHelper.switchToModelViewMatrix(pGL);
-            pGL.glLoadIdentity();
+            GLHelper.SwitchToModelViewMatrix(pGL);
+            pGL.GlLoadIdentity();
         }
 
-        public static void setShadeModelFlat(/* final */ GL10 pGL)
+        public static void SetShadeModelFlat(/* final */ GL10 pGL)
         {
-            pGL.glShadeModel(GL10.GL_FLAT);
+            pGL.GlShadeModel(GL10Consts.GlFlat);
         }
 
-        public static void setPerspectiveCorrectionHintFastest(/* final */ GL10 pGL)
+        public static void SetPerspectiveCorrectionHintFastest(/* final */ GL10 pGL)
         {
-            pGL.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
+            pGL.GlHint(GL10Consts.GlPerspectiveCorrectionHint, GL10Consts.GlFastest);
         }
 
-        public static void bufferData(/* final */ GL11 pGL11, /* final */ ByteBuffer pByteBuffer, /* final */ int pUsage)
+        public static void BufferData(/* final */ GL11 pGL11, /* final */ ByteBuffer pByteBuffer, /* final */ int pUsage)
         {
-            pGL11.glBufferData(GL11.GL_ARRAY_BUFFER, pByteBuffer.capacity(), pByteBuffer, pUsage);
+            pGL11.GlBufferData(GL11Consts.GlArrayBuffer, pByteBuffer.Capacity(), pByteBuffer, pUsage);
         }
 
         /**
@@ -453,15 +458,15 @@ namespace andengine.opengl.util
         public static void glTexSubImage2D(/* final */ GL10 pGL, /* final */ int target, /* final */ int level, /* final */ int xoffset, /* final */ int yoffset, /* final */ Bitmap bitmap, /* final */ int format, /* final */ int type)
         {
             /* final */
-            int[] pixels = GLHelper.getPixels(bitmap);
+            int[] pixels = GLHelper.GetPixels(bitmap);
 
             /* final */
-            Buffer pixelBuffer = GLHelper.convertARGBtoRGBABuffer(pixels);
+            Buffer pixelBuffer = GLHelper.ConvertARGBtoRGBABuffer(pixels);
 
-            pGL.glTexSubImage2D(GL10.GlTexture2d, 0, xoffset, yoffset, bitmap.Width, bitmap.Height, GL10.GlRgba, GL10.GlUnsignedByte, pixelBuffer);
+            pGL.GlTexSubImage2D(GL10Consts.GlTexture2d, 0, xoffset, yoffset, bitmap.Width, bitmap.Height, GL10.GlRgba, GL10.GlUnsignedByte, pixelBuffer);
         }
 
-        private static Buffer convertARGBtoRGBABuffer(/* final */ int[] pPixels)
+        private static Buffer ConvertARGBtoRGBABuffer(/* final */ int[] pPixels)
         {
             if (GLHelper.IS_LITTLE_ENDIAN)
             {
@@ -484,7 +489,7 @@ namespace andengine.opengl.util
             }
             else
             {
-                for (int i = pPixels.length - 1; i >= 0; i--)
+                for (int i = pPixels.Length - 1; i >= 0; i--)
                 {
                     /* final */
                     int pixel = pPixels[i];
@@ -501,10 +506,10 @@ namespace andengine.opengl.util
                     pPixels[i] = red << 24 | green << 16 | blue << 8 | alpha;
                 }
             }
-            return IntBuffer.wrap(pPixels);
+            return IntBuffer.Wrap(pPixels);
         }
 
-        public static int[] getPixels(/* final */ Bitmap pBitmap)
+        public static int[] GetPixels(/* final */ Bitmap pBitmap)
         {
             /* final */
             int w = pBitmap.Width;

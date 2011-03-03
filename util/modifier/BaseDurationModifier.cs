@@ -52,6 +52,7 @@ namespace andengine.util.modifier
         {
             return this.mTotalSecondsElapsed;
         }
+        protected float TotalSecondsElapsed { get { return getTotalSecondsElapsed(); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
@@ -61,18 +62,19 @@ namespace andengine.util.modifier
         {
             return this.mDuration;
         }
+        public override float Duration { get { return getDuration(); } }
 
-        protected abstract void onManagedUpdate(float pSecondsElapsed, T pItem);
+        protected abstract void OnManagedUpdate(float pSecondsElapsed, T pItem);
 
-        protected abstract void onManagedInitialize(T pItem);
+        protected abstract void OnManagedInitialize(T pItem);
 
-        public override sealed void onUpdate(float pSecondsElapsed, T pItem)
+        public override sealed void OnUpdate(float pSecondsElapsed, T pItem)
         {
             if (!this.mFinished)
             {
                 if (this.mTotalSecondsElapsed == 0)
                 {
-                    this.onManagedInitialize(pItem);
+                    this.OnManagedInitialize(pItem);
                 }
 
                 float secondsToElapse;
@@ -86,7 +88,7 @@ namespace andengine.util.modifier
                 }
 
                 this.mTotalSecondsElapsed += secondsToElapse;
-                this.onManagedUpdate(secondsToElapse, pItem);
+                this.OnManagedUpdate(secondsToElapse, pItem);
 
                 if (this.mDuration != -1 && this.mTotalSecondsElapsed >= this.mDuration)
                 {
@@ -94,13 +96,13 @@ namespace andengine.util.modifier
                     this.mFinished = true;
                     if (this.mModifierListener != null)
                     {
-                        this.mModifierListener.onModifierFinished(this, pItem);
+                        this.mModifierListener.OnModifierFinished(this, pItem);
                     }
                 }
             }
         }
 
-        public void reset()
+        public override void Reset()
         {
             this.mFinished = false;
             this.mTotalSecondsElapsed = 0;

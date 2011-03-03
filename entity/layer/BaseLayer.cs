@@ -46,18 +46,18 @@ namespace andengine.entity.layer
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void registerTouchArea(ITouchArea pTouchArea)
+        public override void RegisterTouchArea(ITouchArea pTouchArea)
         {
             this.mTouchAreas.Add(pTouchArea);
         }
 
-        public override void unregisterTouchArea(ITouchArea pTouchArea)
+        public override void UnregisterTouchArea(ITouchArea pTouchArea)
         {
             this.mTouchAreas.Remove(pTouchArea);
         }
 
         //public ArrayList<ITouchArea> getTouchAreas() {
-        public List<ITouchArea> getTouchAreas()
+        public List<ITouchArea> GetTouchAreas()
         {
             return this.mTouchAreas;
         }

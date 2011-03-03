@@ -48,7 +48,7 @@ namespace andengine.engine.handler.runnable
         // ===========================================================
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public override void onUpdate(/* final */ float pSecondsElapsed) {
+        public /* override */ void OnUpdate(/* final */ float pSecondsElapsed) {
 		//final ArrayList<Runnable> runnables = this.mRunnables;
         List<Runnable> runnables = this.mRunnables;
 		/* final */ int runnableCount = runnables.Count;
@@ -59,7 +59,7 @@ namespace andengine.engine.handler.runnable
 		runnables.Clear();
 	}
 
-        public override void reset()
+        public /* override */ void Reset()
         {
             this.mRunnables.Clear();
         }
@@ -69,7 +69,7 @@ namespace andengine.engine.handler.runnable
         // ===========================================================
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void postRunnable(/* final */ Runnable pRunnable)
+        public void PostRunnable(/* final */ Runnable pRunnable)
         {
             this.mRunnables.Add(pRunnable);
         }

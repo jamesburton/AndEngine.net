@@ -73,45 +73,56 @@ namespace andengine.engine.camera
         // Getter & Setter
         // ===========================================================
 
-        public float getMinX()
+        public float GetMinX()
         {
             return this.mMinX;
         }
 
-        public float getMaxX()
+        public float MinX { get { return GetMinX(); } }
+
+        public float GetMaxX()
         {
             return this.mMaxX;
         }
 
-        public float getMinY()
+        public float MaxX { get { return GetMaxX(); } }
+
+        public float GetMinY()
         {
             return this.mMinY;
         }
 
-        public float getMaxY()
+        public float MinY { get { return GetMinY(); } }
+
+        public float GetMaxY()
         {
             return this.mMaxY;
         }
 
-        public float getNearZClippingPlane()
+        public float MaxY { get { return GetMaxY(); } }
+
+        public float GetNearZClippingPlane()
         {
             return this.mNearZ;
         }
 
-        public float getFarZClippingPlane()
+        public float GetFarZClippingPlane()
         {
             return this.mFarZ;
         }
 
-        public void setNearZClippingPlane(/* final */ float pNearZClippingPlane)
+        public void SetNearZClippingPlane(/* final */ float pNearZClippingPlane)
         {
             this.mNearZ = pNearZClippingPlane;
         }
 
-        public void setFarZClippingPlane(/* final */ float pFarZClippingPlane)
+        public void SetFarZClippingPlane(/* final */ float pFarZClippingPlane)
         {
             this.mFarZ = pFarZClippingPlane;
         }
+
+        public float NearZClippingPlane { get { return GetNearZClippingPlane(); } set { SetNearZClippingPlane(value); } }
+        public float FarZClippingPlane { get { return GetFarZClippingPlane(); } set { SetFarZClippingPlane(value); } }
 
         public void setZClippingPlanes(/* final */ float pNearZClippingPlane, /* final */ float pFarZClippingPlane)
         {
@@ -119,36 +130,44 @@ namespace andengine.engine.camera
             this.mFarZ = pFarZClippingPlane;
         }
 
-        public float getWidth()
+        public float GetWidth()
         {
             return this.mMaxX - this.mMinX;
         }
 
-        public float getHeight()
+        public float Width { get { return GetWidth(); } }
+
+        public float GetHeight()
         {
             return this.mMaxY - this.mMinY;
         }
 
-        public float getCenterX()
+        public float Height { get { return GetHeight(); } }
+
+        public float GetCenterX()
         {
             /* final */
             float minX = this.mMinX;
             return minX + (this.mMaxX - minX) * 0.5f;
         }
 
-        public float getCenterY()
+        public float CenterX { get { return GetCenterX(); } }
+
+        public float GetCenterY()
         {
             /* final */
             float minY = this.mMinY;
             return minY + (this.mMaxY - minY) * 0.5f;
         }
 
-        public void setCenter(/* final */ float pCenterX, /* final */ float pCenterY)
+        public float CenterY { get { return GetCenterY(); } }
+
+        public void SetCenter(/* final */ float pCenterX, /* final */ float pCenterY)
         {
             /* final */
-            float dX = pCenterX - this.getCenterX();
+            float dX = pCenterX - this.GetCenterX();
             /* final */
-            float dY = pCenterY - this.getCenterY();
+            float dY = pCenterY - this.GetCenterY();
 
             this.mMinX += dX;
             this.mMaxX += dX;
@@ -156,72 +175,80 @@ namespace andengine.engine.camera
             this.mMaxY += dY;
         }
 
-        public void offsetCenter(/* final */ float pX, /* final */ float pY)
+        public void OffsetCenter(/* final */ float pX, /* final */ float pY)
         {
-            this.setCenter(this.getCenterX() + pX, this.getCenterY() + pY);
+            this.SetCenter(this.GetCenterX() + pX, this.GetCenterY() + pY);
         }
 
-        public HUD getHUD()
+        public HUD HUD { get { return GetHUD(); } set { SetHUD(value); } }
+
+        public HUD GetHUD()
         {
             return this.mHUD;
         }
 
-        public void setHUD(/* final */ HUD pHUD)
+        public void SetHUD(/* final */ HUD pHUD)
         {
             this.mHUD = pHUD;
             pHUD.setCamera(this);
         }
 
-        public bool hasHUD()
+        public bool HasHUD()
         {
             return this.mHUD != null;
         }
 
-        public void setChaseShape(/* final */ IShape pChaseShape)
+        public IShape ChaseShape { set { SetChaseShape(value); } }
+
+        public void SetChaseShape(/* final */ IShape pChaseShape)
         {
             this.mChaseShape = pChaseShape;
         }
 
-        public float getRotation()
+        public float GetRotation()
         {
             return this.mRotation;
         }
 
-        public void setRotation(/* final */ float pRotation)
+        public void SetRotation(/* final */ float pRotation)
         {
             this.mRotation = pRotation;
         }
 
-        public float getCameraSceneRotation()
+        public float Rotation { get { return GetRotation(); } set { SetRotation(value); } }
+
+        public float GetCameraSceneRotation()
         {
             return this.mCameraSceneRotation;
         }
 
-        public void setCameraSceneRotation(/* final */ float pCameraSceneRotation)
+        public void SetCameraSceneRotation(/* final */ float pCameraSceneRotation)
         {
             this.mCameraSceneRotation = pCameraSceneRotation;
         }
+
+        public float CameraSceneRotation { get { return GetCameraSceneRotation(); } set { SetCameraSceneRotation(value); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public /* override */ void onUpdate(/* final */ float pSecondsElapsed)
+        public /* override */ void OnUpdate(/* final */ float pSecondsElapsed)
         {
             if (this.mHUD != null)
             {
-                this.mHUD.onUpdate(pSecondsElapsed);
+                this.mHUD.OnUpdate(pSecondsElapsed);
             }
 
             if (this.mChaseShape != null)
             {
                 /* final */
-                float[] centerCoordinates = this.mChaseShape.getSceneCenterCoordinates();
-                this.setCenter(centerCoordinates[VERTEX_INDEX_X], centerCoordinates[VERTEX_INDEX_Y]);
+                float[] centerCoordinates = this.mChaseShape.GetSceneCenterCoordinates();
+                this.SetCenter(centerCoordinates[Constants.VERTEX_INDEX_X], centerCoordinates[Constants.VERTEX_INDEX_Y]);
             }
         }
 
-        public /* override */ void reset()
+        public /* override */ void Reset()
         {
 
         }
@@ -230,180 +257,191 @@ namespace andengine.engine.camera
         // Methods
         // ===========================================================
 
-        public void onDrawHUD(/* final */ GL10 pGL)
+        public void OnDrawHUD(/* final */ GL10 pGL)
         {
             if (this.mHUD != null)
             {
-                this.mHUD.onDraw(pGL, this);
+                this.mHUD.OnDraw(pGL, this);
             }
         }
 
-        public bool isRectangularShapeVisible(/* final */ RectangularShape pRectangularShape)
+        public bool IsRectangularShapeVisible(/* final */ RectangularShape pRectangularShape)
         {
-            /* final */
-            float otherLeft = pRectangularShape.getX();
-            /* final */
-            float otherTop = pRectangularShape.getY();
-            /* final */
-            float otherRight = pRectangularShape.getWidthScaled() + otherLeft;
-            /* final */
-            float otherBottom = pRectangularShape.getHeightScaled() + otherTop;
+            // final float otherLeft = pRectangularShape.getX();
+            float otherLeft = pRectangularShape.X;
+            // final float otherTop = pRectangularShape.getY();
+            float otherTop = pRectangularShape.Y;
+            // final float otherRight = pRectangularShape.getWidthScaled() + otherLeft;
+            float otherRight = pRectangularShape.WidthScaled + otherLeft;
+            // final float otherBottom = pRectangularShape.getHeightScaled() + otherTop;
+            float otherBottom = pRectangularShape.HeightScaled + otherTop;
 
             // TODO Should also use RectangularShapeCollisionChecker
-            return BaseCollisionChecker.checkAxisAlignedRectangleCollision(this.getMinX(), this.getMinY(), this.getMaxX(), this.getMaxY(), otherLeft, otherTop, otherRight, otherBottom);
+            //return BaseCollisionChecker.checkAxisAlignedRectangleCollision(this.getMinX(), this.getMinY(), this.getMaxX(), this.getMaxY(), otherLeft, otherTop, otherRight, otherBottom);
+            return BaseCollisionChecker.CheckAxisAlignedRectangleCollision(this.MinX, this.MinY, this.MaxX, this.MaxY, otherLeft, otherTop, otherRight, otherBottom);
         }
 
-        public void onApplyMatrix(/* final */ GL10 pGL)
+        public void OnApplyMatrix(/* final */ GL10 pGL)
         {
-            GLHelper.setProjectionIdentityMatrix(pGL);
+            GLHelper.SetProjectionIdentityMatrix(pGL);
 
-            pGL.glOrthof(this.getMinX(), this.getMaxX(), this.getMaxY(), this.getMinY(), this.mNearZ, this.mFarZ);
+            //pGL.GlOrthof(this.getMinX(), this.getMaxX(), this.getMaxY(), this.getMinY(), this.mNearZ, this.mFarZ);
+            pGL.GlOrthof(this.MinX, this.MaxX, this.MaxY, this.MinY, this.mNearZ, this.mFarZ);
 
             /* final */
             float rotation = this.mRotation;
             if (rotation != 0)
             {
-                this.applyRotation(pGL, this.getCenterX(), this.getCenterY(), rotation);
+                //this.ApplyRotation(pGL, this.getCenterX(), this.getCenterY(), rotation);
+                this.ApplyRotation(pGL, this.CenterX, this.CenterY, rotation);
             }
         }
 
-        public void onApplyPositionIndependentMatrix(/* final */ GL10 pGL)
+        public void OnApplyPositionIndependentMatrix(/* final */ GL10 pGL)
         {
-            GLHelper.setProjectionIdentityMatrix(pGL);
+            GLHelper.SetProjectionIdentityMatrix(pGL);
 
             /* final */
             float width = this.mMaxX - this.mMinX;
             /* final */
             float height = this.mMaxY - this.mMinY;
 
-            pGL.glOrthof(0, width, height, 0, this.mNearZ, this.mFarZ);
+            pGL.GlOrthof(0, width, height, 0, this.mNearZ, this.mFarZ);
 
             /* final */
             float rotation = this.mRotation;
             if (rotation != 0)
             {
-                this.applyRotation(pGL, width * 0.5f, height * 0.5f, rotation);
+                this.ApplyRotation(pGL, width * 0.5f, height * 0.5f, rotation);
             }
         }
 
-        public void onApplyCameraSceneMatrix(/* final */ GL10 pGL)
+        public void OnApplyCameraSceneMatrix(/* final */ GL10 pGL)
         {
-            GLHelper.setProjectionIdentityMatrix(pGL);
+            GLHelper.SetProjectionIdentityMatrix(pGL);
 
             /* final */
             float width = this.mMaxX - this.mMinX;
             /* final */
             float height = this.mMaxY - this.mMinY;
 
-            pGL.glOrthof(0, width, height, 0, this.mNearZ, this.mFarZ);
+            pGL.GlOrthof(0, width, height, 0, this.mNearZ, this.mFarZ);
 
             /* final */
             float cameraSceneRotation = this.mCameraSceneRotation;
             if (cameraSceneRotation != 0)
             {
-                this.applyRotation(pGL, width * 0.5f, height * 0.5f, cameraSceneRotation);
+                this.ApplyRotation(pGL, width * 0.5f, height * 0.5f, cameraSceneRotation);
             }
         }
 
-        private void applyRotation(/* final */ GL10 pGL, /* final */ float pRotationCenterX, /* final */ float pRotationCenterY, /* final */ float pAngle)
+        private void ApplyRotation(/* final */ GL10 pGL, /* final */ float pRotationCenterX, /* final */ float pRotationCenterY, /* final */ float pAngle)
         {
-            pGL.glTranslatef(pRotationCenterX, pRotationCenterY, 0);
-            pGL.glRotatef(pAngle, 0, 0, 1);
-            pGL.glTranslatef(-pRotationCenterX, -pRotationCenterY, 0);
+            pGL.GlTranslatef(pRotationCenterX, pRotationCenterY, 0);
+            pGL.GlRotatef(pAngle, 0, 0, 1);
+            pGL.GlTranslatef(-pRotationCenterX, -pRotationCenterY, 0);
         }
 
-        public void convertSceneToCameraSceneTouchEvent(/* final */ TouchEvent pSceneTouchEvent)
+        public void ConvertSceneToCameraSceneTouchEvent(/* final */ TouchEvent pSceneTouchEvent)
         {
-            this.unapplySceneRotation(pSceneTouchEvent);
+            this.UnapplySceneRotation(pSceneTouchEvent);
 
-            this.applySceneToCameraSceneOffset(pSceneTouchEvent);
+            this.ApplySceneToCameraSceneOffset(pSceneTouchEvent);
 
-            this.applyCameraSceneRotation(pSceneTouchEvent);
+            this.ApplyCameraSceneRotation(pSceneTouchEvent);
         }
 
-        public void convertCameraSceneToSceneTouchEvent(/* final */ TouchEvent pCameraSceneTouchEvent)
+        public void ConvertCameraSceneToSceneTouchEvent(/* final */ TouchEvent pCameraSceneTouchEvent)
         {
-            this.unapplyCameraSceneRotation(pCameraSceneTouchEvent);
+            this.UnapplyCameraSceneRotation(pCameraSceneTouchEvent);
 
-            this.unapplySceneToCameraSceneOffset(pCameraSceneTouchEvent);
+            this.UnapplySceneToCameraSceneOffset(pCameraSceneTouchEvent);
 
-            this.applySceneRotation(pCameraSceneTouchEvent);
+            this.ApplySceneRotation(pCameraSceneTouchEvent);
         }
 
-        protected void applySceneToCameraSceneOffset(/* final */ TouchEvent pSceneTouchEvent)
+        protected void ApplySceneToCameraSceneOffset(/* final */ TouchEvent pSceneTouchEvent)
         {
-            pSceneTouchEvent.offset(-this.mMinX, -this.mMinY);
+            pSceneTouchEvent.Offset(-this.mMinX, -this.mMinY);
         }
 
-        protected void unapplySceneToCameraSceneOffset(/* final */ TouchEvent pCameraSceneTouchEvent)
+        protected void UnapplySceneToCameraSceneOffset(/* final */ TouchEvent pCameraSceneTouchEvent)
         {
-            pCameraSceneTouchEvent.offset(this.mMinX, this.mMinY);
+            pCameraSceneTouchEvent.Offset(this.mMinX, this.mMinY);
         }
 
-        private void applySceneRotation(/* final */ TouchEvent pCameraSceneTouchEvent)
+        private void ApplySceneRotation(/* final */ TouchEvent pCameraSceneTouchEvent)
         {
             /* final */
             float rotation = -this.mRotation;
             if (rotation != 0)
             {
-                VERTICES_TOUCH_TMP[VERTEX_INDEX_X] = pCameraSceneTouchEvent.getX();
-                VERTICES_TOUCH_TMP[VERTEX_INDEX_Y] = pCameraSceneTouchEvent.getY();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pCameraSceneTouchEvent.getX();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pCameraSceneTouchEvent.getY();
 
-                MathUtils.rotateAroundCenter(VERTICES_TOUCH_TMP, rotation, this.getCenterX(), this.getCenterY());
+                //MathUtils.RotateAroundCenter(VERTICES_TOUCH_TMP, rotation, this.getCenterX(), this.getCenterY());
+                MathUtils.RotateAroundCenter(VERTICES_TOUCH_TMP, rotation, this.CenterX, this.CenterY);
 
-                pCameraSceneTouchEvent.set(VERTICES_TOUCH_TMP[VERTEX_INDEX_X], VERTICES_TOUCH_TMP[VERTEX_INDEX_Y]);
+                pCameraSceneTouchEvent.Set(VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X], VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y]);
             }
         }
 
-        private void unapplySceneRotation(/* final */ TouchEvent pSceneTouchEvent)
+        private void UnapplySceneRotation(/* final */ TouchEvent pSceneTouchEvent)
         {
             /* final */
             float rotation = this.mRotation;
 
             if (rotation != 0)
             {
-                VERTICES_TOUCH_TMP[VERTEX_INDEX_X] = pSceneTouchEvent.getX();
-                VERTICES_TOUCH_TMP[VERTEX_INDEX_Y] = pSceneTouchEvent.getY();
+                //VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pSceneTouchEvent.getX();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pSceneTouchEvent.X;
+                //VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pSceneTouchEvent.getY();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pSceneTouchEvent.Y;
 
-                MathUtils.revertRotateAroundCenter(VERTICES_TOUCH_TMP, rotation, this.getCenterX(), this.getCenterY());
+                //MathUtils.revertRotateAroundCenter(VERTICES_TOUCH_TMP, rotation, this.getCenterX(), this.getCenterY());
+                MathUtils.RevertRotateAroundCenter(VERTICES_TOUCH_TMP, rotation, this.CenterX, this.CenterY);
 
-                pSceneTouchEvent.set(VERTICES_TOUCH_TMP[VERTEX_INDEX_X], VERTICES_TOUCH_TMP[VERTEX_INDEX_Y]);
+                pSceneTouchEvent.Set(VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X], VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y]);
             }
         }
 
-        private void applyCameraSceneRotation(/* final */ TouchEvent pSceneTouchEvent)
+        private void ApplyCameraSceneRotation(/* final */ TouchEvent pSceneTouchEvent)
         {
             /* final */
             float cameraSceneRotation = -this.mCameraSceneRotation;
 
             if (cameraSceneRotation != 0)
             {
-                VERTICES_TOUCH_TMP[VERTEX_INDEX_X] = pSceneTouchEvent.getX();
-                VERTICES_TOUCH_TMP[VERTEX_INDEX_Y] = pSceneTouchEvent.getY();
+                //VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pSceneTouchEvent.getX();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pSceneTouchEvent.X;
+                //VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pSceneTouchEvent.getY();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pSceneTouchEvent.Y;
 
-                MathUtils.rotateAroundCenter(VERTICES_TOUCH_TMP, cameraSceneRotation, (this.mMaxX - this.mMinX) * 0.5f, (this.mMaxY - this.mMinY) * 0.5f);
+                MathUtils.RotateAroundCenter(VERTICES_TOUCH_TMP, cameraSceneRotation, (this.mMaxX - this.mMinX) * 0.5f, (this.mMaxY - this.mMinY) * 0.5f);
 
-                pSceneTouchEvent.set(VERTICES_TOUCH_TMP[VERTEX_INDEX_X], VERTICES_TOUCH_TMP[VERTEX_INDEX_Y]);
+                pSceneTouchEvent.Set(VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X], VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y]);
             }
         }
 
-        private void unapplyCameraSceneRotation(/* final */ TouchEvent pCameraSceneTouchEvent)
+        private void UnapplyCameraSceneRotation(/* final */ TouchEvent pCameraSceneTouchEvent)
         {
             /* final */
             float cameraSceneRotation = -this.mCameraSceneRotation;
 
             if (cameraSceneRotation != 0)
             {
-                VERTICES_TOUCH_TMP[VERTEX_INDEX_X] = pCameraSceneTouchEvent.getX();
-                VERTICES_TOUCH_TMP[VERTEX_INDEX_Y] = pCameraSceneTouchEvent.getY();
+                //VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pCameraSceneTouchEvent.getX();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pCameraSceneTouchEvent.X;
+                //VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pCameraSceneTouchEvent.getY();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pCameraSceneTouchEvent.Y;
 
-                MathUtils.revertRotateAroundCenter(VERTICES_TOUCH_TMP, cameraSceneRotation, (this.mMaxX - this.mMinX) * 0.5f, (this.mMaxY - this.mMinY) * 0.5f);
+                MathUtils.RevertRotateAroundCenter(VERTICES_TOUCH_TMP, cameraSceneRotation, (this.mMaxX - this.mMinX) * 0.5f, (this.mMaxY - this.mMinY) * 0.5f);
 
-                pCameraSceneTouchEvent.set(VERTICES_TOUCH_TMP[VERTEX_INDEX_X], VERTICES_TOUCH_TMP[VERTEX_INDEX_Y]);
+                pCameraSceneTouchEvent.Set(VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X], VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y]);
             }
         }
 
-        public void convertSurfaceToSceneTouchEvent(/* final */ TouchEvent pSurfaceTouchEvent, /* final */ int pSurfaceWidth, /* final */ int pSurfaceHeight)
+        public void ConvertSurfaceToSceneTouchEvent(/* final */ TouchEvent pSurfaceTouchEvent, /* final */ int pSurfaceWidth, /* final */ int pSurfaceHeight)
         {
             /* final */
             float relativeX;
@@ -414,20 +452,26 @@ namespace andengine.engine.camera
             float rotation = this.mRotation;
             if (rotation == 0)
             {
-                relativeX = pSurfaceTouchEvent.getX() / pSurfaceWidth;
-                relativeY = pSurfaceTouchEvent.getY() / pSurfaceHeight;
+                //relativeX = pSurfaceTouchEvent.getX() / pSurfaceWidth;
+                relativeX = pSurfaceTouchEvent.X / pSurfaceWidth;
+                //relativeY = pSurfaceTouchEvent.getY() / pSurfaceHeight;
+                relativeY = pSurfaceTouchEvent.Y / pSurfaceHeight;
             }
             else if (rotation == 180)
             {
-                relativeX = 1 - (pSurfaceTouchEvent.getX() / pSurfaceWidth);
-                relativeY = 1 - (pSurfaceTouchEvent.getY() / pSurfaceHeight);
+                //relativeX = 1 - (pSurfaceTouchEvent.getX() / pSurfaceWidth);
+                relativeX = 1 - (pSurfaceTouchEvent.X / pSurfaceWidth);
+                //relativeY = 1 - (pSurfaceTouchEvent.getY() / pSurfaceHeight);
+                relativeY = 1 - (pSurfaceTouchEvent.Y / pSurfaceHeight);
             }
             else
             {
-                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pSurfaceTouchEvent.getX();
-                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pSurfaceTouchEvent.getY();
+                //VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pSurfaceTouchEvent.getX();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pSurfaceTouchEvent.X;
+                //VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pSurfaceTouchEvent.getY();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pSurfaceTouchEvent.Y;
 
-                MathUtils.rotateAroundCenter(VERTICES_TOUCH_TMP, rotation, pSurfaceWidth / 2, pSurfaceHeight / 2);
+                MathUtils.RotateAroundCenter(VERTICES_TOUCH_TMP, rotation, pSurfaceWidth / 2, pSurfaceHeight / 2);
 
                 relativeX = VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] / pSurfaceWidth;
                 relativeY = VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] / pSurfaceHeight;
@@ -438,21 +482,21 @@ namespace andengine.engine.camera
 
         private void convertAxisAlignedSurfaceToSceneTouchEvent(/* final */ TouchEvent pSurfaceTouchEvent, /* final */ float pRelativeX, /* final */ float pRelativeY)
         {
-            /* final */
-            float minX = this.getMinX();
-            /* final */
-            float maxX = this.getMaxX();
-            /* final */
-            float minY = this.getMinY();
-            /* final */
-            float maxY = this.getMaxY();
+            // final float minX = this.getMinX();
+            float minX = this.MinX;
+            // final float maxX = this.getMaxX();
+            float maxX = this.MaxX;
+            // final float minY = this.getMinY();
+            float minY = this.MinY;
+            // final float maxY = this.getMaxY();
+            float maxY = this.MaxY;
 
             /* final */
             float x = minX + pRelativeX * (maxX - minX);
             /* final */
             float y = minY + pRelativeY * (maxY - minY);
 
-            pSurfaceTouchEvent.set(x, y);
+            pSurfaceTouchEvent.Set(x, y);
         }
 
         // ===========================================================

@@ -60,17 +60,17 @@ namespace andengine.util.modifier
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected abstract void onSetInitialValues(T pItem, float pValueA, float pValueB);
-        protected abstract void onSetValues(T pItem, float pPercentageDone, float pValueA, float pValueB);
+        protected abstract void OnSetInitialValues(T pItem, float pValueA, float pValueB);
+        protected abstract void OnSetValues(T pItem, float pPercentageDone, float pValueA, float pValueB);
 
-        protected override void onSetInitialValue(T pItem, float pValueA)
+        protected override void OnSetInitialValue(T pItem, float pValueA)
         {
-            this.onSetInitialValues(pItem, pValueA, this.mFromValueB);
+            this.OnSetInitialValues(pItem, pValueA, this.mFromValueB);
         }
 
-        protected override void onSetValue(T pItem, float pPercentageDone, float pValueA)
+        protected override void OnSetValue(T pItem, float pPercentageDone, float pValueA)
         {
-            this.onSetValues(pItem, pPercentageDone, pValueA, this.mFromValueB + pPercentageDone * this.mValueSpanB);
+            this.OnSetValues(pItem, pPercentageDone, pValueA, this.mFromValueB + pPercentageDone * this.mValueSpanB);
         }
 
         // ===========================================================

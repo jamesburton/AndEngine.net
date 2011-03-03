@@ -23,28 +23,28 @@ namespace andengine.opengl.texture
         // Constructors
         // ===========================================================
 
-        public static Texture createForTextureSourceSize(TextureRegion pTextureRegion)
+        public static Texture CreateForTextureSourceSize(TextureRegion pTextureRegion)
         {
-            return createForTextureRegionSize(pTextureRegion, TextureOptions.DEFAULT);
+            return CreateForTextureRegionSize(pTextureRegion, TextureOptions.DEFAULT);
         }
 
-        public static Texture createForTextureRegionSize(TextureRegion pTextureRegion, TextureOptions pTextureOptions)
+        public static Texture CreateForTextureRegionSize(TextureRegion pTextureRegion, TextureOptions pTextureOptions)
         {
             int loadingScreenWidth = pTextureRegion.getWidth();
             int loadingScreenHeight = pTextureRegion.getHeight();
-            return new Texture(MathUtils.nextPowerOfTwo(loadingScreenWidth), MathUtils.nextPowerOfTwo(loadingScreenHeight), pTextureOptions);
+            return new Texture(MathUtils.NextPowerOfTwo(loadingScreenWidth), MathUtils.NextPowerOfTwo(loadingScreenHeight), pTextureOptions);
         }
 
-        public static Texture createForTextureSourceSize(ITextureSource pTextureSource)
+        public static Texture CreateForTextureSourceSize(ITextureSource pTextureSource)
         {
-            return createForTextureSourceSize(pTextureSource, TextureOptions.DEFAULT);
+            return CreateForTextureSourceSize(pTextureSource, TextureOptions.DEFAULT);
         }
 
-        public static Texture createForTextureSourceSize(ITextureSource pTextureSource, TextureOptions pTextureOptions)
+        public static Texture CreateForTextureSourceSize(ITextureSource pTextureSource, TextureOptions pTextureOptions)
         {
             int loadingScreenWidth = pTextureSource.getWidth();
             int loadingScreenHeight = pTextureSource.getHeight();
-            return new Texture(MathUtils.nextPowerOfTwo(loadingScreenWidth), MathUtils.nextPowerOfTwo(loadingScreenHeight), pTextureOptions);
+            return new Texture(MathUtils.NextPowerOfTwo(loadingScreenWidth), MathUtils.NextPowerOfTwo(loadingScreenHeight), pTextureOptions);
         }
 
         // ===========================================================

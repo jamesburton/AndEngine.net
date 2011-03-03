@@ -44,57 +44,63 @@ namespace andengine.entity
         // Getter & Setter
         // ===========================================================
 
-        public bool isVisible()
+        public bool IsVisible()
         {
             return this.mVisible;
         }
 
-        public void setVisible(/* final */ bool pVisible)
+        public void SetVisible(/* final */ bool pVisible)
         {
             this.mVisible = pVisible;
         }
 
-        public bool isIgnoreUpdate()
+        public bool Visible { get { return IsVisible(); } set { SetVisible(value); } }
+
+        public bool IsIgnoreUpdate()
         {
             return this.mIgnoreUpdate;
         }
 
-        public void setIgnoreUpdate(/* final */ bool pIgnoreUpdate)
+        public void SetIgnoreUpdate(/* final */ bool pIgnoreUpdate)
         {
             this.mIgnoreUpdate = pIgnoreUpdate;
         }
 
-        public override int getZIndex()
+        public bool IgnoreUpdate { get { return IsIgnoreUpdate(); } set { SetIgnoreUpdate(); } }
+
+        public /* override */ virtual int GetZIndex()
         {
             return this.mZIndex;
         }
 
-        public override void setZIndex(/* final */ int pZIndex)
+        public /* override */ virtual void SetZIndex(/* final */ int pZIndex)
         {
             this.mZIndex = pZIndex;
         }
+
+        public int ZIndex { get { return GetZIndex(); } set { SetZIndex(value); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected abstract void onManagedDraw(/* final */ GL10 pGL, /* final */ Camera pCamera);
+        protected abstract void OnManagedDraw(/* final */ GL10 pGL, /* final */ Camera pCamera);
 
-        public override /* final */ sealed void onDraw(/* final */ GL10 pGL, /* final */ Camera pCamera)
+        public virtual /* override */ /* final */ /* sealed */ void OnDraw(/* final */ GL10 pGL, /* final */ Camera pCamera)
         {
             if (this.mVisible)
             {
-                this.onManagedDraw(pGL, pCamera);
+                this.OnManagedDraw(pGL, pCamera);
             }
         }
 
-        protected abstract void onManagedUpdate(/* final */ float pSecondsElapsed);
+        protected abstract void OnManagedUpdate(/* final */ float pSecondsElapsed);
 
-        public override /* final */ sealed void onUpdate(/* final */ float pSecondsElapsed)
+        public /* override final sealed */ virtual void OnUpdate(/* final */ float pSecondsElapsed)
         {
             if (!this.mIgnoreUpdate)
             {
-                this.onManagedUpdate(pSecondsElapsed);
+                this.OnManagedUpdate(pSecondsElapsed);
             }
         }
 
@@ -102,7 +108,7 @@ namespace andengine.entity
         // Methods
         // ===========================================================
 
-        public override void reset()
+        public /* override */ virtual void Reset()
         {
             this.mVisible = true;
             this.mIgnoreUpdate = false;

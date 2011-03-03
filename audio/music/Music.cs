@@ -36,81 +36,86 @@ namespace andengine.audio.music
         // Getter & Setter
         // ===========================================================
 
-        public bool isPlaying()
+        public bool IsPlaying()
         {
             return this.mMediaPlayer.IsPlaying;
         }
 
-        public MediaPlayer getMediaPlayer()
+        public MediaPlayer GetMediaPlayer()
         {
             return this.mMediaPlayer;
         }
+
+        public MediaPlayer MediaPlayer { get { return GetMediaPlayer(); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected new MusicManager getAudioManager()
+        protected new MusicManager GetAudioManager()
         {
-            return (MusicManager)base.getAudioManager();
+            //return (MusicManager)base.getAudioManager();
+            return (MusicManager)base.AudioManager;
         }
+        protected new MusicManager AudioManager { get { return GetAudioManager(); } }
 
-        public override void play()
+        public override void Play()
         {
             this.mMediaPlayer.Start();
         }
 
-        public override void stop()
+        public override void Stop()
         {
             this.mMediaPlayer.Stop();
         }
 
-        public override void resume()
+        public override void Resume()
         {
             this.mMediaPlayer.Start();
         }
 
-        public override void pause()
+        public override void Pause()
         {
             this.mMediaPlayer.Pause();
         }
 
-        public override void release()
+        public override void Release()
         {
             this.mMediaPlayer.Release();
         }
 
-        public override void setLooping(bool pLooping)
+        public override void SetLooping(bool pLooping)
         {
             this.mMediaPlayer.Looping = pLooping;
         }
 
-        public new void setVolume(float pLeftVolume, float pRightVolume)
+        public new void SetVolume(float pLeftVolume, float pRightVolume)
         {
-            base.setVolume(pLeftVolume, pRightVolume);
+            base.SetVolume(pLeftVolume, pRightVolume);
 
-            float masterVolume = this.getAudioManager().getMasterVolume();
+            //float masterVolume = this.getAudioManager().getMasterVolume();
+            float masterVolume = this.AudioManager.MasterVolume;
             float actualLeftVolume = pLeftVolume * masterVolume;
             float actualRightVolume = pRightVolume * masterVolume;
 
             this.mMediaPlayer.SetVolume(actualLeftVolume, actualRightVolume);
         }
 
-        public override void onMasterVolumeChanged(float pMasterVolume)
+        public override void OnMasterVolumeChanged(float pMasterVolume)
         {
-            this.setVolume(this.mLeftVolume, this.mRightVolume);
+            this.SetVolume(this.mLeftVolume, this.mRightVolume);
         }
 
         // ===========================================================
         // Methods
         // ===========================================================
 
-        public void seekTo(int pMilliseconds)
+        public void SeekTo(int pMilliseconds)
         {
             this.mMediaPlayer.SeekTo(pMilliseconds);
         }
 
-        public void setOnCompletionListener(OnCompletionListener pOnCompletionListener)
+        public void SetOnCompletionListener(OnCompletionListener pOnCompletionListener)
         {
             this.mMediaPlayer.SetOnCompletionListener(pOnCompletionListener);
         }

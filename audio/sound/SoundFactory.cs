@@ -4,7 +4,9 @@ namespace andengine.audio.sound
     using IOException = Java.IO.IOException;
 
     using Context = Android.Content.Context;
-    using Java.Lang;
+    //using Java.Lang;
+    using String = System.String;
+    using IllegalStateException = Java.Lang.IllegalStateException;
 
     /**
      * @author Nicolas Gramlich
@@ -33,9 +35,9 @@ namespace andengine.audio.sound
         /**
          * @param pAssetBasePath must end with '<code>/</code>' or have <code>.length() == 0</code>.
          */
-        public static void setAssetBasePath(String pAssetBasePath)
+        public static void SetAssetBasePath(String pAssetBasePath)
         {
-            if (pAssetBasePath.endsWith("/") || pAssetBasePath.length() == 0)
+            if (pAssetBasePath.EndsWith("/") || pAssetBasePath.Length == 0)
             {
                 SoundFactory.sAssetBasePath = pAssetBasePath;
             }
@@ -53,25 +55,28 @@ namespace andengine.audio.sound
         // Methods
         // ===========================================================
 
-        public static Sound createSoundFromPath(SoundManager pSoundManager, Context pContext, String pPath) /* throws IOException */ {
-            int soundID = pSoundManager.getSoundPool().load(pPath, 1);
+        public static Sound CreateSoundFromPath(SoundManager pSoundManager, Context pContext, String pPath) /* throws IOException */ {
+            //int soundID = pSoundManager.getSoundPool().load(pPath, 1);
+            int soundID = pSoundManager.SoundPool.Load(pPath, 1);
             Sound sound = new Sound(pSoundManager, soundID);
-            pSoundManager.add(sound);
+            pSoundManager.Add(sound);
             return sound;
         }
 
-        public static Sound createSoundFromAsset(SoundManager pSoundManager, Context pContext, String pAssetPath) /* throws IOException */ {
-            int soundID = pSoundManager.getSoundPool().load(pContext.getAssets().openFd(SoundFactory.sAssetBasePath + pAssetPath), 1);
+        public static Sound CreateSoundFromAsset(SoundManager pSoundManager, Context pContext, String pAssetPath) /* throws IOException */ {
+            //int soundID = pSoundManager.getSoundPool().load(pContext.getAssets().openFd(SoundFactory.sAssetBasePath + pAssetPath), 1);
+            int soundID = pSoundManager.SoundPool.Load(pContext.Assets.OpenFd(SoundFactory.sAssetBasePath + pAssetPath), 1);
             Sound sound = new Sound(pSoundManager, soundID);
-            pSoundManager.add(sound);
+            pSoundManager.Add(sound);
             return sound;
         }
 
-        public static Sound createSoundFromResource(SoundManager pSoundManager, Context pContext, int pSoundResID)
+        public static Sound CreateSoundFromResource(SoundManager pSoundManager, Context pContext, int pSoundResID)
         {
-            int soundID = pSoundManager.getSoundPool().load(pContext, pSoundResID, 1);
+            //int soundID = pSoundManager.getSoundPool().load(pContext, pSoundResID, 1);
+            int soundID = pSoundManager.SoundPool.Load(pContext, pSoundResID, 1);
             Sound sound = new Sound(pSoundManager, soundID);
-            pSoundManager.add(sound);
+            pSoundManager.Add(sound);
             return sound;
         }
 

@@ -30,14 +30,14 @@ namespace andengine.engine.camera.hud
             : this(1)
         {
 
-            this.setBackgroundEnabled(false);
+            this.SetBackgroundEnabled(false);
         }
 
         public HUD(int pLayerCount)
             : base(pLayerCount)
         {
 
-            this.setBackgroundEnabled(false);
+            this.SetBackgroundEnabled(false);
         }
 
         // ===========================================================

@@ -15,22 +15,25 @@ namespace andengine.audio
         // Methods
         // ===========================================================
 
-        void play();
-        void pause();
-        void resume();
-        void stop();
+        void Play();
+        void Pause();
+        void Resume();
+        void Stop();
 
-        float getVolume();
-        void setVolume(/* final */ float pVolume);
+        //float GetVolume();
+        //void SetVolume(/* final */ float pVolume);
+        float Volume { get; set; }
 
-        float getLeftVolume();
-        float getRightVolume();
-        void setVolume(/* final */ float pLeftVolume, /* final */ float pRightVolume);
+        //float getLeftVolume();
+        float LeftVolume { get; }
+        //float getRightVolume();
+        float RightVolume { get; }
+        void SetVolume(/* final */ float pLeftVolume, /* final */ float pRightVolume);
 
-        void onMasterVolumeChanged(/* final */ float pMasterVolume);
+        void OnMasterVolumeChanged(/* final */ float pMasterVolume);
 
-        void setLooping(/* final */ bool pLooping);
+        void SetLooping(/* final */ bool pLooping);
 
-        void release();
+        void Release();
     }
 }

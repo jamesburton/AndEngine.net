@@ -7,6 +7,7 @@ namespace andengine.util.pool
 
     using andengine.util/*.Debug*/;
     using System.Runtime.CompilerServices;
+    using Java.Lang;
 
     /**
      * @author Valentin Milea
@@ -33,14 +34,12 @@ namespace andengine.util.pool
         // Constructors
         // ===========================================================
 
-        public GenericPool()
+        public GenericPool():this(0)
         {
-            this(0);
         }
 
-        public GenericPool(/* final */ int pInitialSize)
+        public GenericPool(/* final */ int pInitialSize):this(pInitialSize, 1)
         {
-            this(pInitialSize, 1);
         }
 
         public GenericPool(/* final */ int pInitialSize, /* final */ int pGrowth)
@@ -54,7 +53,7 @@ namespace andengine.util.pool
 
             if (pInitialSize > 0)
             {
-                this.batchAllocatePoolItems(pInitialSize);
+                this.BatchAllocatePoolItems(pInitialSize);
             }
         }
 
@@ -63,7 +62,7 @@ namespace andengine.util.pool
         // ===========================================================
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public /* synchronized */ int getUnrecycledCount()
+        public /* synchronized */ int GetUnrecycledCount()
         {
             return this.mUnrecycledCount;
         }
@@ -72,29 +71,29 @@ namespace andengine.util.pool
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected abstract T onAllocatePoolItem();
+        protected abstract T OnAllocatePoolItem();
 
         // ===========================================================
         // Methods
         // ===========================================================
 
-        protected void onHandleRecycleItem(/* final */ T pItem)
+        protected void OnHandleRecycleItem(/* final */ T pItem)
         {
 
         }
 
-        protected T onHandleAllocatePoolItem()
+        protected T OnHandleAllocatePoolItem()
         {
-            return this.onAllocatePoolItem();
+            return this.OnAllocatePoolItem();
         }
 
-        protected void onHandleObtainItem(/* final */ T pItem)
+        protected void OnHandleObtainItem(/* final */ T pItem)
         {
 
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public /* synchronized */ void batchAllocatePoolItems(/* final */ int pCount)
+        public /* synchronized */ void BatchAllocatePoolItems(/* final */ int pCount)
         {
             /* final */
             Stack<T> availableItems = this.mAvailableItems;
@@ -105,7 +104,7 @@ namespace andengine.util.pool
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public /* synchronized */ T obtainPoolItem()
+        public /* synchronized */ T ObtainPoolItem()
         {
             /* final */
             T item;
@@ -118,31 +117,31 @@ namespace andengine.util.pool
             {
                 if (this.mGrowth == 1)
                 {
-                    item = onHandleAllocatePoolItem();
+                    item = OnHandleAllocatePoolItem();
                 }
                 else
                 {
-                    this.batchAllocatePoolItems(this.mGrowth);
+                    this.BatchAllocatePoolItems(this.mGrowth);
                     item = this.mAvailableItems.Pop();
                 }
                 //Debug.i(this.getClass().getName() + "<" + item.getClass().getSimpleName() + "> was exhausted, with " + this.mUnrecycledCount + " item not yet recycled. Allocated " + this.mGrowth + " more.");
                 Debug.i(this.GetType().FullName + "<" + item.GetType().Name + "> was exhausted, with " + this.mUnrecycledCount.ToString() + " item(s) not yet recycled. Allocated " + this.mGrowth.ToString() + " more.");
             }
-            this.onHandleObtainItem(item);
+            this.OnHandleObtainItem(item);
 
             this.mUnrecycledCount++;
             return item;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public /* synchronized */ void recyclePoolItem(/* final */ T pItem)
+        public /* synchronized */ void RecyclePoolItem(/* final */ T pItem)
         {
             if (pItem == null)
             {
                 throw new IllegalArgumentException("Cannot recycle null item!");
             }
 
-            this.onHandleRecycleItem(pItem);
+            this.OnHandleRecycleItem(pItem);
 
             this.mAvailableItems.Push(pItem);
 
@@ -150,7 +149,7 @@ namespace andengine.util.pool
 
             if (this.mUnrecycledCount < 0)
             {
-                Debug.e("More items recycled than obtained!");
+                Debug.e(new Java.Lang.String("More items recycled than obtained!"));
             }
         }
 

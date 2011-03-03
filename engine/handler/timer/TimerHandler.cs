@@ -49,37 +49,37 @@ namespace andengine.engine.handler.timer
         // Getter & Setter
         // ===========================================================
 
-        public bool AutoReset { get { return isAutoReset(); } set { setAutoReset(value); } }
+        public bool AutoReset { get { return IsAutoReset(); } set { SetAutoReset(value); } }
 
-        public bool isAutoReset()
+        public bool IsAutoReset()
         {
             return this.mAutoReset;
         }
 
-        public void setAutoReset(bool pAutoReset)
+        public void SetAutoReset(bool pAutoReset)
         {
             this.mAutoReset = pAutoReset;
         }
 
-        public float TimeSeconds { get { return getTimerSeconds(); } set { setTimerSeconds(value); } }
+        public float TimeSeconds { get { return GetTimerSeconds(); } set { SetTimerSeconds(value); } }
 
         /**
          * You probably want to use this in conjunction with {@link TimerHandler#reset()}.
          * @param pTimerSeconds
          */
-        public void setTimerSeconds(float pTimerSeconds)
+        public void SetTimerSeconds(float pTimerSeconds)
         {
             this.mTimerSeconds = pTimerSeconds;
         }
 
-        public float getTimerSeconds()
+        public float GetTimerSeconds()
         {
             return this.mTimerSeconds;
         }
 
-        public float TimerSecondsElapsed { get { return getTimerSecondsElapsed(); } }
+        public float TimerSecondsElapsed { get { return GetTimerSecondsElapsed(); } }
 
-        public float getTimerSecondsElapsed()
+        public float GetTimerSecondsElapsed()
         {
             return this.mTimerSecondsElapsed;
         }
@@ -88,7 +88,7 @@ namespace andengine.engine.handler.timer
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public virtual void onUpdate(float pSecondsElapsed)
+        public virtual void OnUpdate(float pSecondsElapsed)
         {
             if (this.mAutoReset)
             {
@@ -96,7 +96,7 @@ namespace andengine.engine.handler.timer
                 while (this.mTimerSecondsElapsed >= this.mTimerSeconds)
                 {
                     this.mTimerSecondsElapsed -= this.mTimerSeconds;
-                    this.mTimerCallback.onTimePassed(this);
+                    this.mTimerCallback.OnTimePassed(this);
                 }
             }
             else
@@ -107,13 +107,13 @@ namespace andengine.engine.handler.timer
                     if (this.mTimerSecondsElapsed >= this.mTimerSeconds)
                     {
                         this.mCallbackTriggered = true;
-                        this.mTimerCallback.onTimePassed(this);
+                        this.mTimerCallback.OnTimePassed(this);
                     }
                 }
             }
         }
 
-        public override void reset()
+        public /* override */ virtual void Reset()
         {
             this.mCallbackTriggered = false;
             this.mTimerSecondsElapsed = 0;

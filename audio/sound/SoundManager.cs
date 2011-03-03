@@ -28,9 +28,8 @@ namespace andengine.audio.sound
         // Constructors
         // ===========================================================
 
-        public SoundManager()
+        public SoundManager(): this(MAX_SIMULTANEOUS_STREAMS_DEFAULT)
         {
-            this(MAX_SIMULTANEOUS_STREAMS_DEFAULT);
         }
 
         public SoundManager(int pMaxSimultaneousStreams)
@@ -42,10 +41,12 @@ namespace andengine.audio.sound
         // Getter & Setter
         // ===========================================================
 
-        public SoundPool getSoundPool()
+        public SoundPool GetSoundPool()
         {
             return this.mSoundPool;
         }
+
+        public SoundPool SoundPool { get { return GetSoundPool(); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
@@ -55,9 +56,9 @@ namespace andengine.audio.sound
         // Methods
         // ===========================================================
 
-        public new void releaseAll()
+        public new void ReleaseAll()
         {
-            base.releaseAll();
+            base.ReleaseAll();
 
             this.mSoundPool.Release();
         }

@@ -37,12 +37,12 @@ namespace andengine.audio
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public float getMasterVolume()
+        public float GetMasterVolume()
         {
             return this.mMasterVolume;
         }
 
-        public void setMasterVolume(/* final */ float pMasterVolume)
+        public void SetMasterVolume(/* final */ float pMasterVolume)
         {
             this.mMasterVolume = pMasterVolume;
 
@@ -58,12 +58,14 @@ namespace andengine.audio
             }
         }
 
-        public void add(/* final */ T pAudioEntity)
+        public float MasterVolume { get { return GetMasterVolume(); } set { SetMasterVolume(value); } }
+
+        public void Add(/* final */ T pAudioEntity)
         {
             this.mAudioEntities.Add(pAudioEntity);
         }
 
-        public /* override */ void releaseAll()
+        public /* override */ void ReleaseAll()
         {
             // final ArrayList<T> audioEntities = this.mAudioEntities;
             List<T> audioEntities = this.mAudioEntities;

@@ -1,3 +1,4 @@
+using Java.Lang;
 namespace andengine.util.pool
 {
 
@@ -26,7 +27,7 @@ namespace andengine.util.pool
         // ===========================================================
 
         //public Pool<? extends PoolItem> getParent() {
-        public Pool<PoolItem> getParent()
+        public Pool<PoolItem> GetParent()
         {
             return this.mParent;
         }
@@ -35,13 +36,13 @@ namespace andengine.util.pool
         // Getter & Setter
         // ===========================================================
 
-        public bool isRecycled()
+        public bool IsRecycled()
         {
             return this.mRecycled;
         }
 
         //public bool isFromPool(final Pool<? extends PoolItem> pPool) {
-        public bool isFromPool(/* final */ Pool<PoolItem> pPool)
+        public bool IsFromPool(/* final */ Pool<PoolItem> pPool)
         {
             return pPool == this.mParent;
         }
@@ -54,24 +55,24 @@ namespace andengine.util.pool
         // Methods
         // ===========================================================
 
-        public void onRecycle()
+        public void OnRecycle()
         {
 
         }
 
-        public void onObtain()
+        public void OnObtain()
         {
 
         }
 
-        public void recycle()
+        public void Recycle()
         {
             if (this.mParent == null)
             {
                 throw new IllegalStateException("Item already recycled!");
             }
 
-            this.mParent.recycle(this);
+            this.mParent.Recycle(this);
         }
 
         // ===========================================================

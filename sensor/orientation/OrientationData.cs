@@ -58,11 +58,18 @@ namespace andengine.sensor.orientation
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override String toString()
+        public override System.String ToString()
+        {
+            //return "Orientation: " + Arrays.toString(this.mValues);
+            return System.String.Format("Orientation: Roll {0}, Pitch {1}, Yaw {2}", getRoll(), getPitch(), getYaw());
+        }
+
+        /*
+        public override Java.Lang.String toString()
         {
             //return "Orientation: " + Arrays.toString(this.mValues);
             return new Java.Lang.String(System.String.Format("Orientation: Roll {0}, Pitch {1}, Yaw {2}", getRoll(), getPitch(), getYaw()));
-        }
+        } //*/
 
         // ===========================================================
         // Methods
