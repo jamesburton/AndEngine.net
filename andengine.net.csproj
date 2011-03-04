@@ -68,7 +68,7 @@
     <Compile Include="audio\sound\SoundFactory.cs" />
     <Compile Include="audio\sound\SoundLibrary.cs" />
     <Compile Include="audio\sound\SoundManager.cs" />
-    <Content Include="engine\camera\BoundCamera.java" />
+    <Compile Include="engine\camera\BoundCamera.cs" />
     <Compile Include="engine\camera\Camera.cs" />
     <Content Include="engine\camera\CameraFactory.java" />
     <Content Include="engine\camera\hud\controls\AnalogOnScreenControl.java" />
