@@ -44,10 +44,11 @@ namespace andengine.opengl.texture.region.buffer
         // Getter & Setter
         // ===========================================================
 
-        public BaseTextureRegion GetTextureRegion()
+        public virtual BaseTextureRegion GetTextureRegionCore()
         {
             return this.mTextureRegion;
         }
+        public BaseTextureRegion GetTextureRegion() { return GetTextureRegionCore(); }
 
         public bool FlippedHoriontal { get { return IsFlippedHorizontal(); } set { SetFlippedHorizontal(value); } }
 

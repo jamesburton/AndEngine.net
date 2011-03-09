@@ -35,9 +35,19 @@ namespace andengine.opengl.texture.region
         // Getter & Setter
         // ===========================================================
 
+        /*
         public override TextureRegion Get(int pID)
         {
             return (TextureRegion)base.Get(pID);
+        }
+        */
+        public override BaseTextureRegion GetCore(int pID)
+        {
+            return Get(pID);
+        }
+        public new TextureRegion Get(int pID)
+        {
+            return (TextureRegion)base.GetCore(pID);
         }
 
         public TiledTextureRegion GetTiled(int pID)

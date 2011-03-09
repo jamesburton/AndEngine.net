@@ -34,7 +34,7 @@ namespace andengine.entity.scene
     //using andengine.entity.layer.ILayer;
     using ILayer = andengine.entity.layer.ILayer;
     //using andengine.entity.layer.ZIndexSorter;
-    using IndexSorter = andengine.entity.layer.ZIndexSorter;
+    using ZIndexSorter = andengine.entity.layer.ZIndexSorter;
     //using andengine.entity.scene.background;
     //using andengine.entity.scene.background.ColorBackground;
     using ColorBackground = andengine.entity.scene.background.ColorBackground;
@@ -414,12 +414,12 @@ namespace andengine.entity.scene
             }
         }
 
-        public bool OnSceneTouchEvent(/* final */ TouchEvent pSceneTouchEvent)
+        public virtual bool OnSceneTouchEvent(/* final */ TouchEvent pSceneTouchEvent)
         {
-            /* final */
-            int action = pSceneTouchEvent.GetAction();
+            //* final */ int action = pSceneTouchEvent.GetAction();
+            MotionEvent action = pSceneTouchEvent.GetMotionEvent();
             // final bool isDownAction = action == MotionEvent.ACTION_DOWN;
-            bool isDownAction = action == MotionEvent.ActionPointer1Down;
+            bool isDownAction = (action == MotionEvent.ActionPointer1Down);
 
             if (this.mTouchAreaBindingEnabled && !isDownAction)
             {
@@ -470,7 +470,9 @@ namespace andengine.entity.scene
             }
 
             // final float sceneTouchEventX = pSceneTouchEvent.getX();
+            float sceneTouchEventX = pSceneTouchEvent.X;
             // final float sceneTouchEventY = pSceneTouchEvent.getY();
+            float sceneTouchEventY = pSceneTouchEvent.Y;
 
             /* First give the layers a chance to handle their TouchAreas. */
             {

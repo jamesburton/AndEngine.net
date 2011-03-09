@@ -58,7 +58,7 @@ namespace andengine.input.touch.controller
         // Getter & Setter
         // ===========================================================
 
-        public override void SetTouchEventCallback(ITouchEventCallback pTouchEventCallback)
+        public /* override */ virtual void SetTouchEventCallback(ITouchEventCallback pTouchEventCallback)
         {
             this.mTouchEventCallback = pTouchEventCallback;
         }
@@ -67,7 +67,7 @@ namespace andengine.input.touch.controller
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void Reset()
+        public /* override */ virtual void Reset()
         {
             if (this.mRunOnUpdateThread)
             {
@@ -75,7 +75,7 @@ namespace andengine.input.touch.controller
             }
         }
 
-        public override void OnUpdate(float pSecondsElapsed)
+        public /* override */ virtual void OnUpdate(float pSecondsElapsed)
         {
             if (this.mRunOnUpdateThread)
             {
@@ -99,8 +99,8 @@ namespace andengine.input.touch.controller
             }
             else
             {
-                TouchEvent touchEvent = TouchEvent.obtain(pX, pY, pAction, pPointerID, pMotionEvent);
-                handled = this.mTouchEventCallback.onTouchEvent(touchEvent);
+                TouchEvent touchEvent = TouchEvent.Obtain(pX, pY, pAction, pPointerID, pMotionEvent);
+                handled = this.mTouchEventCallback.OnTouchEvent(touchEvent);
                 touchEvent.recycle();
             }
 

@@ -30,37 +30,37 @@ namespace andengine.opengl.texture.region.buffer
         // Getter & Setter
         // ===========================================================
 
-        public TiledTextureRegion getTextureRegion()
+        public TiledTextureRegion GetTextureRegion()
         {
-            return (TiledTextureRegion)base.getTextureRegion();
+            return (TiledTextureRegion)base.GetTextureRegion();
         }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected override float getX1()
+        protected override float GetX1()
         {
-            TiledTextureRegion textureRegion = this.getTextureRegion();
-            return textureRegion.getTexturePositionOfCurrentTileX() / textureRegion.getTexture().getWidth();
+            TiledTextureRegion textureRegion = this.GetTextureRegion();
+            return textureRegion.GetTexturePositionOfCurrentTileX() / textureRegion.GetTexture().GetWidth();
         }
 
-        protected override float getX2()
+        protected override float GetX2()
         {
-            TiledTextureRegion textureRegion = this.getTextureRegion();
-            return (textureRegion.getTexturePositionOfCurrentTileX() + textureRegion.getTileWidth()) / textureRegion.getTexture().getWidth();
+            TiledTextureRegion textureRegion = this.GetTextureRegion();
+            return (textureRegion.GetTexturePositionOfCurrentTileX() + textureRegion.GetTileWidth()) / textureRegion.GetTexture().GetWidth();
         }
 
-        protected override float getY1()
+        protected override float GetY1()
         {
-            TiledTextureRegion textureRegion = this.getTextureRegion();
-            return textureRegion.getTexturePositionOfCurrentTileY() / textureRegion.getTexture().getHeight();
+            TiledTextureRegion textureRegion = this.GetTextureRegion();
+            return textureRegion.GetTexturePositionOfCurrentTileY() / textureRegion.GetTexture().GetHeight();
         }
 
-        protected override float getY2()
+        protected override float GetY2()
         {
-            TiledTextureRegion textureRegion = this.getTextureRegion();
-            return (textureRegion.getTexturePositionOfCurrentTileY() + textureRegion.getTileHeight()) / textureRegion.getTexture().getHeight();
+            TiledTextureRegion textureRegion = this.GetTextureRegion();
+            return (textureRegion.GetTexturePositionOfCurrentTileY() + textureRegion.GetTileHeight()) / textureRegion.GetTexture().GetHeight();
         }
 
         // ===========================================================

@@ -37,6 +37,6 @@ namespace andengine.util.pool
         // ===========================================================
 
         // NB: Pass-thru abstract methods for interface methods
-        public abstract void run();
+        public abstract void Run();
     }
 }

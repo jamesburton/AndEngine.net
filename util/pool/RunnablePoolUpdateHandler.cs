@@ -45,13 +45,13 @@ namespace andengine.util.pool
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected override abstract T onAllocatePoolItem();
+        protected override abstract T OnAllocatePoolItem();
 
-        protected override void onHandlePoolItem(T pRunnablePoolItem)
+        protected override void OnHandlePoolItem(T pRunnablePoolItem)
         {
             // TODO: Check if the ThreadStart bit is needed
             //((Runnable)pRunnablePoolItem).run();
-            new Thread(new ThreadStart(((Runnable)pRunnablePoolItem).run)).Start();
+            new Thread(new ThreadStart(((Runnable)pRunnablePoolItem).Run)).Start();
         }
 
         // ===========================================================

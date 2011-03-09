@@ -643,7 +643,7 @@ namespace andengine.opengl.view
                         Runnable r;
                         while ((r = this.getEvent()) != null)
                         {
-                            r.run();
+                            r.Run();
                         }
                         if (this.mPaused)
                         {

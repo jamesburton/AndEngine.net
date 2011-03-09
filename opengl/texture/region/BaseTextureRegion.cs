@@ -155,7 +155,7 @@ namespace andengine.opengl.texture.region
         protected abstract BaseTextureRegionBuffer OnCreateTextureRegionBuffer();
         //*/
         protected abstract BaseTextureRegionBuffer OnCreateTextureRegionBufferCore();
-        protected BaseTextureRegionBuffer OnCreateTextureRegionBuffer() { return OnCreateTextureRegionBufferCore(); }
+        protected virtual BaseTextureRegionBuffer OnCreateTextureRegionBuffer() { return OnCreateTextureRegionBufferCore(); }
 
         // ===========================================================
         // Methods

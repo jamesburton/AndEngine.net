@@ -177,7 +177,7 @@ namespace andengine.opengl.texture
             {
                 throw new IllegalArgumentException("Illegal negative pTexturePositionY supplied: '" + pTexturePositionY + "'");
             }
-            else if (pTexturePositionX + pTextureSource.getWidth() > this.mWidth || pTexturePositionY + pTextureSource.getHeight() > this.mHeight)
+            else if (pTexturePositionX + pTextureSource.GetWidth() > this.mWidth || pTexturePositionY + pTextureSource.GetHeight() > this.mHeight)
             {
                 throw new IllegalArgumentException("Supplied TextureSource must not exceed bounds of Texture.");
             }

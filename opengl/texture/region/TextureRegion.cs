@@ -36,16 +36,18 @@ namespace andengine.opengl.texture.region
         // Getter & Setter
         // ===========================================================
 
-        public TextureRegionBuffer getTextureBuffer()
+        public new TextureRegionBuffer GetTextureBuffer()
         {
             return (TextureRegionBuffer)this.mTextureRegionBuffer;
         }
+
+        public TextureRegionBuffer TextureBuffer { get { return GetTextureBuffer(); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override TextureRegion clone()
+        public /* override */ virtual TextureRegion Clone()
         {
             return new TextureRegion(this.mTexture, this.mTexturePositionX, this.mTexturePositionY, this.mWidth, this.mHeight);
         }
@@ -54,10 +56,17 @@ namespace andengine.opengl.texture.region
         // Methods
         // ===========================================================
 
-        protected BaseTextureRegionBuffer onCreateTextureRegionBuffer()
+        /*
+        protected override BaseTextureRegionBuffer OnCreateTextureRegionBuffer()
         {
             return new TextureRegionBuffer(this, GL11Consts.GlStaticDraw);
         }
+        */
+        protected override BaseTextureRegionBuffer OnCreateTextureRegionBufferCore()
+        {
+            return new TextureRegionBuffer(this, GL11Consts.GlStaticDraw);
+        }
+        protected new TextureRegionBuffer OnCreateTextureRegionBuffer() { return (TextureRegionBuffer)OnCreateTextureRegionBufferCore(); }
 
         // ===========================================================
         // Inner and Anonymous Classes

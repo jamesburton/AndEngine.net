@@ -15,6 +15,6 @@ namespace andengine.util
         // Methods
         // ===========================================================
 
-        void onCallback(T pCallbackValue);
+        void OnCallback(T pCallbackValue);
     }
 }

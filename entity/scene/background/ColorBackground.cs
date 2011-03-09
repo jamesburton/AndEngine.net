@@ -64,7 +64,7 @@ namespace andengine.entity.scene.background
          * @param pGreen The green color value. Should be between 0.0 and 1.0, inclusive.
          * @param pBlue The blue color value. Should be between 0.0 and 1.0, inclusive.
          */
-        public override void setColor(float pRed, float pGreen, float pBlue)
+        public override void SetColor(float pRed, float pGreen, float pBlue)
         {
             this.mRed = pRed;
             this.mGreen = pGreen;
@@ -78,9 +78,9 @@ namespace andengine.entity.scene.background
          * @param pBlue The blue color value. Should be between 0.0 and 1.0, inclusive.
          * @param pAlpha The alpha color value. Should be between 0.0 and 1.0, inclusive.
          */
-        public void setColor(float pRed, float pGreen, float pBlue, float pAlpha)
+        public override void SetColor(float pRed, float pGreen, float pBlue, float pAlpha)
         {
-            this.setColor(pRed, pGreen, pBlue);
+            this.SetColor(pRed, pGreen, pBlue);
             this.mAlpha = pAlpha;
         }
 
@@ -90,8 +90,8 @@ namespace andengine.entity.scene.background
          * @param pGreen The green color value. Should be between 0 and 255, inclusive.
          * @param pBlue The blue color value. Should be between 0 and 255, inclusive.
          */
-        public void setColor(int pRed, int pGreen, int pBlue) /* throws IllegalArgumentException */ {
-            this.setColor(pRed / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT, pGreen / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT, pBlue / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT);
+        public void SetColor(int pRed, int pGreen, int pBlue) /* throws IllegalArgumentException */ {
+            this.SetColor(pRed / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT, pGreen / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT, pBlue / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT);
         }
 
         /**
@@ -100,25 +100,27 @@ namespace andengine.entity.scene.background
          * @param pGreen The green color value. Should be between 0 and 255, inclusive.
          * @param pBlue The blue color value. Should be between 0 and 255, inclusive.
          */
-        public void setColor(int pRed, int pGreen, int pBlue, int pAlpha) /* throws IllegalArgumentException */ {
-            this.setColor(pRed / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT, pGreen / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT, pBlue / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT, pAlpha / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT);
+        public void SetColor(int pRed, int pGreen, int pBlue, int pAlpha) /* throws IllegalArgumentException */ {
+            this.SetColor(pRed / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT, pGreen / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT, pBlue / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT, pAlpha / ColorConstants.COLOR_FACTOR_INT_TO_FLOAT);
         }
 
-        public void setColorEnabled(bool pColorEnabled)
+        public void SetColorEnabled(bool pColorEnabled)
         {
             this.mColorEnabled = pColorEnabled;
         }
 
-        public bool isColorEnabled()
+        public bool IsColorEnabled()
         {
             return this.mColorEnabled;
         }
+
+        public bool ColorEnabled { get { return IsColorEnabled(); } set { SetColorEnabled(value); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public void onDraw(GL10 pGL, Camera pCamera)
+        public override void OnDraw(GL10 pGL, Camera pCamera)
         {
             if (this.mColorEnabled)
             {

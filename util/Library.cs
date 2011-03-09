@@ -59,7 +59,7 @@ namespace andengine.util
             }
             else
             {
-                throw new IllegalArgumentException("ID: '" + pID + "' is already associated with item: '" + existingItem.toString() + "'.");
+                throw new IllegalArgumentException("ID: '" + pID + "' is already associated with item: '" + existingItem.ToString() + "'.");
             }
         }
 
@@ -68,10 +68,15 @@ namespace andengine.util
             this.mItems.RemoveAt(pID);
         }
 
+        /*
         public T Get(int pID)
         {
             return (T)this.mItems.GetValue(pID);
         }
+        */
+        public virtual T GetCore(int pID) { return (T)this.mItems.GetValue(pID); }
+        public T Get(int pID) { return GetCore(pID); }
+
 
         // Methods for/from SuperClass/Interfaces
         // ===========================================================

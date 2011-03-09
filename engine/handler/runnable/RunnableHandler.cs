@@ -15,7 +15,7 @@ namespace andengine.engine.handler.runnable
     /// </summary>
     public interface Runnable
     {
-        void run();
+        void Run();
     }
 
     /**
@@ -54,7 +54,7 @@ namespace andengine.engine.handler.runnable
 		/* final */ int runnableCount = runnables.Count;
 		for(int i = runnableCount - 1; i >= 0; i--) {
 			//runnables[i].run();
-            Thread thread = new Thread(new ThreadStart(runnables[i].run));
+            Thread thread = new Thread(new ThreadStart(runnables[i].Run));
 		}
 		runnables.Clear();
 	}

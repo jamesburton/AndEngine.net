@@ -49,7 +49,7 @@ namespace andengine.util.pool
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void run()
+        public override void Run()
         {
             this.mLayer.removeEntity(this.mEntity);
         }

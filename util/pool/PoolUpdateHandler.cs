@@ -49,7 +49,7 @@ namespace andengine.util.pool
             protected override T OnAllocatePoolItem()
             {
                 //return PoolUpdateHandler<T>.this.onAllocatePoolItem();
-                return PoolUpdateHandler<T>.Instance.onAllocatePoolItem();
+                return PoolUpdateHandler<T>.Instance.OnAllocatePoolItem();
             }
             public PoolUpdateHandlerPool() : base() { }
             public PoolUpdateHandlerPool(int pInitialPoolSize) : base(pInitialPoolSize) { }
@@ -89,9 +89,9 @@ namespace andengine.util.pool
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected abstract T onAllocatePoolItem();
+        protected abstract T OnAllocatePoolItem();
 
-        protected abstract void onHandlePoolItem(T pPoolItem);
+        protected abstract void OnHandlePoolItem(T pPoolItem);
 
         public /* override */ void OnUpdate(float pSecondsElapsed)
         {
@@ -111,8 +111,8 @@ namespace andengine.util.pool
                     for (int i = 0; i < count; i++)
                     {
                         item = scheduledPoolItems[i];
-                        this.onHandlePoolItem(item);
-                        pool.recyclePoolItem(item);
+                        this.OnHandlePoolItem(item);
+                        pool.RecyclePoolItem(item);
                     }
 
                     scheduledPoolItems.Clear();
@@ -132,7 +132,7 @@ namespace andengine.util.pool
                 Pool<T> pool = this.mPool;
                 for (int i = count - 1; i >= 0; i--)
                 {
-                    pool.recyclePoolItem(scheduledPoolItems[i]);
+                    pool.RecyclePoolItem(scheduledPoolItems[i]);
                 }
 
                 scheduledPoolItems.Clear();
