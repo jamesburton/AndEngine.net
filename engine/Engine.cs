@@ -87,12 +87,12 @@ namespace andengine.engine
     public class Engine : SensorEventListener, OnTouchListener /* NB: Is actually IOnTouchListener */, ITouchEventCallback, /* TimeConstants, */ LocationListener
     {
         #region Interface bindings
-        void ITouchEventCallback.OnTouchEvent(TouchEvent pSurfaceTouchEvent) { OnTouchEvent(pSurfaceTouchEvent); }
+        //void ITouchEventCallback.OnTouchEvent(TouchEvent pSurfaceTouchEvent) { OnTouchEvent(pSurfaceTouchEvent); }
         void Android.Locations.ILocationListener.OnLocationChanged(Location pLocation) { OnLocationChanged(pLocation); }
         //void ILocationListener.OnProviderDisabled(System.String pProvider) { OnProviderDisabled(pProvider); }
         //void Android.Locations.ILocationListener.OnProviderDisabled(System.String pProvider) { OnProviderDisabled(pProvider); }
-        void Android.Locations.ILocationListener.OnProviderDisabled(System.String pProvider) { OnProviderDisabled(new Java.Lang.String(pProvider)); }
-        void Android.Locations.ILocationListener.OnProviderEnabled(System.String pProvider) { OnProviderEnabled(new Java.Lang.String(pProvider)); }
+        void Android.Locations.ILocationListener.OnProviderDisabled(System.String pProvider) { OnProviderDisabled(pProvider); }
+        void Android.Locations.ILocationListener.OnProviderEnabled(System.String pProvider) { OnProviderEnabled(pProvider); }
         void Android.Locations.ILocationListener.OnStatusChanged(string pProvider, int pStatus, Bundle pExtras) { OnStatusChanged(pProvider, pStatus, pExtras); }
         #endregion
 
@@ -641,7 +641,7 @@ namespace andengine.engine
             public /* override */ void OnTimePassed(/* final */ TimerHandler pTimerHandler)
             {
                 this.Engine.UnregisterUpdateHandler(pTimerHandler);
-                this.Engine.SetScene(pScene);
+                this.Engine.SetScene(Engine.Scene /* pScene */);
             }
         }
 
@@ -669,6 +669,7 @@ namespace andengine.engine
             threadLocker.notifyCanDraw();
             threadLocker.waitUntilCanUpdate();
             */
+            State State = this.mThreadLocker;
             State.NotifyCanDraw();
             State.WaitUntilCanUpdate();
         }
@@ -930,7 +931,7 @@ namespace andengine.engine
             public UpdateThread()
                 : base("UpdateThread")
             {
-                thread = new Java.Lang.Thread(run);
+                thread = new Java.Lang.Thread(Run);
                 //thread = new Thread(new ThreadStart(run));
             }
 
@@ -946,7 +947,7 @@ namespace andengine.engine
                 }
                 catch (/* final */ InterruptedException e)
                 {
-                    Debug.d("UpdateThread interrupted. Don't worry - this Exception is most likely expected!", e);
+                    Debug.d(new Java.Lang.String("UpdateThread interrupted. Don't worry - this Exception is most likely expected!"), e);
                     //this.interrupt();
                     Interrupt();
                 }

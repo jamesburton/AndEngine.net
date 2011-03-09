@@ -7,6 +7,7 @@ namespace andengine.entity.shape
 
     //import javax.microedition.khronos.opengles.GL10;
     using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
+    using GL10Consts = Javax.Microedition.Khronos.Opengles.GL10Consts;
 
     using RectangularShapeCollisionChecker = andengine.collision.RectangularShapeCollisionChecker;
     using ShapeCollisionChecker = andengine.collision.ShapeCollisionChecker;
@@ -51,7 +52,7 @@ namespace andengine.entity.shape
             this.mHeight = pHeight;
 
             this.mVertexBuffer = pVertexBuffer;
-            BufferObjectManager.getActiveInstance().loadBufferObject(this.mVertexBuffer);
+            BufferObjectManager.GetActiveInstance().LoadBufferObject(this.mVertexBuffer);
 
             this.mRotationCenterX = pWidth * 0.5f;
             this.mRotationCenterY = pHeight * 0.5f;
@@ -64,99 +65,99 @@ namespace andengine.entity.shape
         // Getter & Setter
         // ===========================================================
 
-        public VertexBuffer VertexBuffer { get { return getVertexBuffer(); } }
+        public VertexBuffer VertexBuffer { get { return GetVertexBuffer(); } }
 
-        public override VertexBuffer getVertexBuffer()
+        public override VertexBuffer GetVertexBuffer()
         {
             return this.mVertexBuffer;
         }
 
-        public float Width { get { return getWidth(); } set { setWidth(value); } }
-        public float Height { get { return getHeight(); } set { setHeight(value); } }
+        public float Width { get { return GetWidth(); } set { SetWidth(value); } }
+        public float Height { get { return GetHeight(); } set { SetHeight(value); } }
 
-        public override float getWidth()
+        public override float GetWidth()
         {
             return this.mWidth;
         }
 
-        public override float getHeight()
+        public override float GetHeight()
         {
             return this.mHeight;
         }
 
-        public float BaseWidth { get { return getBaseWidth(); } }
-        public float BaseHeight { get { return getBaseHeight(); } }
+        public float BaseWidth { get { return GetBaseWidth(); } }
+        public float BaseHeight { get { return GetBaseHeight(); } }
 
-        public override float getBaseWidth()
+        public override float GetBaseWidth()
         {
             return this.mBaseWidth;
         }
 
-        public override float getBaseHeight()
+        public override float GetBaseHeight()
         {
             return this.mBaseHeight;
         }
 
-        public void setWidth(/* final */ float pWidth)
+        public void SetWidth(/* final */ float pWidth)
         {
             this.mWidth = pWidth;
-            this.updateVertexBuffer();
+            this.UpdateVertexBuffer();
         }
 
-        public void setHeight(/* final */ float pHeight)
+        public void SetHeight(/* final */ float pHeight)
         {
             this.mHeight = pHeight;
-            this.updateVertexBuffer();
+            this.UpdateVertexBuffer();
         }
 
-        public void setSize(/* final */ float pWidth, /* final */ float pHeight)
+        public void SetSize(/* final */ float pWidth, /* final */ float pHeight)
         {
             this.mWidth = pWidth;
             this.mHeight = pHeight;
-            this.updateVertexBuffer();
+            this.UpdateVertexBuffer();
         }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public void setBaseSize()
+        public void SetBaseSize()
         {
             if (this.mWidth != this.mBaseWidth || this.mHeight != this.mBaseHeight)
             {
                 this.mWidth = this.mBaseWidth;
                 this.mHeight = this.mBaseHeight;
-                this.onPositionChanged();
-                this.updateVertexBuffer();
+                this.OnPositionChanged();
+                this.UpdateVertexBuffer();
             }
         }
 
-        protected override bool isCulled(/* final */ Camera pCamera)
+        protected override bool IsCulled(/* final */ Camera pCamera)
         {
             /* final */
             float x = this.mX;
             /* final */
             float y = this.mY;
-            return x > pCamera.getMaxX()
-                || y > pCamera.getMaxY()
-                || x + this.getWidth() < pCamera.getMinX()
-                || y + this.getHeight() < pCamera.getMinY();
+            return x > pCamera.GetMaxX()
+                || y > pCamera.GetMaxY()
+                || x + this.GetWidth() < pCamera.GetMinX()
+                || y + this.GetHeight() < pCamera.GetMinY();
         }
 
-        protected override void drawVertices(/* final */ GL10 pGL, /* final */ Camera pCamera)
+        protected override void DrawVertices(/* final */ GL10 pGL, /* final */ Camera pCamera)
         {
-            pGL.glDrawArrays(GL10.GlTriangleStrip, 0, 4);
+            pGL.GlDrawArrays(GL10Consts.GlTriangleStrip, 0, 4);
         }
 
-        public override void reset()
+        public override void Reset()
         {
-            base.reset();
-            this.setBaseSize();
+            base.Reset();
+            this.SetBaseSize();
 
             /* final */
-            float baseWidth = this.getBaseWidth();
+            float baseWidth = this.GetBaseWidth();
             /* final */
-            float baseHeight = this.getBaseHeight();
+            float baseHeight = this.GetBaseHeight();
 
             this.mRotationCenterX = baseWidth * 0.5f;
             this.mRotationCenterY = baseHeight * 0.5f;
@@ -165,42 +166,42 @@ namespace andengine.entity.shape
             this.mScaleCenterY = this.mRotationCenterY;
         }
 
-        public override bool contains(/* final */ float pX, /* final */ float pY)
+        public override bool Contains(/* final */ float pX, /* final */ float pY)
         {
-            return RectangularShapeCollisionChecker.checkContains(this, pX, pY);
+            return RectangularShapeCollisionChecker.CheckContains(this, pX, pY);
         }
 
-        public override float[] getSceneCenterCoordinates()
+        public override float[] GetSceneCenterCoordinates()
         {
-            return this.convertLocalToSceneCoordinates(this.mWidth * 0.5f, this.mHeight * 0.5f);
+            return this.ConvertLocalToSceneCoordinates(this.mWidth * 0.5f, this.mHeight * 0.5f);
         }
 
-        public override float[] convertLocalToSceneCoordinates(/* final */ float pX, /* final */ float pY)
+        public override float[] ConvertLocalToSceneCoordinates(/* final */ float pX, /* final */ float pY)
         {
             /* final */
-            float[] sceneCoordinates = ShapeCollisionChecker.convertLocalToSceneCoordinates(this, pX, pY);
+            float[] sceneCoordinates = ShapeCollisionChecker.ConvertLocalToSceneCoordinates(this, pX, pY);
             sceneCoordinates[Constants.VERTEX_INDEX_X] += this.mX;
             sceneCoordinates[Constants.VERTEX_INDEX_Y] += this.mY;
             return sceneCoordinates;
         }
 
-        public override float[] convertSceneToLocalCoordinates(/* final */ float pX, /* final */ float pY)
+        public override float[] ConvertSceneToLocalCoordinates(/* final */ float pX, /* final */ float pY)
         {
             /* final */
-            float[] localCoordinates = ShapeCollisionChecker.convertSceneToLocalCoordinates(this, pX, pY);
+            float[] localCoordinates = ShapeCollisionChecker.ConvertSceneToLocalCoordinates(this, pX, pY);
             localCoordinates[Constants.VERTEX_INDEX_X] -= this.mX;
             localCoordinates[Constants.VERTEX_INDEX_Y] -= this.mY;
             return localCoordinates;
         }
 
-        public override bool collidesWith(/* final */ IShape pOtherShape)
+        public override bool CollidesWith(/* final */ IShape pOtherShape)
         {
             if (pOtherShape is RectangularShape)
             {
                 /* final */
                 RectangularShape pOtherRectangularShape = (RectangularShape)pOtherShape;
 
-                return RectangularShapeCollisionChecker.checkCollision(this, pOtherRectangularShape);
+                return RectangularShapeCollisionChecker.CheckCollision(this, pOtherRectangularShape);
             }
             else
             {

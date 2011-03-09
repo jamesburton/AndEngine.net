@@ -35,12 +35,12 @@ namespace andengine.opengl.texture.region
         // Getter & Setter
         // ===========================================================
 
-        public override TextureRegion get(int pID)
+        public override TextureRegion Get(int pID)
         {
-            return (TextureRegion)base.get(pID);
+            return (TextureRegion)base.Get(pID);
         }
 
-        public TiledTextureRegion getTiled(int pID)
+        public TiledTextureRegion GetTiled(int pID)
         {
             //return (TiledTextureRegion) this.mItems.get(pID);
             return (TiledTextureRegion)this.mItems[pID];

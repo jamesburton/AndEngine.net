@@ -58,7 +58,7 @@ namespace andengine.engine.camera
             this.mBoundsEnabled = pBoundsEnabled;
         }
 
-        public void setBounds(float pBoundMinX, float pBoundMaxX, float pBoundMinY, float pBoundMaxY)
+        public void SetBounds(float pBoundMinX, float pBoundMaxX, float pBoundMinY, float pBoundMaxY)
         {
             this.mBoundsMinX = pBoundMinX;
             this.mBoundsMaxX = pBoundMaxX;

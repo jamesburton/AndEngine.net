@@ -42,19 +42,19 @@ namespace andengine.collision
         // Methods
         // ===========================================================
 
-        public static float[] convertSceneToLocalCoordinates(/* final */ Shape pShape, /* final */ float pX, /* final */ float pY)
+        public static float[] ConvertSceneToLocalCoordinates(/* final */ Shape pShape, /* final */ float pX, /* final */ float pY)
         {
             VERTICES_SCENE_TO_LOCAL_TMP[Constants.VERTEX_INDEX_X] = pX;
             VERTICES_SCENE_TO_LOCAL_TMP[Constants.VERTEX_INDEX_Y] = pY;
 
             /* final */
-            float left = pShape.getX();
+            float left = pShape.GetX();
             /* final */
-            float top = pShape.getY();
+            float top = pShape.GetY();
 
-            MathUtils.revertRotateAndScaleAroundCenter(VERTICES_SCENE_TO_LOCAL_TMP,
-                    pShape.getRotation(), left + pShape.getRotationCenterX(), top + pShape.getRotationCenterY(),
-                    pShape.getScaleX(), pShape.getScaleY(), left + pShape.getScaleCenterX(), top + pShape.getScaleCenterY());
+            MathUtils.RevertRotateAndScaleAroundCenter(VERTICES_SCENE_TO_LOCAL_TMP,
+                    pShape.GetRotation(), left + pShape.GetRotationCenterX(), top + pShape.GetRotationCenterY(),
+                    pShape.GetScaleX(), pShape.GetScaleY(), left + pShape.GetScaleCenterX(), top + pShape.GetScaleCenterY());
 
             return VERTICES_SCENE_TO_LOCAL_TMP;
         }
@@ -65,9 +65,9 @@ namespace andengine.collision
             VERTICES_LOCAL_TO_SCENE_TMP[Constants.VERTEX_INDEX_X] = pX;
             VERTICES_LOCAL_TO_SCENE_TMP[Constants.VERTEX_INDEX_Y] = pY;
 
-            MathUtils.rotateAndScaleAroundCenter(VERTICES_LOCAL_TO_SCENE_TMP,
-                    pShape.getRotation(), pShape.getRotationCenterX(), pShape.getRotationCenterY(),
-                    pShape.getScaleX(), pShape.getScaleY(), pShape.getScaleCenterX(), pShape.getScaleCenterY());
+            MathUtils.RotateAndScaleAroundCenter(VERTICES_LOCAL_TO_SCENE_TMP,
+                    pShape.GetRotation(), pShape.GetRotationCenterX(), pShape.GetRotationCenterY(),
+                    pShape.GetScaleX(), pShape.GetScaleY(), pShape.GetScaleCenterX(), pShape.GetScaleCenterY());
 
             return VERTICES_LOCAL_TO_SCENE_TMP;
         }
@@ -78,13 +78,13 @@ namespace andengine.collision
             for (int a = pVerticesALength - 4; a >= 0; a -= 2)
             {
                 /* ... against all lines in B. */
-                if (checkCollisionSub(a, a + 2, pVerticesA, pVerticesB, pVerticesBLength))
+                if (CheckCollisionSub(a, a + 2, pVerticesA, pVerticesB, pVerticesBLength))
                 {
                     return true;
                 }
             }
             /* Also check the 'around the corner of the array' line of A against all lines in B. */
-            if (checkCollisionSub(pVerticesALength - 2, 0, pVerticesA, pVerticesB, pVerticesBLength))
+            if (CheckCollisionSub(pVerticesALength - 2, 0, pVerticesA, pVerticesB, pVerticesBLength))
             {
                 return true;
             }
@@ -92,11 +92,11 @@ namespace andengine.collision
             {
                 /* At last check if one polygon 'contains' the other one by checking 
                  * if one vertex of the one vertices is contained by all of the other vertices. */
-                if (ShapeCollisionChecker.checkContains(pVerticesA, pVerticesALength, pVerticesB[Constants.VERTEX_INDEX_X], pVerticesB[VERTEX_INDEX_Y]))
+                if (ShapeCollisionChecker.CheckContains(pVerticesA, pVerticesALength, pVerticesB[Constants.VERTEX_INDEX_X], pVerticesB[VERTEX_INDEX_Y]))
                 {
                     return true;
                 }
-                else if (ShapeCollisionChecker.checkContains(pVerticesB, pVerticesBLength, pVerticesA[Constants.VERTEX_INDEX_X], pVerticesA[VERTEX_INDEX_Y]))
+                else if (ShapeCollisionChecker.CheckContains(pVerticesB, pVerticesBLength, pVerticesA[Constants.VERTEX_INDEX_X], pVerticesA[VERTEX_INDEX_Y]))
                 {
                     return true;
                 }
@@ -110,7 +110,7 @@ namespace andengine.collision
         /**
          * Checks line specified by pVerticesA[pVertexIndexA1] and pVerticesA[pVertexIndexA2] against all lines in pVerticesB.
          */
-        private static bool checkCollisionSub(/* final */ int pVertexIndexA1, /* final */ int pVertexIndexA2, /* final */ float[] pVerticesA, /* final */ float[] pVerticesB, /* final */ int pVerticesBLength)
+        private static bool CheckCollisionSub(/* final */ int pVertexIndexA1, /* final */ int pVertexIndexA2, /* final */ float[] pVerticesA, /* final */ float[] pVerticesB, /* final */ int pVerticesBLength)
         {
             /* Check against all the lines of B. */
             /* final */
@@ -124,20 +124,20 @@ namespace andengine.collision
 
             for (int b = pVerticesBLength - 4; b >= 0; b -= 2)
             {
-                if (LineCollisionChecker.checkLineCollision(vertexA1X, vertexA1Y, vertexA2X, vertexA2Y, pVerticesB[b + VERTEX_INDEX_X], pVerticesB[b + VERTEX_INDEX_Y], pVerticesB[b + 2 + VERTEX_INDEX_X], pVerticesB[b + 2 + VERTEX_INDEX_Y]))
+                if (LineCollisionChecker.CheckLineCollision(vertexA1X, vertexA1Y, vertexA2X, vertexA2Y, pVerticesB[b + Constants.VERTEX_INDEX_X], pVerticesB[b + Constants.VERTEX_INDEX_Y], pVerticesB[b + 2 + Constants.VERTEX_INDEX_X], pVerticesB[b + 2 + Constants.VERTEX_INDEX_Y]))
                 {
                     return true;
                 }
             }
             /* Also check the 'around the corner of the array' line of B. */
-            if (LineCollisionChecker.checkLineCollision(vertexA1X, vertexA1Y, vertexA2X, vertexA2Y, pVerticesB[pVerticesBLength - 2], pVerticesB[pVerticesBLength - 1], pVerticesB[VERTEX_INDEX_X], pVerticesB[VERTEX_INDEX_Y]))
+            if (LineCollisionChecker.CheckLineCollision(vertexA1X, vertexA1Y, vertexA2X, vertexA2Y, pVerticesB[pVerticesBLength - 2], pVerticesB[pVerticesBLength - 1], pVerticesB[Constants.VERTEX_INDEX_X], pVerticesB[Constants.VERTEX_INDEX_Y]))
             {
                 return true;
             }
             return false;
         }
 
-        public static bool checkContains(/* final */ float[] pVertices, /* final */ int pVerticesLength, /* final */ float pX, /* final */ float pY)
+        public static bool CheckContains(/* final */ float[] pVertices, /* final */ int pVerticesLength, /* final */ float pX, /* final */ float pY)
         {
             int edgeResult;
             int edgeResultSum = 0;
@@ -145,7 +145,7 @@ namespace andengine.collision
             for (int i = pVerticesLength - 4; i >= 0; i -= 2)
             {
                 /* final */
-                edgeResult = relativeCCW(pVertices[i], pVertices[i + 1], pVertices[i + 2], pVertices[i + 3], pX, pY);
+                edgeResult = RelativeCCW(pVertices[i], pVertices[i + 1], pVertices[i + 2], pVertices[i + 3], pX, pY);
                 if (edgeResult == 0)
                 {
                     return true;
@@ -157,7 +157,7 @@ namespace andengine.collision
             }
             /* Also check the 'around the corner of the array' line. */
             /* final */
-            edgeResult = relativeCCW(pVertices[pVerticesLength - 2], pVertices[pVerticesLength - 1], pVertices[VERTEX_INDEX_X], pVertices[VERTEX_INDEX_Y], pX, pY);
+            edgeResult = RelativeCCW(pVertices[pVerticesLength - 2], pVertices[pVerticesLength - 1], pVertices[Constants.VERTEX_INDEX_X], pVertices[Constants.VERTEX_INDEX_Y], pX, pY);
             if (edgeResult == 0)
             {
                 return true;

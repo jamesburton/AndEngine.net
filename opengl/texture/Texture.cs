@@ -95,7 +95,7 @@ namespace andengine.opengl.texture
          * @param pTextureStateListener to be informed when this {@link Texture} is loaded, unloaded or a {@link ITextureSource} failed to load.
          */
         protected void Init(int pWidth, int pHeight, TextureOptions pTextureOptions, ITextureStateListener pTextureStateListener) /* throws IllegalArgumentException */ {
-            if (!MathUtils.isPowerOfTwo(pWidth) || !MathUtils.isPowerOfTwo(pHeight))
+            if (!MathUtils.IsPowerOfTwo(pWidth) || !MathUtils.IsPowerOfTwo(pHeight))
             {
                 throw new IllegalArgumentException("Width and Height of a Texture must be a power of 2!");
             }
@@ -110,44 +110,46 @@ namespace andengine.opengl.texture
         // Getter & Setter
         // ===========================================================
 
-        public int getHardwareTextureID()
+        public int GetHardwareTextureID()
         {
             return this.mHardwareTextureID;
         }
 
-        public bool isLoadedToHardware()
+        public bool IsLoadedToHardware()
         {
             return this.mLoadedToHardware;
         }
 
-        public bool isUpdateOnHardwareNeeded()
+        public bool IsUpdateOnHardwareNeeded()
         {
             return this.mUpdateOnHardwareNeeded;
         }
 
-        void setLoadedToHardware(bool pLoadedToHardware)
+        protected void SetLoadedToHardware(bool pLoadedToHardware)
         {
             this.mLoadedToHardware = pLoadedToHardware;
         }
+        protected bool LoadedToHardware { get { return GetIsLoadedToHardware(); } set { SetLoadedToHardware(value); } }
 
-        public int Width { get { return getWidth(); } }
+        public int Width { get { return GetWidth(); } }
 
-        public int getWidth()
+        public int GetWidth()
         {
             return this.mWidth;
         }
 
-        public int Height { get { return getHeight(); } }
+        public int Height { get { return GetHeight(); } }
 
-        public int getHeight()
+        public int GetHeight()
         {
             return this.mHeight;
         }
 
-        public TextureOptions getTextureOptions()
+        public TextureOptions GetTextureOptions()
         {
             return this.mTextureOptions;
         }
+        public TextureOptions TextureOptions { get { return GetTextureOptions(); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
@@ -157,8 +159,8 @@ namespace andengine.opengl.texture
         // Methods
         // ===========================================================
 
-        public TextureSourceWithLocation addTextureSource(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY) /* throws IllegalArgumentException */ {
-            this.checkTextureSourcePosition(pTextureSource, pTexturePositionX, pTexturePositionY);
+        public TextureSourceWithLocation AddTextureSource(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY) /* throws IllegalArgumentException */ {
+            this.CheckTextureSourcePosition(pTextureSource, pTexturePositionX, pTexturePositionY);
 
             TextureSourceWithLocation textureSourceWithLocation = new TextureSourceWithLocation(pTextureSource, pTexturePositionX, pTexturePositionY);
             this.mTextureSources.Add(textureSourceWithLocation);
@@ -166,7 +168,7 @@ namespace andengine.opengl.texture
             return textureSourceWithLocation;
         }
 
-        private void checkTextureSourcePosition(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY) /* throws IllegalArgumentException */ {
+        private void CheckTextureSourcePosition(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY) /* throws IllegalArgumentException */ {
             if (pTexturePositionX < 0)
             {
                 throw new IllegalArgumentException("Illegal negative pTexturePositionX supplied: '" + pTexturePositionX + "'");
@@ -181,7 +183,7 @@ namespace andengine.opengl.texture
             }
         }
 
-        public void removeTextureSource(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY)
+        public void RemoveTextureSource(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY)
         {
             //final ArrayList<TextureSourceWithLocation> textureSources = this.mTextureSources;
             List<TextureSourceWithLocation> textureSources = this.mTextureSources;
@@ -197,38 +199,38 @@ namespace andengine.opengl.texture
             }
         }
 
-        public void clearTextureSources()
+        public void ClearTextureSources()
         {
             this.mTextureSources.Clear();
             this.mUpdateOnHardwareNeeded = true;
         }
 
-        public void loadToHardware(GL10 pGL)
+        public void LoadToHardware(GL10 pGL)
         {
-            GLHelper.enableTextures(pGL);
+            GLHelper.EnableTextures(pGL);
 
-            this.mHardwareTextureID = Texture.generateHardwareTextureID(pGL);
+            this.mHardwareTextureID = Texture.GenerateHardwareTextureID(pGL);
 
-            this.allocateAndBindTextureOnHardware(pGL);
+            this.AllocateAndBindTextureOnHardware(pGL);
 
-            this.applyTextureOptions(pGL);
+            this.ApplyTextureOptions(pGL);
 
-            this.writeTextureToHardware(pGL);
+            this.WriteTextureToHardware(pGL);
 
             this.mUpdateOnHardwareNeeded = false;
             this.mLoadedToHardware = true;
 
             if (this.mTextureStateListener != null)
             {
-                this.mTextureStateListener.onLoadedToHardware(this);
+                this.mTextureStateListener.OnLoadedToHardware(this);
             }
         }
 
-        public void unloadFromHardware(GL10 pGL)
+        public void UnloadFromHardware(GL10 pGL)
         {
-            GLHelper.enableTextures(pGL);
+            GLHelper.EnableTextures(pGL);
 
-            this.deleteTextureOnHardware(pGL);
+            this.DeleteTextureOnHardware(pGL);
 
             this.mHardwareTextureID = -1;
 
@@ -236,11 +238,11 @@ namespace andengine.opengl.texture
 
             if (this.mTextureStateListener != null)
             {
-                this.mTextureStateListener.onUnloadedFromHardware(this);
+                this.mTextureStateListener.OnUnloadedFromHardware(this);
             }
         }
 
-        private void writeTextureToHardware(GL10 pGL)
+        private void WriteTextureToHardware(GL10 pGL)
         {
             bool preMultipyAlpha = this.mTextureOptions.mPreMultipyAlpha;
 
@@ -253,7 +255,7 @@ namespace andengine.opengl.texture
                 TextureSourceWithLocation textureSourceWithLocation = textureSources[j];
                 if (textureSourceWithLocation != null)
                 {
-                    Bitmap bmp = textureSourceWithLocation.onLoadBitmap();
+                    Bitmap bmp = textureSourceWithLocation.OnLoadBitmap();
                     try
                     {
                         if (bmp == null)
@@ -266,7 +268,7 @@ namespace andengine.opengl.texture
                         }
                         else
                         {
-                            GLHelper.glTexSubImage2D(pGL, GL10Consts.GlTexture2d, 0, textureSourceWithLocation.getTexturePositionX(), textureSourceWithLocation.getTexturePositionY(), bmp, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte);
+                            GLHelper.GlTexSubImage2D(pGL, GL10Consts.GlTexture2d, 0, textureSourceWithLocation.getTexturePositionX(), textureSourceWithLocation.getTexturePositionY(), bmp, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte);
                         }
 
                         bmp.Recycle();
@@ -277,7 +279,7 @@ namespace andengine.opengl.texture
                         Debug.e("Error loading: " + textureSourceWithLocation.ToString(), iae);
                         if (this.mTextureStateListener != null)
                         {
-                            this.mTextureStateListener.onTextureSourceLoadExeption(this, textureSourceWithLocation.mTextureSource, iae);
+                            this.mTextureStateListener.OnTextureSourceLoadExeption(this, textureSourceWithLocation.mTextureSource, iae);
                         }
                         else
                         {
@@ -288,7 +290,7 @@ namespace andengine.opengl.texture
             }
         }
 
-        private void applyTextureOptions(GL10 pGL)
+        private void ApplyTextureOptions(GL10 pGL)
         {
             TextureOptions textureOptions = this.mTextureOptions;
             pGL.GlTexParameterf(GL10Consts.GlTexture2d, GL10Consts.GlTextureMinFilter, textureOptions.mMinFilter);
@@ -298,26 +300,26 @@ namespace andengine.opengl.texture
             pGL.GlTexEnvf(GL10Consts.GlTextureEnv, GL10Consts.GlTextureEnvMode, textureOptions.mTextureEnvironment);
         }
 
-        private void allocateAndBindTextureOnHardware(GL10 pGL)
+        private void AllocateAndBindTextureOnHardware(GL10 pGL)
         {
-            GLHelper.bindTexture(pGL, this.mHardwareTextureID);
+            GLHelper.BindTexture(pGL, this.mHardwareTextureID);
 
-            Texture.sendPlaceholderBitmapToHardware(this.mWidth, this.mHeight);
+            Texture.SendPlaceholderBitmapToHardware(this.mWidth, this.mHeight);
         }
 
-        private void deleteTextureOnHardware(GL10 pGL)
+        private void DeleteTextureOnHardware(GL10 pGL)
         {
-            GLHelper.deleteTexture(pGL, this.mHardwareTextureID);
+            GLHelper.DeleteTexture(pGL, this.mHardwareTextureID);
         }
 
-        private static int generateHardwareTextureID(GL10 pGL)
+        private static int GenerateHardwareTextureID(GL10 pGL)
         {
-            pGL.glGenTextures(1, Texture.HARDWARETEXTUREID_FETCHER, 0);
+            pGL.GlGenTextures(1, Texture.HARDWARETEXTUREID_FETCHER, 0);
 
             return Texture.HARDWARETEXTUREID_FETCHER[0];
         }
 
-        private static void sendPlaceholderBitmapToHardware(int pWidth, int pHeight)
+        private static void SendPlaceholderBitmapToHardware(int pWidth, int pHeight)
         {
             Bitmap textureBitmap = Bitmap.CreateBitmap(pWidth, pHeight, Bitmap.Config.Argb8888);
 
@@ -340,9 +342,9 @@ namespace andengine.opengl.texture
             // Methods
             // ===========================================================
 
-            void onLoadedToHardware(Texture pTexture);
-            void onTextureSourceLoadExeption(Texture pTexture, ITextureSource pTextureSource, Throwable pThrowable);
-            void onUnloadedFromHardware(Texture pTexture);
+            void OnLoadedToHardware(Texture pTexture);
+            void OnTextureSourceLoadExeption(Texture pTexture, ITextureSource pTextureSource, Throwable pThrowable);
+            void OnUnloadedFromHardware(Texture pTexture);
 
             // ===========================================================
             // Inner and Anonymous Classes
@@ -375,26 +377,26 @@ namespace andengine.opengl.texture
 
         public /* static */ class TextureStateAdapter : ITextureStateListener
         {
-            public override void onLoadedToHardware(Texture pTexture) { }
+            public /* override */ virtual void OnLoadedToHardware(Texture pTexture) { }
 
-            public override void onTextureSourceLoadExeption(Texture pTexture, ITextureSource pTextureSource, Throwable pThrowable) { }
+            public /* override */ virtual void OnTextureSourceLoadExeption(Texture pTexture, ITextureSource pTextureSource, Throwable pThrowable) { }
 
-            public override void onUnloadedFromHardware(Texture pTexture) { }
+            public /* override */ virtual void OnUnloadedFromHardware(Texture pTexture) { }
         }
 
         public /* static */ class DebugTextureStateListener : ITextureStateListener
         {
-            public override void onLoadedToHardware(Texture pTexture)
+            public /* override */ virtual void OnLoadedToHardware(Texture pTexture)
             {
                 Debug.d("Texture loaded: " + pTexture.ToString());
             }
 
-            public override void onTextureSourceLoadExeption(Texture pTexture, ITextureSource pTextureSource, Throwable pThrowable)
+            public /* override */ virtual void OnTextureSourceLoadExeption(Texture pTexture, ITextureSource pTextureSource, Throwable pThrowable)
             {
                 Debug.e("Exception loading TextureSource. Texture: " + pTexture.ToString() + " TextureSource: " + pTextureSource.toString(), pThrowable);
             }
 
-            public override void onUnloadedFromHardware(Texture pTexture)
+            public/* override */ virtual void OnUnloadedFromHardware(Texture pTexture)
             {
                 Debug.d("Texture unloaded: " + pTexture.ToString());
             }
@@ -429,15 +431,15 @@ namespace andengine.opengl.texture
             // Getter & Setter
             // ===========================================================
 
-            public int TexturePositionX { get { return getTexturePositionX(); } }
-            public int TexturePositionY { get { return getTexturePositionY(); } }
+            public int TexturePositionX { get { return GetTexturePositionX(); } }
+            public int TexturePositionY { get { return GetTexturePositionY(); } }
 
-            public int getTexturePositionX()
+            public int GetTexturePositionX()
             {
                 return this.mTexturePositionX;
             }
 
-            public int getTexturePositionY()
+            public int GetTexturePositionY()
             {
                 return this.mTexturePositionY;
             }
@@ -446,30 +448,30 @@ namespace andengine.opengl.texture
             // Methods for/from SuperClass/Interfaces
             // ===========================================================
 
-            public int Width { get { return getWidth(); } }
-            public int Height { get { return getHeight(); } }
+            public int Width { get { return GetWidth(); } }
+            public int Height { get { return GetHeight(); } }
 
-            public int getWidth()
+            public int GetWidth()
             {
-                return this.mTextureSource.getWidth();
+                return this.mTextureSource.GetWidth();
             }
 
-            public int getHeight()
+            public int GetHeight()
             {
-                return this.mTextureSource.getHeight();
+                return this.mTextureSource.GetHeight();
             }
 
-            public Bitmap onLoadBitmap()
+            public Bitmap OnLoadBitmap()
             {
-                return this.mTextureSource.onLoadBitmap();
+                return this.mTextureSource.OnLoadBitmap();
             }
 
-            public override String ToString()
+            public override System.String ToString()
             {
                 return this.mTextureSource.ToString();
             }
 
-            public void setTexturePosition(int TexturePositionX, int TexturePositionY)
+            public void SetTexturePosition(int TexturePositionX, int TexturePositionY)
             {
                 this.mTexturePositionX = TexturePositionX;
                 this.mTexturePositionY = TexturePositionY;

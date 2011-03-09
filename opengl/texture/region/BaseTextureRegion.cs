@@ -49,131 +49,138 @@ namespace andengine.opengl.texture.region
             this.mWidth = pWidth;
             this.mHeight = pHeight;
 
-            this.mTextureRegionBuffer = this.onCreateTextureRegionBuffer();
+            this.mTextureRegionBuffer = this.OnCreateTextureRegionBuffer();
 
-            BufferObjectManager.getActiveInstance().loadBufferObject(this.mTextureRegionBuffer);
+            BufferObjectManager.GetActiveInstance().LoadBufferObject(this.mTextureRegionBuffer);
 
-            this.initTextureBuffer();
+            this.InitTextureBuffer();
         }
 
-        protected void initTextureBuffer()
+        protected virtual void InitTextureBuffer()
         {
-            this.updateTextureRegionBuffer();
+            this.UpdateTextureRegionBuffer();
         }
 
         // ===========================================================
         // Getter & Setter
         // ===========================================================
 
-        public int Width { get { return getWidth(); } set { setWidth(value); } }
-        public int Height { get { return getHeight(); } set { setHeight(value); } }
+        public virtual int Width { get { return GetWidth(); } set { SetWidth(value); } }
+        public virtual int Height { get { return GetHeight(); } set { SetHeight(value); } }
 
-        public int getWidth()
+        public int GetWidth()
         {
             return this.mWidth;
         }
 
-        public int getHeight()
+        public int GetHeight()
         {
             return this.mHeight;
         }
 
-        public void setWidth(int pWidth)
+        public void SetWidth(int pWidth)
         {
             this.mWidth = pWidth;
-            this.updateTextureRegionBuffer();
+            this.UpdateTextureRegionBuffer();
         }
 
-        public void setHeight(int pHeight)
+        public void SetHeight(int pHeight)
         {
             this.mHeight = pHeight;
-            this.updateTextureRegionBuffer();
+            this.UpdateTextureRegionBuffer();
         }
 
-        public void setTexturePosition(int pX, int pY)
+        public void SetTexturePosition(int pX, int pY)
         {
             this.mTexturePositionX = pX;
             this.mTexturePositionY = pY;
-            this.updateTextureRegionBuffer();
+            this.UpdateTextureRegionBuffer();
         }
 
-        public int TexturePositionX { get { return getTexturePositionX(); } }
-        public int TexturePositionY { get { return getTexturePositionY(); } }
+        public int TexturePositionX { get { return GetTexturePositionX(); } }
+        public int TexturePositionY { get { return GetTexturePositionY(); } }
 
-        public int getTexturePositionX()
+        public int GetTexturePositionX()
         {
             return this.mTexturePositionX;
         }
 
-        public int getTexturePositionY()
+        public int GetTexturePositionY()
         {
             return this.mTexturePositionY;
         }
 
-        public Texture getTexture()
+        public Texture GetTexture()
         {
             return this.mTexture;
         }
 
-        public BaseTextureRegionBuffer getTextureBuffer()
+        public virtual BaseTextureRegionBuffer GetTextureBuffer()
         {
             return this.mTextureRegionBuffer;
         }
 
-        public bool FlippedHoriontal { get { return isFlippedHorizontal(); } set { setFlippedHorizontal(value); } }
+        public bool FlippedHoriontal { get { return IsFlippedHorizontal(); } set { SetFlippedHorizontal(value); } }
 
-        public bool isFlippedHorizontal()
+        public bool IsFlippedHorizontal()
         {
-            return this.mTextureRegionBuffer.isFlippedHorizontal();
+            return this.mTextureRegionBuffer.IsFlippedHorizontal();
         }
 
-        public void setFlippedHorizontal(bool pFlippedHorizontal)
+        public void SetFlippedHorizontal(bool pFlippedHorizontal)
         {
-            this.mTextureRegionBuffer.setFlippedHorizontal(pFlippedHorizontal);
+            this.mTextureRegionBuffer.SetFlippedHorizontal(pFlippedHorizontal);
         }
 
-        public bool FlippedVertical { get { return isFlippedVertical(); } set { setFlippedVertical(value); } }
+        public bool FlippedVertical { get { return IsFlippedVertical(); } set { SetFlippedVertical(value); } }
 
-        public bool isFlippedVertical()
+        public bool IsFlippedVertical()
         {
-            return this.mTextureRegionBuffer.isFlippedVertical();
+            return this.mTextureRegionBuffer.IsFlippedVertical();
         }
 
-        public void setFlippedVertical(bool pFlippedVertical)
+        public void SetFlippedVertical(bool pFlippedVertical)
         {
-            this.mTextureRegionBuffer.setFlippedVertical(pFlippedVertical);
+            this.mTextureRegionBuffer.SetFlippedVertical(pFlippedVertical);
         }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected abstract BaseTextureRegionBuffer onCreateTextureRegionBuffer();
+        /* Covariance is not supported, see these for discussion and work arounds:
+         * 
+         * http://www.simple-talk.com/community/blogs/simonc/archive/2010/07/14/93495.aspx
+         * http://stackoverflow.com/questions/421851/how-to-return-subtype-in-overridden-method-of-subclass-in-c
+        protected abstract BaseTextureRegionBuffer OnCreateTextureRegionBuffer();
+        //*/
+        protected abstract BaseTextureRegionBuffer OnCreateTextureRegionBufferCore();
+        protected BaseTextureRegionBuffer OnCreateTextureRegionBuffer() { return OnCreateTextureRegionBufferCore(); }
 
         // ===========================================================
         // Methods
         // ===========================================================
 
-        protected void updateTextureRegionBuffer()
+        protected void UpdateTextureRegionBuffer()
         {
-            this.mTextureRegionBuffer.update();
+            this.mTextureRegionBuffer.Update();
         }
 
-        public void onApply(GL10 pGL)
+        public void OnApply(GL10 pGL)
         {
             if (GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS)
             {
                 GL11 gl11 = (GL11)pGL;
 
-                this.mTextureRegionBuffer.selectOnHardware(gl11);
+                this.mTextureRegionBuffer.SelectOnHardware(gl11);
 
-                GLHelper.bindTexture(pGL, this.mTexture.getHardwareTextureID());
-                GLHelper.texCoordZeroPointer(gl11);
+                GLHelper.BindTexture(pGL, this.mTexture.GetHardwareTextureID());
+                GLHelper.TexCoordZeroPointer(gl11);
             }
             else
             {
-                GLHelper.bindTexture(pGL, this.mTexture.getHardwareTextureID());
-                GLHelper.texCoordPointer(pGL, this.mTextureRegionBuffer.getFloatBuffer());
+                GLHelper.BindTexture(pGL, this.mTexture.GetHardwareTextureID());
+                GLHelper.TexCoordPointer(pGL, this.mTextureRegionBuffer.GetFloatBuffer());
             }
         }
 

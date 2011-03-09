@@ -48,31 +48,37 @@ namespace andengine.opengl.buffer
         // Getter & Setter
         // ===========================================================
 
-        public FastFloatBuffer getFloatBuffer()
+        public FastFloatBuffer GetFloatBuffer()
         {
             return this.mFloatBuffer;
         }
 
-        public int getHardwareBufferID()
+        public FastFloatBuffer FloatBuffer { get { return GetFloatBuffer(); } }
+
+        public int GetHardwareBufferID()
         {
             return this.mHardwareBufferID;
         }
 
-        public bool isLoadedToHardware()
+        public int HardwareBufferID { get { return GetHardwareBufferID(); } }
+
+        public bool IsLoadedToHardware()
         {
             return this.mLoadedToHardware;
         }
 
-        void setLoadedToHardware(bool pLoadedToHardware)
+        protected void SetLoadedToHardware(bool pLoadedToHardware)
         {
             this.mLoadedToHardware = pLoadedToHardware;
         }
+
+        public bool LoadedToHardware { get { return IsLoadedToHardware(); } set { SetLoadedToHardware(value); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public void setHardwareBufferNeedsUpdate()
+        public void SetHardwareBufferNeedsUpdate()
         {
             this.mHardwareBufferNeedsUpdate = true;
         }
@@ -81,7 +87,7 @@ namespace andengine.opengl.buffer
         // Methods
         // ===========================================================
 
-        public void selectOnHardware(GL11 pGL11)
+        public void SelectOnHardware(GL11 pGL11)
         {
             int hardwareBufferID = this.mHardwareBufferID;
             if (hardwareBufferID == -1)
@@ -89,7 +95,7 @@ namespace andengine.opengl.buffer
                 return;
             }
 
-            GLHelper.bindBuffer(pGL11, hardwareBufferID); // TODO Does this always need to be binded, or are just for buffers of the same 'type'(texture/vertex)?
+            GLHelper.BindBuffer(pGL11, hardwareBufferID); // TODO Does this always need to be binded, or are just for buffers of the same 'type'(texture/vertex)?
 
             if (this.mHardwareBufferNeedsUpdate)
             {
@@ -99,34 +105,34 @@ namespace andengine.opengl.buffer
                 object thisLock = new object();
                 lock (thisLock)
                 {
-                    GLHelper.bufferData(pGL11, this.mFloatBuffer.mByteBuffer, this.mDrawType);
+                    GLHelper.BufferData(pGL11, this.mFloatBuffer.mByteBuffer, this.mDrawType);
                 }
             }
         }
 
-        public void loadToHardware(GL11 pGL11)
+        public void LoadToHardware(GL11 pGL11)
         {
-            this.mHardwareBufferID = this.generateHardwareBufferID(pGL11);
+            this.mHardwareBufferID = this.GenerateHardwareBufferID(pGL11);
             //		Debug.d("BufferObject.loadToHardware(): ID = " + this.mHardwareBufferID);
 
             this.mLoadedToHardware = true;
         }
 
-        public void unloadFromHardware(GL11 pGL11)
+        public void UnloadFromHardware(GL11 pGL11)
         {
-            this.deleteBufferOnHardware(pGL11);
+            this.DeleteBufferOnHardware(pGL11);
 
             this.mHardwareBufferID = -1;
 
             this.mLoadedToHardware = false;
         }
 
-        private void deleteBufferOnHardware(GL11 pGL11)
+        private void DeleteBufferOnHardware(GL11 pGL11)
         {
-            GLHelper.deleteBuffer(pGL11, this.mHardwareBufferID);
+            GLHelper.DeleteBuffer(pGL11, this.mHardwareBufferID);
         }
 
-        private int generateHardwareBufferID(GL11 pGL11)
+        private int GenerateHardwareBufferID(GL11 pGL11)
         {
             pGL11.GlGenBuffers(1, HARDWAREBUFFERID_FETCHER, 0);
 

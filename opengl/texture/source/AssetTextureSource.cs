@@ -11,7 +11,8 @@ namespace andengine.opengl.texture.source
     using Bitmap = Android.Graphics.Bitmap;
     using BitmapFactory = Android.Graphics.BitmapFactory;
     using Config = Android.Graphics.Bitmap.Config;
-    using Java.Lang;
+    //using Java.Lang;
+    using String = System.String;
 
     /**
      * @author Nicolas Gramlich
@@ -43,13 +44,15 @@ namespace andengine.opengl.texture.source
             this.mAssetPath = pAssetPath;
 
             BitmapFactory.Options decodeOptions = new BitmapFactory.Options();
-            decodeOptions.inJustDecodeBounds = true;
+            decodeOptions.InJustDecodeBounds = true;
 
-            InputStream input = null;
+            //InputStream input = null;
+            System.IO.Stream input = null;
             try
             {
-                input = pContext.getAssets().open(pAssetPath);
-                BitmapFactory.decodeStream(input, null, decodeOptions);
+                //input = pContext.getAssets().open(pAssetPath);
+                input = pContext.Assets.Open(pAssetPath);
+                BitmapFactory.DecodeStream(input, null, decodeOptions);
             }
             catch (IOException e)
             {
@@ -57,11 +60,11 @@ namespace andengine.opengl.texture.source
             }
             finally
             {
-                StreamUtils.closeStream(input);
+                StreamUtils.CloseStream(input);
             }
 
-            this.mWidth = decodeOptions.outWidth;
-            this.mHeight = decodeOptions.outHeight;
+            this.mWidth = decodeOptions.OutWidth;
+            this.mHeight = decodeOptions.OutHeight;
         }
 
         AssetTextureSource(Context pContext, String pAssetPath, int pWidth, int pHeight)
@@ -72,7 +75,8 @@ namespace andengine.opengl.texture.source
             this.mHeight = pHeight;
         }
 
-        public override AssetTextureSource clone()
+        ITextureSource ITextureSource.Clone() { return (ITextureSource)this.Clone(); }
+        public /* override */ virtual AssetTextureSource Clone()
         {
             return new AssetTextureSource(this.mContext, this.mAssetPath, this.mWidth, this.mHeight);
         }
@@ -85,29 +89,31 @@ namespace andengine.opengl.texture.source
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public int Height { get { return getHeight(); } }
-        public int Width { get { return getWidth(); } }
+        public int Height { get { return GetHeight(); } }
+        public int Width { get { return GetWidth(); } }
 
-        public override int getHeight()
+        public /* override */ virtual int GetHeight()
         {
             return this.mHeight;
         }
 
-        public override int getWidth()
+        public /* override */ virtual int GetWidth()
         {
             return this.mWidth;
         }
 
-        public override Bitmap onLoadBitmap()
+        public /* override */ virtual Bitmap OnLoadBitmap()
         {
-            InputStream input = null;
+            System.IO.Stream input = null;
+            //InputStream input = null;
             try
             {
                 BitmapFactory.Options decodeOptions = new BitmapFactory.Options();
-                decodeOptions.inPreferredConfig = Config.Argb8888;
+                decodeOptions.InPreferredConfig = Config.Argb8888;
 
-                input = this.mContext.getAssets().open(this.mAssetPath);
-                return BitmapFactory.decodeStream(input, null, decodeOptions);
+                //input = this.mContext.getAssets().open(this.mAssetPath);
+                input = this.mContext.Assets.Open(this.mAssetPath);
+                return BitmapFactory.DecodeStream(input, null, decodeOptions);
             }
             catch (IOException e)
             {
@@ -116,11 +122,11 @@ namespace andengine.opengl.texture.source
             }
             finally
             {
-                StreamUtils.closeStream(input);
+                //StreamUtils.closeStream(input);
             }
         }
 
-        public String toString()
+        public override System.String ToString()
         {
             return this.GetType().Name + "(" + this.mAssetPath + ")";
         }

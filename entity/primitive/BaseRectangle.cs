@@ -28,7 +28,7 @@ namespace andengine.entity.primitive
         public BaseRectangle(float pX, float pY, float pWidth, float pHeight)
             : base(pX, pY, pWidth, pHeight, new RectangleVertexBuffer(GL11Consts.GlStaticDraw))
         {
-            this.updateVertexBuffer();
+            this.UpdateVertexBuffer();
         }
 
         public BaseRectangle(float pX, float pY, float pWidth, float pHeight, RectangleVertexBuffer pRectangleVertexBuffer)
@@ -44,14 +44,14 @@ namespace andengine.entity.primitive
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override RectangleVertexBuffer getVertexBuffer()
+        protected /* override */ new virtual RectangleVertexBuffer GetVertexBuffer()
         {
-            return (RectangleVertexBuffer)base.getVertexBuffer();
+            return (RectangleVertexBuffer)base.GetVertexBuffer();
         }
 
-        protected override void onUpdateVertexBuffer()
+        protected override void OnUpdateVertexBuffer()
         {
-            this.getVertexBuffer().update(this.mWidth, this.mHeight);
+            this.GetVertexBuffer().Update(this.mWidth, this.mHeight);
         }
 
         // ===========================================================

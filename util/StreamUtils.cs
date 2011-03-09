@@ -56,7 +56,7 @@ namespace andengine.util
         }
         */
 
-        public static String readFully(System.IO.Stream stream) {
+        public static String ReadFully(System.IO.Stream stream) {
             System.IO.StreamReader sr = new System.IO.StreamReader(stream);
             return new Java.Lang.String(sr.ReadToEnd());
         }
@@ -68,9 +68,9 @@ namespace andengine.util
             return StreamUtils.streamToBytes(input, -1);
         }
         */
-        public static byte[] streamToBytes(System.IO.Stream input)
+        public static byte[] StreamToBytes(System.IO.Stream input)
         {
-            return StreamUtils.streamToBytes(input, -1);
+            return StreamUtils.StreamToBytes(input, -1);
         }
 
         /*
@@ -82,10 +82,10 @@ namespace andengine.util
             return os.toByteArray();
         }
         */
-        public static byte[] streamToBytes(System.IO.Stream input, int pReadLimit)
+        public static byte[] StreamToBytes(System.IO.Stream input, int pReadLimit)
         {
             System.IO.MemoryStream mem = new System.IO.MemoryStream();
-            StreamUtils.copy(input, mem, pReadLimit);
+            StreamUtils.Copy(input, mem, pReadLimit);
             return mem.ToArray();
         }
 
@@ -96,9 +96,9 @@ namespace andengine.util
             StreamUtils.copy(input, output, -1);
         }
         */
-        public static void copy(System.IO.Stream inputStream, System.IO.Stream outputStream)
+        public static void Copy(System.IO.Stream inputStream, System.IO.Stream outputStream)
         {
-            StreamUtils.copy(inputStream, outputStream, -1);
+            StreamUtils.Copy(inputStream, outputStream, -1);
         }
 
         //public static bool copyAndClose(InputStream input, OutputStream output)
@@ -106,7 +106,7 @@ namespace andengine.util
         {
             try
             {
-                StreamUtils.copy(input, output, -1);
+                StreamUtils.Copy(input, output, -1);
                 return true;
             }
             catch (IOException e)
@@ -115,8 +115,8 @@ namespace andengine.util
             }
             finally
             {
-                StreamUtils.closeStream(input);
-                StreamUtils.closeStream(output);
+                StreamUtils.CloseStream(input);
+                StreamUtils.CloseStream(output);
             }
         }
 
@@ -162,7 +162,7 @@ namespace andengine.util
             output.flush();
         }
         */
-        public static void copy(System.IO.Stream input, System.IO.Stream output, int pByteLimit)
+        public static void Copy(System.IO.Stream input, System.IO.Stream output, int pByteLimit)
         {
             int bufferSize = pByteLimit < 0 ? IO_BUFFER_SIZE : (pByteLimit < IO_BUFFER_SIZE ? pByteLimit : IO_BUFFER_SIZE);
             byte[] b = new byte[bufferSize];
@@ -199,7 +199,7 @@ namespace andengine.util
          *
          * @param pStream The stream to close.
          */
-        public static void closeStream(Closeable pStream)
+        public static void CloseStream(Closeable pStream)
         {
             if (pStream != null)
             {
@@ -219,14 +219,14 @@ namespace andengine.util
          *
          * @param pStream The stream to close.
          */
-        public static void flushCloseStream(OutputStream pStream)
+        public static void FlushCloseStream(OutputStream pStream)
         {
             if (pStream != null)
             {
                 try
                 {
                     pStream.Flush();
-                    StreamUtils.closeStream(pStream);
+                    StreamUtils.CloseStream(pStream);
                 }
                 catch (IOException e)
                 {
@@ -240,14 +240,14 @@ namespace andengine.util
          *
          * @param pWriter The Writer to close.
          */
-        public static void flushCloseWriter(Writer pWriter)
+        public static void FlushCloseWriter(Writer pWriter)
         {
             if (pWriter != null)
             {
                 try
                 {
                     pWriter.Flush();
-                    StreamUtils.closeStream(pWriter);
+                    StreamUtils.CloseStream(pWriter);
                 }
                 catch (IOException e)
                 {

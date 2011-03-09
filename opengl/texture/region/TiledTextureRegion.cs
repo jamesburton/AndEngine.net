@@ -7,6 +7,7 @@ namespace andengine.opengl.texture.region
 
     using Texture = andengine.opengl.texture.Texture;
     using TiledTextureRegionBuffer = andengine.opengl.texture.region.buffer.TiledTextureRegionBuffer;
+    using BaseTextureRegionBuffer = andengine.opengl.texture.region.buffer.BaseTextureRegionBuffer;
 
     /**
      * @author Nicolas Gramlich
@@ -41,14 +42,14 @@ namespace andengine.opengl.texture.region
             this.mCurrentTileColumn = 0;
             this.mCurrentTileRow = 0;
 
-            this.initTextureBuffer();
+            this.InitTextureBuffer();
         }
 
-        protected override void initTextureBuffer()
+        protected override void InitTextureBuffer()
         {
             if (this.mTileRows != 0 && this.mTileColumns != 0)
             {
-                base.initTextureBuffer();
+                base.InitTextureBuffer();
             }
         }
 
@@ -56,94 +57,106 @@ namespace andengine.opengl.texture.region
         // Getter & Setter
         // ===========================================================
 
-        public override TiledTextureRegionBuffer getTextureBuffer()
+        public /* override */ new TiledTextureRegionBuffer GetTextureBuffer()
         {
             return (TiledTextureRegionBuffer)this.mTextureRegionBuffer;
         }
+        public TiledTextureRegionBuffer TextureBuffer { get { return GetTextureBuffer(); } }
 
-        public int getTileCount()
+        public int GetTileCount()
         {
             return this.mTileCount;
         }
+        public int TileCount { get { return GetTileCount(); } }
 
-        public int getTileWidth()
+        public int GetTileWidth()
         {
-            return base.getWidth() / this.mTileColumns;
+            return base.GetWidth() / this.mTileColumns;
         }
+        public override int Width { get { return GetWidth(); } }
 
-        public int getTileHeight()
+        public int GetTileHeight()
         {
-            return base.getHeight() / this.mTileRows;
+            return base.GetHeight() / this.mTileRows;
         }
+        public override int Height { get { return GetHeight(); } }
 
-        public int getCurrentTileColumn()
+        public int GetCurrentTileColumn()
         {
             return this.mCurrentTileColumn;
         }
+        public int CurrentTileColumn { get { return GetCurrentTileColumn(); } }
 
-        public int getCurrentTileRow()
+        public int GetCurrentTileRow()
         {
             return this.mCurrentTileRow;
         }
+        public int CurrentTileRow { get { return GetCurrentTileRow(); } }
 
-        public int getCurrentTileIndex()
+        public int GetCurrentTileIndex()
         {
             return this.mCurrentTileRow * this.mTileColumns + this.mCurrentTileColumn;
         }
+        public int CurrentTileIndex { get { return GetCurrentTileIndex(); } set { SetCurrentTileIndex(value); } }
 
-        public void setCurrentTileIndex(int pTileColumn, int pTileRow)
+        public void SetCurrentTileIndex(int pTileColumn, int pTileRow)
         {
             if (pTileColumn != this.mCurrentTileColumn || pTileRow != this.mCurrentTileRow)
             {
                 this.mCurrentTileColumn = pTileColumn;
                 this.mCurrentTileRow = pTileRow;
-                base.updateTextureRegionBuffer();
+                base.UpdateTextureRegionBuffer();
             }
         }
 
-        public void setCurrentTileIndex(int pTileIndex)
+        public void SetCurrentTileIndex(int pTileIndex)
         {
             if (pTileIndex < this.mTileCount)
             {
                 int tileColumns = this.mTileColumns;
-                this.setCurrentTileIndex(pTileIndex % tileColumns, pTileIndex / tileColumns);
+                this.SetCurrentTileIndex(pTileIndex % tileColumns, pTileIndex / tileColumns);
             }
         }
 
-        public float getTexturePositionOfCurrentTileX()
+        public float GetTexturePositionOfCurrentTileX()
         {
-            return base.getTexturePositionX() + this.mCurrentTileColumn * this.getTileWidth();
+            return base.GetTexturePositionX() + this.mCurrentTileColumn * this.GetTileWidth();
         }
+        public float TexturePositionOfCurrentTileX { get { return GetTexturePositionOfCurrentTileX(); } }
 
-        public float getTexturePositionOfCurrentTileY()
+        public float GetTexturePositionOfCurrentTileY()
         {
-            return base.getTexturePositionY() + this.mCurrentTileRow * this.getTileHeight();
+            return base.GetTexturePositionY() + this.mCurrentTileRow * this.GetTileHeight();
         }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override TiledTextureRegion clone()
+        public /* override */ virtual TiledTextureRegion Clone()
         {
-            TiledTextureRegion clone = new TiledTextureRegion(this.mTexture, this.getTexturePositionX(), this.getTexturePositionY(), this.getWidth(), this.getHeight(), this.mTileColumns, this.mTileRows);
-            clone.setCurrentTileIndex(this.mCurrentTileColumn, this.mCurrentTileRow);
+            TiledTextureRegion clone = new TiledTextureRegion(this.mTexture, this.GetTexturePositionX(), this.GetTexturePositionY(), this.GetWidth(), this.GetHeight(), this.mTileColumns, this.mTileRows);
+            clone.SetCurrentTileIndex(this.mCurrentTileColumn, this.mCurrentTileRow);
             return clone;
         }
 
-        protected override TiledTextureRegionBuffer onCreateTextureRegionBuffer()
+        //protected override TiledTextureRegionBuffer OnCreateTextureRegionBuffer()
+        protected override BaseTextureRegionBuffer OnCreateTextureRegionBufferCore()
         {
             return new TiledTextureRegionBuffer(this, GL11Consts.GlStaticDraw);
         }
+        //BaseTextureRegionBuffer BaseTextureRegion.OnCreateTextureRegionBuffer() { return (BaseTextureRegionBuffer)OnCreateTextureRegionBuffer(); }
+        //private BaseTextureRegionBuffer OnCreateTextureRegionBuffer() { return this.OnCreateTextureRegionBuffer(); }
+        protected new TiledTextureRegionBuffer OnCreateTextureRegionBuffer() { return (TiledTextureRegionBuffer)OnCreateTextureRegionBufferCore(); }
 
         // ===========================================================
         // Methods
         // ===========================================================
 
-        public void nextTile()
+        public void NextTile()
         {
-            int tileIndex = (this.getCurrentTileIndex() + 1) % this.getTileCount();
-            this.setCurrentTileIndex(tileIndex);
+            int tileIndex = (this.GetCurrentTileIndex() + 1) % this.GetTileCount();
+            this.SetCurrentTileIndex(tileIndex);
         }
 
         // ===========================================================

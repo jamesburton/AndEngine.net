@@ -45,22 +45,23 @@ namespace andengine.opengl.view
         {
         }
 
-        public void setRenderer(Engine pEngine)
+        public void SetRenderer(Engine pEngine)
         {
             this.SetOnTouchListener(pEngine);
             this.mRenderer = new Renderer(pEngine);
-            this.setRenderer(this.mRenderer);
+            this.SetRenderer(this.mRenderer);
         }
 
-        /**
+        /**         
          * @see android.view.View#measure(int, int)
          */
-        protected override void onMeasure(int pWidthMeasureSpec, int pHeightMeasureSpec)
+        protected override void OnMeasure(int pWidthMeasureSpec, int pHeightMeasureSpec)
         {
-            this.mRenderer.mEngine.getEngineOptions().getResolutionPolicy().onMeasure(this, pWidthMeasureSpec, pHeightMeasureSpec);
+            //this.mRenderer.mEngine.getEngineOptions().getResolutionPolicy().onMeasure(this, pWidthMeasureSpec, pHeightMeasureSpec);
+            this.mRenderer.mEngine.EngineOptions.ResolutionPolicy.OnMeasure(this, pWidthMeasureSpec, pHeightMeasureSpec);
         }
 
-        public void setMeasuredDimensionProxy(int pMeasuredWidth, int pMeasuredHeight)
+        public void SetMeasuredDimensionProxy(int pMeasuredWidth, int pMeasuredHeight)
         {
             this.SetMeasuredDimension(pMeasuredWidth, pMeasuredHeight);
         }
@@ -85,7 +86,7 @@ namespace andengine.opengl.view
          * @author Nicolas Gramlich
          * @since 11:45:59 - 08.03.2010
          */
-        public /* static */ class Renderer : GLSurfaceView.Renderer
+        public /* static */ new class Renderer : GLSurfaceView.Renderer
         {
             public static Renderer Instance;
             // ===========================================================
@@ -155,7 +156,8 @@ namespace andengine.opengl.view
                 pGL.GlFrontFace(GL10Consts.GlCcw);
                 pGL.GlCullFace(GL10Consts.GlBack);
 
-                GLHelper.EnableExtensions(pGL, this.mEngine.getEngineOptions().getRenderOptions());
+               // GLHelper.EnableExtensions(pGL, this.mEngine.getEngineOptions().getRenderOptions());
+                GLHelper.EnableExtensions(pGL, this.mEngine.EngineOptions.RenderOptions);
             }
 
             public /* override */ void OnDrawFrame(GL10 pGL)

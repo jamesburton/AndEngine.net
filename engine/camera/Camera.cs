@@ -124,7 +124,7 @@ namespace andengine.engine.camera
         public float NearZClippingPlane { get { return GetNearZClippingPlane(); } set { SetNearZClippingPlane(value); } }
         public float FarZClippingPlane { get { return GetFarZClippingPlane(); } set { SetFarZClippingPlane(value); } }
 
-        public void setZClippingPlanes(/* final */ float pNearZClippingPlane, /* final */ float pFarZClippingPlane)
+        public void SetZClippingPlanes(/* final */ float pNearZClippingPlane, /* final */ float pFarZClippingPlane)
         {
             this.mNearZ = pNearZClippingPlane;
             this.mFarZ = pFarZClippingPlane;
@@ -162,7 +162,7 @@ namespace andengine.engine.camera
 
         public float CenterY { get { return GetCenterY(); } }
 
-        public void SetCenter(/* final */ float pCenterX, /* final */ float pCenterY)
+        public virtual void SetCenter(/* final */ float pCenterX, /* final */ float pCenterY)
         {
             /* final */
             float dX = pCenterX - this.GetCenterX();
@@ -190,7 +190,7 @@ namespace andengine.engine.camera
         public void SetHUD(/* final */ HUD pHUD)
         {
             this.mHUD = pHUD;
-            pHUD.setCamera(this);
+            pHUD.SetCamera(this);
         }
 
         public bool HasHUD()

@@ -1,6 +1,6 @@
 namespace andengine.entity.scene.background
 {
-
+    using GL10 = Javax.Microedition.Khronos.Opengles.IGL10;
     //using andengine.util.modifier.IModifier;
     //using andengine.util.modifier.ModifierList;
 
@@ -12,6 +12,13 @@ namespace andengine.entity.scene.background
      */
     public abstract class BaseBackground : IBackground
     {
+        #region pass-thru abstract method stubs for interface support
+        public abstract void SetColor(float pRed, float pGreen, float pBlue);
+        public abstract void SetColor(float pRed, float pGreen, float pBlue, float pAlpha);
+
+        public abstract void OnDraw(GL10 gl10, andengine.engine.camera.Camera camera);
+        #endregion
+
         // ===========================================================
         // Constants
         // ===========================================================
@@ -20,11 +27,13 @@ namespace andengine.entity.scene.background
         // Fields
         // ===========================================================
 
-        private /* final */ readonly ModifierList<IBackground> mBackgroundModifiers = new ModifierList<IBackground>(this);
+        //private /* final */ readonly ModifierList<IBackground> mBackgroundModifiers = new ModifierList<IBackground>(this);
+        private /* final */ readonly ModifierList<IBackground> mBackgroundModifiers;
 
         // ===========================================================
         // Constructors
         // ===========================================================
+        public BaseBackground() { mBackgroundModifiers = new ModifierList<IBackground>(this); }
 
         // ===========================================================
         // Getter & Setter
@@ -34,29 +43,29 @@ namespace andengine.entity.scene.background
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void addBackgroundModifier(IModifier<IBackground> pBackgroundModifier)
+        public /* override */ virtual void AddBackgroundModifier(IModifier<IBackground> pBackgroundModifier)
         {
-            this.mBackgroundModifiers.Add pBackgroundModifier);
+            this.mBackgroundModifiers.Add(pBackgroundModifier);
         }
 
-        public override bool removeBackgroundModifier(IModifier<IBackground> pBackgroundModifier)
+        public /* override */ virtual bool RemoveBackgroundModifier(IModifier<IBackground> pBackgroundModifier)
         {
             return this.mBackgroundModifiers.Remove(pBackgroundModifier);
         }
 
-        public override void clearBackgroundModifiers()
+        public /* override */ virtual void ClearBackgroundModifiers()
         {
             this.mBackgroundModifiers.Clear();
         }
 
-        public override void onUpdate(float pSecondsElapsed)
+        public /* override */ virtual void OnUpdate(float pSecondsElapsed)
         {
-            this.mBackgroundModifiers.onUpdate(pSecondsElapsed);
+            this.mBackgroundModifiers.OnUpdate(pSecondsElapsed);
         }
 
-        public override void reset()
+        public /* override */ virtual void Reset()
         {
-            this.mBackgroundModifiers.reset();
+            this.mBackgroundModifiers.Reset();
         }
 
         // ===========================================================

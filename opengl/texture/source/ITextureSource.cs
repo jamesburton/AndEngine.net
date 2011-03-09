@@ -18,11 +18,11 @@ namespace andengine.opengl.texture.source
         // Methods
         // ===========================================================
 
-        int getWidth();
-        int getHeight();
+        int GetWidth();
+        int GetHeight();
 
-        ITextureSource clone();
+        ITextureSource Clone();
 
-        Bitmap onLoadBitmap();
+        Bitmap OnLoadBitmap();
     }
 }

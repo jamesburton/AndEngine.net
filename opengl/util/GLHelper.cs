@@ -455,7 +455,7 @@ namespace andengine.opengl.util
          * </br>
          * See topic: '<a href="http://groups.google.com/group/android-developers/browse_thread/thread/baa6c33e63f82fca">PNG loading that doesn't premultiply alpha?</a>'
          */
-        public static void glTexSubImage2D(/* final */ GL10 pGL, /* final */ int target, /* final */ int level, /* final */ int xoffset, /* final */ int yoffset, /* final */ Bitmap bitmap, /* final */ int format, /* final */ int type)
+        public static void GlTexSubImage2D(/* final */ GL10 pGL, /* final */ int target, /* final */ int level, /* final */ int xoffset, /* final */ int yoffset, /* final */ Bitmap bitmap, /* final */ int format, /* final */ int type)
         {
             /* final */
             int[] pixels = GLHelper.GetPixels(bitmap);

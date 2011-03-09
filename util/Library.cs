@@ -3,6 +3,7 @@ namespace andengine.util
 
     //using SparseArray = Android.Util.SparseArray;
     using Android.Util;
+    using IllegalArgumentException = Java.Lang.IllegalArgumentException;
 
     /**
      * @author Nicolas Gramlich
@@ -48,7 +49,7 @@ namespace andengine.util
         // Getter & Setter
         // ===========================================================
 
-        public void put(int pID, T pItem)
+        public void Put(int pID, T pItem)
         {
             //T existingItem = this.mItems.get(pID);
             T existingItem = (T)this.mItems.GetValue(pID);
@@ -62,12 +63,12 @@ namespace andengine.util
             }
         }
 
-        public void remove(int pID)
+        public void Remove(int pID)
         {
             this.mItems.RemoveAt(pID);
         }
 
-        public T get(int pID)
+        public T Get(int pID)
         {
             return (T)this.mItems.GetValue(pID);
         }

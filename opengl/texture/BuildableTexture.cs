@@ -83,15 +83,15 @@ namespace andengine.opengl.texture
          * Use {@link BuildableTexture#addTextureSource(ITextureSource)} instead.
          */
         /// @Deprecated
-        public TextureSourceWithLocation addTextureSource(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY)
+        public TextureSourceWithLocation AddTextureSource(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY)
         {
-            return base.addTextureSource(pTextureSource, pTexturePositionX, pTexturePositionY);
+            return base.AddTextureSource(pTextureSource, pTexturePositionX, pTexturePositionY);
         }
 
         public override void clearTextureSources()
         {
-            base.clearTextureSources();
-            this.mTextureSourcesToPlace.clear();
+            base.ClearTextureSources();
+            this.mTextureSourcesToPlace.Clear();
         }
 
         // ===========================================================
@@ -103,7 +103,7 @@ namespace andengine.opengl.texture
          * @param pTextureSource to be added.
          * @param pTextureRegion
          */
-        public void addTextureSource(ITextureSource pTextureSource, andengine.util.Callback<TextureSourceWithLocation> pCallback)
+        public void AddTextureSource(ITextureSource pTextureSource, andengine.util.Callback<TextureSourceWithLocation> pCallback)
         {
             this.mTextureSourcesToPlace.Add(new TextureSourceWithWithLocationCallback(pTextureSource, pCallback));
         }
@@ -112,7 +112,7 @@ namespace andengine.opengl.texture
          * Removes a {@link ITextureSource} before {@link BuildableTexture#build(ITextureBuilder)} is called.
          * @param pTextureSource to be removed.
          */
-        public void removeTextureSource(ITextureSource pTextureSource)
+        public void RemoveTextureSource(ITextureSource pTextureSource)
         {
             //final ArrayList<TextureSourceWithWithLocationCallback> textureSources = this.mTextureSourcesToPlace;
             List<TextureSourceWithWithLocationCallback> textureSources = this.mTextureSourcesToPlace;
@@ -134,7 +134,7 @@ namespace andengine.opengl.texture
          * @param pTextureSourcePackingAlgorithm the {@link ITextureBuilder} to use for packing the {@link ITextureSource} in this {@link BuildableTexture}.
          * @throws TextureSourcePackingException i.e. when the {@link ITextureSource}s didn't fit into this {@link BuildableTexture}.
          */
-        public void build(ITextureBuilder pTextureSourcePackingAlgorithm) /* throws TextureSourcePackingException */ {
+        public void Build(ITextureBuilder pTextureSourcePackingAlgorithm) /* throws TextureSourcePackingException */ {
             pTextureSourcePackingAlgorithm.pack(this, this.mTextureSourcesToPlace);
             this.mTextureSourcesToPlace.Clear();
             this.mUpdateOnHardwareNeeded = true;
@@ -167,7 +167,7 @@ namespace andengine.opengl.texture
                 mCallback = pCallback;
             }
 
-            public override TextureSourceWithWithLocationCallback clone()
+            public /* override */ TextureSourceWithWithLocationCallback Clone()
             {
                 return null;
             }
@@ -176,12 +176,12 @@ namespace andengine.opengl.texture
             // Getter & Setter
             // ===========================================================
 
-            public andengine.util.Callback<TextureSourceWithLocation> getCallback()
+            public andengine.util.Callback<TextureSourceWithLocation> GetCallback()
             {
                 return this.mCallback;
             }
 
-            public ITextureSource getTextureSource()
+            public ITextureSource GetTextureSource()
             {
                 return this.mTextureSource;
             }
@@ -190,23 +190,23 @@ namespace andengine.opengl.texture
             // Methods for/from SuperClass/Interfaces
             // ===========================================================
 
-            public int Width { get { return getWidth(); } }
+            public int Width { get { return GetWidth(); } }
 
-            public override int getWidth()
+            public /* override */ virtual int GetWidth()
             {
-                return this.mTextureSource.getWidth();
+                return this.mTextureSource.GetWidth();
             }
 
-            public int Height { get { return getHeight(); } }
+            public int Height { get { return GetHeight(); } }
 
-            public override int getHeight()
+            public /* override */ virtual int GetHeight()
             {
-                return this.mTextureSource.getHeight();
+                return this.mTextureSource.GetHeight();
             }
 
-            public override Bitmap onLoadBitmap()
+            public /* override */ virtual Bitmap OnLoadBitmap()
             {
-                return this.mTextureSource.onLoadBitmap();
+                return this.mTextureSource.OnLoadBitmap();
             }
 
             public override String ToString()

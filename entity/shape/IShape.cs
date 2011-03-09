@@ -19,89 +19,89 @@ namespace andengine.entity.shape
         // Methods
         // ===========================================================
 
-        /* public */ float getRed();
-        /* public */ float getGreen();
-        /* public */ float getBlue();
-        /* public */ float getAlpha();
-        /* public */ void setAlpha(/* final */ float pAlpha);
+        /* public */ float GetRed();
+        /* public */ float GetGreen();
+        /* public */ float GetBlue();
+        /* public */ float GetAlpha();
+        /* public */ void SetAlpha(/* final */ float pAlpha);
 
-        /* public */ void setColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue);
-        /* public */ void setColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue, /* final */ float pAlpha);
+        /* public */ void SetColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue);
+        /* public */ void SetColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue, /* final */ float pAlpha);
 
-        /* public */ float getX();
-        /* public */ float getY();
+        /* public */ float GetX();
+        /* public */ float GetY();
 
-        /* public */ float getBaseX();
-        /* public */ float getBaseY();
+        /* public */ float GetBaseX();
+        /* public */ float GetBaseY();
 
-        /* public */ float[] getSceneCenterCoordinates();
+        /* public */ float[] GetSceneCenterCoordinates();
 
-        /* public */ void setBasePosition();
-        /* public */ void setPosition(/* final */ IShape pOtherShape);
-        /* public */ void setPosition(/* final */ float pX, /* final */ float pY);
+        /* public */ void SetBasePosition();
+        /* public */ void SetPosition(/* final */ IShape pOtherShape);
+        /* public */ void SetPosition(/* final */ float pX, /* final */ float pY);
 
-        /* public */ float getVelocityX();
-        /* public */ float getVelocityY();
-        /* public */ void setVelocityX(/* final */ float pVelocityX);
-        /* public */ void setVelocityY(/* final */ float pVelocityY);
-        /* public */ void setVelocity(/* final */ float pVelocity);
-        /* public */ void setVelocity(/* final */ float pVelocityX, /* final */ float pVelocityY);
+        /* public */ float GetVelocityX();
+        /* public */ float GetVelocityY();
+        /* public */ void SetVelocityX(/* final */ float pVelocityX);
+        /* public */ void SetVelocityY(/* final */ float pVelocityY);
+        /* public */ void SetVelocity(/* final */ float pVelocity);
+        /* public */ void SetVelocity(/* final */ float pVelocityX, /* final */ float pVelocityY);
 
-        /* public */ float getAccelerationX();
-        /* public */ float getAccelerationY();
-        /* public */ void setAccelerationX(/* final */ float pAccelerationX);
-        /* public */ void setAccelerationY(/* final */ float pAccelerationY);
-        /* public */ void setAcceleration(/* final */ float pAcceleration);
-        /* public */ void setAcceleration(/* final */ float pAccelerationX, /* final */ float pAccelerationY);
-        /* public */ void accelerate(/* final */ float pAccelerationX, /* final */ float pAccelerationY);
+        /* public */ float GetAccelerationX();
+        /* public */ float GetAccelerationY();
+        /* public */ void SetAccelerationX(/* final */ float pAccelerationX);
+        /* public */ void SetAccelerationY(/* final */ float pAccelerationY);
+        /* public */ void SetAcceleration(/* final */ float pAcceleration);
+        /* public */ void SetAcceleration(/* final */ float pAccelerationX, /* final */ float pAccelerationY);
+        /* public */ void Accelerate(/* final */ float pAccelerationX, /* final */ float pAccelerationY);
 
-        /* public */ float getRotation();
-        /* public */ void setRotation(/* final */ float pRotation);
+        /* public */ float GetRotation();
+        /* public */ void SetRotation(/* final */ float pRotation);
 
-        /* public */ float getAngularVelocity();
-        /* public */ void setAngularVelocity(/* final */ float pAngularVelocity);
+        /* public */ float GetAngularVelocity();
+        /* public */ void SetAngularVelocity(/* final */ float pAngularVelocity);
 
-        /* public */ float getRotationCenterX();
-        /* public */ float getRotationCenterY();
-        /* public */ void setRotationCenterX(/* final */ float pRotationCenterX);
-        /* public */ void setRotationCenterY(/* final */ float pRotationCenterY);
-        /* public */ void setRotationCenter(/* final */ float pRotationCenterX, /* final */ float pRotationCenterY);
+        /* public */ float GetRotationCenterX();
+        /* public */ float GetRotationCenterY();
+        /* public */ void SetRotationCenterX(/* final */ float pRotationCenterX);
+        /* public */ void SetRotationCenterY(/* final */ float pRotationCenterY);
+        /* public */ void SetRotationCenter(/* final */ float pRotationCenterX, /* final */ float pRotationCenterY);
 
-        /* public */ bool isScaled();
-        /* public */ float getScaleX();
-        /* public */ float getScaleY();
-        /* public */ void setScaleX(/* final */ float pScaleX);
-        /* public */ void setScaleY(/* final */ float pScaleY);
-        /* public */ void setScale(/* final */ float pScale);
-        /* public */ void setScale(/* final */ float pScaleX, /* final */ float pScaleY);
+        /* public */ bool IsScaled();
+        /* public */ float GetScaleX();
+        /* public */ float GetScaleY();
+        /* public */ void SetScaleX(/* final */ float pScaleX);
+        /* public */ void SetScaleY(/* final */ float pScaleY);
+        /* public */ void SetScale(/* final */ float pScale);
+        /* public */ void SetScale(/* final */ float pScaleX, /* final */ float pScaleY);
 
-        /* public */ float getScaleCenterX();
-        /* public */ float getScaleCenterY();
-        /* public */ void setScaleCenterX(/* final */ float pScaleCenterX);
-        /* public */ void setScaleCenterY(/* final */ float pScaleCenterY);
-        /* public */ void setScaleCenter(/* final */ float pScaleCenterX, /* final */ float pScaleCenterY);
+        /* public */ float GetScaleCenterX();
+        /* public */ float GetScaleCenterY();
+        /* public */ void SetScaleCenterX(/* final */ float pScaleCenterX);
+        /* public */ void SetScaleCenterY(/* final */ float pScaleCenterY);
+        /* public */ void SetScaleCenter(/* final */ float pScaleCenterX, /* final */ float pScaleCenterY);
 
-        /* public */ bool isUpdatePhysics();
-        /* public */ void setUpdatePhysics(/* final */ bool pUpdatePhysics);
+        /* public */ bool IsUpdatePhysics();
+        /* public */ void SetUpdatePhysics(/* final */ bool pUpdatePhysics);
 
-        /* public */ bool isCullingEnabled();
-        /* public */ void setCullingEnabled(/* final */ bool pCullingEnabled);
+        /* public */ bool IsCullingEnabled();
+        /* public */ void SetCullingEnabled(/* final */ bool pCullingEnabled);
 
-        /* public */ float getWidth();
-        /* public */ float getHeight();
+        /* public */ float GetWidth();
+        /* public */ float GetHeight();
 
-        /* public */ float getBaseWidth();
-        /* public */ float getBaseHeight();
+        /* public */ float GetBaseWidth();
+        /* public */ float GetBaseHeight();
 
-        /* public */ float getWidthScaled();
-        /* public */ float getHeightScaled();
+        /* public */ float GetWidthScaled();
+        /* public */ float GetHeightScaled();
 
-        /* public */ void addShapeModifier(/* final */ IModifier<IShape> pShapeModifier);
-        /* public */ bool removeShapeModifier(/* final */ IModifier<IShape> pShapeModifier);
-        /* public */ void clearShapeModifiers();
+        /* public */ void AddShapeModifier(/* final */ IModifier<IShape> pShapeModifier);
+        /* public */ bool RemoveShapeModifier(/* final */ IModifier<IShape> pShapeModifier);
+        /* public */ void ClearShapeModifiers();
 
-        /* public */ bool collidesWith(/* final */ IShape pOtherShape);
+        /* public */ bool CollidesWith(/* final */ IShape pOtherShape);
 
-        /* public */ void setBlendFunction(/* final */ int pSourceBlendFunction, /* final */ int pDestinationBlendFunction);
+        /* public */ void SetBlendFunction(/* final */ int pSourceBlendFunction, /* final */ int pDestinationBlendFunction);
     }
 }

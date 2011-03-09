@@ -51,50 +51,51 @@ namespace andengine.entity.layer
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override int getEntityCount()
+        public override int GetEntityCount()
         {
             return this.mEntityCount;
         }
+        public int EntityCount { get { return GetEntityCount(); } }
 
-        protected override void onManagedDraw(GL10 pGL, Camera pCamera)
+        protected override void OnManagedDraw(GL10 pGL, Camera pCamera)
         {
             IEntity[] entities = this.mEntities;
             int entityCount = this.mEntityCount;
             for (int i = 0; i < entityCount; i++)
             {
-                entities[i].onDraw(pGL, pCamera);
+                entities[i].OnDraw(pGL, pCamera);
             }
         }
 
-        protected override void onManagedUpdate(float pSecondsElapsed)
+        protected override void OnManagedUpdate(float pSecondsElapsed)
         {
             IEntity[] entities = this.mEntities;
             int entityCount = this.mEntityCount;
             for (int i = 0; i < entityCount; i++)
             {
-                entities[i].onUpdate(pSecondsElapsed);
+                entities[i].OnUpdate(pSecondsElapsed);
             }
         }
 
-        public override void reset()
+        public override void Reset()
         {
-            base.reset();
+            base.Reset();
 
             IEntity[] entities = this.mEntities;
             for (int i = this.mEntityCount - 1; i >= 0; i--)
             {
-                entities[i].reset();
+                entities[i].Reset();
             }
         }
 
-        public override IEntity getEntity(int pIndex)
+        public override IEntity GetEntity(int pIndex)
         {
-            this.checkIndex(pIndex);
+            this.CheckIndex(pIndex);
 
             return this.mEntities[pIndex];
         }
 
-        public override void clear() {
+        public override void Clear() {
 		    IEntity[] entities = this.mEntities;
 		    for(int i = this.mEntityCount - 1; i >= 0; i--) {
 			    entities[i] = null;
@@ -102,7 +103,7 @@ namespace andengine.entity.layer
 		    this.mEntityCount = 0;
 	    }
 
-        public override void addEntity(IEntity pEntity)
+        public override void AddEntity(IEntity pEntity)
         {
             if (this.mEntityCount < this.mCapacity)
             {
@@ -111,14 +112,14 @@ namespace andengine.entity.layer
             }
         }
 
-        public override bool removeEntity(IEntity pEntity)
+        public override bool RemoveEntity(IEntity pEntity)
         {
-            return this.removeEntity(this.indexOfEntity(pEntity)) != null;
+            return this.RemoveEntity(this.indexOfEntity(pEntity)) != null;
         }
 
-        public override IEntity removeEntity(int pIndex)
+        public override IEntity RemoveEntity(int pIndex)
         {
-            this.checkIndex(pIndex);
+            this.CheckIndex(pIndex);
 
             IEntity[] entities = this.mEntities;
             IEntity retVal = entities[pIndex];
@@ -138,27 +139,27 @@ namespace andengine.entity.layer
             return retVal;
         }
 
-        public override bool removeEntity(IEntityMatcher pEntityMatcher)
+        public override bool RemoveEntity(IEntityMatcher pEntityMatcher)
         {
             IEntity[] entities = this.mEntities;
-            for (int i = entities.length - 1; i >= 0; i--)
+            for (int i = entities.Length - 1; i >= 0; i--)
             {
-                if (pEntityMatcher.matches(entities[i]))
+                if (pEntityMatcher.Matches(entities[i]))
                 {
-                    this.removeEntity(i);
+                    this.RemoveEntity(i);
                     return true;
                 }
             }
             return false;
         }
 
-        public override IEntity findEntity(IEntityMatcher pEntityMatcher)
+        public override IEntity FindEntity(IEntityMatcher pEntityMatcher)
         {
             IEntity[] entities = this.mEntities;
             for (int i = entities.Length - 1; i >= 0; i--)
             {
                 IEntity entity = entities[i];
-                if (pEntityMatcher.matches(entity))
+                if (pEntityMatcher.Matches(entity))
                 {
                     return entity;
                 }
@@ -166,7 +167,7 @@ namespace andengine.entity.layer
             return null;
         }
 
-        private int indexOfEntity(IEntity pEntity)
+        private int IndexOfEntity(IEntity pEntity)
         {
             IEntity[] entities = this.mEntities;
             for (int i = entities.Length - 1; i >= 0; i--)
@@ -180,19 +181,21 @@ namespace andengine.entity.layer
             return -1;
         }
 
-        public override void sortEntities()
+        public override void SortEntities()
         {
-            ZIndexSorter.getInstance().sort(this.mEntities, 0, this.mEntityCount);
+            //ZIndexSorter.getInstance().sort(this.mEntities, 0, this.mEntityCount);
+            ZIndexSorter.Instance.Sort(this.mEntities, 0, this.mEntityCount);
         }
 
-        public override void sortEntities(/*final Comparator<IEntity>*/ Comparer<IEntity> pEntityComparator)
+        public override void SortEntities(/*final Comparator<IEntity>*/ Comparer<IEntity> pEntityComparator)
         {
-            ZIndexSorter.getInstance().sort(this.mEntities, 0, this.mEntityCount, pEntityComparator);
+            //ZIndexSorter.getInstance().sort(this.mEntities, 0, this.mEntityCount, pEntityComparator);
+            ZIndexSorter.Instance.Sort(this.mEntities, 0, this.mEntityCount, pEntityComparator);
         }
 
-        public override IEntity replaceEntity(int pIndex, IEntity pEntity)
+        public override IEntity ReplaceEntity(int pIndex, IEntity pEntity)
         {
-            this.checkIndex(pIndex);
+            this.CheckIndex(pIndex);
 
             IEntity[] entities = this.mEntities;
             IEntity oldEntity = entities[pIndex];
@@ -200,13 +203,13 @@ namespace andengine.entity.layer
             return oldEntity;
         }
 
-        public override void setEntity(int pIndex, IEntity pEntity)
+        public override void SetEntity(int pIndex, IEntity pEntity)
         {
             this.checkIndex(pIndex);
 
             if (pIndex == this.mEntityCount)
             {
-                this.addEntity(pEntity);
+                this.AddEntity(pEntity);
             }
             else if (pIndex < this.mEntityCount)
             {
@@ -214,7 +217,7 @@ namespace andengine.entity.layer
             }
         }
 
-        public override void swapEntities(int pEntityIndexA, int pEntityIndexB)
+        public override void SwapEntities(int pEntityIndexA, int pEntityIndexB)
         {
             if (pEntityIndexA > this.mEntityCount)
             {
@@ -234,7 +237,7 @@ namespace andengine.entity.layer
         // Methods
         // ===========================================================
 
-        private void checkIndex(int pIndex)
+        private void CheckIndex(int pIndex)
         {
             if (pIndex < 0 || pIndex >= this.mEntityCount)
             {

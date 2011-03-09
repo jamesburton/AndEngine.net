@@ -66,7 +66,7 @@ namespace andengine.entity
             this.mIgnoreUpdate = pIgnoreUpdate;
         }
 
-        public bool IgnoreUpdate { get { return IsIgnoreUpdate(); } set { SetIgnoreUpdate(); } }
+        public bool IgnoreUpdate { get { return IsIgnoreUpdate(); } set { SetIgnoreUpdate(value); } }
 
         public /* override */ virtual int GetZIndex()
         {

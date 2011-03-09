@@ -37,24 +37,24 @@ namespace andengine.opengl.view
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void close()
+        public override void Close()
         {
-            this.flushBuilder();
+            this.FlushBuilder();
         }
 
-        public override void flush()
+        public override void Flush()
         {
-            this.flushBuilder();
+            this.FlushBuilder();
         }
 
-        public override void write(char[] buf, int offset, int count)
+        public override void Write(char[] buf, int offset, int count)
         {
             for (int i = 0; i < count; i++)
             {
                 char c = buf[offset + i];
                 if (c == '\n')
                 {
-                    this.flushBuilder();
+                    this.FlushBuilder();
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace andengine.opengl.view
         // Methods
         // ===========================================================
 
-        private void flushBuilder()
+        private void FlushBuilder()
         {
             if (this.mBuilder.Length() > 0)
             {

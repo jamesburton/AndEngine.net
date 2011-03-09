@@ -40,10 +40,10 @@ namespace andengine.entity.shape
         // Getter & Setter
         // ===========================================================
 
-        protected abstract void onUpdateVertexBuffer();
-        protected abstract VertexBuffer getVertexBuffer();
+        protected abstract void OnUpdateVertexBuffer();
+        protected abstract VertexBuffer GetVertexBuffer();
 
-        protected override void onApplyVertices(/* final */ GL10 pGL)
+        protected override void OnApplyVertices(/* final */ GL10 pGL)
         {
             if (GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS)
             {
@@ -51,12 +51,12 @@ namespace andengine.entity.shape
                 /* final */
                 GL11 gl11 = (GL11)pGL;
 
-                this.getVertexBuffer().selectOnHardware(gl11);
-                GLHelper.vertexZeroPointer(gl11);
+                this.GetVertexBuffer().SelectOnHardware(gl11);
+                GLHelper.VertexZeroPointer(gl11);
             }
             else
             {
-                GLHelper.vertexPointer(pGL, this.getVertexBuffer().getFloatBuffer());
+                GLHelper.VertexPointer(pGL, this.GetVertexBuffer().GetFloatBuffer());
             }
         }
 
@@ -68,9 +68,9 @@ namespace andengine.entity.shape
         // Methods
         // ===========================================================
 
-        protected void updateVertexBuffer()
+        protected void UpdateVertexBuffer()
         {
-            this.onUpdateVertexBuffer();
+            this.OnUpdateVertexBuffer();
         }
 
         // ===========================================================

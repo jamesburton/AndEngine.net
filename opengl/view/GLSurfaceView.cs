@@ -1095,7 +1095,7 @@ namespace andengine.opengl.view
              *            the EGLConfig of the created surface. Can be used to
              *            create matching pbuffers.
              */
-            void onSurfaceCreated(GL10 gl, EGLConfig config);
+            void OnSurfaceCreated(GL10 gl, EGLConfig config);
 
             /**
              * Called when the surface changed size.
@@ -1123,7 +1123,7 @@ namespace andengine.opengl.view
              * @param width
              * @param height
              */
-            void onSurfaceChanged(GL10 gl, int width, int height);
+            void OnSurfaceChanged(GL10 gl, int width, int height);
 
             /**
              * Called to draw the current frame.
@@ -1143,7 +1143,7 @@ namespace andengine.opengl.view
              *            the GL interface. Use <code>instanceof</code> to test if
              *            the interface supports GL11 or higher interfaces.
              */
-            void onDrawFrame(GL10 gl);
+            void OnDrawFrame(GL10 gl);
         }
     }
 }

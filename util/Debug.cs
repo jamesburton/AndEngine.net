@@ -4,7 +4,10 @@ namespace andengine.util
 
     using andengine.util.constants/*.Constants*/;
     using Android.Util;
-    using Java.Lang;
+    //using Java.Lang;
+    using String = System.String;
+    using Throwable = Java.Lang.Throwable;
+    using IllegalArgumentException = Java.Lang.IllegalArgumentException;
 
     //import android.util.Log;
 
@@ -31,21 +34,21 @@ namespace andengine.util
         }
         public DebugLevel(DebugLevel debugLevel)
         {
-            init(debugLevel.DebugValue);
+            Init(debugLevel.DebugValue);
         }
         public DebugLevel(DebugValueEnum DebugValue)
         {
-            init(DebugValue);
+            Init(DebugValue);
         }
-        protected void init(DebugValueEnum DebugValue)
+        protected void Init(DebugValueEnum DebugValue)
         {
             this.DebugValue = DebugValue;
         }
-        public bool isSameOrLessThan(DebugLevel otherDebugLevel)
+        public bool IsSameOrLessThan(DebugLevel otherDebugLevel)
         {
-            return isSameOrLessThan(otherDebugLevel.DebugValue);
+            return IsSameOrLessThan(otherDebugLevel.DebugValue);
         }
-        public bool isSameOrLessThan(DebugValueEnum DebugValue)
+        public bool IsSameOrLessThan(DebugValueEnum DebugValue)
         {
             return (this.DebugValue <= DebugValue);
         }
@@ -75,7 +78,7 @@ namespace andengine.util
         // Getter & Setter
         // ===========================================================
 
-        public static void setDebugLevel(/* final */ DebugLevel pDebugLevel)
+        public static void SetDebugLevel(/* final */ DebugLevel pDebugLevel)
         {
             if (pDebugLevel == null)
             {
@@ -84,10 +87,12 @@ namespace andengine.util
             Debug.DEBUGLEVEL = pDebugLevel;
         }
 
-        public static DebugLevel getDebugLevel()
+        public static DebugLevel GetDebugLevel()
         {
             return Debug.DEBUGLEVEL;
         }
+
+        public static DebugLevel DebugLevel { get { return GetDebugLevel(); } set { SetDebugLevel(value); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
@@ -97,14 +102,15 @@ namespace andengine.util
         // Methods
         // ===========================================================
 
-        public static void v(System.String pMessage) { v(new Java.Lang.String(pMessage)); }
-        public static void v(/* final */ String pMessage)
+        //public static void V(System.String pMessage) { V(new Java.Lang.String(pMessage)); }
+        public static void V(Java.Lang.String pMessage) { V(pMessage.ToString()); }
+        public static void V(/* final */ String pMessage)
         {
             Debug.v(pMessage, null);
         }
 
-        public static void v(/* final */ System.String pMessage, /* final */ Throwable pThrowable)
-        { v(new Java.Lang.String(pMessage), pThrowable); }
+        //public static void v(/* final */ System.String pMessage, /* final */ Throwable pThrowable) { v(new Java.Lang.String(pMessage), pThrowable); } 
+
         public static void v(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
             if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.VERBOSE))
@@ -114,16 +120,18 @@ namespace andengine.util
             }
         }
 
+        /*
         public static void d(System.String pMessage)
         {
             d(new Java.Lang.String(pMessage));
-        }
+        } */
 
         public static void d(/* final */ String pMessage)
         {
             Debug.d(pMessage, null);
         }
 
+        //public static void d(System.String pMessage, Throwable pThrowable) { Debug.d(new Java.Lang.String(pMessage), pThrowable); }
         public static void d(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
             if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.DEBUG))
@@ -141,7 +149,7 @@ namespace andengine.util
         {
             if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.INFO))
             {
-                Log.i(DEBUGTAG, pMessage, pThrowable);
+                Log.Info(DEBUGTAG, pMessage, pThrowable);
             }
         }
 
@@ -157,15 +165,15 @@ namespace andengine.util
 
         public static void w(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
-            if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.WARNING))
+            if (DEBUGLEVEL.IsSameOrLessThan(DebugLevel.WARNING))
             {
                 if (pThrowable == null)
                 {
-                    Log.w(DEBUGTAG, pMessage, new Exception());
+                    Log.Warn(DEBUGTAG, pMessage, new Exception());
                 }
                 else
                 {
-                    Log.w(DEBUGTAG, pMessage, pThrowable);
+                    Log.Warn(DEBUGTAG, pMessage, pThrowable);
                 }
             }
         }
@@ -182,15 +190,15 @@ namespace andengine.util
 
         public static void e(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
-            if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.ERROR))
+            if (DEBUGLEVEL.IsSameOrLessThan(DebugLevel.ERROR))
             {
                 if (pThrowable == null)
                 {
-                    Log.e(DEBUGTAG, pMessage, new Exception());
+                    Log.Error(DEBUGTAG, pMessage, new Exception());
                 }
                 else
                 {
-                    Log.e(DEBUGTAG, pMessage, pThrowable);
+                    Log.Error(DEBUGTAG, pMessage, pThrowable);
                 }
             }
         }

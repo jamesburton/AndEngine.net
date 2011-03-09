@@ -54,7 +54,8 @@ namespace andengine.opengl.texture.source
             this.mHeight = pHeight;
         }
 
-        public override ResourceTextureSource clone()
+        ITextureSource ITextureSource.Clone() { return (ITextureSource)this.Clone(); }
+        public /* override */ virtual ResourceTextureSource Clone()
         {
             return new ResourceTextureSource(this.mContext, this.mDrawableResourceID, this.mWidth, this.mHeight);
         }
@@ -67,20 +68,20 @@ namespace andengine.opengl.texture.source
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public int Height { get { return getHeight(); } }
-        public int Width { get { return getWidth(); } }
+        public int Height { get { return GetHeight(); } }
+        public int Width { get { return GetWidth(); } }
 
-        public override int getHeight()
+        public /* override */ virtual int GetHeight()
         {
             return this.mHeight;
         }
 
-        public override int getWidth()
+        public /* override */ virtual int GetWidth()
         {
             return this.mWidth;
         }
 
-        public /* override */ Bitmap onLoadBitmap()
+        public /* override */ virtual Bitmap OnLoadBitmap()
         {
             BitmapFactory.Options decodeOptions = new BitmapFactory.Options();
             decodeOptions.InPreferredConfig = Config.Argb8888;

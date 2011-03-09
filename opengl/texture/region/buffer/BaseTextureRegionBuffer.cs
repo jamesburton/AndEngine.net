@@ -34,7 +34,8 @@ namespace andengine.opengl.texture.region.buffer
         // ===========================================================
 
         public BaseTextureRegionBuffer(BaseTextureRegion pBaseTextureRegion, int pDrawType)
-            : base(2 * VERTICES_PER_RECTANGLE, pDrawType)
+            //: base(2 * VERTICES_PER_RECTANGLE, pDrawType)
+            : base(2 * RectangleVertexBuffer.VERTICES_PER_RECTANGLE, pDrawType)
         {
             this.mTextureRegion = pBaseTextureRegion;
         }
@@ -43,40 +44,40 @@ namespace andengine.opengl.texture.region.buffer
         // Getter & Setter
         // ===========================================================
 
-        public BaseTextureRegion getTextureRegion()
+        public BaseTextureRegion GetTextureRegion()
         {
             return this.mTextureRegion;
         }
 
-        public bool FlippedHoriontal { get { return isFlippedHorizontal(); } set { setFlippedHorizontal(value); } }
+        public bool FlippedHoriontal { get { return IsFlippedHorizontal(); } set { SetFlippedHorizontal(value); } }
 
-        public bool isFlippedHorizontal()
+        public bool IsFlippedHorizontal()
         {
             return this.mFlippedHorizontal;
         }
 
-        public void setFlippedHorizontal(bool pFlippedHorizontal)
+        public void SetFlippedHorizontal(bool pFlippedHorizontal)
         {
             if (this.mFlippedHorizontal != pFlippedHorizontal)
             {
                 this.mFlippedHorizontal = pFlippedHorizontal;
-                this.update();
+                this.Update();
             }
         }
 
-        public bool FlippedVertical { get { return isFlippedVertical(); } set { setFlippedVertical(value); } }
+        public bool FlippedVertical { get { return IsFlippedVertical(); } set { SetFlippedVertical(value); } }
 
-        public bool isFlippedVertical()
+        public bool IsFlippedVertical()
         {
             return this.mFlippedVertical;
         }
 
-        public void setFlippedVertical(bool pFlippedVertical)
+        public void SetFlippedVertical(bool pFlippedVertical)
         {
             if (this.mFlippedVertical != pFlippedVertical)
             {
                 this.mFlippedVertical = pFlippedVertical;
-                this.update();
+                this.Update();
             }
         }
 
@@ -84,13 +85,13 @@ namespace andengine.opengl.texture.region.buffer
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected abstract float getX1();
+        protected abstract float GetX1();
 
-        protected abstract float getY1();
+        protected abstract float GetY1();
 
-        protected abstract float getX2();
+        protected abstract float GetX2();
 
-        protected abstract float getY2();
+        protected abstract float GetY2();
 
         // ===========================================================
         // Methods
@@ -98,20 +99,20 @@ namespace andengine.opengl.texture.region.buffer
 
         //public synchronized void update() {
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void update()
+        public void Update()
         {
             BaseTextureRegion textureRegion = this.mTextureRegion;
-            Texture texture = textureRegion.getTexture();
+            Texture texture = textureRegion.GetTexture();
 
             if (texture == null)
             {
                 return;
             }
 
-            int x1 = Float.FloatToRawIntBits(this.getX1());
-            int y1 = Float.FloatToRawIntBits(this.getY1());
-            int x2 = Float.FloatToRawIntBits(this.getX2());
-            int y2 = Float.FloatToRawIntBits(this.getY2());
+            int x1 = Float.FloatToRawIntBits(this.GetX1());
+            int y1 = Float.FloatToRawIntBits(this.GetY1());
+            int x2 = Float.FloatToRawIntBits(this.GetX2());
+            int y2 = Float.FloatToRawIntBits(this.GetY2());
 
             int[] bufferData = this.mBufferData;
 
@@ -178,12 +179,12 @@ namespace andengine.opengl.texture.region.buffer
                 }
             }
 
-            FastFloatBuffer buffer = this.getFloatBuffer();
-            buffer.position(0);
-            buffer.put(bufferData);
-            buffer.position(0);
+            FastFloatBuffer buffer = this.GetFloatBuffer();
+            buffer.Position(0);
+            buffer.Put(bufferData);
+            buffer.Position(0);
 
-            base.setHardwareBufferNeedsUpdate();
+            base.SetHardwareBufferNeedsUpdate();
         }
 
         // ===========================================================

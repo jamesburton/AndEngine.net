@@ -205,10 +205,11 @@ namespace andengine.opengl.texture.builder
             {
                 return System.String.Format("@: {0}/{1} * {2}x{3}", this.mLeft, this.mTop, this.mWidth, this.mHeight);
             }
+            /*
             public override Java.Lang.String toString()
             {
                 return new Java.Lang.String(ToString());
-            }
+            } //*/
 
             // ===========================================================
             // Methods

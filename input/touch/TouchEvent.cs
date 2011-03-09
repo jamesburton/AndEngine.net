@@ -45,15 +45,15 @@ namespace andengine.input.touch
         // Constructors
         // ===========================================================
 
-        public static TouchEvent obtain(/* final */ float pX, /* final */ float pY, /* final int */ MotionEventActions pAction, /* final */ int pPointerID, /* final */ MotionEvent pMotionEvent)
+        public static TouchEvent Obtain(/* final */ float pX, /* final */ float pY, /* final int */ MotionEventActions pAction, /* final */ int pPointerID, /* final */ MotionEvent pMotionEvent)
         {
             /* final */
-            TouchEvent touchEvent = TOUCHEVENT_POOL.obtainPoolItem();
-            touchEvent.set(pX, pY, pAction, pPointerID, pMotionEvent);
+            TouchEvent touchEvent = TOUCHEVENT_POOL.ObtainPoolItem();
+            touchEvent.Set(pX, pY, pAction, pPointerID, pMotionEvent);
             return touchEvent;
         }
 
-        private void set(/* final */ float pX, /* final */ float pY, /* final int */ MotionEventActions pAction, /* final */ int pPointerID, /* final */ MotionEvent pMotionEvent)
+        private void Set(/* final */ float pX, /* final */ float pY, /* final int */ MotionEventActions pAction, /* final */ int pPointerID, /* final */ MotionEvent pMotionEvent)
         {
             this.mX = pX;
             this.mY = pY;
@@ -64,59 +64,64 @@ namespace andengine.input.touch
 
         public void recycle()
         {
-            TOUCHEVENT_POOL.recyclePoolItem(this);
+            TOUCHEVENT_POOL.RecyclePoolItem(this);
         }
 
         public static void recycle(/* final */ TouchEvent pTouchEvent)
         {
-            TOUCHEVENT_POOL.recyclePoolItem(pTouchEvent);
+            TOUCHEVENT_POOL.RecyclePoolItem(pTouchEvent);
         }
 
         // ===========================================================
         // Getter & Setter
         // ===========================================================
 
-        public float getX()
+        public float GetX()
         {
             return this.mX;
         }
+        public float X { get { return GetX(); } }
 
-        public float getY()
+        public float GetY()
         {
             return this.mY;
         }
+        public float Y { get { return GetY(); } }
 
-        public void set(/* final */ float pX, /* final */ float pY)
+        public void Set(/* final */ float pX, /* final */ float pY)
         {
             this.mX = pX;
             this.mY = pY;
         }
 
-        public void offset(/* final */ float pDeltaX, /* final */ float pDeltaY)
+        public void Offset(/* final */ float pDeltaX, /* final */ float pDeltaY)
         {
             this.mX += pDeltaX;
             this.mY += pDeltaY;
         }
 
-        public int getPointerID()
+        public int GetPointerID()
         {
             return this.mPointerID;
         }
+        public int PointerID { get { return GetPointerID(); } }
 
-        public /* int */ MotionEventActions getAction()
+        public /* int */ MotionEventActions GetAction()
         {
             return this.mAction;
         }
+        public MotionEventActions Action { get { return GetAction(); } }
 
         /**
          * Provides the raw {@link MotionEvent} that originally caused this {@link TouchEvent}.
          * The coordinates of this {@link MotionEvent} are in surface-coordinates!
          * @return
          */
-        public MotionEvent getMotionEvent()
+        public MotionEvent GetMotionEvent()
         {
             return this.mMotionEvent;
         }
+        public MotionEvent MotionEvent { get { return GetMotionEvent(); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
@@ -136,7 +141,7 @@ namespace andengine.input.touch
             // Methods for/from SuperClass/Interfaces
             // ===========================================================
 
-            protected override TouchEvent onAllocatePoolItem()
+            protected override TouchEvent OnAllocatePoolItem()
             {
                 return new TouchEvent();
             }

@@ -94,27 +94,27 @@ namespace andengine.entity.shape
         // Getter & Setter
         // ===========================================================
 
-        public float Red { get { return getRed(); } }
-        public float Green { get { return getGreen(); } }
-        public float Blue { get { return getBlue(); } }
-        public float Alpha { get { return getAlpha(); } set { setAlpha(value); } }
+        public float Red { get { return GetRed(); } }
+        public float Green { get { return GetGreen(); } }
+        public float Blue { get { return GetBlue(); } }
+        public float Alpha { get { return GetAlpha(); } set { SetAlpha(value); } }
 
-        public override float getRed()
+        public override float GetRed()
         {
             return this.mRed;
         }
 
-        public override float getGreen()
+        public override float GetGreen()
         {
             return this.mGreen;
         }
 
-        public override float getBlue()
+        public override float GetBlue()
         {
             return this.mBlue;
         }
 
-        public override float getAlpha()
+        public override float GetAlpha()
         {
             return this.mAlpha;
         }
@@ -122,7 +122,7 @@ namespace andengine.entity.shape
         /**
          * @param pAlpha from <code>0.0f</code> (invisible) to <code>1.0f</code> (opaque)
          */
-        public override void setAlpha(/* final */ float pAlpha)
+        public override void SetAlpha(/* final */ float pAlpha)
         {
             this.mAlpha = pAlpha;
         }
@@ -132,7 +132,7 @@ namespace andengine.entity.shape
          * @param pGreen from <code>0.0f</code> to <code>1.0f</code>
          * @param pBlue from <code>0.0f</code> to <code>1.0f</code>
          */
-        public override void setColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue)
+        public override void SetColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue)
         {
             this.mRed = pRed;
             this.mGreen = pGreen;
@@ -145,7 +145,7 @@ namespace andengine.entity.shape
          * @param pBlue from <code>0.0f</code> to <code>1.0f</code>
          * @param pAlpha from <code>0.0f</code> (invisible) to <code>1.0f</code> (opaque)
          */
-        public override void setColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue, /* final */ float pAlpha)
+        public override void SetColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue, /* final */ float pAlpha)
         {
             this.mRed = pRed;
             this.mGreen = pGreen;
@@ -153,121 +153,121 @@ namespace andengine.entity.shape
             this.mAlpha = pAlpha;
         }
 
-        public float X { get { return getX(); } }
-        public float Y { get { return getY(); } }
-        public float BaseX { get { return getBaseX(); } }
-        public float BaseY { get { return getBaseY(); } }
+        public float X { get { return GetX(); } }
+        public float Y { get { return GetY(); } }
+        public float BaseX { get { return GetBaseX(); } }
+        public float BaseY { get { return GetBaseY(); } }
 
-        public override float getX()
+        public override float GetX()
         {
             return this.mX;
         }
 
-        public override float getY()
+        public override float GetY()
         {
             return this.mY;
         }
 
-        public override float getBaseX()
+        public override float GetBaseX()
         {
             return this.mBaseX;
         }
 
-        public override float getBaseY()
+        public override float GetBaseY()
         {
             return this.mBaseY;
         }
 
-        public override void setPosition(/* final */ IShape pOtherShape)
+        public override void SetPosition(/* final */ IShape pOtherShape)
         {
-            this.setPosition(pOtherShape.getX(), pOtherShape.getY());
+            this.SetPosition(pOtherShape.GetX(), pOtherShape.GetY());
         }
 
-        public override void setPosition(/* final */ float pX, /* final */ float pY)
+        public override void SetPosition(/* final */ float pX, /* final */ float pY)
         {
             this.mX = pX;
             this.mY = pY;
-            this.onPositionChanged();
+            this.OnPositionChanged();
         }
 
-        public override void setBasePosition()
+        public override void SetBasePosition()
         {
             this.mX = this.mBaseX;
             this.mY = this.mBaseY;
-            this.onPositionChanged();
+            this.OnPositionChanged();
         }
 
-        public float VelocityX { get { return getVelocityX(); } set { setVelocityX(value); } }
-        public float VelocityY { get { return getVelocityY(); } set { setVelocityY(value); } }
+        public float VelocityX { get { return GetVelocityX(); } set { SetVelocityX(value); } }
+        public float VelocityY { get { return GetVelocityY(); } set { SetVelocityY(value); } }
 
-        public override float getVelocityX()
+        public override float GetVelocityX()
         {
             return this.mVelocityX;
         }
 
-        public override float getVelocityY()
+        public override float GetVelocityY()
         {
             return this.mVelocityY;
         }
 
-        public override void setVelocityX(/* final */ float pVelocityX)
+        public override void SetVelocityX(/* final */ float pVelocityX)
         {
             this.mVelocityX = pVelocityX;
         }
 
-        public override void setVelocityY(/* final */ float pVelocityY)
+        public override void SetVelocityY(/* final */ float pVelocityY)
         {
             this.mVelocityY = pVelocityY;
         }
 
-        public override void setVelocity(/* final */ float pVelocity)
+        public override void SetVelocity(/* final */ float pVelocity)
         {
             this.mVelocityX = pVelocity;
             this.mVelocityY = pVelocity;
         }
 
-        public override void setVelocity(/* final */ float pVelocityX, /* final */ float pVelocityY)
+        public override void SetVelocity(/* final */ float pVelocityX, /* final */ float pVelocityY)
         {
             this.mVelocityX = pVelocityX;
             this.mVelocityY = pVelocityY;
         }
 
-        public float AccelerationX { get { return getAccelerationX(); } set { setAccelerationX(value); } }
-        public float AccelerationY { get { return getAccelerationY(); } set { setAccelerationY(value); } }
+        public float AccelerationX { get { return GetAccelerationX(); } set { SetAccelerationX(value); } }
+        public float AccelerationY { get { return GetAccelerationY(); } set { SetAccelerationY(value); } }
 
-        public override float getAccelerationX()
+        public override float GetAccelerationX()
         {
             return this.mAccelerationX;
         }
 
-        public override float getAccelerationY()
+        public override float GetAccelerationY()
         {
             return this.mAccelerationY;
         }
 
-        public override void setAccelerationX(/* final */ float pAccelerationX)
+        public override void SetAccelerationX(/* final */ float pAccelerationX)
         {
             this.mAccelerationX = pAccelerationX;
         }
 
-        public override void setAccelerationY(/* final */ float pAccelerationY)
+        public override void SetAccelerationY(/* final */ float pAccelerationY)
         {
             this.mAccelerationY = pAccelerationY;
         }
 
-        public override void setAcceleration(/* final */ float pAccelerationX, /* final */ float pAccelerationY)
+        public override void SetAcceleration(/* final */ float pAccelerationX, /* final */ float pAccelerationY)
         {
             this.mAccelerationX = pAccelerationX;
             this.mAccelerationY = pAccelerationY;
         }
 
-        public override void setAcceleration(/* final */ float pAcceleration)
+        public override void SetAcceleration(/* final */ float pAcceleration)
         {
             this.mAccelerationX = pAcceleration;
             this.mAccelerationY = pAcceleration;
         }
 
-        public override void accelerate(/* final */ float pAccelerationX, /* final */ float pAccelerationY)
+        public override void Accelerate(/* final */ float pAccelerationX, /* final */ float pAccelerationY)
         {
             this.mAccelerationX += pAccelerationX;
             this.mAccelerationY += pAccelerationY;
@@ -275,129 +275,129 @@ namespace andengine.entity.shape
 
         public float Rotation { get { return getRotation(); } set { setRotation(value); } }
 
-        public override float getRotation()
+        public override float GetRotation()
         {
             return this.mRotation;
         }
 
-        public override void setRotation(/* final */ float pRotation)
+        public override void SetRotation(/* final */ float pRotation)
         {
             this.mRotation = pRotation;
         }
 
         public float AngularVelocity { get { return getAngularVelocity(); } set { setAngularVelocity(value); } }
 
-        public override float getAngularVelocity()
+        public override float GetAngularVelocity()
         {
             return this.mAngularVelocity;
         }
 
-        public override void setAngularVelocity(/* final */ float pAngularVelocity)
+        public override void SetAngularVelocity(/* final */ float pAngularVelocity)
         {
             this.mAngularVelocity = pAngularVelocity;
         }
 
-        public float RotationCenterX { get { return getRotationCenterX(); } set { setRotationCenterX(value); } }
-        public float RotationCenterY { get { return getRotationCenterY(); } set { setRotationCenterY(value); } }
+        public float RotationCenterX { get { return GetRotationCenterX(); } set { SetRotationCenterX(value); } }
+        public float RotationCenterY { get { return GetRotationCenterY(); } set { SetRotationCenterY(value); } }
 
-        public override float getRotationCenterX()
+        public override float GetRotationCenterX()
         {
             return this.mRotationCenterX;
         }
 
-        public override float getRotationCenterY()
+        public override float GetRotationCenterY()
         {
             return this.mRotationCenterY;
         }
 
-        public override void setRotationCenterX(/* final */ float pRotationCenterX)
+        public override void SetRotationCenterX(/* final */ float pRotationCenterX)
         {
             this.mRotationCenterX = pRotationCenterX;
         }
 
-        public override void setRotationCenterY(/* final */ float pRotationCenterY)
+        public override void SetRotationCenterY(/* final */ float pRotationCenterY)
         {
             this.mRotationCenterY = pRotationCenterY;
         }
 
-        public override void setRotationCenter(/* final */ float pRotationCenterX, /* final */ float pRotationCenterY)
+        public override void SetRotationCenter(/* final */ float pRotationCenterX, /* final */ float pRotationCenterY)
         {
             this.mRotationCenterX = pRotationCenterX;
             this.mRotationCenterY = pRotationCenterY;
         }
 
-        public bool isScaled()
+        public bool IsScaled()
         {
             return this.mScaleX != 1 || this.mScaleY != 1;
         }
 
-        public float ScaleX { get { return getScaleX(); } set { setScaleX(value); } }
-        public float ScaleY { get { return getScaleY(); } set { setScaleY(value); } }
+        public float ScaleX { get { return GetScaleX(); } set { SetScaleX(value); } }
+        public float ScaleY { get { return GetScaleY(); } set { SetScaleY(value); } }
 
-        public /* override */ float getScaleX()
+        public /* override */ float GetScaleX()
         {
             return this.mScaleX;
         }
 
-        public /* override */ float getScaleY()
+        public /* override */ float GetScaleY()
         {
             return this.mScaleY;
         }
 
-        public /* override */ void setScaleX(/* final */ float pScaleX)
+        public /* override */ void SetScaleX(/* final */ float pScaleX)
         {
             this.mScaleX = pScaleX;
         }
 
-        public override void setScaleY(/* final */ float pScaleY)
+        public override void SetScaleY(/* final */ float pScaleY)
         {
             this.mScaleY = pScaleY;
         }
 
-        public override void setScale(/* final */ float pScale)
+        public override void SetScale(/* final */ float pScale)
         {
             this.mScaleX = pScale;
             this.mScaleY = pScale;
         }
 
-        public override void setScale(/* final */ float pScaleX, /* final */ float pScaleY)
+        public override void SetScale(/* final */ float pScaleX, /* final */ float pScaleY)
         {
             this.mScaleX = pScaleX;
             this.mScaleY = pScaleY;
         }
 
-        public float ScaleCenterX { get { return getScaleCenterX(); } set { setScaleCenterX(value); } }
-        public float ScaleCenterY { get { return getScaleCenterY(); } set { setScaleCenterY(value); } }
+        public float ScaleCenterX { get { return GetScaleCenterX(); } set { SetScaleCenterX(value); } }
+        public float ScaleCenterY { get { return GetScaleCenterY(); } set { SetScaleCenterY(value); } }
 
-        public override float getScaleCenterX()
+        public override float GetScaleCenterX()
         {
             return this.mScaleCenterX;
         }
 
-        public override float getScaleCenterY()
+        public override float GetScaleCenterY()
         {
             return this.mScaleCenterY;
         }
 
-        public override void setScaleCenterX(/* final */ float pScaleCenterX)
+        public override void SetScaleCenterX(/* final */ float pScaleCenterX)
         {
             this.mScaleCenterX = pScaleCenterX;
         }
 
-        public override void setScaleCenterY(/* final */ float pScaleCenterY)
+        public override void SetScaleCenterY(/* final */ float pScaleCenterY)
         {
             this.mScaleCenterY = pScaleCenterY;
         }
 
-        public override void setScaleCenter(/* final */ float pScaleCenterX, /* final */ float pScaleCenterY)
+        public override void SetScaleCenter(/* final */ float pScaleCenterX, /* final */ float pScaleCenterY)
         {
             this.mScaleCenterX = pScaleCenterX;
             this.mScaleCenterY = pScaleCenterY;
         }
 
-        public bool UpdatePhysics { get { return isUpdatePhysics(); } set { setUpdatePhysics(value); } }
+        public bool UpdatePhysics { get { return IsUpdatePhysics(); } set { SetUpdatePhysics(value); } }
 
-        public override bool isUpdatePhysics()
+        public override bool IsUpdatePhysics()
         {
             return this.mUpdatePhysics;
         }
@@ -406,56 +406,56 @@ namespace andengine.entity.shape
          * Enable or disable the AndEngine <b>internal</b> physics, you usually call this once you use the AndEnginePhysicsBox2dExtension.
          * @param pUpdatePhysics
          */
-        public void setUpdatePhysics(/* final */ bool pUpdatePhysics)
+        public void SetUpdatePhysics(/* final */ bool pUpdatePhysics)
         {
             this.mUpdatePhysics = pUpdatePhysics;
         }
 
-        public bool CullingEnabled { get { return isCullingEnabled(); } set { setCullingEnabled(value); } }
+        public bool CullingEnabled { get { return IsCullingEnabled(); } set { SetCullingEnabled(value); } }
 
-        public override bool isCullingEnabled()
+        public override bool IsCullingEnabled()
         {
             return this.mCullingEnabled;
         }
 
-        public override void setCullingEnabled(/* final */ bool pCullingEnabled)
+        public override void SetCullingEnabled(/* final */ bool pCullingEnabled)
         {
             this.mCullingEnabled = pCullingEnabled;
         }
 
-        public override void setBlendFunction(/* final */ int pSourceBlendFunction, /* final */ int pDestinationBlendFunction)
+        public override void SetBlendFunction(/* final */ int pSourceBlendFunction, /* final */ int pDestinationBlendFunction)
         {
             this.mSourceBlendFunction = pSourceBlendFunction;
             this.mDestinationBlendFunction = pDestinationBlendFunction;
         }
 
-        public float WidthScaled { get { return getWidthScaled(); } }
+        public float WidthScaled { get { return GetWidthScaled(); } }
 
-        public override float getWidthScaled()
+        public override float GetWidthScaled()
         {
             return this./*getWidth()*/Width * this.mScaleX;
         }
 
-        public float HeightScaled { get { return getHeightScaled(); } }
+        public float HeightScaled { get { return GetHeightScaled(); } }
 
-        public override float getHeightScaled()
+        public override float GetHeightScaled()
         {
             return this./*getHeight()*/Height * this.mScaleY;
         }
 
         //public override void addShapeModifier(/* final */ IModifier<IShape> pShapeModifier)
-        public override void addShapeModifier(andengine.util.modifier.IModifier<IShape> pShapeModifier)
+        public override void AddShapeModifier(andengine.util.modifier.IModifier<IShape> pShapeModifier)
         {
             this.mShapeModifiers.Add(pShapeModifier);
         }
 
         //public override bool removeShapeModifier(/* final */ IModifier<IShape> pShapeModifier)
-        public override bool removeShapeModifier(andengine.util.modifier.IModifier<IShape> pShapeModifier)
+        public override bool RemoveShapeModifier(andengine.util.modifier.IModifier<IShape> pShapeModifier)
         {
             return this.mShapeModifiers.Remove(pShapeModifier);
         }
 
-        public override void clearShapeModifiers()
+        public override void ClearShapeModifiers()
         {
             this.mShapeModifiers.Clear();
         }
@@ -464,7 +464,7 @@ namespace andengine.entity.shape
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override bool onAreaTouched(/* final */ TouchEvent pSceneTouchEvent, /* final */ float pTouchAreaLocalX, /* final */ float pTouchAreaLocalY)
+        public override bool OnAreaTouched(/* final */ TouchEvent pSceneTouchEvent, /* final */ float pTouchAreaLocalX, /* final */ float pTouchAreaLocalY)
         {
             return false;
         }
@@ -474,17 +474,17 @@ namespace andengine.entity.shape
          * @param pCamera
          * @return <code>true</code> when this object is visible by the {@link Camera}, <code>false</code> otherwise.
          */
-        protected abstract bool isCulled(/* final */ Camera pCamera);
+        protected abstract bool IsCulled(/* final */ Camera pCamera);
 
-        protected void onPositionChanged()
+        protected void OnPositionChanged()
         {
 
         }
 
-        protected abstract void onApplyVertices(/* final */ GL10 pGL);
-        protected abstract void drawVertices(/* final */ GL10 pGL, /* final */ Camera pCamera);
+        protected abstract void OnApplyVertices(/* final */ GL10 pGL);
+        protected abstract void DrawVertices(/* final */ GL10 pGL, /* final */ Camera pCamera);
 
-        protected override void onManagedUpdate(/* final */ float pSecondsElapsed)
+        protected override void OnManagedUpdate(/* final */ float pSecondsElapsed)
         {
             if (this.mUpdatePhysics)
             {
@@ -516,52 +516,52 @@ namespace andengine.entity.shape
                 {
                     this.mX += velocityX * pSecondsElapsed;
                     this.mY += velocityY * pSecondsElapsed;
-                    this.onPositionChanged();
+                    this.OnPositionChanged();
                 }
             }
 
-            this.mShapeModifiers.onUpdate(pSecondsElapsed);
+            this.mShapeModifiers.OnUpdate(pSecondsElapsed);
         }
 
-        protected override void onManagedDraw(/* final */ GL10 pGL, /* final */ Camera pCamera)
+        protected override void OnManagedDraw(/* final */ GL10 pGL, /* final */ Camera pCamera)
         {
-            if (this.mCullingEnabled == false || this.isCulled(pCamera) == false)
+            if (this.mCullingEnabled == false || this.IsCulled(pCamera) == false)
             {
-                this.onInitDraw(pGL);
+                this.OnInitDraw(pGL);
 
-                pGL.glPushMatrix();
+                pGL.GlPushMatrix();
                 {
-                    this.onApplyVertices(pGL);
-                    this.onApplyTransformations(pGL);
-                    this.drawVertices(pGL, pCamera);
+                    this.OnApplyVertices(pGL);
+                    this.OnApplyTransformations(pGL);
+                    this.DrawVertices(pGL, pCamera);
                 }
-                pGL.glPopMatrix();
+                pGL.GlPopMatrix();
             }
         }
 
-        protected void onInitDraw(/* final */ GL10 pGL)
+        protected void OnInitDraw(/* final */ GL10 pGL)
         {
-            GLHelper.setColor(pGL, this.mRed, this.mGreen, this.mBlue, this.mAlpha);
+            GLHelper.SetColor(pGL, this.mRed, this.mGreen, this.mBlue, this.mAlpha);
 
-            GLHelper.enableVertexArray(pGL);
-            GLHelper.blendFunction(pGL, this.mSourceBlendFunction, this.mDestinationBlendFunction);
+            GLHelper.EnableVertexArray(pGL);
+            GLHelper.BlendFunction(pGL, this.mSourceBlendFunction, this.mDestinationBlendFunction);
         }
 
-        protected void onApplyTransformations(/* final */ GL10 pGL)
+        protected void OnApplyTransformations(/* final */ GL10 pGL)
         {
-            this.applyTranslation(pGL);
+            this.ApplyTranslation(pGL);
 
-            this.applyRotation(pGL);
+            this.ApplyRotation(pGL);
 
-            this.applyScale(pGL);
+            this.ApplyScale(pGL);
         }
 
-        protected void applyTranslation(/* final */ GL10 pGL)
+        protected void ApplyTranslation(/* final */ GL10 pGL)
         {
-            pGL.glTranslatef(this.mX, this.mY, 0);
+            pGL.GlTranslatef(this.mX, this.mY, 0);
         }
 
-        protected void applyRotation(/* final */ GL10 pGL)
+        protected void ApplyRotation(/* final */ GL10 pGL)
         {
             /* final */
             float rotation = this.mRotation;
@@ -579,7 +579,7 @@ namespace andengine.entity.shape
             }
         }
 
-        protected void applyScale(/* final */ GL10 pGL)
+        protected void ApplyScale(/* final */ GL10 pGL)
         {
             /* final */
             float scaleX = this.mScaleX;
@@ -599,10 +599,10 @@ namespace andengine.entity.shape
             }
         }
 
-        public override void reset()
+        public override void Reset()
         {
             //super.reset();
-            base.reset();
+            base.Reset();
 
             this.mX = this.mBaseX;
             this.mY = this.mBaseY;
@@ -615,7 +615,7 @@ namespace andengine.entity.shape
             this.mScaleX = 1;
             this.mScaleY = 1;
 
-            this.onPositionChanged();
+            this.OnPositionChanged();
 
             this.mRed = 1.0f;
             this.mGreen = 1.0f;
@@ -625,7 +625,7 @@ namespace andengine.entity.shape
             this.mSourceBlendFunction = BLENDFUNCTION_SOURCE_DEFAULT;
             this.mDestinationBlendFunction = BLENDFUNCTION_DESTINATION_DEFAULT;
 
-            this.mShapeModifiers.reset();
+            this.mShapeModifiers.Reset();
         }
 
         // ===========================================================

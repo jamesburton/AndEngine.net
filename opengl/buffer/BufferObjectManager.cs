@@ -36,15 +36,17 @@ namespace andengine.opengl.buffer
         // Constructors
         // ===========================================================
 
-        public static BufferObjectManager getActiveInstance()
+        public static BufferObjectManager GetActiveInstance()
         {
             return BufferObjectManager.mActiveInstance;
         }
 
-        public static void setActiveInstance(BufferObjectManager pActiveInstance)
+        public static void SetActiveInstance(BufferObjectManager pActiveInstance)
         {
             BufferObjectManager.mActiveInstance = pActiveInstance;
         }
+
+        public static BufferObjectManager ActiveInstance { get { return GetActiveInstance(); } set { SetActiveInstance(value); } }
 
         // ===========================================================
         // Getter & Setter
@@ -58,14 +60,14 @@ namespace andengine.opengl.buffer
         // Methods
         // ===========================================================
 
-        public void clear()
+        public void Clear()
         {
             BufferObjectManager.mBufferObjectsToBeLoaded.Clear();
             BufferObjectManager.mBufferObjectsLoaded.Clear();
             BufferObjectManager.mBufferObjectsManaged.Clear();
         }
 
-        public void loadBufferObject(BufferObject pBufferObject)
+        public void LoadBufferObject(BufferObject pBufferObject)
         {
             if (pBufferObject == null)
             {
@@ -84,7 +86,7 @@ namespace andengine.opengl.buffer
             }
         }
 
-        public void unloadBufferObject(BufferObject pBufferObject)
+        public void UnloadBufferObject(BufferObject pBufferObject)
         {
             if (pBufferObject == null)
             {
@@ -104,32 +106,32 @@ namespace andengine.opengl.buffer
         }
 
         //public void loadBufferObjects(final BufferObject... pBufferObjects) {
-        public void loadBufferObjects(params BufferObject[] pBufferObjects)
+        public void LoadBufferObjects(params BufferObject[] pBufferObjects)
         {
             //for(int i = pBufferObjects.length - 1; i >= 0; i--) {
             for (int i = pBufferObjects.Length - 1; i >= 0; i--)
             {
-                this.loadBufferObject(pBufferObjects[i]);
+                this.LoadBufferObject(pBufferObjects[i]);
             }
         }
 
         //public void unloadBufferObjects(final BufferObject... pBufferObjects) {
-        public void unloadBufferObjects(params BufferObject[] pBufferObjects)
+        public void UnloadBufferObjects(params BufferObject[] pBufferObjects)
         {
             //for(int i = pBufferObjects.length - 1; i >= 0; i--) {
             for (int i = pBufferObjects.Length - 1; i >= 0; i--)
             {
-                this.unloadBufferObject(pBufferObjects[i]);
+                this.UnloadBufferObject(pBufferObjects[i]);
             }
         }
 
-        public void reloadBufferObjects()
+        public void ReloadBufferObjects()
         {
             /*final ArrayList*/
             List<BufferObject> loadedBufferObjects = BufferObjectManager.mBufferObjectsLoaded;
             for (int i = loadedBufferObjects.Count - 1; i >= 0; i--)
             {
-                loadedBufferObjects[i].setLoadedToHardware(false);
+                loadedBufferObjects[i].SetLoadedToHardware(false);
             }
 
             BufferObjectManager.mBufferObjectsToBeLoaded.AddRange(loadedBufferObjects);
@@ -137,7 +139,7 @@ namespace andengine.opengl.buffer
             loadedBufferObjects.Clear();
         }
 
-        public void updateBufferObjects(GL11 pGL11)
+        public void UpdateBufferObjects(GL11 pGL11)
         {
             HashSet<BufferObject> bufferObjectsManaged = BufferObjectManager.mBufferObjectsManaged;
             List<BufferObject> bufferObjectsLoaded = BufferObjectManager.mBufferObjectsLoaded;
@@ -152,10 +154,10 @@ namespace andengine.opengl.buffer
                 for (int i = bufferObjectToBeLoadedCount - 1; i >= 0; i--)
                 {
                     BufferObject bufferObjectToBeLoaded = bufferObjectsToBeLoaded[i];
-                    if (!bufferObjectToBeLoaded.isLoadedToHardware())
+                    if (!bufferObjectToBeLoaded.IsLoadedToHardware())
                     {
-                        bufferObjectToBeLoaded.loadToHardware(pGL11);
-                        bufferObjectToBeLoaded.setHardwareBufferNeedsUpdate();
+                        bufferObjectToBeLoaded.LoadToHardware(pGL11);
+                        bufferObjectToBeLoaded.SetHardwareBufferNeedsUpdate();
                     }
                     bufferObjectsLoaded.Add(bufferObjectToBeLoaded);
                 }
@@ -173,9 +175,9 @@ namespace andengine.opengl.buffer
                     //BufferObject bufferObjectToBeUnloaded = bufferObjectsToBeUnloaded.remove(i);
                     BufferObject bufferObjectToBeUnloaded = bufferObjectsToBeUnloaded[i];
                     bufferObjectsToBeUnloaded.Remove(bufferObjectToBeUnloaded);
-                    if (bufferObjectToBeUnloaded.isLoadedToHardware())
+                    if (bufferObjectToBeUnloaded.IsLoadedToHardware())
                     {
-                        bufferObjectToBeUnloaded.unloadFromHardware(pGL11);
+                        bufferObjectToBeUnloaded.UnloadFromHardware(pGL11);
                     }
                     bufferObjectsLoaded.Remove(bufferObjectToBeUnloaded);
                     bufferObjectsManaged.Remove(bufferObjectToBeUnloaded);

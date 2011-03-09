@@ -36,7 +36,7 @@ namespace andengine.input.touch.controller
         */
         public sealed class TouchEventRunnablePoolUpdateHandler : andengine.util.pool.RunnablePoolUpdateHandler<TouchEventRunnablePoolItem>
         {
-            protected override TouchEventRunnablePoolItem onAllocatePoolItem()
+            protected override TouchEventRunnablePoolItem OnAllocatePoolItem()
             {
                 return new TouchEventRunnablePoolItem();
             }
@@ -58,7 +58,7 @@ namespace andengine.input.touch.controller
         // Getter & Setter
         // ===========================================================
 
-        public override void setTouchEventCallback(ITouchEventCallback pTouchEventCallback)
+        public override void SetTouchEventCallback(ITouchEventCallback pTouchEventCallback)
         {
             this.mTouchEventCallback = pTouchEventCallback;
         }
@@ -67,33 +67,33 @@ namespace andengine.input.touch.controller
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void reset()
+        public override void Reset()
         {
             if (this.mRunOnUpdateThread)
             {
-                this.mTouchEventRunnablePoolUpdateHandler.reset();
+                this.mTouchEventRunnablePoolUpdateHandler.Reset();
             }
         }
 
-        public override void onUpdate(float pSecondsElapsed)
+        public override void OnUpdate(float pSecondsElapsed)
         {
             if (this.mRunOnUpdateThread)
             {
-                this.mTouchEventRunnablePoolUpdateHandler.onUpdate(pSecondsElapsed);
+                this.mTouchEventRunnablePoolUpdateHandler.OnUpdate(pSecondsElapsed);
             }
         }
 
-        protected bool fireTouchEvent(float pX, float pY, /* int pAction */ Android.Views.MotionEventActions pAction, int pPointerID, MotionEvent pMotionEvent)
+        protected bool FireTouchEvent(float pX, float pY, /* int pAction */ Android.Views.MotionEventActions pAction, int pPointerID, MotionEvent pMotionEvent)
         {
             bool handled;
 
             if (this.mRunOnUpdateThread)
             {
-                TouchEvent touchEvent = TouchEvent.obtain(pX, pY, pAction, pPointerID, MotionEvent.Obtain(pMotionEvent));
+                TouchEvent touchEvent = TouchEvent.Obtain(pX, pY, pAction, pPointerID, MotionEvent.Obtain(pMotionEvent));
 
-                TouchEventRunnablePoolItem touchEventRunnablePoolItem = this.mTouchEventRunnablePoolUpdateHandler.obtainPoolItem();
-                touchEventRunnablePoolItem.set(touchEvent);
-                this.mTouchEventRunnablePoolUpdateHandler.postPoolItem(touchEventRunnablePoolItem);
+                TouchEventRunnablePoolItem touchEventRunnablePoolItem = this.mTouchEventRunnablePoolUpdateHandler.ObtainPoolItem();
+                touchEventRunnablePoolItem.Set(touchEvent);
+                this.mTouchEventRunnablePoolUpdateHandler.PostPoolItem(touchEventRunnablePoolItem);
 
                 handled = true;
             }
@@ -111,9 +111,9 @@ namespace andengine.input.touch.controller
         // Methods
         // ===========================================================
 
-        public void applyTouchOptions(TouchOptions pTouchOptions)
+        public void ApplyTouchOptions(TouchOptions pTouchOptions)
         {
-            this.mRunOnUpdateThread = pTouchOptions.isRunOnUpdateThread();
+            this.mRunOnUpdateThread = pTouchOptions.IsRunOnUpdateThread();
         }
 
         // ===========================================================
@@ -132,7 +132,7 @@ namespace andengine.input.touch.controller
             // Getter & Setter
             // ===========================================================
 
-            public void set(TouchEvent pTouchEvent)
+            public void Set(TouchEvent pTouchEvent)
             {
                 this.mTouchEvent = pTouchEvent;
             }
@@ -141,17 +141,17 @@ namespace andengine.input.touch.controller
             // Methods for/from SuperClass/Interfaces
             // ===========================================================
 
-            public void run() {
+            public void Run() {
 			   // BaseTouchController.this.mTouchEventCallback.onTouchEvent(this.mTouchEvent);
-                BaseTouchController.Instance.mTouchEventCallback.onTouchEvent(this.mTouchEvent);
+                BaseTouchController.Instance.mTouchEventCallback.OnTouchEvent(this.mTouchEvent);
 		    }
 
-            protected override void onRecycle()
+            protected override void OnRecycle()
             {
-                base.onRecycle();
+                base.OnRecycle();
                 TouchEvent touchEvent = this.mTouchEvent;
-                touchEvent.getMotionEvent().Recycle();
-                touchEvent.recycle();
+                touchEvent.GetMotionEvent().Recycle();
+                touchEvent.Recycle();
             }
         }
     }

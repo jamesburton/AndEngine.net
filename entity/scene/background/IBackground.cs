@@ -19,11 +19,11 @@ namespace andengine.entity.scene.background
         // Methods
         // ===========================================================
 
-        void addBackgroundModifier(andengine.util.modifier.IModifier<IBackground> pBackgroundModifier);
-        bool removeBackgroundModifier(andengine.util.modifier.IModifier<IBackground> pBackgroundModifier);
-        void clearBackgroundModifiers();
+        void AddBackgroundModifier(andengine.util.modifier.IModifier<IBackground> pBackgroundModifier);
+        bool RemoveBackgroundModifier(andengine.util.modifier.IModifier<IBackground> pBackgroundModifier);
+        void ClearBackgroundModifiers();
 
-        void setColor(float pRed, float pGreen, float pBlue);
-        void setColor(float pRed, float pGreen, float pBlue, float pAlpha);
+        void SetColor(float pRed, float pGreen, float pBlue);
+        void SetColor(float pRed, float pGreen, float pBlue, float pAlpha);
     }
 }

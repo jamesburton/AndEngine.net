@@ -46,38 +46,38 @@ namespace andengine.collision
         // Methods
         // ===========================================================
 
-        public static bool checkContains(/* final */ RectangularShape pRectangularShape, /* final */ float pX, /* final */ float pY)
+        public static bool CheckContains(/* final */ RectangularShape pRectangularShape, /* final */ float pX, /* final */ float pY)
         {
-            RectangularShapeCollisionChecker.fillVertices(pRectangularShape, VERTICES_CONTAINS_TMP);
-            return ShapeCollisionChecker.checkContains(VERTICES_CONTAINS_TMP, 2 * RECTANGULARSHAPE_VERTEX_COUNT, pX, pY);
+            RectangularShapeCollisionChecker.FillVertices(pRectangularShape, VERTICES_CONTAINS_TMP);
+            return ShapeCollisionChecker.CheckContains(VERTICES_CONTAINS_TMP, 2 * RECTANGULARSHAPE_VERTEX_COUNT, pX, pY);
         }
 
-        public static bool checkCollision(/* final */ RectangularShape pRectangularShapeA, /* final */ RectangularShape pRectangularShapeB) {
-		if(pRectangularShapeA.getRotation() == 0 && pRectangularShapeB.getRotation() == 0 && pRectangularShapeA.isScaled() == false && pRectangularShapeB.isScaled() == false) {
-			/* final */ float aLeft = pRectangularShapeA.getX();
-			/* final */ float aTop = pRectangularShapeA.getY();
-			/* final */ float bLeft = pRectangularShapeB.getX();
-			/* final */ float bTop = pRectangularShapeB.getY();
-			return BaseCollisionChecker.checkAxisAlignedRectangleCollision(aLeft, aTop, aLeft + pRectangularShapeA.getWidth(), aTop + pRectangularShapeA.getHeight(),
-																			bLeft, bTop, bLeft + pRectangularShapeB.getWidth(), bTop + pRectangularShapeB.getHeight());
+        public static bool CheckCollision(/* final */ RectangularShape pRectangularShapeA, /* final */ RectangularShape pRectangularShapeB) {
+		if(pRectangularShapeA.GetRotation() == 0 && pRectangularShapeB.GetRotation() == 0 && pRectangularShapeA.IsScaled() == false && pRectangularShapeB.IsScaled() == false) {
+			/* final */ float aLeft = pRectangularShapeA.GetX();
+			/* final */ float aTop = pRectangularShapeA.GetY();
+			/* final */ float bLeft = pRectangularShapeB.GetX();
+			/* final */ float bTop = pRectangularShapeB.GetY();
+			return BaseCollisionChecker.CheckAxisAlignedRectangleCollision(aLeft, aTop, aLeft + pRectangularShapeA.GetWidth(), aTop + pRectangularShapeA.GetHeight(),
+																			bLeft, bTop, bLeft + pRectangularShapeB.GetWidth(), bTop + pRectangularShapeB.GetHeight());
 		} else {
-			RectangularShapeCollisionChecker.fillVertices(pRectangularShapeA, VERTICES_COLLISION_TMP_A);
-			RectangularShapeCollisionChecker.fillVertices(pRectangularShapeB, VERTICES_COLLISION_TMP_B);
+			RectangularShapeCollisionChecker.FillVertices(pRectangularShapeA, VERTICES_COLLISION_TMP_A);
+			RectangularShapeCollisionChecker.FillVertices(pRectangularShapeB, VERTICES_COLLISION_TMP_B);
 
-			return ShapeCollisionChecker.checkCollision(2 * RECTANGULARSHAPE_VERTEX_COUNT, 2 * RECTANGULARSHAPE_VERTEX_COUNT, VERTICES_COLLISION_TMP_A, VERTICES_COLLISION_TMP_B);
+			return ShapeCollisionChecker.CheckCollision(2 * RECTANGULARSHAPE_VERTEX_COUNT, 2 * RECTANGULARSHAPE_VERTEX_COUNT, VERTICES_COLLISION_TMP_A, VERTICES_COLLISION_TMP_B);
 		}
 	}
 
-        public static void fillVertices(/* final */ RectangularShape pRectangularShape, /* final */ float[] pVertices)
+        public static void FillVertices(/* final */ RectangularShape pRectangularShape, /* final */ float[] pVertices)
         {
             /* final */
-            float left = pRectangularShape.getX();
+            float left = pRectangularShape.GetX();
             /* final */
-            float top = pRectangularShape.getY();
+            float top = pRectangularShape.GetY();
             /* final */
-            float right = pRectangularShape.getWidth() + left;
+            float right = pRectangularShape.GetWidth() + left;
             /* final */
-            float bottom = pRectangularShape.getHeight() + top;
+            float bottom = pRectangularShape.GetHeight() + top;
 
             pVertices[0 + Constants.VERTEX_INDEX_X] = left;
             pVertices[0 + Constants.VERTEX_INDEX_Y] = top;
@@ -91,9 +91,9 @@ namespace andengine.collision
             pVertices[6 + Constants.VERTEX_INDEX_X] = left;
             pVertices[6 + Constants.VERTEX_INDEX_Y] = bottom;
 
-            MathUtils.rotateAndScaleAroundCenter(pVertices,
-                    pRectangularShape.getRotation(), left + pRectangularShape.getRotationCenterX(), top + pRectangularShape.getRotationCenterY(),
-                    pRectangularShape.getScaleX(), pRectangularShape.getScaleY(), left + pRectangularShape.getScaleCenterX(), top + pRectangularShape.getScaleCenterY());
+            MathUtils.RotateAndScaleAroundCenter(pVertices,
+                    pRectangularShape.GetRotation(), left + pRectangularShape.GetRotationCenterX(), top + pRectangularShape.GetRotationCenterY(),
+                    pRectangularShape.GetScaleX(), pRectangularShape.GetScaleY(), left + pRectangularShape.GetScaleCenterX(), top + pRectangularShape.GetScaleCenterY());
         }
 
         // ===========================================================
