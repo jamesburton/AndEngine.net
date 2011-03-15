@@ -1,2 +1,0 @@
-C:\Development\Android\andengine.net\obj\Debug\ResolveAssemblyReference.cache
-C:\Development\andengine.net\obj\Debug\ResolveAssemblyReference.cache
