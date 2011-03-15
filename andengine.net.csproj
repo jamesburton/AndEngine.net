@@ -72,7 +72,7 @@
     <Compile Include="engine\camera\Camera.cs" />
     <Content Include="engine\camera\CameraFactory.java" />
     <Content Include="engine\camera\hud\controls\AnalogOnScreenControl.java" />
-    <Content Include="engine\camera\hud\controls\BaseOnScreenControl.java" />
+    <Compile Include="engine\camera\hud\controls\BaseOnScreenControl.cs" />
     <Content Include="engine\camera\hud\controls\DigitalOnScreenControl.java" />
     <Compile Include="engine\camera\hud\HUD.cs" />
     <Content Include="engine\camera\SmoothCamera.java" />
