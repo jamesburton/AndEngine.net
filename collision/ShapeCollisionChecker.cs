@@ -60,7 +60,7 @@ namespace andengine.collision
         }
 
 
-        public static float[] convertLocalToSceneCoordinates(/* final */ Shape pShape, /* final */ float pX, /* final */ float pY)
+        public static float[] ConvertLocalToSceneCoordinates(/* final */ Shape pShape, /* final */ float pX, /* final */ float pY)
         {
             VERTICES_LOCAL_TO_SCENE_TMP[Constants.VERTEX_INDEX_X] = pX;
             VERTICES_LOCAL_TO_SCENE_TMP[Constants.VERTEX_INDEX_Y] = pY;
@@ -72,7 +72,7 @@ namespace andengine.collision
             return VERTICES_LOCAL_TO_SCENE_TMP;
         }
 
-        public static bool checkCollision(/* final */ int pVerticesALength, /* final */ int pVerticesBLength, /* final */ float[] pVerticesA, /* final */ float[] pVerticesB)
+        public static bool CheckCollision(/* final */ int pVerticesALength, /* final */ int pVerticesBLength, /* final */ float[] pVerticesA, /* final */ float[] pVerticesB)
         {
             /* Check all the lines of A ... */
             for (int a = pVerticesALength - 4; a >= 0; a -= 2)

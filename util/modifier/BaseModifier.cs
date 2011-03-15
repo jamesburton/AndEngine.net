@@ -100,7 +100,8 @@ namespace andengine.util.modifier
         }
         //*/
 
-        public /* override */ abstract IModifier<T> Clone();
+       // public /* override */ abstract IModifier<T> Clone();
+        public abstract IModifier<T> Clone();
 
         // ===========================================================
         // Methods

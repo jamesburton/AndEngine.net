@@ -50,7 +50,7 @@ namespace andengine.entity.sprite
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override TextureRegion getTextureRegion()
+        public override TextureRegion GetTextureRegion()
         {
             return (TextureRegion)this.mTextureRegion;
         }

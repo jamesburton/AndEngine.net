@@ -67,7 +67,7 @@ namespace andengine.entity.shape.modifier
         {
         }
 
-        public override ScaleModifier Clone()
+        public /* ScaleModifier */ andengine.util.modifier.IModifier<IShape> Clone()
         {
             return new ScaleModifier(this);
         }

@@ -172,7 +172,7 @@ namespace andengine.opengl.texture
             {
                 return (ITextureSource)null;
             }
-            public TextureSourceWithWithLocationCallback Clone()
+            public new TextureSourceWithWithLocationCallback Clone()
             {
                 return (TextureSourceWithWithLocationCallback)CloneCore();
             }

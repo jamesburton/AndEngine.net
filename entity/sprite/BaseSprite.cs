@@ -34,7 +34,7 @@ namespace andengine.entity.sprite
             : base(pX, pY, pWidth, pHeight)
         {
             this.mTextureRegion = pTextureRegion;
-            this.initBlendFunction();
+            this.InitBlendFunction();
         }
 
         public BaseSprite(float pX, float pY, float pWidth, float pHeight, BaseTextureRegion pTextureRegion, RectangleVertexBuffer pRectangleVertexBuffer)
@@ -42,14 +42,14 @@ namespace andengine.entity.sprite
         {
 
             this.mTextureRegion = pTextureRegion;
-            this.initBlendFunction();
+            this.InitBlendFunction();
         }
 
         // ===========================================================
         // Getter & Setter
         // ===========================================================
 
-        public BaseTextureRegion getTextureRegion()
+        public BaseTextureRegion GetTextureRegion()
         {
             return this.mTextureRegion;
         }
@@ -58,36 +58,36 @@ namespace andengine.entity.sprite
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void reset()
+        public override void Reset()
         {
-            base.reset();
+            base.Reset();
 
-            this.initBlendFunction();
+            this.InitBlendFunction();
         }
 
-        protected override void onInitDraw(GL10 pGL)
+        protected override void OnInitDraw(GL10 pGL)
         {
-            base.onInitDraw(pGL);
-            GLHelper.enableTextures(pGL);
-            GLHelper.enableTexCoordArray(pGL);
+            base.OnInitDraw(pGL);
+            GLHelper.EnableTextures(pGL);
+            GLHelper.EnableTexCoordArray(pGL);
         }
 
-        protected override void onApplyTransformations(GL10 pGL)
+        protected override void OnApplyTransformations(GL10 pGL)
         {
-            base.onApplyTransformations(pGL);
+            base.OnApplyTransformations(pGL);
 
-            this.mTextureRegion.onApply(pGL);
+            this.mTextureRegion.OnApply(pGL);
         }
 
         // ===========================================================
         // Methods
         // ===========================================================
 
-        private void initBlendFunction()
+        private void InitBlendFunction()
         {
-            if (this.mTextureRegion.getTexture().getTextureOptions().mPreMultipyAlpha)
+            if (this.mTextureRegion.GetTexture().GetTextureOptions().mPreMultipyAlpha)
             {
-                this.setBlendFunction(BLENDFUNCTION_SOURCE_PREMULTIPLYALPHA_DEFAULT, BLENDFUNCTION_DESTINATION_PREMULTIPLYALPHA_DEFAULT);
+                this.SetBlendFunction(BLENDFUNCTION_SOURCE_PREMULTIPLYALPHA_DEFAULT, BLENDFUNCTION_DESTINATION_PREMULTIPLYALPHA_DEFAULT);
             }
         }
 

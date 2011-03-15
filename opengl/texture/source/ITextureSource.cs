@@ -22,7 +22,7 @@ namespace andengine.opengl.texture.source
         int GetHeight();
 
         ITextureSource CloneCore();
-        //ITextureSource Clone();
+        ITextureSource Clone();
 
         Bitmap OnLoadBitmap();
     }

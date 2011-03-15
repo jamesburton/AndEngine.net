@@ -67,7 +67,7 @@ namespace andengine.entity.shape
 
         public VertexBuffer VertexBuffer { get { return GetVertexBuffer(); } }
 
-        public override VertexBuffer GetVertexBuffer()
+        protected override VertexBuffer GetVertexBuffer()
         {
             return this.mVertexBuffer;
         }
