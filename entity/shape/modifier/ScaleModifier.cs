@@ -1,3 +1,5 @@
+using andengine.util.modifier;
+
 namespace andengine.entity.shape.modifier
 {
 
@@ -67,7 +69,8 @@ namespace andengine.entity.shape.modifier
         {
         }
 
-        public override ScaleModifier clone()
+        /*public override ScaleModifier clone()*/
+        public override IModifier<IShape> Clone()
         {
             return new ScaleModifier(this);
         }
@@ -80,14 +83,14 @@ namespace andengine.entity.shape.modifier
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected override void onSetInitialValues(IShape pShape, float pScaleA, float pScaleB)
+        protected override void OnSetInitialValues(IShape pShape, float pScaleA, float pScaleB)
         {
-            pShape.setScale(pScaleA, pScaleB);
+            pShape.SetScale(pScaleA, pScaleB);
         }
 
-        protected override void onSetValues(IShape pShape, float pPercentageDone, float pScaleA, float pScaleB)
+        protected override void OnSetValues(IShape pShape, float pPercentageDone, float pScaleA, float pScaleB)
         {
-            pShape.setScale(pScaleA, pScaleB);
+            pShape.SetScale(pScaleA, pScaleB);
         }
 
         // ===========================================================
