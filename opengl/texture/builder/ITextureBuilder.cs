@@ -23,7 +23,7 @@ namespace andengine.opengl.texture.builder
         // ===========================================================
 
         //public void pack(final BuildableTexture pBuildableTexture, final ArrayList<TextureSourceWithWithLocationCallback> pTextureSourcesWithLocationCallback) throws TextureSourcePackingException;
-        void pack(BuildableTexture pBuildableTexture, List<TextureSourceWithLocationCallback> pTextureSourcesWithLocationCallback);
+        void Pack(BuildableTexture pBuildableTexture, List<TextureSourceWithLocationCallback> pTextureSourcesWithLocationCallback);
 
         // ===========================================================
         // Inner and Anonymous Classes

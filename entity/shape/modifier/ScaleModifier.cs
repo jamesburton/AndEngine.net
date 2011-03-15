@@ -1,5 +1,3 @@
-using andengine.util.modifier;
-
 namespace andengine.entity.shape.modifier
 {
 
@@ -69,8 +67,7 @@ namespace andengine.entity.shape.modifier
         {
         }
 
-        /*public override ScaleModifier clone()*/
-        public override IModifier<IShape> Clone()
+        public /* ScaleModifier */ override andengine.util.modifier.IModifier<IShape> Clone()
         {
             return new ScaleModifier(this);
         }

@@ -168,9 +168,13 @@ namespace andengine.opengl.texture
                 mCallback = pCallback;
             }
 
-            public /* override */ TextureSourceWithWithLocationCallback Clone()
+            public ITextureSource CloneCore()
             {
-                return null;
+                return (ITextureSource)null;
+            }
+            public new TextureSourceWithWithLocationCallback Clone()
+            {
+                return (TextureSourceWithWithLocationCallback)CloneCore();
             }
 
             // ===========================================================

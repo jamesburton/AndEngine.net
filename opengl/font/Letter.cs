@@ -47,7 +47,7 @@ namespace andengine.opengl.font
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override int hashCode()
+        public virtual int HashCode()
         {
             int prime = 31;
             int result = 1;
@@ -56,7 +56,7 @@ namespace andengine.opengl.font
         }
 
         //public override bool equals(Object obj)
-        public override bool equals(object obj)
+        public override bool Equals(object obj)
         {
             if (this == obj)
             {

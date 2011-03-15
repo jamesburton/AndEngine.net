@@ -114,7 +114,7 @@ namespace andengine.entity.layer
 
         public override bool RemoveEntity(IEntity pEntity)
         {
-            return this.RemoveEntity(this.indexOfEntity(pEntity)) != null;
+            return this.RemoveEntity(this.IndexOfEntity(pEntity)) != null;
         }
 
         public override IEntity RemoveEntity(int pIndex)
@@ -205,7 +205,7 @@ namespace andengine.entity.layer
 
         public override void SetEntity(int pIndex, IEntity pEntity)
         {
-            this.checkIndex(pIndex);
+            this.CheckIndex(pIndex);
 
             if (pIndex == this.mEntityCount)
             {

@@ -31,10 +31,10 @@ namespace andengine.collision
         // Methods
         // ===========================================================
 
-        public static bool checkLineCollision(/* final */ float pX1, /* final */ float pY1, /* final */ float pX2, /* final */ float pY2, /* final */ float pX3, /* final */ float pY3, /* final */ float pX4, /* final */ float pY4)
+        public static bool CheckLineCollision(/* final */ float pX1, /* final */ float pY1, /* final */ float pX2, /* final */ float pY2, /* final */ float pX3, /* final */ float pY3, /* final */ float pX4, /* final */ float pY4)
         {
-            return ((relativeCCW(pX1, pY1, pX2, pY2, pX3, pY3) * relativeCCW(pX1, pY1, pX2, pY2, pX4, pY4) <= 0)
-                    && (relativeCCW(pX3, pY3, pX4, pY4, pX1, pY1) * relativeCCW(pX3, pY3, pX4, pY4, pX2, pY2) <= 0));
+            return ((RelativeCCW(pX1, pY1, pX2, pY2, pX3, pY3) * RelativeCCW(pX1, pY1, pX2, pY2, pX4, pY4) <= 0)
+                    && (RelativeCCW(pX3, pY3, pX4, pY4, pX1, pY1) * RelativeCCW(pX3, pY3, pX4, pY4, pX2, pY2) <= 0));
         }
 
         // ===========================================================

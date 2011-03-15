@@ -16,7 +16,7 @@ using System;
         // Constants
         // ===========================================================
 
-        private static readonly ZIndexSorter INSTANCE = new ZIndexSorter();
+        private static ZIndexSorter INSTANCE;
 
         // ===========================================================
         // Fields
@@ -37,19 +37,19 @@ using System;
         };
         private static readonly IComparator<IEntity> mZIndexComparator = new ZIndexComparator();
         */
-        private sealed class ZIndexComparator : IComparer<IEntity>
+        private sealed class ZIndexComparator : IComparator
         {
-            /*public  override  int Compare(Object pEntityA, Object pEntityB)
+            public /* override */ int Compare(Object pEntityA, Object pEntityB)
             {
                 return ((IEntity)pEntityA).GetZIndex() - ((IEntity)pEntityB).GetZIndex();
-            }*/
-
-            public int Compare(IEntity x, IEntity y)
-            {
-                return x.GetZIndex() - y.GetZIndex();
             }
+            public int Compare(Java.Lang.Object pEntityA, Java.Lang.Object pEntityB)
+            {
+                return ((IEntity)pEntityA).GetZIndex() - ((IEntity)pEntityB).GetZIndex();
+            }
+            // TODO: Work out correct Equals implemetation: public bool Equals(Java.Lang.Object pEntity) { return ???; }
         }
-        private static readonly IComparer<IEntity> mZIndexComparator = new ZIndexComparator();
+        private static readonly IComparator mZIndexComparator = new ZIndexComparator();
 
         // ===========================================================
         // Constructors
@@ -60,12 +60,13 @@ using System;
 
         }
 
-        public static ZIndexSorter getInstance()
+        public static ZIndexSorter Instance { get { return GetInstance(); } }
+        public static ZIndexSorter GetInstance()
         {
-            /*if (INSTANCE == null)
+            if (INSTANCE == null)
             {
                 INSTANCE = new ZIndexSorter();
-            }*/
+            }
             return INSTANCE;
         }
 
@@ -81,24 +82,24 @@ using System;
         // Methods
         // ===========================================================
 
-        public void sort(IEntity[] pEntities)
+        public void Sort(IEntity[] pEntities)
         {
-            sort(pEntities, mZIndexComparator);
+            Sort(pEntities, this.mZIndexComparator);
         }
 
-        public void sort(IEntity[] pEntities, int pStart, int pEnd)
+        public void Sort(IEntity[] pEntities, int pStart, int pEnd)
         {
-            sort(pEntities, pStart, pEnd, mZIndexComparator);
+            Sort(pEntities, pStart, pEnd, this.mZIndexComparator);
         }
 
-        public void sort(List<IEntity> pEntities)
+        public void Sort(IList<IEntity> pEntities)
         {
-            sort(pEntities, mZIndexComparator);
+            Sort(pEntities, this.mZIndexComparator);
         }
 
-        public void sort(List<IEntity> pEntities, int pStart, int pEnd)
+        public void Sort(IList<IEntity> pEntities, int pStart, int pEnd)
         {
-            sort(pEntities, pStart, pEnd, mZIndexComparator);
+            Sort(pEntities, pStart, pEnd, this.mZIndexComparator);
         }
 
         // ===========================================================

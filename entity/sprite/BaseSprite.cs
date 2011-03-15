@@ -34,7 +34,7 @@ namespace andengine.entity.sprite
             : base(pX, pY, pWidth, pHeight)
         {
             this.mTextureRegion = pTextureRegion;
-            this.initBlendFunction();
+            this.InitBlendFunction();
         }
 
         public BaseSprite(float pX, float pY, float pWidth, float pHeight, BaseTextureRegion pTextureRegion, RectangleVertexBuffer pRectangleVertexBuffer)
@@ -42,14 +42,14 @@ namespace andengine.entity.sprite
         {
 
             this.mTextureRegion = pTextureRegion;
-            this.initBlendFunction();
+            this.InitBlendFunction();
         }
 
         // ===========================================================
         // Getter & Setter
         // ===========================================================
 
-        public virtual BaseTextureRegion getTextureRegion()
+        public virtual BaseTextureRegion GetTextureRegion()
         {
             return this.mTextureRegion;
         }
@@ -62,7 +62,7 @@ namespace andengine.entity.sprite
         {
             base.Reset();
 
-            this.initBlendFunction();
+            this.InitBlendFunction();
         }
 
         protected override void OnInitDraw(GL10 pGL)
@@ -83,7 +83,7 @@ namespace andengine.entity.sprite
         // Methods
         // ===========================================================
 
-        private void initBlendFunction()
+        private void InitBlendFunction()
         {
             if (this.mTextureRegion.GetTexture().GetTextureOptions().mPreMultipyAlpha)
             {

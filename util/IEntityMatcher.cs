@@ -17,7 +17,7 @@ namespace andengine.util
         // Methods
         // ===========================================================
 
-        /* public */ bool matches(/* final */ IEntity pEntity);
+        /* public */ bool Matches(/* final */ IEntity pEntity);
     }
 }
 
