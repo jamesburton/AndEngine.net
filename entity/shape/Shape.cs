@@ -554,7 +554,7 @@ namespace andengine.entity.shape
             }
         }
 
-        protected void OnInitDraw(/* final */ GL10 pGL)
+        protected virtual void OnInitDraw(/* final */ GL10 pGL)
         {
             GLHelper.SetColor(pGL, this.mRed, this.mGreen, this.mBlue, this.mAlpha);
 
@@ -562,7 +562,7 @@ namespace andengine.entity.shape
             GLHelper.BlendFunction(pGL, this.mSourceBlendFunction, this.mDestinationBlendFunction);
         }
 
-        protected void OnApplyTransformations(/* final */ GL10 pGL)
+        protected virtual void OnApplyTransformations(/* final */ GL10 pGL)
         {
             this.ApplyTranslation(pGL);
 

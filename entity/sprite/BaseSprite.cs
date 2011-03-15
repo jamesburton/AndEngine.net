@@ -49,7 +49,7 @@ namespace andengine.entity.sprite
         // Getter & Setter
         // ===========================================================
 
-        public BaseTextureRegion getTextureRegion()
+        public virtual BaseTextureRegion getTextureRegion()
         {
             return this.mTextureRegion;
         }
@@ -58,25 +58,25 @@ namespace andengine.entity.sprite
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void reset()
+        public override void Reset()
         {
-            base.reset();
+            base.Reset();
 
             this.initBlendFunction();
         }
 
-        protected override void onInitDraw(GL10 pGL)
+        protected override void OnInitDraw(GL10 pGL)
         {
-            base.onInitDraw(pGL);
-            GLHelper.enableTextures(pGL);
-            GLHelper.enableTexCoordArray(pGL);
+            base.OnInitDraw(pGL);
+            GLHelper.EnableTextures(pGL);
+            GLHelper.EnableTexCoordArray(pGL);
         }
 
-        protected override void onApplyTransformations(GL10 pGL)
+        protected override void OnApplyTransformations(GL10 pGL)
         {
-            base.onApplyTransformations(pGL);
+            base.OnApplyTransformations(pGL);
 
-            this.mTextureRegion.onApply(pGL);
+            this.mTextureRegion.OnApply(pGL);
         }
 
         // ===========================================================
@@ -85,9 +85,9 @@ namespace andengine.entity.sprite
 
         private void initBlendFunction()
         {
-            if (this.mTextureRegion.getTexture().getTextureOptions().mPreMultipyAlpha)
+            if (this.mTextureRegion.GetTexture().GetTextureOptions().mPreMultipyAlpha)
             {
-                this.setBlendFunction(BLENDFUNCTION_SOURCE_PREMULTIPLYALPHA_DEFAULT, BLENDFUNCTION_DESTINATION_PREMULTIPLYALPHA_DEFAULT);
+                this.SetBlendFunction(BLENDFUNCTION_SOURCE_PREMULTIPLYALPHA_DEFAULT, BLENDFUNCTION_DESTINATION_PREMULTIPLYALPHA_DEFAULT);
             }
         }
 
