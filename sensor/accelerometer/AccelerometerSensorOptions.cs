@@ -1,7 +1,7 @@
 namespace andengine.sensor.accelerometer
 {
 
-    using SensorDelay = andengine.sensor.SensorDelay;
+    using Android.Hardware;
 
     /**
      * @author Nicolas Gramlich

@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace andengine.engine
 {
 
@@ -34,7 +36,6 @@ namespace andengine.engine
     using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
     using ITextureSource = andengine.opengl.texture.source.ITextureSource;
     using GLHelper = andengine.opengl.util.GLHelper;
-    using SensorDelay = andengine.sensor.SensorDelay;
     using AccelerometerData = andengine.sensor.accelerometer.AccelerometerData;
     using AccelerometerSensorOptions = andengine.sensor.accelerometer.AccelerometerSensorOptions;
     using IAccelerometerListener = andengine.sensor.accelerometer.IAccelerometerListener;
@@ -84,7 +85,7 @@ namespace andengine.engine
      * @since 12:21:31 - 08.03.2010
      */
     // TODO: Check the implications of removing class(es) from the list (TimeConstants - no longer an interface, so add class to usage)
-    public class Engine : SensorEventListener, OnTouchListener /* NB: Is actually IOnTouchListener */, ITouchEventCallback, /* TimeConstants, */ LocationListener
+    public class Engine : Java.Lang.Object, SensorEventListener, OnTouchListener /* NB: Is actually IOnTouchListener */, ITouchEventCallback, /* TimeConstants, */ LocationListener
     {
         #region Interface bindings
         //void ITouchEventCallback.OnTouchEvent(TouchEvent pSurfaceTouchEvent) { OnTouchEvent(pSurfaceTouchEvent); }
@@ -167,7 +168,7 @@ namespace andengine.engine
             //MusicFactory.setAssetBasePath("");
             MusicFactory.SetAssetBasePath("");
             //FontFactory.setAssetBasePath("");
-            FontFactory.SetAssetBasePath("");
+            FontFactory.setAssetBasePath("");
 
             //BufferObjectManager.setActiveInstance(this.mBufferObjectManager);
             BufferObjectManager.SetActiveInstance(this.mBufferObjectManager);
@@ -420,12 +421,12 @@ namespace andengine.engine
                 switch (pEvent.Sensor.Type)
                 {
                     case SensorType.Accelerometer:
-                        this.mAccelerometerData.SetValues(pEvent.Values);
-                        this.mAccelerometerListener.OnAccelerometerChanged(this.mAccelerometerData);
+                        this.mAccelerometerData.setValues(pEvent.Values.ToArray());
+                        this.mAccelerometerListener.onAccelerometerChanged(this.mAccelerometerData);
                         break;
                     case SensorType.Orientation:
-                        this.mOrientationData.SetValues(pEvent.Values);
-                        this.mOrientationListener.OnOrientationChanged(this.mOrientationData);
+                        this.mOrientationData.setValues(pEvent.Values.ToArray());
+                        this.mOrientationListener.onOrientationChanged(this.mOrientationData);
                         break;
                 }
             }
@@ -441,24 +442,26 @@ namespace andengine.engine
             {
                 if (pLocation == null)
                 {
-                    this.mLocationListener.OnLocationLost();
+                    this.mLocationListener.onLocationLost();
                 }
                 else
                 {
                     this.mLocation = pLocation;
-                    this.mLocationListener.OnLocationChanged(pLocation);
+                    this.mLocationListener.onLocationChanged(pLocation);
                 }
             }
         }
 
         public /* override */ void OnProviderDisabled(/* final */ String pProvider)
         {
-            this.mLocationListener.OnProviderDisabled(pProvider);
+            //TODO: The following method call had a parameter in the Java code. Why has it been removed?
+            this.mLocationListener.onLocationProviderDisabled();/* pProvider */
         }
 
         public /* override */ void OnProviderEnabled(/* final */ String pProvider)
         {
-            this.mLocationListener.OnProviderEnabled(pProvider);
+            //TODO: The following method call had a parameter in the Java code. Why has it been removed?
+            this.mLocationListener.onLocationProviderEnabled(); /* pProvider */
         }
 
         public void OnStatusChanged(/* final */ String pProvider, /* final */ int  pStatus, /* final */ Bundle pExtras)
@@ -472,15 +475,15 @@ namespace andengine.engine
             {
                 //case LocationProvider.AVAILABLE:
                 case LocationProviderStatus.AVAILABLE:
-                    this.mLocationListener.OnStatusChanged(LocationProviderStatus.AVAILABLE, pExtras);
+                    this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.AVAILABLE, pExtras);
                     break;
                 //case LocationProvider.OUT_OF_SERVICE:
                 case LocationProviderStatus.OUT_OF_SERVICE:
-                    this.mLocationListener.OnStatusChanged(LocationProviderStatus.OUT_OF_SERVICE, pExtras);
+                    this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.OUT_OF_SERVICE, pExtras);
                     break;
                 //case LocationProvider.TEMPORARILY_UNAVAILABLE:
                 case LocationProviderStatus.TEMPORARILY_UNAVAILABLE:
-                    this.mLocationListener.OnStatusChanged(LocationProviderStatus.TEMPORARILY_UNAVAILABLE, pExtras);
+                    this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.TEMPORARILY_UNAVAILABLE, pExtras);
                     break;
             }
         }
@@ -586,8 +589,8 @@ namespace andengine.engine
         {
             this.mTextureManager.reloadTextures();
             this.mFontManager.reloadFonts();
-            BufferObjectManager.setActiveInstance(this.mBufferObjectManager);
-            this.mBufferObjectManager.reloadBufferObjects();
+            BufferObjectManager.SetActiveInstance(this.mBufferObjectManager);
+            this.mBufferObjectManager.ReloadBufferObjects();
         }
 
         public void OnPause()
@@ -710,8 +713,8 @@ namespace andengine.engine
             //State.WaitUntilCanDraw();
             State threadLocker = this.mThreadLocker;
 
-            this.mTextureManager.UpdateTextures(pGL);
-            this.mFontManager.UpdateFonts(pGL);
+            this.mTextureManager.updateTextures(pGL);
+            this.mFontManager.updateFonts(pGL);
             if (GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS)
             {
                 this.mBufferObjectManager.UpdateBufferObjects((GL11)pGL);
@@ -947,7 +950,7 @@ namespace andengine.engine
                 }
                 catch (/* final */ InterruptedException e)
                 {
-                    Debug.d(new Java.Lang.String("UpdateThread interrupted. Don't worry - this Exception is most likely expected!"), e);
+                    Debug.d("UpdateThread interrupted. Don't worry - this Exception is most likely expected!", e);
                     //this.interrupt();
                     Interrupt();
                 }
