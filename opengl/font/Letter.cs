@@ -54,6 +54,10 @@ namespace andengine.opengl.font
             result = prime * result + this.mCharacter;
             return result;
         }
+        public override int GetHashCode()
+        {
+            return HashCode();
+        }
 
         //public override bool equals(Object obj)
         public override bool Equals(object obj)

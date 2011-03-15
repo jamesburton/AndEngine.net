@@ -49,10 +49,17 @@ namespace andengine.entity.sprite
         // Getter & Setter
         // ===========================================================
 
+        /*
         public BaseTextureRegion GetTextureRegion()
         {
             return this.mTextureRegion;
         }
+        */
+        public virtual BaseTextureRegion GetTextureRegionCore()
+        {
+            return this.mTextureRegion;
+        }
+        public BaseTextureRegion GetTextureRegion() { return GetTextureRegionCore(); }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces

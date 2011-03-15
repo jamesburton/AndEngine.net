@@ -76,7 +76,11 @@ namespace andengine.opengl.texture.source
         }
 
         ITextureSource ITextureSource.Clone() { return (ITextureSource)this.Clone(); }
-        public /* override */ virtual AssetTextureSource Clone()
+        public virtual ITextureSource CloneCore()
+        {
+            return (ITextureSource)Clone();
+        }
+        public new virtual AssetTextureSource Clone()
         {
             return new AssetTextureSource(this.mContext, this.mAssetPath, this.mWidth, this.mHeight);
         }

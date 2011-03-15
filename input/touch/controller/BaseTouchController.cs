@@ -141,7 +141,7 @@ namespace andengine.input.touch.controller
             // Methods for/from SuperClass/Interfaces
             // ===========================================================
 
-            public void Run() {
+            public override void Run() {
 			   // BaseTouchController.this.mTouchEventCallback.onTouchEvent(this.mTouchEvent);
                 BaseTouchController.Instance.mTouchEventCallback.OnTouchEvent(this.mTouchEvent);
 		    }

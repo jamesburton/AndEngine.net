@@ -23,7 +23,7 @@ namespace andengine.entity.sprite
         // ===========================================================
 
         public Sprite(float pX, float pY, TextureRegion pTextureRegion)
-            : base(pX, pY, pTextureRegion.getWidth(), pTextureRegion.getHeight(), pTextureRegion)
+            : base(pX, pY, pTextureRegion.GetWidth(), pTextureRegion.GetHeight(), pTextureRegion)
         {
         }
 
@@ -33,7 +33,7 @@ namespace andengine.entity.sprite
         }
 
         public Sprite(float pX, float pY, TextureRegion pTextureRegion, RectangleVertexBuffer pRectangleVertexBuffer)
-            : base(pX, pY, pTextureRegion.getWidth(), pTextureRegion.getHeight(), pTextureRegion, pRectangleVertexBuffer)
+            : base(pX, pY, pTextureRegion.GetWidth(), pTextureRegion.GetHeight(), pTextureRegion, pRectangleVertexBuffer)
         {
         }
 
@@ -50,10 +50,11 @@ namespace andengine.entity.sprite
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override TextureRegion GetTextureRegion()
+        public override andengine.opengl.texture.region.BaseTextureRegion GetTextureRegionCore()
         {
-            return (TextureRegion)this.mTextureRegion;
+            return this.mTextureRegion;
         }
+        public new TextureRegion GetTextureRegion() { return (TextureRegion)GetTextureRegionCore(); }
 
         // ===========================================================
         // Methods

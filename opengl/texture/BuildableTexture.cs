@@ -89,7 +89,7 @@ namespace andengine.opengl.texture
             return base.AddTextureSource(pTextureSource, pTexturePositionX, pTexturePositionY);
         }
 
-        public override void clearTextureSources()
+        public override void ClearTextureSources()
         {
             base.ClearTextureSources();
             this.mTextureSourcesToPlace.Clear();
