@@ -30,7 +30,11 @@ namespace andengine.opengl.texture.region.buffer
         // Getter & Setter
         // ===========================================================
 
-        public TiledTextureRegion GetTextureRegion()
+        public override BaseTextureRegion GetTextureRegionCore()
+        {
+            return (BaseTextureRegion)GetTextureRegion();
+        }
+        public new TiledTextureRegion GetTextureRegion()
         {
             return (TiledTextureRegion)base.GetTextureRegion();
         }

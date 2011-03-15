@@ -10,7 +10,8 @@ namespace andengine.opengl.texture
 
     using Bitmap = Android.Graphics.Bitmap;
     using System.Collections.Generic;
-    using Java.Lang;
+    //using Java.Lang;
+    using String = System.String;
 
     /**
      * @author Nicolas Gramlich

@@ -27,7 +27,7 @@ namespace andengine.util.pool
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected override EntityRemoveRunnablePoolItem onAllocatePoolItem()
+        protected override EntityRemoveRunnablePoolItem OnAllocatePoolItem()
         {
             return new EntityRemoveRunnablePoolItem();
         }
