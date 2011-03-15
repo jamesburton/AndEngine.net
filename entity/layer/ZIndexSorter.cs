@@ -43,6 +43,11 @@ using System;
             {
                 return ((IEntity)pEntityA).GetZIndex() - ((IEntity)pEntityB).GetZIndex();
             }
+            public int Compare(Java.Lang.Object pEntityA, Java.Lang.Object pEntityB)
+            {
+                return ((IEntity)pEntityA).GetZIndex() - ((IEntity)pEntityB).GetZIndex();
+            }
+            // TODO: Work out correct Equals implemetation: public bool Equals(Java.Lang.Object pEntity) { return ???; }
         }
         private static readonly IComparator mZIndexComparator = new ZIndexComparator();
 
@@ -55,7 +60,8 @@ using System;
 
         }
 
-        public static ZIndexSorter getInstance()
+        public static ZIndexSorter Instance { get { return GetInstance(); } }
+        public static ZIndexSorter GetInstance()
         {
             if (INSTANCE == null)
             {
@@ -76,24 +82,24 @@ using System;
         // Methods
         // ===========================================================
 
-        public void sort(IEntity[] pEntities)
+        public void Sort(IEntity[] pEntities)
         {
-            sort(pEntities, this.mZIndexComparator);
+            Sort(pEntities, this.mZIndexComparator);
         }
 
-        public void sort(IEntity[] pEntities, int pStart, int pEnd)
+        public void Sort(IEntity[] pEntities, int pStart, int pEnd)
         {
-            sort(pEntities, pStart, pEnd, this.mZIndexComparator);
+            Sort(pEntities, pStart, pEnd, this.mZIndexComparator);
         }
 
-        public void sort(IList<IEntity> pEntities)
+        public void Sort(IList<IEntity> pEntities)
         {
-            sort(pEntities, this.mZIndexComparator);
+            Sort(pEntities, this.mZIndexComparator);
         }
 
-        public void sort(IList<IEntity> pEntities, int pStart, int pEnd)
+        public void Sort(IList<IEntity> pEntities, int pStart, int pEnd)
         {
-            sort(pEntities, pStart, pEnd, this.mZIndexComparator);
+            Sort(pEntities, pStart, pEnd, this.mZIndexComparator);
         }
 
         // ===========================================================

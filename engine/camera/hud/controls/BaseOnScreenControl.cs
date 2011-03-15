@@ -17,7 +17,7 @@ namespace andengine.engine.camera.hud.controls
     using TextureRegion = andengine.opengl.texture.region.TextureRegion;
     using MathUtils = andengine.util.MathUtils;
 
-    using MotioEvent = Android.Views.MotionEvent;
+    using MotionEvent = Android.Views.MotionEvent;
 
     /**
      * @author Nicolas Gramlich

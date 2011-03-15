@@ -159,7 +159,7 @@ namespace andengine.entity.layer
             ZIndexSorter.Instance.Sort(this.mEntities);
         }
 
-        public override void SortEntities(/*Comparator<IEntity>*/ Comparer<IEntity> pEntityComparator)
+        public /* override */ void SortEntities(/*Comparator<IEntity>*/ Comparer<IEntity> pEntityComparator)
         {
             //ZIndexSorter.getInstance().sort(this.mEntities, pEntityComparator);
             ZIndexSorter.Instance.Sort(this.mEntities, pEntityComparator);
