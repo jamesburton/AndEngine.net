@@ -32,7 +32,7 @@ namespace andengine.util.sort
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void sort(T[] pArray, int pStart, int pEnd, /* Comparator<T> */ IComparer<T> pComparator)
+        public override void Sort(T[] pArray, int pStart, int pEnd, /* Comparator<T> */ IComparer<T> pComparator)
         {
             for (int i = pStart + 1; i < pEnd; i++)
             {
@@ -51,7 +51,7 @@ namespace andengine.util.sort
             return;
         }
 
-        public override void sort(List<T> pList, int pStart, int pEnd, /* Comparator<T> */ IComparer<T> pComparator)
+        public override void Sort(List<T> pList, int pStart, int pEnd, /* Comparator<T> */ IComparer<T> pComparator)
         {
             for (int i = pStart + 1; i < pEnd; i++)
             {

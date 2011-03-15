@@ -32,22 +32,22 @@ namespace andengine.util.sort
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public abstract void sort(T[] pArray, int pStart, int pEnd, /* Comparator<T> */ IComparer<T> pComparator);
+        public abstract void Sort(T[] pArray, int pStart, int pEnd, /* Comparator<T> */ IComparer<T> pComparator);
 
-        public abstract void sort(List<T> pList, int pStart, int pEnd, /* Comparator<T> */ IComparer<T> pComparator);
+        public abstract void Sort(List<T> pList, int pStart, int pEnd, /* Comparator<T> */ IComparer<T> pComparator);
 
         // ===========================================================
         // Methods
         // ===========================================================
 
-        public void sort(T[] pArray, /* Comparator<T> */ IComparer<T> pComparator)
+        public void Sort(T[] pArray, /* Comparator<T> */ IComparer<T> pComparator)
         {
-            sort(pArray, 0, pArray.Length, pComparator);
+            Sort(pArray, 0, pArray.Length, pComparator);
         }
 
-        public void sort(List<T> pList, /* Comparator<T> */ IComparer<T> pComparator)
+        public void Sort(List<T> pList, /* Comparator<T> */ IComparer<T> pComparator)
         {
-            sort(pList, 0, pList.Count, pComparator);
+            Sort(pList, 0, pList.Count, pComparator);
         }
 
         // ===========================================================

@@ -68,9 +68,7 @@ namespace andengine.entity.layer
         public abstract void SwapEntities(int pEntityIndexA, int pEntityIndexB);
         public abstract IEntity ReplaceEntity(int pEntityIndex, IEntity pEntity);
         public abstract void SortEntities();
-        // TODO: Check this substitution:- public abstract void SortEntities(/* final */ IComparator pEntityComparator);
-        //public abstract void SortEntities(Comparer<IEntity> entityComparer);
-        public abstract void SortEntities(IComparator entityComparator);
+        public abstract void SortEntities(IComparer<IEntity> entityComparator);
         public abstract IEntity GetEntity(/* final */ int pIndex);
         public abstract void AddEntity(/* final */ IEntity pEntity);
         public abstract IEntity FindEntity(/* final */ IEntityMatcher pEntityMatcher);
