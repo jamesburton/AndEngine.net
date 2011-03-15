@@ -88,7 +88,7 @@ namespace andengine.entity.scene
             }
         }
 
-        protected override bool OnChildSceneTouchEvent(TouchEvent pSceneTouchEvent)
+        protected /*override*/ bool OnChildSceneTouchEvent(TouchEvent pSceneTouchEvent)
         {
             bool childIsCameraScene = this.mChildScene is CameraScene;
             if (childIsCameraScene)
@@ -131,19 +131,20 @@ namespace andengine.entity.scene
         {
             Camera camera = this.mCamera;
             //pShape.setPosition((camera.getWidth() - pShape.getWidth()) * 0.5f, (camera.getHeight() - pShape.getHeight()) * 0.5f);
-            pShape.setPosition((camera.Width - pShape.Width) * 0.5f, (camera.Height - pShape.Height) * 0.5f);
+            pShape.SetPosition((camera.Width - pShape.GetWidth()) * 0.5f, (camera.Height - pShape.GetHeight()) * 0.5f);
         }
 
         public void centerShapeInCameraHorizontally(Shape pShape)
         {
             //pShape.setPosition((this.mCamera.getWidth() - pShape.getWidth()) * 0.5f, pShape.getY());
-            pShape.setPosition((this.mCamera.Width - pShape.Width) * 0.5f, pShape.Y);
+            pShape.SetPosition((this.mCamera.Width - pShape.GetWidth()) * 0.5f, pShape.Y);
         }
 
         public void centerShapeInCameraVertically(Shape pShape)
         {
             //pShape.setPosition(pShape.getX(), (this.mCamera.getHeight() - pShape.getHeight()) * 0.5f);
-            pShape.setPosition(pShape.X, (this.mCamera.Height - pShape.Height) * 0.5f);
+            pShape.SetPosition(pShape.X, (this.mCamera.Height - pShape.GetHeight()) * 0.5f);
+            pShape.SetPosition(pShape.X, (this.mCamera.Height - pShape.GetHeight()) * 0.5f);
         }
 
         // ===========================================================
