@@ -645,7 +645,7 @@ namespace andengine.entity.scene
             }
         }
 
-        protected bool OnChildSceneTouchEvent(/* final */ TouchEvent pSceneTouchEvent)
+        protected virtual bool OnChildSceneTouchEvent(/* final */ TouchEvent pSceneTouchEvent)
         {
             return this.mChildScene.OnSceneTouchEvent(pSceneTouchEvent);
         }

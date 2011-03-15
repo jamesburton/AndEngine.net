@@ -21,7 +21,8 @@ namespace andengine.opengl.texture.source
         int GetWidth();
         int GetHeight();
 
-        ITextureSource Clone();
+        ITextureSource CloneCore();
+        //ITextureSource Clone();
 
         Bitmap OnLoadBitmap();
     }
