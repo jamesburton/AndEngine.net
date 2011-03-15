@@ -101,7 +101,7 @@ namespace andengine.input.touch.controller
             {
                 TouchEvent touchEvent = TouchEvent.Obtain(pX, pY, pAction, pPointerID, pMotionEvent);
                 handled = this.mTouchEventCallback.OnTouchEvent(touchEvent);
-                touchEvent.recycle();
+                touchEvent.Recycle();
             }
 
             return handled;
@@ -146,7 +146,7 @@ namespace andengine.input.touch.controller
                 BaseTouchController.Instance.mTouchEventCallback.OnTouchEvent(this.mTouchEvent);
 		    }
 
-            protected override void OnRecycle()
+            /* protected */ public override void OnRecycle()
             {
                 base.OnRecycle();
                 TouchEvent touchEvent = this.mTouchEvent;

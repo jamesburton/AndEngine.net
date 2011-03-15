@@ -18,13 +18,13 @@ namespace andengine.input.touch
         //public static /* final */ readonly int ACTION_CANCEL = MotionEvent.ACTION_CANCEL;
         public static readonly MotionEventActions ACTION_CANCEL = MotionEventActions.Cancel;
         //public static /* final */ readonly int ACTION_DOWN = MotionEvent.ACTION_DOWN;
-        public static /* final */ readonly MotionEventActions ACTION_DOWN = MotionEventActions.ACTION_DOWN;
+        public static /* final */ readonly MotionEventActions ACTION_DOWN = MotionEventActions.Down;
         //public static /* final */ readonly int ACTION_MOVE = MotionEvent.ACTION_MOVE;
-        public static /* final */ readonly MotionEventActions ACTION_MOVE = MotionEventActions.ACTION_MOVE;
+        public static /* final */ readonly MotionEventActions ACTION_MOVE = MotionEventActions.Move;
         //public static /* final */ readonly int ACTION_OUTSIDE = MotionEvent.ACTION_OUTSIDE;
-        public static /* final */ readonly MotionEventActions ACTION_OUTSIDE = MotionEventActions.ACTION_OUTSIDE;
+        public static /* final */ readonly MotionEventActions ACTION_OUTSIDE = MotionEventActions.Outside;
         //public static /* final */ readonly int ACTION_UP = MotionEvent.ACTION_UP;
-        public static /* final */ readonly MotionEventActions ACTION_UP = MotionEventActions.ACTION_UP;
+        public static /* final */ readonly MotionEventActions ACTION_UP = MotionEventActions.Up;
 
         private static /* final */ readonly TouchEventPool TOUCHEVENT_POOL = new TouchEventPool();
 
@@ -62,7 +62,7 @@ namespace andengine.input.touch
             this.mMotionEvent = pMotionEvent;
         }
 
-        public void recycle()
+        public void Recycle()
         {
             TOUCHEVENT_POOL.RecyclePoolItem(this);
         }
