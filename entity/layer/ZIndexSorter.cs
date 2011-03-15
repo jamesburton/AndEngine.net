@@ -16,7 +16,7 @@ using System;
         // Constants
         // ===========================================================
 
-        private static ZIndexSorter INSTANCE;
+        private static readonly ZIndexSorter INSTANCE = new ZIndexSorter();
 
         // ===========================================================
         // Fields
@@ -37,14 +37,19 @@ using System;
         };
         private static readonly IComparator<IEntity> mZIndexComparator = new ZIndexComparator();
         */
-        private sealed class ZIndexComparator : IComparator
+        private sealed class ZIndexComparator : IComparer<IEntity>
         {
-            public /* override */ int Compare(Object pEntityA, Object pEntityB)
+            /*public  override  int Compare(Object pEntityA, Object pEntityB)
             {
                 return ((IEntity)pEntityA).GetZIndex() - ((IEntity)pEntityB).GetZIndex();
+            }*/
+
+            public int Compare(IEntity x, IEntity y)
+            {
+                return x.GetZIndex() - y.GetZIndex();
             }
         }
-        private static readonly IComparator mZIndexComparator = new ZIndexComparator();
+        private static readonly IComparer<IEntity> mZIndexComparator = new ZIndexComparator();
 
         // ===========================================================
         // Constructors
@@ -57,10 +62,10 @@ using System;
 
         public static ZIndexSorter getInstance()
         {
-            if (INSTANCE == null)
+            /*if (INSTANCE == null)
             {
                 INSTANCE = new ZIndexSorter();
-            }
+            }*/
             return INSTANCE;
         }
 
@@ -78,22 +83,22 @@ using System;
 
         public void sort(IEntity[] pEntities)
         {
-            sort(pEntities, this.mZIndexComparator);
+            sort(pEntities, mZIndexComparator);
         }
 
         public void sort(IEntity[] pEntities, int pStart, int pEnd)
         {
-            sort(pEntities, pStart, pEnd, this.mZIndexComparator);
+            sort(pEntities, pStart, pEnd, mZIndexComparator);
         }
 
-        public void sort(IList<IEntity> pEntities)
+        public void sort(List<IEntity> pEntities)
         {
-            sort(pEntities, this.mZIndexComparator);
+            sort(pEntities, mZIndexComparator);
         }
 
-        public void sort(IList<IEntity> pEntities, int pStart, int pEnd)
+        public void sort(List<IEntity> pEntities, int pStart, int pEnd)
         {
-            sort(pEntities, pStart, pEnd, this.mZIndexComparator);
+            sort(pEntities, pStart, pEnd, mZIndexComparator);
         }
 
         // ===========================================================

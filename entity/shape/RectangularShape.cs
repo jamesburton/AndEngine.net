@@ -179,7 +179,7 @@ namespace andengine.entity.shape
         public override float[] ConvertLocalToSceneCoordinates(/* final */ float pX, /* final */ float pY)
         {
             /* final */
-            float[] sceneCoordinates = ShapeCollisionChecker.ConvertLocalToSceneCoordinates(this, pX, pY);
+            float[] sceneCoordinates = ShapeCollisionChecker.convertLocalToSceneCoordinates(this, pX, pY);
             sceneCoordinates[Constants.VERTEX_INDEX_X] += this.mX;
             sceneCoordinates[Constants.VERTEX_INDEX_Y] += this.mY;
             return sceneCoordinates;

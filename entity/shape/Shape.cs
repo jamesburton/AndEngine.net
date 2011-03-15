@@ -137,7 +137,7 @@ namespace andengine.entity.shape
         /**
          * @param pAlpha from <code>0.0f</code> (invisible) to <code>1.0f</code> (opaque)
          */
-        public override void SetAlpha(/* final */ float pAlpha)
+        public /*override*/ void SetAlpha(/* final */ float pAlpha)
         {
             this.mAlpha = pAlpha;
         }
@@ -147,7 +147,7 @@ namespace andengine.entity.shape
          * @param pGreen from <code>0.0f</code> to <code>1.0f</code>
          * @param pBlue from <code>0.0f</code> to <code>1.0f</code>
          */
-        public override void SetColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue)
+        public /*override*/ void SetColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue)
         {
             this.mRed = pRed;
             this.mGreen = pGreen;
@@ -160,7 +160,7 @@ namespace andengine.entity.shape
          * @param pBlue from <code>0.0f</code> to <code>1.0f</code>
          * @param pAlpha from <code>0.0f</code> (invisible) to <code>1.0f</code> (opaque)
          */
-        public override void SetColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue, /* final */ float pAlpha)
+        public /*override*/ void SetColor(/* final */ float pRed, /* final */ float pGreen, /* final */ float pBlue, /* final */ float pAlpha)
         {
             this.mRed = pRed;
             this.mGreen = pGreen;
