@@ -55,17 +55,17 @@ namespace andengine.util.pool
         // Methods
         // ===========================================================
 
-        public void OnRecycle()
+        public virtual void OnRecycle()
         {
 
         }
 
-        public void OnObtain()
+        public virtual void OnObtain()
         {
 
         }
 
-        public void Recycle()
+        public virtual void Recycle()
         {
             if (this.mParent == null)
             {
