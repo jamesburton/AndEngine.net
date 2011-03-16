@@ -56,7 +56,7 @@ namespace andengine.opengl.texture.source
             }
             catch (IOException e)
             {
-                Debug.e("Failed loading Bitmap in AssetTextureSource. AssetPath: " + pAssetPath, e);
+                Debug.E("Failed loading Bitmap in AssetTextureSource. AssetPath: " + pAssetPath, e);
             }
             finally
             {
@@ -76,7 +76,11 @@ namespace andengine.opengl.texture.source
         }
 
         ITextureSource ITextureSource.Clone() { return (ITextureSource)this.Clone(); }
-        public /* override */ virtual AssetTextureSource Clone()
+        public virtual ITextureSource CloneCore()
+        {
+            return (ITextureSource)Clone();
+        }
+        public /* new */ virtual AssetTextureSource Clone()
         {
             return new AssetTextureSource(this.mContext, this.mAssetPath, this.mWidth, this.mHeight);
         }
@@ -117,7 +121,7 @@ namespace andengine.opengl.texture.source
             }
             catch (IOException e)
             {
-                Debug.e("Failed loading Bitmap in AssetTextureSource. AssetPath: " + this.mAssetPath, e);
+                Debug.E("Failed loading Bitmap in AssetTextureSource. AssetPath: " + this.mAssetPath, e);
                 return null;
             }
             finally

@@ -17,6 +17,6 @@ namespace andengine.engine.options.resolutionpolicy
         // Methods
         // ===========================================================
 
-        void onMeasure(RenderSurfaceView pRenderSurfaceView, int pWidthMeasureSpec, int pHeightMeasureSpec);
+        void OnMeasure(RenderSurfaceView pRenderSurfaceView, int pWidthMeasureSpec, int pHeightMeasureSpec);
     }
 }

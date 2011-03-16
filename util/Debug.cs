@@ -106,14 +106,14 @@ namespace andengine.util
         public static void V(Java.Lang.String pMessage) { V(pMessage.ToString()); }
         public static void V(/* final */ String pMessage)
         {
-            Debug.v(pMessage, null);
+            Debug.V(pMessage, null);
         }
 
         //public static void v(/* final */ System.String pMessage, /* final */ Throwable pThrowable) { v(new Java.Lang.String(pMessage), pThrowable); } 
 
-        public static void v(/* final */ String pMessage, /* final */ Throwable pThrowable)
+        public static void V(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
-            if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.VERBOSE))
+            if (DEBUGLEVEL.IsSameOrLessThan(DebugLevel.VERBOSE))
             {
                 //Log.Verbose(DEBUGTAG, pMessage, pThrowable);
                 Log.Verbose(DEBUGTAG, pThrowable, pMessage);
@@ -126,44 +126,44 @@ namespace andengine.util
             d(new Java.Lang.String(pMessage));
         } */
 
-        public static void d(/* final */ String pMessage)
+        public static void D(/* final */ String pMessage)
         {
-            Debug.d(pMessage, null);
+            Debug.D(pMessage, null);
         }
 
         //public static void d(System.String pMessage, Throwable pThrowable) { Debug.d(new Java.Lang.String(pMessage), pThrowable); }
-        public static void d(/* final */ String pMessage, /* final */ Throwable pThrowable)
+        public static void D(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
-            if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.DEBUG))
+            if (DEBUGLEVEL.IsSameOrLessThan(DebugLevel.DEBUG))
             {
                 Log.Debug(DEBUGTAG, pMessage, pThrowable);
             }
         }
 
-        public static void i(/* final */ String pMessage)
+        public static void I(/* final */ String pMessage)
         {
-            Debug.i(pMessage, null);
+            Debug.I(pMessage, null);
         }
 
-        public static void i(/* final */ String pMessage, /* final */ Throwable pThrowable)
+        public static void I(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
-            if (DEBUGLEVEL.isSameOrLessThan(DebugLevel.INFO))
+            if (DEBUGLEVEL.IsSameOrLessThan(DebugLevel.INFO))
             {
                 Log.Info(DEBUGTAG, pMessage, pThrowable);
             }
         }
 
-        public static void w(/* final */ String pMessage)
+        public static void W(/* final */ String pMessage)
         {
-            Debug.w(pMessage, null);
+            Debug.W(pMessage, null);
         }
 
-        public static void w(/* final */ Throwable pThrowable)
+        public static void W(/* final */ Throwable pThrowable)
         {
-            Debug.w(DEBUGTAG, pThrowable);
+            Debug.W(DEBUGTAG, pThrowable);
         }
 
-        public static void w(/* final */ String pMessage, /* final */ Throwable pThrowable)
+        public static void W(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
             if (DEBUGLEVEL.IsSameOrLessThan(DebugLevel.WARNING))
             {
@@ -178,17 +178,17 @@ namespace andengine.util
             }
         }
 
-        public static void e(/* final */ String pMessage)
+        public static void E(/* final */ String pMessage)
         {
-            Debug.e(pMessage, null);
+            Debug.E(pMessage, null);
         }
 
-        public static void e(/* final */ Throwable pThrowable)
+        public static void E(/* final */ Throwable pThrowable)
         {
-            Debug.e(DEBUGTAG, pThrowable);
+            Debug.E(DEBUGTAG, pThrowable);
         }
 
-        public static void e(/* final */ String pMessage, /* final */ Throwable pThrowable)
+        public static void E(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
             if (DEBUGLEVEL.IsSameOrLessThan(DebugLevel.ERROR))
             {

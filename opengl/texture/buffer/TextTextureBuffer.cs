@@ -46,7 +46,7 @@ namespace andengine.opengl.texture.buffer
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void update(Font pFont, String[] pLines)
         {
-            FastFloatBuffer textureFloatBuffer = this.getFloatBuffer();
+            FastFloatBuffer textureFloatBuffer = this.GetFloatBuffer();
             textureFloatBuffer.Position(0);
 
             Font font = pFont;
@@ -60,7 +60,7 @@ namespace andengine.opengl.texture.buffer
                 int lineLength = line.Length();
                 for (int j = 0; j < lineLength; j++)
                 {
-                    Letter letter = font.getLetter(line.CharAt(j));
+                    Letter letter = font.GetLetter(line.CharAt(j));
 
                     float letterTextureX = letter.mTextureX;
                     float letterTextureY = letter.mTextureY;
@@ -88,7 +88,7 @@ namespace andengine.opengl.texture.buffer
             }
             textureFloatBuffer.Position(0);
 
-            this.setHardwareBufferNeedsUpdate();
+            this.SetHardwareBufferNeedsUpdate();
         }
 
         // ===========================================================

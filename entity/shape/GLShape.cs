@@ -41,7 +41,7 @@ namespace andengine.entity.shape
         // ===========================================================
 
         protected abstract void OnUpdateVertexBuffer();
-        protected abstract VertexBuffer GetVertexBuffer();
+        /*protected*/ public abstract VertexBuffer GetVertexBuffer();
 
         protected override void OnApplyVertices(/* final */ GL10 pGL)
         {

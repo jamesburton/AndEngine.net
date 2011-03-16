@@ -6,7 +6,7 @@ namespace andengine.opengl.font
     using Paint = Android.Graphics.Paint;
     using Typeface = Android.Graphics.Typeface;
     using Style = Android.Graphics.Paint.Style;
-    using Java.Lang;
+    using System;
 
     /**
      * @author Nicolas Gramlich
@@ -22,8 +22,8 @@ namespace andengine.opengl.font
         // Fields
         // ===========================================================
 
-        private readonly Paint mStrokePaint;
-        private readonly bool mStrokeOnly;
+        private Paint mStrokePaint;
+        private bool mStrokeOnly;
 
         // ===========================================================
         // Constructors
@@ -62,13 +62,13 @@ namespace andengine.opengl.font
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected override void drawCharacterString(String pCharacterAsString)
+        protected override void DrawCharacterString(String pCharacterAsString)
         {
             if (this.mStrokeOnly == false)
             {
-                base.drawCharacterString(pCharacterAsString);
+                base.DrawCharacterString(pCharacterAsString);
             }
-            this.mCanvas.DrawText(pCharacterAsString.ToCharArray(), LETTER_LEFT_OFFSET, -this.mFontMetrics.Ascent, this.mStrokePaint);
+            this.mCanvas.DrawText(pCharacterAsString, LETTER_LEFT_OFFSET, -this.mFontMetrics.Ascent, this.mStrokePaint);
         }
 
         // ===========================================================

@@ -84,12 +84,12 @@ namespace andengine.opengl.texture
          * Use {@link BuildableTexture#addTextureSource(ITextureSource)} instead.
          */
         /// @Deprecated
-        public TextureSourceWithLocation AddTextureSource(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY)
+        public new TextureSourceWithLocation AddTextureSource(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY)
         {
             return base.AddTextureSource(pTextureSource, pTexturePositionX, pTexturePositionY);
         }
 
-        public override void clearTextureSources()
+        public override void ClearTextureSources()
         {
             base.ClearTextureSources();
             this.mTextureSourcesToPlace.Clear();
@@ -122,7 +122,7 @@ namespace andengine.opengl.texture
                 TextureSourceWithWithLocationCallback textureSource = textureSources[i];
                 if (textureSource.mTextureSource == pTextureSource)
                 {
-                    textureSources.Remove(i);
+                    textureSources.RemoveAt(i);
                     this.mUpdateOnHardwareNeeded = true;
                     return;
                 }
@@ -136,7 +136,7 @@ namespace andengine.opengl.texture
          * @throws TextureSourcePackingException i.e. when the {@link ITextureSource}s didn't fit into this {@link BuildableTexture}.
          */
         public void Build(ITextureBuilder pTextureSourcePackingAlgorithm) /* throws TextureSourcePackingException */ {
-            pTextureSourcePackingAlgorithm.pack(this, this.mTextureSourcesToPlace);
+            pTextureSourcePackingAlgorithm.Pack(this, this.mTextureSourcesToPlace);
             this.mTextureSourcesToPlace.Clear();
             this.mUpdateOnHardwareNeeded = true;
         }
@@ -168,9 +168,14 @@ namespace andengine.opengl.texture
                 mCallback = pCallback;
             }
 
-            public /* override */ TextureSourceWithWithLocationCallback Clone()
+            public ITextureSource CloneCore()
             {
-                return null;
+                return (ITextureSource)null;
+            }
+            /*public new TextureSourceWithWithLocationCallback Clone()*/
+            public ITextureSource Clone()
+            {
+                return CloneCore();
             }
 
             // ===========================================================

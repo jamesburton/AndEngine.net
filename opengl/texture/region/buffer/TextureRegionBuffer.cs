@@ -26,9 +26,19 @@ namespace andengine.opengl.texture.region.buffer
         // Getter & Setter
         // ===========================================================
 
+        /*
         public override TextureRegion GetTextureRegion()
         {
             return (TextureRegion)base.GetTextureRegion();
+        }
+        */
+        public override BaseTextureRegion GetTextureRegionCore()
+        {
+            return (BaseTextureRegion) GetTextureRegion();
+        }
+        public new TextureRegion GetTextureRegion()
+        {
+            return (TextureRegion)base.GetTextureRegionCore();
         }
 
         // ===========================================================

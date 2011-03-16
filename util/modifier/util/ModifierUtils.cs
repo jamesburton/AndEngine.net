@@ -43,7 +43,7 @@ namespace andengine.util.modifier.util
             for (int i = pModifiers.Length - 1; i >= 0; i--)
             {
                 /* final */
-                float duration = pModifiers[i].getDuration();
+                float duration = pModifiers[i].Duration;
                 if (duration > longestDuration)
                 {
                     longestDuration = duration;
@@ -61,7 +61,7 @@ namespace andengine.util.modifier.util
 
             for (int i = pModifiers.Length - 1; i >= 0; i--)
             {
-                duration += pModifiers[i].getDuration();
+                duration += pModifiers[i].Duration;
             }
 
             return duration;

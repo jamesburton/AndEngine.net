@@ -67,7 +67,7 @@ namespace andengine.opengl.buffer
             return this.mLoadedToHardware;
         }
 
-        protected void SetLoadedToHardware(bool pLoadedToHardware)
+        internal void SetLoadedToHardware(bool pLoadedToHardware)
         {
             this.mLoadedToHardware = pLoadedToHardware;
         }

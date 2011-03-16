@@ -27,7 +27,7 @@ namespace andengine.opengl.font
         // Constructors
         // ===========================================================
 
-        Letter(char pCharacter, int pAdvance, int pWidth, int pHeight, float pTextureX, float pTextureY, float pTextureWidth, float pTextureHeight)
+        public Letter(char pCharacter, int pAdvance, int pWidth, int pHeight, float pTextureX, float pTextureY, float pTextureWidth, float pTextureHeight)
         {
             this.mCharacter = pCharacter;
             this.mAdvance = pAdvance;
@@ -47,16 +47,20 @@ namespace andengine.opengl.font
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override int hashCode()
+        public virtual int HashCode()
         {
             int prime = 31;
             int result = 1;
             result = prime * result + this.mCharacter;
             return result;
         }
+        public override int GetHashCode()
+        {
+            return HashCode();
+        }
 
         //public override bool equals(Object obj)
-        public override bool equals(object obj)
+        public override bool Equals(object obj)
         {
             if (this == obj)
             {

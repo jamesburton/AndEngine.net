@@ -60,7 +60,7 @@ namespace andengine.collision
         }
 
 
-        public static float[] convertLocalToSceneCoordinates(/* final */ Shape pShape, /* final */ float pX, /* final */ float pY)
+        public static float[] ConvertLocalToSceneCoordinates(/* final */ Shape pShape, /* final */ float pX, /* final */ float pY)
         {
             VERTICES_LOCAL_TO_SCENE_TMP[Constants.VERTEX_INDEX_X] = pX;
             VERTICES_LOCAL_TO_SCENE_TMP[Constants.VERTEX_INDEX_Y] = pY;
@@ -72,7 +72,7 @@ namespace andengine.collision
             return VERTICES_LOCAL_TO_SCENE_TMP;
         }
 
-        public static bool checkCollision(/* final */ int pVerticesALength, /* final */ int pVerticesBLength, /* final */ float[] pVerticesA, /* final */ float[] pVerticesB)
+        public static bool CheckCollision(/* final */ int pVerticesALength, /* final */ int pVerticesBLength, /* final */ float[] pVerticesA, /* final */ float[] pVerticesB)
         {
             /* Check all the lines of A ... */
             for (int a = pVerticesALength - 4; a >= 0; a -= 2)
@@ -92,11 +92,11 @@ namespace andengine.collision
             {
                 /* At last check if one polygon 'contains' the other one by checking 
                  * if one vertex of the one vertices is contained by all of the other vertices. */
-                if (ShapeCollisionChecker.CheckContains(pVerticesA, pVerticesALength, pVerticesB[Constants.VERTEX_INDEX_X], pVerticesB[VERTEX_INDEX_Y]))
+                if (ShapeCollisionChecker.CheckContains(pVerticesA, pVerticesALength, pVerticesB[Constants.VERTEX_INDEX_X], pVerticesB[Constants.VERTEX_INDEX_Y]))
                 {
                     return true;
                 }
-                else if (ShapeCollisionChecker.CheckContains(pVerticesB, pVerticesBLength, pVerticesA[Constants.VERTEX_INDEX_X], pVerticesA[VERTEX_INDEX_Y]))
+                else if (ShapeCollisionChecker.CheckContains(pVerticesB, pVerticesBLength, pVerticesA[Constants.VERTEX_INDEX_X], pVerticesA[Constants.VERTEX_INDEX_Y]))
                 {
                     return true;
                 }

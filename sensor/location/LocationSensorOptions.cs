@@ -1,9 +1,13 @@
+using Android.Locations;
+
 namespace andengine.sensor.location
 {
 
     using TimeConstants = andengine.util.constants.TimeConstants;
 
     using Criteria = Android.Locations.Criteria;
+
+    using Accuracy = Android.Locations.Accuracy;
 
     /**
      * @author Nicolas Gramlich
@@ -58,18 +62,20 @@ namespace andengine.sensor.location
          * @param pMinimumTriggerTime
          * @param pMinimumTriggerDistance
          */
-        public LocationSensorOptions(int pAccuracy, bool pAltitudeRequired, bool pBearingRequired, bool pCostAllowed, int pPowerRequirement, bool pSpeedRequired, bool pEnabledOnly, long pMinimumTriggerTime, long pMinimumTriggerDistance)
+        //public LocationSensorOptions(int pAccuracy, bool pAltitudeRequired, bool pBearingRequired, bool pCostAllowed, int pPowerRequirement, bool pSpeedRequired, bool pEnabledOnly, long pMinimumTriggerTime, long pMinimumTriggerDistance)
+        public LocationSensorOptions(Accuracy pAccuracy, bool pAltitudeRequired, bool pBearingRequired, bool pCostAllowed, Power pPowerRequirement, bool pSpeedRequired, bool pEnabledOnly, long pMinimumTriggerTime, long pMinimumTriggerDistance)
         {
             this.mEnabledOnly = pEnabledOnly;
             this.mMinimumTriggerTime = pMinimumTriggerTime;
             this.mMinimumTriggerDistance = pMinimumTriggerDistance;
 
-            this.setAccuracy(pAccuracy);
-            this.setAltitudeRequired(pAltitudeRequired);
-            this.setBearingRequired(pBearingRequired);
-            this.setCostAllowed(pCostAllowed);
-            this.setPowerRequirement(pPowerRequirement);
-            this.setSpeedRequired(pSpeedRequired);
+            //this.SetAccuracy(pAccuracy);
+            this.Accuracy = pAccuracy;
+            this.AltitudeRequired = pAltitudeRequired;
+            this.BearingRequired = pBearingRequired;
+            this.CostAllowed = pCostAllowed;
+            this.PowerRequirement = pPowerRequirement;
+            this.SpeedRequired = pSpeedRequired;
         }
 
         // ===========================================================

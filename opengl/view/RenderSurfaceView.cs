@@ -121,7 +121,7 @@ namespace andengine.opengl.view
 
             public /* override */ void OnSurfaceChanged(GL10 pGL, int pWidth, int pHeight)
             {
-                Debug.d("onSurfaceChanged: pWidth=" + pWidth + "  pHeight=" + pHeight);
+                Debug.D("onSurfaceChanged: pWidth=" + pWidth + "  pHeight=" + pHeight);
                 this.mEngine.SetSurfaceSize(pWidth, pHeight);
                 pGL.GlViewport(0, 0, pWidth, pHeight);
                 pGL.GlLoadIdentity();
@@ -129,7 +129,7 @@ namespace andengine.opengl.view
 
             public /* override */ void OnSurfaceCreated(GL10 pGL, EGLConfig pConfig)
             {
-                Debug.d("onSurfaceCreated");
+                Debug.D("onSurfaceCreated");
                 GLHelper.Reset(pGL);
 
                 GLHelper.SetPerspectiveCorrectionHintFastest(pGL);
@@ -168,7 +168,7 @@ namespace andengine.opengl.view
                 }
                 catch (InterruptedException e)
                 {
-                    Debug.e(new Java.Lang.String("GLThread interrupted!"), e);
+                    Debug.E("GLThread interrupted!", e);
                 }
             }
 

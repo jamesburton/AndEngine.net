@@ -34,10 +34,10 @@ namespace andengine.input.touch.controller
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override bool onHandleMotionEvent(MotionEvent pMotionEvent)
+        public override bool OnHandleMotionEvent(MotionEvent pMotionEvent)
         {
             //return this.fireTouchEvent(pMotionEvent.getX(), pMotionEvent.getY(), pMotionEvent.getAction(), 0, pMotionEvent);
-            return this.fireTouchEvent(pMotionEvent.GetX(), pMotionEvent.GetY(), pMotionEvent.Action, 0, pMotionEvent);
+            return this.FireTouchEvent(pMotionEvent.GetX(), pMotionEvent.GetY(), pMotionEvent.Action, 0, pMotionEvent);
         }
 
         // ===========================================================

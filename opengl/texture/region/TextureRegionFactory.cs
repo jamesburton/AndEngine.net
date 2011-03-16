@@ -166,18 +166,27 @@ namespace andengine.opengl.texture.region
         */
         public class TextureSourceWithLocationCallback : andengine.util.Callback<TextureSourceWithLocation>
         {
-            protected TextureSourceWithLocation _TextureSourceWithLocation;
-            public TextureSourceWithLocationCallback(TextureSourceWithLocation textureSourceWithLocation) { _TextureSourceWithLocation = textureSourceWithLocation; }
+            private readonly BaseTextureRegion _textureSourceWithLocation;
+
+            public TextureSourceWithLocationCallback(TextureRegion textureSourceWithLocation)
+            {
+                _textureSourceWithLocation = textureSourceWithLocation;
+            }
+            public TextureSourceWithLocationCallback(TiledTextureRegion tiledTexture)
+            {
+                _textureSourceWithLocation = tiledTexture;
+            }
+
             public /* override */ virtual void OnCallback(TextureSourceWithLocation pCallbackValue)
             {
                 //_TextureSourceWithLocation.setTexturePosition(pCallbackValue.getTexturePositionX(), pCallbackValue.getTexturePositionY());
-                _TextureSourceWithLocation.SetTexturePosition(pCallbackValue.TexturePositionX, pCallbackValue.TexturePositionY);
+                _textureSourceWithLocation.SetTexturePosition(pCallbackValue.TexturePositionX, pCallbackValue.TexturePositionY);
             }
         }
         public static TextureRegion CreateFromSource(BuildableTexture pBuildableTexture, ITextureSource pTextureSource)
         {
             TextureRegion textureRegion = new TextureRegion(pBuildableTexture, 0, 0, pTextureSource.GetWidth(), pTextureSource.GetHeight());
-            TextureSourceWithLocationCallback callback = new TextureSourceWithLocationCallback((TextureSourceWithLocation)textureRegion);
+            TextureSourceWithLocationCallback callback = new TextureSourceWithLocationCallback(textureRegion);
             pBuildableTexture.AddTextureSource(pTextureSource, callback);
             return textureRegion;
         }
@@ -198,7 +207,7 @@ namespace andengine.opengl.texture.region
         {
             //TiledTextureRegion tiledTextureRegion = new TiledTextureRegion(pBuildableTexture, 0, 0, pTextureSource.getWidth(), pTextureSource.getHeight(), pTileColumns, pTileRows);
             TiledTextureRegion tiledTextureRegion = new TiledTextureRegion(pBuildableTexture, 0, 0, pTextureSource.GetWidth(), pTextureSource.GetHeight(), pTileColumns, pTileRows);
-            pBuildableTexture.AddTextureSource(pTextureSource, new TextureSourceWithLocationCallback((TextureSourceWithLocation)tiledTextureRegion));
+            pBuildableTexture.AddTextureSource(pTextureSource, new TextureSourceWithLocationCallback(tiledTextureRegion));
             return tiledTextureRegion;
         }
 

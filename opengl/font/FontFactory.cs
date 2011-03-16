@@ -74,17 +74,20 @@ namespace andengine.opengl.font
 
         public static Font CreateFromAsset(Texture pTexture, Context pContext, String pAssetPath, float pSize, bool pAntiAlias, int pColor)
         {
-            return new Font(pTexture, Typeface.CreateFromAsset(pContext.getAssets(), FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor);
+            //return new Font(pTexture, Typeface.CreateFromAsset(pContext.getAssets(), FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor);
+            return new Font(pTexture, Typeface.CreateFromAsset(pContext.Assets, FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor);
         }
 
         public static StrokeFont CreateStrokeFromAsset(Texture pTexture, Context pContext, String pAssetPath, float pSize, bool pAntiAlias, int pColor, int pStrokeWidth, int pStrokeColor)
         {
-            return new StrokeFont(pTexture, Typeface.CreateFromAsset(pContext.getAssets(), FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor);
+            //return new StrokeFont(pTexture, Typeface.CreateFromAsset(pContext.getAssets(), FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor);
+            return new StrokeFont(pTexture, Typeface.CreateFromAsset(pContext.Assets, FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor);
         }
 
         public static StrokeFont CreateStrokeFromAsset(Texture pTexture, Context pContext, String pAssetPath, float pSize, bool pAntiAlias, int pColor, int pStrokeWidth, int pStrokeColor, bool pStrokeOnly)
         {
-            return new StrokeFont(pTexture, Typeface.CreateFromAsset(pContext.getAssets(), FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor, pStrokeOnly);
+           // return new StrokeFont(pTexture, Typeface.CreateFromAsset(pContext.getAssets(), FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor, pStrokeOnly);
+            return new StrokeFont(pTexture, Typeface.CreateFromAsset(pContext.Assets, FontFactory.sAssetBasePath + pAssetPath), pSize, pAntiAlias, pColor, pStrokeWidth, pStrokeColor, pStrokeOnly);
         }
 
         // ===========================================================

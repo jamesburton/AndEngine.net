@@ -49,8 +49,12 @@ namespace andengine.entity.sprite
         // Getter & Setter
         // ===========================================================
 
+<<<<<<< HEAD
         /*
         public BaseTextureRegion GetTextureRegion()
+=======
+        public virtual BaseTextureRegion GetTextureRegion()
+>>>>>>> 4b6055f4246b8a1977c91f0aefa8c843654ade10
         {
             return this.mTextureRegion;
         }

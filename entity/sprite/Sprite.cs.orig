@@ -52,7 +52,12 @@ namespace andengine.entity.sprite
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override BaseTextureRegion GetTextureRegionCore()
+<<<<<<< HEAD
+        public override andengine.opengl.texture.region.BaseTextureRegion GetTextureRegionCore()
+=======
+        /*public override TextureRegion GetTextureRegion()*/
+        public override BaseTextureRegion GetTextureRegion()
+>>>>>>> 4b6055f4246b8a1977c91f0aefa8c843654ade10
         {
             return this.mTextureRegion;
         }

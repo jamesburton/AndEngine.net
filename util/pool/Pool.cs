@@ -11,7 +11,13 @@ namespace andengine.util.pool
      * @since 23:00:21 - 21.08.2010
      * @param <T>
      */
-    public abstract class Pool<T> : GenericPool<T> where T : PoolItem
+
+    public interface IPool
+    {
+        void Recycle(/* final */ PoolItem pPoolItem);
+    }
+
+    public abstract class Pool<T> : GenericPool<T>, IPool where T : PoolItem
     {
         // ===========================================================
         // Constants
@@ -42,7 +48,7 @@ namespace andengine.util.pool
         protected /* override */ new T OnHandleAllocatePoolItem()
         {
             /* final */
-            T poolItem = /*super*/base.onHandleAllocatePoolItem();
+            T poolItem = /*super*/base.OnHandleAllocatePoolItem();
             poolItem.mParent = this;
             return poolItem;
         }
@@ -50,12 +56,12 @@ namespace andengine.util.pool
         protected /* override */ new void OnHandleObtainItem(/* final */ T pPoolItem)
         {
             pPoolItem.mRecycled = false;
-            pPoolItem.onObtain();
+            pPoolItem.OnObtain();
         }
 
         protected /* override */ new void OnHandleRecycleItem(/* final */ T pPoolItem)
         {
-            pPoolItem.onRecycle();
+            pPoolItem.OnRecycle();
             pPoolItem.mRecycled = true;
         }
 
@@ -92,7 +98,7 @@ namespace andengine.util.pool
         // TODO: Check if anything should be added in place of this:- @SuppressWarnings("unchecked")
         /*protected*/public void Recycle(/* final */ PoolItem pPoolItem)
         {
-            this.recyclePoolItem((T)pPoolItem);
+            this.RecyclePoolItem((T)pPoolItem);
         }
 
         // ===========================================================

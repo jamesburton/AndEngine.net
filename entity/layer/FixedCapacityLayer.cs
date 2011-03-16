@@ -114,7 +114,7 @@ namespace andengine.entity.layer
 
         public override bool RemoveEntity(IEntity pEntity)
         {
-            return this.RemoveEntity(this.indexOfEntity(pEntity)) != null;
+            return this.RemoveEntity(this.IndexOfEntity(pEntity)) != null;
         }
 
         public override IEntity RemoveEntity(int pIndex)
@@ -187,7 +187,7 @@ namespace andengine.entity.layer
             ZIndexSorter.Instance.Sort(this.mEntities, 0, this.mEntityCount);
         }
 
-        public override void SortEntities(/*final Comparator<IEntity>*/ Comparer<IEntity> pEntityComparator)
+        public override void SortEntities(/*final Comparator<IEntity>*/ IComparer<IEntity> pEntityComparator)
         {
             //ZIndexSorter.getInstance().sort(this.mEntities, 0, this.mEntityCount, pEntityComparator);
             ZIndexSorter.Instance.Sort(this.mEntities, 0, this.mEntityCount, pEntityComparator);
@@ -205,7 +205,7 @@ namespace andengine.entity.layer
 
         public override void SetEntity(int pIndex, IEntity pEntity)
         {
-            this.checkIndex(pIndex);
+            this.CheckIndex(pIndex);
 
             if (pIndex == this.mEntityCount)
             {

@@ -1,3 +1,5 @@
+using System;
+
 namespace andengine.audio
 {
     using System.Collections.Generic;
@@ -10,7 +12,7 @@ namespace andengine.audio
      * @since 18:07:02 - 13.06.2010
      */
     //public abstract class BaseAudioManager<T extends IAudioEntity> : IAudioManager<T> {
-    public abstract class BaseAudioManager<T> : IAudioManager<T> where T : IAudioEntity
+    public abstract class BaseAudioManager<T> : IAudioManager where T : IAudioEntity
     {
         // ===========================================================
         // Constants
@@ -54,7 +56,7 @@ namespace andengine.audio
                 /* final */
                 T audioEntity = audioEntities[i];
 
-                audioEntity.onMasterVolumeChanged(pMasterVolume);
+                audioEntity.OnMasterVolumeChanged(pMasterVolume);
             }
         }
 
@@ -63,6 +65,11 @@ namespace andengine.audio
         public void Add(/* final */ T pAudioEntity)
         {
             this.mAudioEntities.Add(pAudioEntity);
+        }
+
+        public void Add(object pAudioEntity)
+        {
+            Add((T)pAudioEntity);
         }
 
         public /* override */ void ReleaseAll()
@@ -74,8 +81,8 @@ namespace andengine.audio
                 /* final */
                 T audioEntity = audioEntities[i];
 
-                audioEntity.stop();
-                audioEntity.release();
+                audioEntity.Stop();
+                audioEntity.Release();
             }
         }
 

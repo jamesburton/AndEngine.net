@@ -70,7 +70,7 @@ namespace andengine.util.modifier
 
         protected override void OnManagedInitialize(T pItem)
         {
-            this.onSetInitialValue(pItem, this.mFromValue);
+            this.OnSetInitialValue(pItem, this.mFromValue);
         }
 
         protected override void OnManagedUpdate(float pSecondsElapsed, T pItem)

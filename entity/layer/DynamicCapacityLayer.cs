@@ -32,7 +32,7 @@ namespace andengine.entity.layer
         // ===========================================================
 
         //private final ArrayList<IEntity> mEntities;
-        private readonly IList<IEntity> mEntities;
+        private readonly List<IEntity> mEntities;
 
         // ===========================================================
         // Constructors
@@ -159,7 +159,7 @@ namespace andengine.entity.layer
             ZIndexSorter.Instance.Sort(this.mEntities);
         }
 
-        public override void SortEntities(/*Comparator<IEntity>*/ Comparer<IEntity> pEntityComparator)
+        public override void SortEntities(/*Comparator<IEntity>*/ IComparer<IEntity> pEntityComparator)
         {
             //ZIndexSorter.getInstance().sort(this.mEntities, pEntityComparator);
             ZIndexSorter.Instance.Sort(this.mEntities, pEntityComparator);

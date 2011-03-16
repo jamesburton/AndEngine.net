@@ -1,3 +1,5 @@
+using Java.Lang;
+
 namespace andengine.engine.handler.runnable
 {
     //import java.util.ArrayList;
@@ -33,7 +35,7 @@ namespace andengine.engine.handler.runnable
         // ===========================================================
 
         //private final ArrayList<Runnable> mRunnables = new ArrayList<Runnable>();
-        private readonly List<Runnable> mRunnables = new List<Runnable>();
+        private readonly List<IRunnable> mRunnables = new List<IRunnable>();
 
         // ===========================================================
         // Constructors
@@ -50,7 +52,7 @@ namespace andengine.engine.handler.runnable
         [MethodImpl(MethodImplOptions.Synchronized)]
         public /* override */ void OnUpdate(/* final */ float pSecondsElapsed) {
 		//final ArrayList<Runnable> runnables = this.mRunnables;
-        List<Runnable> runnables = this.mRunnables;
+        List<IRunnable> runnables = this.mRunnables;
 		/* final */ int runnableCount = runnables.Count;
 		for(int i = runnableCount - 1; i >= 0; i--) {
 			//runnables[i].run();
@@ -69,7 +71,7 @@ namespace andengine.engine.handler.runnable
         // ===========================================================
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void PostRunnable(/* final */ Runnable pRunnable)
+        public void PostRunnable(/* final */ IRunnable pRunnable)
         {
             this.mRunnables.Add(pRunnable);
         }

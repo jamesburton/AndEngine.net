@@ -47,12 +47,14 @@ namespace andengine.opengl.font
         // Methods
         // ===========================================================
 
-        protected void loadFonts(FontManager pFontManager)
+        internal void LoadFonts(FontManager pFontManager)
         {
-            SparseArray<Font> items = this.mItems;
-            for (int i = items.Count - 1; i >= 0; i--)
+            //SparseArray<Font> items = this.mItems;
+            //for (int i = items.Count - 1; i >= 0; i--)
+            for(int i = mItems.Count - 1; i >= 0; i--)
             {
-                pFontManager.loadFont(items[i]);
+                //pFontManager.loadFont(items[i]);
+                pFontManager.LoadFont((Font)mItems[i]);
             }
         }
 

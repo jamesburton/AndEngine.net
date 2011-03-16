@@ -91,7 +91,7 @@ namespace andengine.collision
             pVertices[6 + Constants.VERTEX_INDEX_X] = left;
             pVertices[6 + Constants.VERTEX_INDEX_Y] = bottom;
 
-            MathUtils.RotateAndScaleAroundCenter(pVertices,
+            MathUtil.RotateAndScaleAroundCenter(pVertices,
                     pRectangularShape.GetRotation(), left + pRectangularShape.GetRotationCenterX(), top + pRectangularShape.GetRotationCenterY(),
                     pRectangularShape.GetScaleX(), pRectangularShape.GetScaleY(), left + pRectangularShape.GetScaleCenterX(), top + pRectangularShape.GetScaleCenterY());
         }

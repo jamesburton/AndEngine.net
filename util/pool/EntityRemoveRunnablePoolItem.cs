@@ -51,7 +51,7 @@ namespace andengine.util.pool
 
         public override void Run()
         {
-            this.mLayer.removeEntity(this.mEntity);
+            this.mLayer.RemoveEntity(this.mEntity);
         }
 
         // ===========================================================

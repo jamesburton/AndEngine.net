@@ -1,3 +1,5 @@
+using Android.Media;
+
 namespace andengine.audio.sound
 {
     using andengine.audio;
@@ -34,7 +36,7 @@ namespace andengine.audio.sound
 
         public SoundManager(int pMaxSimultaneousStreams)
         {
-            this.mSoundPool = new SoundPool(pMaxSimultaneousStreams, AudioManager.STREAM_MUSIC, 0);
+            this.mSoundPool = new SoundPool(pMaxSimultaneousStreams, (int) Stream.Music, 0);
         }
 
         // ===========================================================

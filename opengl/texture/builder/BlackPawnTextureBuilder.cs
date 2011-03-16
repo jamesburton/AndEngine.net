@@ -49,14 +49,14 @@ namespace andengine.opengl.texture.builder
 
             public override int Compare(ITextureSource x, ITextureSource y)
             {
-                int deltaWidth = y.getWidth() - x.getWidth();
+                int deltaWidth = y.GetWidth() - x.GetWidth();
                 if (deltaWidth != 0)
                 {
                     return deltaWidth;
                 }
                 else
                 {
-                    return y.getHeight() - x.getHeight();
+                    return y.GetHeight() - x.GetHeight();
                 }
             }
         }
@@ -88,28 +88,28 @@ namespace andengine.opengl.texture.builder
         //@SuppressWarnings("deprecation")
         //@Override
         //public override void pack(final BuildableTexture pBuildableTexture, final ArrayList<TextureSourceWithWithLocationCallback> pTextureSourcesWithLocationCallback) throws IllegalArgumentException {
-        public override void pack(BuildableTexture pBuildableTexture, List<TextureSourceWithLocationCallback> pTextureSourcesWithLocationCallback)
+        public /* override */ void Pack(BuildableTexture pBuildableTexture, List<TextureSourceWithLocationCallback> pTextureSourcesWithLocationCallback)
         {
             //Collections.sort(pTextureSourcesWithLocationCallback, TEXTURESOURCE_COMPARATOR);
             pTextureSourcesWithLocationCallback.Sort((IComparer<TextureSourceWithLocationCallback>)TEXTURESOURCE_COMPARER);
 
-            NodeClass root = new NodeClass(new RectClass(0, 0, pBuildableTexture.getWidth(), pBuildableTexture.getHeight()));
+            NodeClass root = new NodeClass(new RectClass(0, 0, pBuildableTexture.GetWidth(), pBuildableTexture.GetHeight()));
 
             int textureSourceCount = pTextureSourcesWithLocationCallback.Count;
 
             for (int i = 0; i < textureSourceCount; i++)
             {
                 TextureSourceWithLocationCallback textureSourceWithLocationCallback = pTextureSourcesWithLocationCallback[i];
-                ITextureSource textureSource = textureSourceWithLocationCallback.getTextureSource();
+                ITextureSource textureSource = textureSourceWithLocationCallback.GetTextureSource();
 
-                NodeClass inserted = root.insert(textureSource, pBuildableTexture.getWidth(), pBuildableTexture.getHeight(), this.mTextureSourceSpacing);
+                NodeClass inserted = root.Insert(textureSource, pBuildableTexture.GetWidth(), pBuildableTexture.GetHeight(), this.mTextureSourceSpacing);
 
                 if (inserted == null)
                 {
                     throw new IllegalArgumentException("Could not pack: " + textureSource.ToString());
                 }
-                TextureSourceWithLocation textureSourceWithLocation = pBuildableTexture.addTextureSource(textureSource, inserted.mRect.mLeft, inserted.mRect.mTop);
-                textureSourceWithLocationCallback.getCallback().onCallback(textureSourceWithLocation);
+                TextureSourceWithLocation textureSourceWithLocation = pBuildableTexture.AddTextureSource(textureSource, inserted.mRect.mLeft, inserted.mRect.mTop);
+                textureSourceWithLocationCallback.GetCallback().OnCallback(textureSourceWithLocation);
             }
         }
 
@@ -133,10 +133,10 @@ namespace andengine.opengl.texture.builder
             // Fields
             // ===========================================================
 
-            private readonly int mLeft;
-            private readonly int mTop;
-            private readonly int mWidth;
-            private readonly int mHeight;
+            internal readonly int mLeft;
+            internal readonly int mTop;
+            internal readonly int mWidth;
+            internal readonly int mHeight;
 
             // ===========================================================
             // Constructors
@@ -155,39 +155,39 @@ namespace andengine.opengl.texture.builder
             // Getter & Setter
             // ===========================================================
 
-            public int Width { get { return getWidth(); } }
-            public int Height { get { return getHeight(); } }
-            public int Top { get { return getTop(); } }
-            public int Bottom { get { return getBottom(); } }
-            public int Left { get { return getLeft(); } }
-            public int Right { get { return getRight(); } }
+            public int Width { get { return GetWidth(); } }
+            public int Height { get { return GetHeight(); } }
+            public int Top { get { return GetTop(); } }
+            public int Bottom { get { return GetBottom(); } }
+            public int Left { get { return GetLeft(); } }
+            public int Right { get { return GetRight(); } }
 
-            public int getWidth()
+            public int GetWidth()
             {
                 return this.mWidth;
             }
 
-            public int getHeight()
+            public int GetHeight()
             {
                 return this.mHeight;
             }
 
-            public int getLeft()
+            public int GetLeft()
             {
                 return this.mLeft;
             }
 
-            public int getTop()
+            public int GetTop()
             {
                 return this.mTop;
             }
 
-            public int getRight()
+            public int GetRight()
             {
                 return this.mLeft + this.mWidth;
             }
 
-            public int getBottom()
+            public int GetBottom()
             {
                 return this.mTop + this.mHeight;
             }
@@ -237,7 +237,7 @@ namespace andengine.opengl.texture.builder
             //private Node mChildB;
             private NodeClass mChildB;
             //private final Rect mRect;
-            private readonly RectClass mRect;
+            internal readonly RectClass mRect;
             private ITextureSource mTextureSource;
 
             // ===========================================================
@@ -261,25 +261,25 @@ namespace andengine.opengl.texture.builder
             // ===========================================================
 
             //public Rect getRect() {
-            public RectClass getRect()
+            public RectClass GetRect()
             {
                 return this.mRect;
             }
-            public RectClass Rect { get { return getRect(); } }
+            public RectClass Rect { get { return GetRect(); } }
 
             //public Node getChildA() {
-            public NodeClass getChildA()
+            public NodeClass GetChildA()
             {
                 return this.mChildA;
             }
-            public NodeClass ChildA { get { return getChildA(); } }
+            public NodeClass ChildA { get { return GetChildA(); } }
 
             //public Node getChildB() {
-            public NodeClass getChildB()
+            public NodeClass GetChildB()
             {
                 return this.mChildB;
             }
-            public NodeClass ChildB { get { return getChildB(); } }
+            public NodeClass ChildB { get { return GetChildB(); } }
 
             // ===========================================================
             // Methods for/from SuperClass/Interfaces
@@ -290,17 +290,17 @@ namespace andengine.opengl.texture.builder
             // ===========================================================
 
             //	public Node insert(final ITextureSource pTextureSource, final int pTextureWidth, final int pTextureHeight, final int pTextureSpacing) throws IllegalArgumentException {
-            public NodeClass insert(ITextureSource pTextureSource, int pTextureWidth, int pTextureHeight, int pTextureSpacing) /* throws IllegalArgumentException */ {
+            public NodeClass Insert(ITextureSource pTextureSource, int pTextureWidth, int pTextureHeight, int pTextureSpacing) /* throws IllegalArgumentException */ {
                 if (this.mChildA != null && this.mChildB != null)
                 {
-                    NodeClass newNode = this.mChildA.insert(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing);
+                    NodeClass newNode = this.mChildA.Insert(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing);
                     if (newNode != null)
                     {
                         return newNode;
                     }
                     else
                     {
-                        return this.mChildB.insert(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing);
+                        return this.mChildB.Insert(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing);
                     }
                 }
                 else
@@ -310,11 +310,11 @@ namespace andengine.opengl.texture.builder
                         return null;
                     }
 
-                    int textureSourceWidth = pTextureSource.getWidth();
-                    int textureSourceHeight = pTextureSource.getHeight();
+                    int textureSourceWidth = pTextureSource.GetWidth();
+                    int textureSourceHeight = pTextureSource.GetHeight();
 
-                    int rectWidth = this.mRect.getWidth();
-                    int rectHeight = this.mRect.getHeight();
+                    int rectWidth = this.mRect.GetWidth();
+                    int rectHeight = this.mRect.GetHeight();
 
                     if (textureSourceWidth > rectWidth || textureSourceHeight > rectHeight)
                     {
@@ -324,8 +324,8 @@ namespace andengine.opengl.texture.builder
                     int textureSourceWidthWithSpacing = textureSourceWidth + pTextureSpacing;
                     int textureSourceHeightWithSpacing = textureSourceHeight + pTextureSpacing;
 
-                    int rectLeft = this.mRect.getLeft();
-                    int rectTop = this.mRect.getTop();
+                    int rectLeft = this.mRect.GetLeft();
+                    int rectTop = this.mRect.GetTop();
 
                     bool fitToBottomWithoutSpacing = textureSourceHeight == rectHeight && rectTop + textureSourceHeight == pTextureHeight;
                     bool fitToRightWithoutSpacing = textureSourceWidth == rectWidth && rectLeft + textureSourceWidth == pTextureWidth;
@@ -363,7 +363,7 @@ namespace andengine.opengl.texture.builder
                         else
                         {
 
-                            return createChildren(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing, rectWidth - textureSourceWidth, rectHeight - textureSourceHeightWithSpacing);
+                            return CreateChildren(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing, rectWidth - textureSourceWidth, rectHeight - textureSourceHeightWithSpacing);
                         }
                     }
 
@@ -380,7 +380,7 @@ namespace andengine.opengl.texture.builder
                         }
                         else
                         {
-                            return createChildren(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing, rectWidth - textureSourceWidthWithSpacing, rectHeight - textureSourceHeight);
+                            return CreateChildren(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing, rectWidth - textureSourceWidthWithSpacing, rectHeight - textureSourceHeight);
                         }
                     }
                     else if (textureSourceWidthWithSpacing > rectWidth || textureSourceHeightWithSpacing > rectHeight)
@@ -389,13 +389,13 @@ namespace andengine.opengl.texture.builder
                     }
                     else
                     {
-                        return createChildren(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing, rectWidth - textureSourceWidthWithSpacing, rectHeight - textureSourceHeightWithSpacing);
+                        return CreateChildren(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing, rectWidth - textureSourceWidthWithSpacing, rectHeight - textureSourceHeightWithSpacing);
                     }
                 }
             }
 
             //private Node createChildren(final ITextureSource pTextureSource, final int pTextureWidth, final int pTextureHeight, final int pTextureSpacing, final int pDeltaWidth, final int pDeltaHeight) {
-            private NodeClass createChildren(ITextureSource pTextureSource, int pTextureWidth, int pTextureHeight, int pTextureSpacing, int pDeltaWidth, int pDeltaHeight)
+            private NodeClass CreateChildren(ITextureSource pTextureSource, int pTextureWidth, int pTextureHeight, int pTextureSpacing, int pDeltaWidth, int pDeltaHeight)
             {
                 RectClass rect = this.mRect;
 
@@ -403,38 +403,38 @@ namespace andengine.opengl.texture.builder
                 {
                     /* Split using a vertical axis. */
                     this.mChildA = new NodeClass(
-                            rect.getLeft(),
-                            rect.getTop(),
-                            pTextureSource.getWidth() + pTextureSpacing,
-                            rect.getHeight()
+                            rect.GetLeft(),
+                            rect.GetTop(),
+                            pTextureSource.GetWidth() + pTextureSpacing,
+                            rect.GetHeight()
                     );
 
                     this.mChildB = new NodeClass(
-                            rect.getLeft() + (pTextureSource.getWidth() + pTextureSpacing),
-                            rect.getTop(),
-                            rect.getWidth() - (pTextureSource.getWidth() + pTextureSpacing),
-                            rect.getHeight()
+                            rect.GetLeft() + (pTextureSource.GetWidth() + pTextureSpacing),
+                            rect.GetTop(),
+                            rect.GetWidth() - (pTextureSource.GetWidth() + pTextureSpacing),
+                            rect.GetHeight()
                     );
                 }
                 else
                 {
                     /* Split using a horizontal axis. */
                     this.mChildA = new NodeClass(
-                            rect.getLeft(),
-                            rect.getTop(),
-                            rect.getWidth(),
-                            pTextureSource.getHeight() + pTextureSpacing
+                            rect.GetLeft(),
+                            rect.GetTop(),
+                            rect.GetWidth(),
+                            pTextureSource.GetHeight() + pTextureSpacing
                     );
 
                     this.mChildB = new NodeClass(
-                            rect.getLeft(),
-                            rect.getTop() + (pTextureSource.getHeight() + pTextureSpacing),
-                            rect.getWidth(),
-                            rect.getHeight() - (pTextureSource.getHeight() + pTextureSpacing)
+                            rect.GetLeft(),
+                            rect.GetTop() + (pTextureSource.GetHeight() + pTextureSpacing),
+                            rect.GetWidth(),
+                            rect.GetHeight() - (pTextureSource.GetHeight() + pTextureSpacing)
                     );
                 }
 
-                return this.mChildA.insert(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing);
+                return this.mChildA.Insert(pTextureSource, pTextureWidth, pTextureHeight, pTextureSpacing);
             }
 
             // ===========================================================

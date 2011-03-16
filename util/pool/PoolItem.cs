@@ -19,7 +19,7 @@ namespace andengine.util.pool
         // ===========================================================
 
         //Pool<? extends PoolItem> mParent;
-        public Pool<PoolItem> mParent;
+        public IPool mParent;
         public bool mRecycled = true;
 
         // ===========================================================
@@ -27,7 +27,7 @@ namespace andengine.util.pool
         // ===========================================================
 
         //public Pool<? extends PoolItem> getParent() {
-        public Pool<PoolItem> GetParent()
+        public IPool GetParent()
         {
             return this.mParent;
         }
@@ -42,7 +42,7 @@ namespace andengine.util.pool
         }
 
         //public bool isFromPool(final Pool<? extends PoolItem> pPool) {
-        public bool IsFromPool(/* final */ Pool<PoolItem> pPool)
+        public bool IsFromPool(/* final */ IPool pPool)
         {
             return pPool == this.mParent;
         }
@@ -55,17 +55,17 @@ namespace andengine.util.pool
         // Methods
         // ===========================================================
 
-        public void OnRecycle()
+        public virtual void OnRecycle()
         {
 
         }
 
-        public void OnObtain()
+        public virtual void OnObtain()
         {
 
         }
 
-        public void Recycle()
+        public virtual void Recycle()
         {
             if (this.mParent == null)
             {

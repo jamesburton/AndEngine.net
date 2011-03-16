@@ -17,7 +17,7 @@ namespace andengine.audio
         // ===========================================================
 
         //private final IAudioManager<? extends IAudioEntity> mAudioManager;
-        private readonly IAudioManager<IAudioEntity> mAudioManager;
+        private readonly IAudioManager mAudioManager;
 
         protected float mLeftVolume = 1.0f;
         protected float mRightVolume = 1.0f;
@@ -27,7 +27,7 @@ namespace andengine.audio
         // ===========================================================
 
         //public BaseAudioEntity(final IAudioManager<? extends IAudioEntity> pAudioManager) {
-        public BaseAudioEntity(IAudioManager<IAudioEntity> pAudioManager)
+        public BaseAudioEntity(IAudioManager pAudioManager)
         {
             this.mAudioManager = pAudioManager;
         }
@@ -37,11 +37,11 @@ namespace andengine.audio
         // ===========================================================
 
         //protected IAudioManager<? extends IAudioEntity> getAudioManager() {
-        protected IAudioManager<IAudioEntity> GetAudioManager()
+        protected IAudioManager GetAudioManager()
         {
             return this.mAudioManager;
         }
-        public IAudioManager<IAudioEntity> AudioManager { get { return GetAudioManager(); } }
+        public IAudioManager AudioManager { get { return GetAudioManager(); } }
 
         public float GetActualLeftVolume()
         {

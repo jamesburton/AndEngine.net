@@ -43,9 +43,9 @@ namespace andengine.entity.shape.util
         public void setVelocityRespectingRotation(/* final */ IShape pShape, /* final */ float pVelocityX, /* final */ float pVelocityY)
         {
             /* final */
-            float rotation = pShape.getRotation();
+            float rotation = pShape.GetRotation();
             /* final */
-            float rotationRad = MathUtils.degToRad(rotation);
+            float rotationRad = MathUtils.DegToRad(rotation);
 
             /* final */
             float sin = FloatMath.Sin(rotationRad);
@@ -57,7 +57,7 @@ namespace andengine.entity.shape.util
             /* final */
             float velocityY = cos * pVelocityY + sin * pVelocityX;
 
-            pShape.setVelocity(velocityX, velocityY);
+            pShape.SetVelocity(velocityX, velocityY);
         }
 
         /**
@@ -71,9 +71,9 @@ namespace andengine.entity.shape.util
         public void accelerateRespectingRotation(/* final */ IShape pShape, /* final */ float pAccelerationX, /* final */ float pAccelerationY)
         {
             /* final */
-            float rotation = pShape.getRotation();
+            float rotation = pShape.GetRotation();
             /* final */
-            float rotationRad = MathUtils.degToRad(rotation);
+            float rotationRad = MathUtils.DegToRad(rotation);
 
             /* final */
             float sin = FloatMath.Sin(rotationRad);
@@ -85,7 +85,7 @@ namespace andengine.entity.shape.util
             /* final */
             float accelerationY = cos * pAccelerationY + sin * pAccelerationX;
 
-            pShape.setAcceleration(accelerationX, accelerationY);
+            pShape.SetAcceleration(accelerationX, accelerationY);
         }
 
         // ===========================================================

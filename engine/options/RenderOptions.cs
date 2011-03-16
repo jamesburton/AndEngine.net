@@ -25,26 +25,28 @@ namespace andengine.engine.options
         // Getter & Setter
         // ===========================================================
 
-        public RenderOptions enableExtensionVertexBufferObjects()
+        public RenderOptions DnableExtensionVertexBufferObjects()
         {
-            return this.setDisableExtensionVertexBufferObjects(false);
+            return this.SetDisableExtensionVertexBufferObjects(false);
         }
 
-        public RenderOptions disableExtensionVertexBufferObjects()
+        public RenderOptions DisableExtensionVertexBufferObjects()
         {
-            return this.setDisableExtensionVertexBufferObjects(true);
+            return this.SetDisableExtensionVertexBufferObjects(true);
         }
 
-        public RenderOptions setDisableExtensionVertexBufferObjects(/* final */ bool pDisableExtensionVertexBufferObjects)
+        public RenderOptions SetDisableExtensionVertexBufferObjects(/* final */ bool pDisableExtensionVertexBufferObjects)
         {
             this.mDisableExtensionVertexBufferObjects = pDisableExtensionVertexBufferObjects;
             return this;
         }
 
+        public bool DisableExtensionVertexBuffer { get { return IsDisableExtensionVertexBufferObjects(); } set { SetDisableExtensionVertexBufferObjects(value); } }
+
         /**
          * <u><b>Default:</b></u> <code>false</code>
          */
-        public bool isDisableExtensionVertexBufferObjects()
+        public bool IsDisableExtensionVertexBufferObjects()
         {
             return this.mDisableExtensionVertexBufferObjects;
         }

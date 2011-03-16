@@ -41,31 +41,31 @@ namespace andengine.opengl.font
         // Methods
         // ===========================================================
 
-        public void clear()
+        public void Clear()
         {
             this.mFontsManaged.Clear();
         }
 
-        public void loadFont(Font pFont)
+        public void LoadFont(Font pFont)
         {
             this.mFontsManaged.Add(pFont);
         }
 
-        public void loadFonts(FontLibrary pFontLibrary)
+        public void LoadFonts(FontLibrary pFontLibrary)
         {
-            pFontLibrary.loadFonts(this);
+            pFontLibrary.LoadFonts(this);
         }
 
         //public void loadFonts(final Font ... pFonts) {
-        public void loadFonts(params Font[] pFonts)
+        public void LoadFonts(params Font[] pFonts)
         {
             for (int i = pFonts.Length - 1; i >= 0; i--)
             {
-                this.loadFont(pFonts[i]);
+                this.LoadFont(pFonts[i]);
             }
         }
 
-        public void updateFonts(GL10 pGL)
+        public void UpdateFonts(GL10 pGL)
         {
             //final ArrayList<Font> fonts = this.mFontsManaged;
             List<Font> fonts = this.mFontsManaged;
@@ -74,18 +74,18 @@ namespace andengine.opengl.font
             {
                 for (int i = fontCount - 1; i >= 0; i--)
                 {
-                    fonts[i].update(pGL);
+                    fonts[i].Update(pGL);
                 }
             }
         }
 
-        public void reloadFonts()
+        public void ReloadFonts()
         {
             //final ArrayList<Font> managedFonts = this.mFontsManaged;
             List<Font> managedFonts = this.mFontsManaged;
             for (int i = managedFonts.Count - 1; i >= 0; i--)
             {
-                managedFonts[i].reload();
+                managedFonts[i].Reload();
             }
         }
 

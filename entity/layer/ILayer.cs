@@ -51,7 +51,7 @@ namespace andengine.entity.layer
          * @param pEntityComparator
          */
         // public void sortEntities(/* final */ Comparator<IEntity> pEntityComparator);
-        void SortEntities(/* final */ IComparator pEntityComparator);
+        void SortEntities(/* final */ IComparer<IEntity> pEntityComparator);
 
         /* public */ IEntity GetEntity(/* final */ int pIndex);
 

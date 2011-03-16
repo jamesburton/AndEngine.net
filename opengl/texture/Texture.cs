@@ -38,12 +38,12 @@ namespace andengine.opengl.texture
 
         private bool mLoadedToHardware;
         private int mHardwareTextureID = -1;
-        private readonly TextureOptions mTextureOptions;
+        private TextureOptions mTextureOptions;
 
         //private final ArrayList<TextureSourceWithLocation> mTextureSources = new ArrayList<TextureSourceWithLocation>();
         private readonly List<TextureSourceWithLocation> mTextureSources = new List<TextureSourceWithLocation>();
 
-        private readonly ITextureStateListener mTextureStateListener;
+        private ITextureStateListener mTextureStateListener;
 
         protected bool mUpdateOnHardwareNeeded = false;
 
@@ -125,11 +125,11 @@ namespace andengine.opengl.texture
             return this.mUpdateOnHardwareNeeded;
         }
 
-        protected void SetLoadedToHardware(bool pLoadedToHardware)
+        public /*protected*/ void SetLoadedToHardware(bool pLoadedToHardware)
         {
             this.mLoadedToHardware = pLoadedToHardware;
         }
-        protected bool LoadedToHardware { get { return GetIsLoadedToHardware(); } set { SetLoadedToHardware(value); } }
+        protected bool LoadedToHardware { get { return IsLoadedToHardware(); } set { SetLoadedToHardware(value); } }
 
         public int Width { get { return GetWidth(); } }
 
@@ -199,7 +199,7 @@ namespace andengine.opengl.texture
             }
         }
 
-        public void ClearTextureSources()
+        public virtual void ClearTextureSources()
         {
             this.mTextureSources.Clear();
             this.mUpdateOnHardwareNeeded = true;
@@ -264,11 +264,11 @@ namespace andengine.opengl.texture
                         }
                         if (preMultipyAlpha)
                         {
-                            GLUtils.TexSubImage2D(GL10Consts.GlTexture2d, 0, textureSourceWithLocation.getTexturePositionX(), textureSourceWithLocation.getTexturePositionY(), bmp, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte);
+                            GLUtils.TexSubImage2D(GL10Consts.GlTexture2d, 0, textureSourceWithLocation.GetTexturePositionX(), textureSourceWithLocation.GetTexturePositionY(), bmp, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte);
                         }
                         else
                         {
-                            GLHelper.GlTexSubImage2D(pGL, GL10Consts.GlTexture2d, 0, textureSourceWithLocation.getTexturePositionX(), textureSourceWithLocation.getTexturePositionY(), bmp, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte);
+                            GLHelper.GlTexSubImage2D(pGL, GL10Consts.GlTexture2d, 0, textureSourceWithLocation.GetTexturePositionX(), textureSourceWithLocation.GetTexturePositionY(), bmp, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte);
                         }
 
                         bmp.Recycle();
@@ -276,7 +276,7 @@ namespace andengine.opengl.texture
                     catch (IllegalArgumentException iae)
                     {
                         // TODO Load some static checkerboard or so to visualize that loading the texture has failed.
-                        Debug.e("Error loading: " + textureSourceWithLocation.ToString(), iae);
+                        Debug.E("Error loading: " + textureSourceWithLocation.ToString(), iae);
                         if (this.mTextureStateListener != null)
                         {
                             this.mTextureStateListener.OnTextureSourceLoadExeption(this, textureSourceWithLocation.mTextureSource, iae);
@@ -388,17 +388,17 @@ namespace andengine.opengl.texture
         {
             public /* override */ virtual void OnLoadedToHardware(Texture pTexture)
             {
-                Debug.d("Texture loaded: " + pTexture.ToString());
+                Debug.D("Texture loaded: " + pTexture.ToString());
             }
 
             public /* override */ virtual void OnTextureSourceLoadExeption(Texture pTexture, ITextureSource pTextureSource, Throwable pThrowable)
             {
-                Debug.e("Exception loading TextureSource. Texture: " + pTexture.ToString() + " TextureSource: " + pTextureSource.toString(), pThrowable);
+                Debug.E("Exception loading TextureSource. Texture: " + pTexture.ToString() + " TextureSource: " + pTextureSource, pThrowable);
             }
 
             public/* override */ virtual void OnUnloadedFromHardware(Texture pTexture)
             {
-                Debug.d("Texture unloaded: " + pTexture.ToString());
+                Debug.D("Texture unloaded: " + pTexture.ToString());
             }
         }
 
