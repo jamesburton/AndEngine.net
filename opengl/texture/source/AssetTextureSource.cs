@@ -80,7 +80,7 @@ namespace andengine.opengl.texture.source
         {
             return (ITextureSource)Clone();
         }
-        public new virtual AssetTextureSource Clone()
+        public /* new */ virtual AssetTextureSource Clone()
         {
             return new AssetTextureSource(this.mContext, this.mAssetPath, this.mWidth, this.mHeight);
         }

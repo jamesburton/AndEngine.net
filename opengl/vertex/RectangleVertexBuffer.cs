@@ -46,7 +46,7 @@ namespace andengine.opengl.vertex
 
         //public synchronized void update(final float pWidth, final float pHeight) {
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void update(float pWidth, float pHeight)
+        public void Update(float pWidth, float pHeight)
         {
             int x = FLOAT_TO_RAW_INT_BITS_ZERO;
             int y = FLOAT_TO_RAW_INT_BITS_ZERO;
@@ -66,12 +66,12 @@ namespace andengine.opengl.vertex
             bufferData[6] = x2;
             bufferData[7] = y2;
 
-            FastFloatBuffer buffer = this.getFloatBuffer();
+            FastFloatBuffer buffer = this.GetFloatBuffer();
             buffer.Position(0);
             buffer.Put(bufferData);
             buffer.Position(0);
 
-            base.setHardwareBufferNeedsUpdate();
+            base.SetHardwareBufferNeedsUpdate();
         }
 
         // ===========================================================

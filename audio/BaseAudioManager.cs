@@ -54,7 +54,7 @@ namespace andengine.audio
                 /* final */
                 T audioEntity = audioEntities[i];
 
-                audioEntity.onMasterVolumeChanged(pMasterVolume);
+                audioEntity.OnMasterVolumeChanged(pMasterVolume);
             }
         }
 
@@ -74,8 +74,8 @@ namespace andengine.audio
                 /* final */
                 T audioEntity = audioEntities[i];
 
-                audioEntity.stop();
-                audioEntity.release();
+                audioEntity.Stop();
+                audioEntity.Release();
             }
         }
 

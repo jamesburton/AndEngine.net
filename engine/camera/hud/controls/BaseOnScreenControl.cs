@@ -122,11 +122,14 @@ namespace andengine.engine.camera.hud.controls
             {
                 this.OnHandleControlBaseLeft();
 
-                switch (pSceneTouchEvent.getAction())
+                switch (pSceneTouchEvent.GetAction())
                 {
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
+                    //case MotionEvent.ACTION_UP:
+                    //case MotionEvent.ACTION_CANCEL:
+                    case Android.Views.MotionEventActions.Up:
+                    case Android.Views.MotionEventActions.Cancel:
                         this.mActivePointerID = INVALID_POINTER_ID;
+                        break;
                 }
             }
             return false;
@@ -201,7 +204,8 @@ namespace andengine.engine.camera.hud.controls
 
             switch (pSceneTouchEvent.GetAction())
             {
-                case MotionEvent.ACTION_DOWN:
+                //case MotionEvent.ACTION_DOWN:
+                case Android.Views.MotionEventActions.Down:
                     if (this.mActivePointerID == INVALID_POINTER_ID)
                     {
                         this.mActivePointerID = pointerID;
@@ -209,8 +213,10 @@ namespace andengine.engine.camera.hud.controls
                         return true;
                     }
                     break;
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
+                //case MotionEvent.ACTION_UP:
+                case Android.Views.MotionEventActions.Up:
+                //case MotionEvent.ACTION_CANCEL:
+                case Android.Views.MotionEventActions.Cancel:
                     if (this.mActivePointerID == pointerID)
                     {
                         this.mActivePointerID = INVALID_POINTER_ID;
