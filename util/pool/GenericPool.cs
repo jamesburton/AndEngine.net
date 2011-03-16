@@ -14,7 +14,7 @@ namespace andengine.util.pool
      * @author Nicolas Gramlich
      * 
      * @since 22:19:55 - 31.08.2010
-     * @param <T>
+     * @param &lt;T&gt;
      */
     public abstract class GenericPool<T>
     {
