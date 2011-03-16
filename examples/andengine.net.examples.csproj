@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BE537322-5C9C-424E-A179-8BF10F030CA9}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>andengine.net.examples</RootNamespace>
+    <AssemblyName>andengine.net.examples</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>Full</AndroidLinkMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android" />
+    <Reference Include="OpenTK" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\font\Droid.ttf" />
+    <AndroidAsset Include="Assets\font\KingdomOfHearts.ttf" />
+    <AndroidAsset Include="Assets\font\LCD.ttf" />
+    <AndroidAsset Include="Assets\font\NeverwinterNights.ttf" />
+    <AndroidAsset Include="Assets\font\Plok.ttf" />
+    <AndroidAsset Include="Assets\font\UnrealTournament.ttf" />
+    <AndroidAsset Include="Assets\level\example.lvl" />
+    <AndroidAsset Include="Assets\mfx\explosion.ogg" />
+    <AndroidAsset Include="Assets\mfx\game_over.ogg" />
+    <AndroidAsset Include="Assets\mfx\munch.ogg" />
+    <AndroidAsset Include="Assets\mfx\wagner_the_ride_of_the_valkyries.ogg" />
+    <AndroidAsset Include="Assets\tmx\desert.tmx" />
+    <AndroidAsset Include="Assets\tmx\desert.tsx" />
+    <AndroidAsset Include="Assets\tmx\desert_with_tsx_tileset.tmx" />
+    <None Include="doc\benchmarks.pdf" />
+    <None Include="doc\benchmarks.xlsx" />
+    <None Include="doc\culling_benchmark.xlsx" />
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Drawable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\background_grass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\badge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\banana_tiled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\carddeck_tiled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\chromatic_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\click_to_unload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\desert_tiled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\enemy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\face_box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\face_box_menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\face_box_tiled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\face_circle_tiled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\face_hexagon_tiled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\face_triangle_tiled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\frog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\helicopter_tiled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\i_love_8_bit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\imageformat_bmp.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\imageformat_gif.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\imageformat_gif.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\imageformat_jpg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\imageformat_png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\menu_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\menu_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\menu_ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\menu_quit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\menu_reset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\notes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\onscreen_control_base.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\onscreen_control_knob.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\parallax_background_layer_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\parallax_background_layer_front.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\parallax_background_layer_mid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\particle_fire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\particle_point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\paused.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\player.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\racetrack_curve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\racetrack_straight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\radar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\radarpoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\snake_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\snake_head.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\snake_tailpart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\snapdragon_tiled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\tank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\toggle_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\gfx\vehicles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\mfx\lepeltheme.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="adt\card\Card.java" />
+    <Content Include="adt\card\Color.java" />
+    <Content Include="adt\card\Value.java" />
+    <Content Include="adt\cityradar\City.java" />
+    <Content Include="AnalogOnScreenControlExample.java" />
+    <Content Include="AnalogOnScreenControlsExample.java" />
+    <Content Include="AnimatedSpritesExample.java" />
+    <Content Include="app\cityradar\CityRadarActivity.java" />
+    <Content Include="AugmentedRealityExample.java" />
+    <Content Include="AugmentedRealityHorizonExample.java" />
+    <Content Include="AutoParallaxBackgroundExample.java" />
+    <Content Include="BaseExample.java" />
+    <Content Include="BasePhysicsJointExample.java" />
+    <Content Include="benchmark\AnimationBenchmark.java" />
+    <Content Include="benchmark\BaseBenchmark.java" />
+    <Content Include="benchmark\EntityModifierBenchmark.java" />
+    <Content Include="benchmark\ParticleSystemBenchmark.java" />
+    <Content Include="benchmark\PhysicsBenchmark.java" />
+    <Content Include="benchmark\SpriteBenchmark.java" />
+    <Content Include="benchmark\TickerTextBenchmark.java" />
+    <Content Include="BoundCameraExample.java" />
+    <Content Include="ChangeableTextExample.java" />
+    <Content Include="CollisionDetectionExample.java" />
+    <Content Include="ColorKeyTextureSourceDecoratorExample.java" />
+    <Content Include="CoordinateConversionExample.java" />
+    <Content Include="CustomFontExample.java" />
+    <Content Include="DigitalOnScreenControlExample.java" />
+    <Content Include="doc\culling_benchmark.png" />
+    <AndroidResource Include="Resources\Layout\list_examples.xml" />
+    <AndroidResource Include="Resources\Layout\listrow_example.xml" />
+    <AndroidResource Include="Resources\Layout\listrow_examplegroup.xml" />
+    <AndroidResource Include="Resources\Layout\xmllayoutexample.xml" />
+    <AndroidResource Include="Resources\Values\strings.xml" />
+    <AndroidResource Include="Resources\Values\versions.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\icon.png" />
+    <Content Include="EaseFunctionExample.java" />
+    <Content Include="EntityModifierExample.java" />
+    <Content Include="EntityModifierIrregularExample.java" />
+    <Content Include="game\pong\adt\MovePaddleClientMessage.java" />
+    <Content Include="game\pong\adt\PaddleUserData.java" />
+    <Content Include="game\pong\adt\Score.java" />
+    <Content Include="game\pong\adt\SetPaddleIDServerMessage.java" />
+    <Content Include="game\pong\adt\UpdateBallServerMessage.java" />
+    <Content Include="game\pong\adt\UpdatePaddleServerMessage.java" />
+    <Content Include="game\pong\adt\UpdateScoreServerMessage.java" />
+    <Content Include="game\pong\PongGameActivity.java" />
+    <Content Include="game\pong\PongServer.java" />
+    <Content Include="game\pong\PongServerConnector.java" />
+    <Content Include="game\pong\util\constants\PongConstants.java" />
+    <Content Include="game\racer\RacerGameActivity.java" />
+    <Content Include="game\snake\adt\Direction.java" />
+    <Content Include="game\snake\adt\SnakeSuicideException.java" />
+    <Content Include="game\snake\entity\AnimatedCellEntity.java" />
+    <Content Include="game\snake\entity\CellEntity.java" />
+    <Content Include="game\snake\entity\Frog.java" />
+    <Content Include="game\snake\entity\ICellEntity.java" />
+    <Content Include="game\snake\entity\Snake.java" />
+    <Content Include="game\snake\entity\SnakeHead.java" />
+    <Content Include="game\snake\entity\SnakeTailPart.java" />
+    <Content Include="game\snake\SnakeGameActivity.java" />
+    <Content Include="game\snake\util\constants\SnakeConstants.java" />
+    <Content Include="ImageFormatsExample.java" />
+    <Content Include="launcher\Example.java" />
+    <Content Include="launcher\ExampleGroup.java" />
+    <Content Include="launcher\ExampleLauncher.java" />
+    <Content Include="launcher\ExpandableExampleLauncherListAdapter.java" />
+    <Content Include="LevelLoaderExample.java" />
+    <Content Include="LineExample.java" />
+    <Content Include="LoadTextureExample.java" />
+    <Content Include="MenuExample.java" />
+    <Content Include="ModPlayerExample.java" />
+    <Content Include="MovingBallExample.java" />
+    <Content Include="MultiplayerExample.java" />
+    <Content Include="MultiTouchExample.java" />
+    <Content Include="MusicExample.java" />
+    <Content Include="ParticleSystemCoolExample.java" />
+    <Content Include="ParticleSystemNexusExample.java" />
+    <Content Include="ParticleSystemSimpleExample.java" />
+    <Content Include="PathModifierExample.java" />
+    <Content Include="PauseExample.java" />
+    <Content Include="PhysicsCollisionFilteringExample.java" />
+    <Content Include="PhysicsExample.java" />
+    <Content Include="PhysicsFixedStepExample.java" />
+    <Content Include="PhysicsJumpExample.java" />
+    <Content Include="PhysicsMouseJointExample.java" />
+    <Content Include="PhysicsRemoveExample.java" />
+    <Content Include="PhysicsRevoluteJointExample.java" />
+    <Content Include="PinchZoomExample.java" />
+    <Content Include="RectangleExample.java" />
+    <Content Include="RepeatingSpriteBackgroundExample.java" />
+    <Content Include="Rotation3DExample.java" />
+    <Content Include="ScreenCaptureExample.java" />
+    <Content Include="SoundExample.java" />
+    <Content Include="SplitScreenExample.java" />
+    <Content Include="SpriteExample.java" />
+    <Content Include="SpriteRemoveExample.java" />
+    <Content Include="StrokeFontExample.java" />
+    <Content Include="SubMenuExample.java" />
+    <Content Include="TextExample.java" />
+    <Content Include="TextMenuExample.java" />
+    <Content Include="TextureOptionsExample.java" />
+    <Content Include="TickerTextExample.java" />
+    <Content Include="TMXTiledMapExample.java" />
+    <Content Include="TouchDragExample.java" />
+    <Content Include="UnloadResourcesExample.java" />
+    <Content Include="UpdateTextureExample.java" />
+    <Content Include="XMLLayoutExample.java" />
+    <Content Include="ZoomExample.java" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\andengine.net.csproj">
+      <Project>{64289D15-EC5D-4C21-863F-69EFD325B9C3}</Project>
+      <Name>andengine.net</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+     Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

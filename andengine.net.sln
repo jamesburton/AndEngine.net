@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "andengine.net", "andengine.net.csproj", "{64289D15-EC5D-4C21-863F-69EFD325B9C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "andengine.net.examples", "examples\andengine.net.examples.csproj", "{BE537322-5C9C-424E-A179-8BF10F030CA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,12 @@ Global
 		{64289D15-EC5D-4C21-863F-69EFD325B9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64289D15-EC5D-4C21-863F-69EFD325B9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64289D15-EC5D-4C21-863F-69EFD325B9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE537322-5C9C-424E-A179-8BF10F030CA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE537322-5C9C-424E-A179-8BF10F030CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE537322-5C9C-424E-A179-8BF10F030CA9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BE537322-5C9C-424E-A179-8BF10F030CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE537322-5C9C-424E-A179-8BF10F030CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE537322-5C9C-424E-A179-8BF10F030CA9}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
