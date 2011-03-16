@@ -38,12 +38,12 @@ namespace andengine.opengl.texture
 
         private bool mLoadedToHardware;
         private int mHardwareTextureID = -1;
-        private readonly TextureOptions mTextureOptions;
+        private TextureOptions mTextureOptions;
 
         //private final ArrayList<TextureSourceWithLocation> mTextureSources = new ArrayList<TextureSourceWithLocation>();
         private readonly List<TextureSourceWithLocation> mTextureSources = new List<TextureSourceWithLocation>();
 
-        private readonly ITextureStateListener mTextureStateListener;
+        private ITextureStateListener mTextureStateListener;
 
         protected bool mUpdateOnHardwareNeeded = false;
 
@@ -129,7 +129,7 @@ namespace andengine.opengl.texture
         {
             this.mLoadedToHardware = pLoadedToHardware;
         }
-        protected bool LoadedToHardware { get { return GetIsLoadedToHardware(); } set { SetLoadedToHardware(value); } }
+        protected bool LoadedToHardware { get { return IsLoadedToHardware(); } set { SetLoadedToHardware(value); } }
 
         public int Width { get { return GetWidth(); } }
 
@@ -199,7 +199,7 @@ namespace andengine.opengl.texture
             }
         }
 
-        public void ClearTextureSources()
+        public virtual void ClearTextureSources()
         {
             this.mTextureSources.Clear();
             this.mUpdateOnHardwareNeeded = true;
@@ -264,11 +264,11 @@ namespace andengine.opengl.texture
                         }
                         if (preMultipyAlpha)
                         {
-                            GLUtils.TexSubImage2D(GL10Consts.GlTexture2d, 0, textureSourceWithLocation.getTexturePositionX(), textureSourceWithLocation.getTexturePositionY(), bmp, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte);
+                            GLUtils.TexSubImage2D(GL10Consts.GlTexture2d, 0, textureSourceWithLocation.GetTexturePositionX(), textureSourceWithLocation.GetTexturePositionY(), bmp, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte);
                         }
                         else
                         {
-                            GLHelper.GlTexSubImage2D(pGL, GL10Consts.GlTexture2d, 0, textureSourceWithLocation.getTexturePositionX(), textureSourceWithLocation.getTexturePositionY(), bmp, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte);
+                            GLHelper.GlTexSubImage2D(pGL, GL10Consts.GlTexture2d, 0, textureSourceWithLocation.GetTexturePositionX(), textureSourceWithLocation.GetTexturePositionY(), bmp, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte);
                         }
 
                         bmp.Recycle();
@@ -393,7 +393,7 @@ namespace andengine.opengl.texture
 
             public /* override */ virtual void OnTextureSourceLoadExeption(Texture pTexture, ITextureSource pTextureSource, Throwable pThrowable)
             {
-                Debug.e("Exception loading TextureSource. Texture: " + pTexture.ToString() + " TextureSource: " + pTextureSource.toString(), pThrowable);
+                Debug.e("Exception loading TextureSource. Texture: " + pTexture.ToString() + " TextureSource: " + pTextureSource, pThrowable);
             }
 
             public/* override */ virtual void OnUnloadedFromHardware(Texture pTexture)

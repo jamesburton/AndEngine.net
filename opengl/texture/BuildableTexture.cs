@@ -122,7 +122,7 @@ namespace andengine.opengl.texture
                 TextureSourceWithWithLocationCallback textureSource = textureSources[i];
                 if (textureSource.mTextureSource == pTextureSource)
                 {
-                    textureSources.Remove(i);
+                    textureSources.RemoveAt(i);
                     this.mUpdateOnHardwareNeeded = true;
                     return;
                 }
@@ -136,7 +136,7 @@ namespace andengine.opengl.texture
          * @throws TextureSourcePackingException i.e. when the {@link ITextureSource}s didn't fit into this {@link BuildableTexture}.
          */
         public void Build(ITextureBuilder pTextureSourcePackingAlgorithm) /* throws TextureSourcePackingException */ {
-            pTextureSourcePackingAlgorithm.pack(this, this.mTextureSourcesToPlace);
+            pTextureSourcePackingAlgorithm.Pack(this, this.mTextureSourcesToPlace);
             this.mTextureSourcesToPlace.Clear();
             this.mUpdateOnHardwareNeeded = true;
         }
@@ -172,9 +172,10 @@ namespace andengine.opengl.texture
             {
                 return (ITextureSource)null;
             }
-            public new TextureSourceWithWithLocationCallback Clone()
+            /*public new TextureSourceWithWithLocationCallback Clone()*/
+            public ITextureSource Clone()
             {
-                return (TextureSourceWithWithLocationCallback)CloneCore();
+                return CloneCore();
             }
 
             // ===========================================================

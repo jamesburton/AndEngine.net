@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace andengine.util
 {
 
@@ -16,6 +18,8 @@ namespace andengine.util
      */
     public class StreamUtils
     {
+        //TODO:Consider whether we need this class or if we can lean on the System.IO namespace
+
         // ===========================================================
         // Constants
         // ===========================================================
@@ -199,7 +203,8 @@ namespace andengine.util
          *
          * @param pStream The stream to close.
          */
-        public static void CloseStream(Closeable pStream)
+        /*public static void CloseStream(Closeable pStream)*/
+        public static void CloseStream(Stream pStream)
         {
             if (pStream != null)
             {
@@ -219,7 +224,7 @@ namespace andengine.util
          *
          * @param pStream The stream to close.
          */
-        public static void FlushCloseStream(OutputStream pStream)
+        public static void FlushCloseStream(Stream pStream)
         {
             if (pStream != null)
             {
@@ -240,7 +245,7 @@ namespace andengine.util
          *
          * @param pWriter The Writer to close.
          */
-        public static void FlushCloseWriter(Writer pWriter)
+        public static void FlushCloseWriter(Stream pWriter)
         {
             if (pWriter != null)
             {

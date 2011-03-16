@@ -42,6 +42,8 @@ namespace andengine.input.touch.controller
             }
         }
 
+        private readonly andengine.util.pool.RunnablePoolUpdateHandler<TouchEventRunnablePoolItem> mTouchEventRunnablePoolUpdateHandler = new TouchEventRunnablePoolUpdateHandler();
+
         // ===========================================================
         // Constructors
         // ===========================================================
@@ -113,7 +115,7 @@ namespace andengine.input.touch.controller
 
         public void ApplyTouchOptions(TouchOptions pTouchOptions)
         {
-            this.mRunOnUpdateThread = pTouchOptions.IsRunOnUpdateThread();
+            this.mRunOnUpdateThread = pTouchOptions.isRunOnUpdateThread();
         }
 
         // ===========================================================
@@ -154,5 +156,7 @@ namespace andengine.input.touch.controller
                 touchEvent.Recycle();
             }
         }
+
+        public abstract bool OnHandleMotionEvent(MotionEvent pMotionEvent);
     }
 }
