@@ -208,7 +208,7 @@ namespace andengine.entity.scene
          */
         public void SortLayers()
         {
-            ZIndexSorter.getInstance().sort(this.mLayers);
+            ZIndexSorter.GetInstance().Sort(this.mLayers);
         }
 
         public bool IsBackgroundEnabled()

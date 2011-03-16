@@ -43,9 +43,9 @@ namespace andengine.entity.shape.util
         public void setVelocityRespectingRotation(/* final */ IShape pShape, /* final */ float pVelocityX, /* final */ float pVelocityY)
         {
             /* final */
-            float rotation = pShape.getRotation();
+            float rotation = pShape.GetRotation();
             /* final */
-            float rotationRad = MathUtils.degToRad(rotation);
+            float rotationRad = MathUtils.DegToRad(rotation);
 
             /* final */
             float sin = FloatMath.Sin(rotationRad);

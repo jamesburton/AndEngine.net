@@ -114,11 +114,11 @@ namespace andengine.opengl.util
         public static void EnableExtensions(/* final */ GL10 pGL, /* final */ RenderOptions pRenderOptions)
         {
             /* final */
-            String version = pGL.glGetString(GL10Consts.GlVersion);
+            String version = pGL.GlGetString(GL10Consts.GlVersion);
             /* final */
-            String renderer = pGL.glGetString(GL10Consts.GlRenderer);
+            String renderer = pGL.GlGetString(GL10Consts.GlRenderer);
             /* final */
-            String extensions = pGL.glGetString(GL10Consts.GlExtensions);
+            String extensions = pGL.GlGetString(GL10Consts.GlExtensions);
 
             Debug.d("RENDERER: " + renderer);
             Debug.d("VERSION: " + version);

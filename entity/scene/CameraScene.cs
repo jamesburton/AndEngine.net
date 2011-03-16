@@ -88,7 +88,7 @@ namespace andengine.entity.scene
             }
         }
 
-        protected /*override*/ bool OnChildSceneTouchEvent(TouchEvent pSceneTouchEvent)
+        protected override bool OnChildSceneTouchEvent(TouchEvent pSceneTouchEvent)
         {
             bool childIsCameraScene = this.mChildScene is CameraScene;
             if (childIsCameraScene)
