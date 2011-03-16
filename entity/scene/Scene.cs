@@ -1,3 +1,6 @@
+using Android.Views;
+using Java.Lang;
+
 namespace andengine.entity.scene
 {
 
@@ -205,7 +208,7 @@ namespace andengine.entity.scene
          */
         public void SortLayers()
         {
-            ZIndexSorter.GetInstance().Sort(this.mLayers);
+            ZIndexSorter.getInstance().sort(this.mLayers);
         }
 
         public bool IsBackgroundEnabled()
@@ -379,7 +382,7 @@ namespace andengine.entity.scene
                     pCamera.OnApplyPositionIndependentMatrix(pGL);
                     GLHelper.SetModelViewIdentityMatrix(pGL);
 
-                    this.mBackground.onDraw(pGL, pCamera);
+                    this.mBackground.OnDraw(pGL, pCamera);
                 }
 
                 pCamera.OnApplyMatrix(pGL);
@@ -419,7 +422,12 @@ namespace andengine.entity.scene
             //* final */ int action = pSceneTouchEvent.GetAction();
             MotionEvent action = pSceneTouchEvent.GetMotionEvent();
             // final bool isDownAction = action == MotionEvent.ACTION_DOWN;
-            bool isDownAction = (action == MotionEvent.ActionPointer1Down);
+            bool isDownAction = (action == (MotionEvent) MotionEvent.ActionPointer1Down);
+
+            // final float sceneTouchEventX = pSceneTouchEvent.getX();
+            float sceneTouchEventX = pSceneTouchEvent.X;
+            // final float sceneTouchEventY = pSceneTouchEvent.getY();
+            float sceneTouchEventY = pSceneTouchEvent.Y;
 
             if (this.mTouchAreaBindingEnabled && !isDownAction)
             {
@@ -431,22 +439,18 @@ namespace andengine.entity.scene
                  * we'll pass this this TouchEvent to the same ITouchArea. */
                 if (boundTouchArea != null)
                 {
-                    // final float sceneTouchEventX = pSceneTouchEvent.getX();
-                    float sceneTouchEventX = pSceneTouchEvent.X;
-                    // final float sceneTouchEventY = pSceneTouchEvent.getY();
-                    float sceneTouchEventY = pSceneTouchEvent.Y;
-
                     /* Check if boundTouchArea needs to be removed. */
-                    switch (action)
+                    switch (action.Action)
                     {
-                        case MotionEvent.ActionPointer1Up: // TODO: Checking mapping from ACTION_UP
-                        // TODO: Check Action mappings from MotionEvent ... missing values in MonoDroid?
-                        //case MotionEvent.ACTION_CANCEL:
-                            touchAreaBindings.RemoveAt(pSceneTouchEvent.getPointerID());
+                        //TODO: this value was MotionEvent.ActionPointer1Up in Java.  Is it important to be pointer 1?
+                        case MotionEventActions.PointerUp:
+                        case MotionEventActions.Cancel:
+                            touchAreaBindings.RemoveAt(pSceneTouchEvent.GetPointerID());
+                            break;
                     }
                     /* final */
-                    bool handled = this.OnAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, boundTouchArea);
-                    if (handled != null && handled)
+                    bool? handled = this.OnAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, boundTouchArea);
+                    if (handled != null && handled.Value)
                     {
                         return true;
                     }
@@ -469,11 +473,6 @@ namespace andengine.entity.scene
                 }
             }
 
-            // final float sceneTouchEventX = pSceneTouchEvent.getX();
-            float sceneTouchEventX = pSceneTouchEvent.X;
-            // final float sceneTouchEventY = pSceneTouchEvent.getY();
-            float sceneTouchEventY = pSceneTouchEvent.Y;
-
             /* First give the layers a chance to handle their TouchAreas. */
             {
                 /* final */
@@ -488,7 +487,7 @@ namespace andengine.entity.scene
                         ILayer layer = layers[i];
                         /* final */
                         //ArrayList<ITouchArea> layerTouchAreas = layer.getTouchAreas();
-                        List<ITouchArea> layerTouchAreas = layer.GetTouchAreas();
+                        var layerTouchAreas = layer.GetTouchAreas();
                         /* final */
                         int layerTouchAreaCount = layerTouchAreas.Count;
                         if (layerTouchAreaCount > 0)
@@ -500,14 +499,14 @@ namespace andengine.entity.scene
                                 if (layerTouchArea.Contains(sceneTouchEventX, sceneTouchEventY))
                                 {
                                     /* final */
-                                    bool handled = this.OnAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, layerTouchArea);
-                                    if (handled != null && handled)
+                                    bool? handled = this.OnAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, layerTouchArea);
+                                    if (handled != null && handled.Value)
                                     {
                                         /* If binding of ITouchAreas is enabled and this is an ACTION_DOWN event,
                                          *  bind this ITouchArea to the PointerID. */
                                         if (this.mTouchAreaBindingEnabled && isDownAction)
                                         {
-                                            this.mTouchAreaBindings[pSceneTouchEvent.getPointerID()] = layerTouchArea;
+                                            this.mTouchAreaBindings[pSceneTouchEvent.GetPointerID()] = layerTouchArea;
                                         }
                                         return true;
                                     }
@@ -524,7 +523,7 @@ namespace andengine.entity.scene
                         ILayer layer = layers[i];
                         /* final */
                         //ArrayList<ITouchArea> layerTouchAreas = layer.getTouchAreas();
-                        List<ITouchArea> layerTouchAreas = layer.GetTouchAreas();
+                        var layerTouchAreas = layer.GetTouchAreas();
                         /* final */
                         int layerTouchAreaCount = layerTouchAreas.Count;
                         if (layerTouchAreaCount > 0)
@@ -536,14 +535,14 @@ namespace andengine.entity.scene
                                 if (layerTouchArea.Contains(sceneTouchEventX, sceneTouchEventY))
                                 {
                                     /* final */
-                                    bool handled = this.onAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, layerTouchArea);
-                                    if (handled != null && handled)
+                                    bool? handled = this.OnAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, layerTouchArea);
+                                    if (handled != null && handled.Value)
                                     {
                                         /* If binding of ITouchAreas is enabled and this is an ACTION_DOWN event,
                                          *  bind this ITouchArea to the PointerID. */
                                         if (this.mTouchAreaBindingEnabled && isDownAction)
                                         {
-                                            this.mTouchAreaBindings[pSceneTouchEvent.getPointerID()] = layerTouchArea;
+                                            this.mTouchAreaBindings[pSceneTouchEvent.GetPointerID()] = layerTouchArea;
                                         }
                                         return true;
                                     }
@@ -570,8 +569,8 @@ namespace andengine.entity.scene
                         if (touchArea.Contains(sceneTouchEventX, sceneTouchEventY))
                         {
                             /* final */
-                            bool handled = this.OnAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, touchArea);
-                            if (handled != null && handled)
+                            bool? handled = this.OnAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, touchArea);
+                            if (handled != null && handled.Value)
                             {
                                 /* If binding of ITouchAreas is enabled and this is an ACTION_DOWN event,
                                  *  bind this ITouchArea to the PointerID. */
@@ -593,8 +592,8 @@ namespace andengine.entity.scene
                         if (touchArea.Contains(sceneTouchEventX, sceneTouchEventY))
                         {
                             /* final */
-                            bool handled = this.OnAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, touchArea);
-                            if (handled != null && handled)
+                            bool? handled = this.OnAreaTouchEvent(pSceneTouchEvent, sceneTouchEventX, sceneTouchEventY, touchArea);
+                            if (handled != null && handled.Value)
                             {
                                 /* If binding of ITouchAreas is enabled and this is an ACTION_DOWN event,
                                  *  bind this ITouchArea to the PointerID. */
@@ -669,7 +668,7 @@ namespace andengine.entity.scene
         // Methods
         // ===========================================================
 
-        public void PostRunnable(/* final */ Runnable pRunnable)
+        public void PostRunnable(/* final */ IRunnable pRunnable)
         {
             this.mRunnableHandler.PostRunnable(pRunnable);
         }

@@ -1,3 +1,5 @@
+using andengine.opengl.texture.region;
+
 namespace andengine.entity.sprite
 {
 
@@ -51,6 +53,7 @@ namespace andengine.entity.sprite
         // ===========================================================
 
         public override andengine.opengl.texture.region.BaseTextureRegion GetTextureRegionCore()
+        public override BaseTextureRegion GetTextureRegion()
         {
             return this.mTextureRegion;
         }
