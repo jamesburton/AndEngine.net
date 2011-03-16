@@ -27,7 +27,7 @@ namespace andengine.opengl.font
         // Constructors
         // ===========================================================
 
-        Letter(char pCharacter, int pAdvance, int pWidth, int pHeight, float pTextureX, float pTextureY, float pTextureWidth, float pTextureHeight)
+        public Letter(char pCharacter, int pAdvance, int pWidth, int pHeight, float pTextureX, float pTextureY, float pTextureWidth, float pTextureHeight)
         {
             this.mCharacter = pCharacter;
             this.mAdvance = pAdvance;

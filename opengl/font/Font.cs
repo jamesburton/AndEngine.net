@@ -1,3 +1,5 @@
+using System;
+
 namespace andengine.opengl.font
 {
 
@@ -20,7 +22,6 @@ namespace andengine.opengl.font
     using Style = Android.Graphics.Paint.Style;
     using GLUtils = Android.Opengl.GLUtils;
     using FloatMath = Android.Util.FloatMath;
-    using Java.Lang;
     using System.Runtime.CompilerServices;
     //using android.util.SparseArray;
 
@@ -73,8 +74,8 @@ namespace andengine.opengl.font
         public Font(Texture pTexture, Typeface pTypeface, float pSize, bool pAntiAlias, int pColor)
         {
             this.mTexture = pTexture;
-            this.mTextureWidth = pTexture.getWidth();
-            this.mTextureHeight = pTexture.getHeight();
+            this.mTextureWidth = pTexture.GetWidth();
+            this.mTextureHeight = pTexture.GetHeight();
 
             this.mPaint = new Paint();
             this.mPaint.SetTypeface(pTypeface);
@@ -135,14 +136,14 @@ namespace andengine.opengl.font
 
         private int getLetterAdvance(char pCharacter)
         {
-            this.mPaint.GetTextWidths(String.ValueOf(pCharacter), this.mTemporaryTextWidthFetchers);
+            this.mPaint.GetTextWidths(pCharacter.ToString(), this.mTemporaryTextWidthFetchers);
             return (int)(FloatMath.Ceil(this.mTemporaryTextWidthFetchers[0]));
         }
 
         private Bitmap getLetterBitmap(char pCharacter)
         {
             Rect getLetterBitmapTemporaryRect = this.mGetLetterBitmapTemporaryRect;
-            String characterAsString = String.ValueOf(pCharacter);
+            String characterAsString = pCharacter.ToString();
             this.mPaint.GetTextBounds(characterAsString, 0, 1, getLetterBitmapTemporaryRect);
 
             int lineHeight = this.getLineHeight();
@@ -158,20 +159,20 @@ namespace andengine.opengl.font
             return bitmap;
         }
 
-        protected void drawCharacterString(String pCharacterAsString)
+        protected virtual void drawCharacterString(String pCharacterAsString)
         {
             this.mCanvas.DrawText(pCharacterAsString, LETTER_LEFT_OFFSET, -this.mFontMetrics.Ascent, this.mPaint);
         }
 
         public int getStringWidth(String pText)
         {
-            this.mPaint.GetTextBounds(pText, 0, pText.Length(), this.mGetStringWidthTemporaryRect);
+            this.mPaint.GetTextBounds(pText, 0, pText.Length, this.mGetStringWidthTemporaryRect);
             return this.mGetStringWidthTemporaryRect.Width();
         }
 
         private void getLetterBounds(char pCharacter, Size pSize)
         {
-            this.mPaint.GetTextBounds(String.ValueOf(pCharacter), 0, 1, this.mGetLetterBoundsTemporaryRect);
+            this.mPaint.GetTextBounds(pCharacter.ToString(), 0, 1, this.mGetLetterBoundsTemporaryRect);
             pSize.set(this.mGetLetterBoundsTemporaryRect.Width() + LETTER_EXTRA_WIDTH, this.getLineHeight());
         }
 
@@ -214,7 +215,7 @@ namespace andengine.opengl.font
             float letterTextureHeight = letterHeight / textureHeight;
 
             Letter letter = new Letter(pCharacter, this.getLetterAdvance(pCharacter), (int)letterWidth, (int)letterHeight, letterTextureX, letterTextureY, letterTextureWidth, letterTextureHeight);
-            this.mCurrentTextureX += letterWidth;
+            this.mCurrentTextureX += (int)letterWidth;
 
             return letter;
         }
@@ -227,7 +228,7 @@ namespace andengine.opengl.font
             List<Letter> lettersPendingToBeDrawnToTexture = this.mLettersPendingToBeDrawnToTexture;
             if (lettersPendingToBeDrawnToTexture.Count > 0)
             {
-                int hardwareTextureID = this.mTexture.getHardwareTextureID();
+                int hardwareTextureID = this.mTexture.GetHardwareTextureID();
 
                 float textureWidth = this.mTextureWidth;
                 float textureHeight = this.mTextureHeight;
@@ -237,7 +238,7 @@ namespace andengine.opengl.font
                     Letter letter = lettersPendingToBeDrawnToTexture[i];
                     Bitmap bitmap = this.getLetterBitmap(letter.mCharacter);
 
-                    GLHelper.bindTexture(pGL, hardwareTextureID);
+                    GLHelper.BindTexture(pGL, hardwareTextureID);
                     GLUtils.TexSubImage2D(Javax.Microedition.Khronos.Opengles.GL10Consts.GlTexture2d, 0, (int)(letter.mTextureX * textureWidth), (int)(letter.mTextureY * textureHeight), bitmap);
 
                     bitmap.Recycle();
