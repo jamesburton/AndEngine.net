@@ -39,14 +39,14 @@ namespace andengine.entity.scene
 
         protected void Init(Camera pCamera, TextureRegion pTextureRegion, float pDuration, float pScaleFrom, float pScaleTo)
         {
-            Sprite loadingScreenSprite = new Sprite(pCamera.getMinX(), pCamera.getMinY(), pCamera.getWidth(), pCamera.getHeight(), pTextureRegion);
+            Sprite loadingScreenSprite = new Sprite(pCamera.GetMinX(), pCamera.GetMinY(), pCamera.GetWidth(), pCamera.GetHeight(), pTextureRegion);
             if (pScaleFrom != 1 || pScaleTo != 1)
             {
-                loadingScreenSprite.setScale(pScaleFrom);
-                loadingScreenSprite.addShapeModifier(new ScaleModifier(pDuration, pScaleFrom, pScaleTo, IEaseFunction.DEFAULT));
+                loadingScreenSprite.SetScale(pScaleFrom);
+                loadingScreenSprite.AddShapeModifier(new ScaleModifier(pDuration, pScaleFrom, pScaleTo, IEaseFunction.DEFAULT));
             }
 
-            this.getTopLayer().addEntity(loadingScreenSprite);
+            this.GetTopLayer().AddEntity(loadingScreenSprite);
         }
 
         // ===========================================================
