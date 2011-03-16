@@ -92,11 +92,11 @@ namespace andengine.collision
             {
                 /* At last check if one polygon 'contains' the other one by checking 
                  * if one vertex of the one vertices is contained by all of the other vertices. */
-                if (ShapeCollisionChecker.CheckContains(pVerticesA, pVerticesALength, pVerticesB[Constants.VERTEX_INDEX_X], pVerticesB[VERTEX_INDEX_Y]))
+                if (ShapeCollisionChecker.CheckContains(pVerticesA, pVerticesALength, pVerticesB[Constants.VERTEX_INDEX_X], pVerticesB[Constants.VERTEX_INDEX_Y]))
                 {
                     return true;
                 }
-                else if (ShapeCollisionChecker.CheckContains(pVerticesB, pVerticesBLength, pVerticesA[Constants.VERTEX_INDEX_X], pVerticesA[VERTEX_INDEX_Y]))
+                else if (ShapeCollisionChecker.CheckContains(pVerticesB, pVerticesBLength, pVerticesA[Constants.VERTEX_INDEX_X], pVerticesA[Constants.VERTEX_INDEX_Y]))
                 {
                     return true;
                 }
