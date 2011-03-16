@@ -56,7 +56,7 @@ namespace andengine.opengl.texture.source
             }
             catch (IOException e)
             {
-                Debug.e("Failed loading Bitmap in AssetTextureSource. AssetPath: " + pAssetPath, e);
+                Debug.E("Failed loading Bitmap in AssetTextureSource. AssetPath: " + pAssetPath, e);
             }
             finally
             {
@@ -121,7 +121,7 @@ namespace andengine.opengl.texture.source
             }
             catch (IOException e)
             {
-                Debug.e("Failed loading Bitmap in AssetTextureSource. AssetPath: " + this.mAssetPath, e);
+                Debug.E("Failed loading Bitmap in AssetTextureSource. AssetPath: " + this.mAssetPath, e);
                 return null;
             }
             finally

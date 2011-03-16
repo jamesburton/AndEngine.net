@@ -504,7 +504,7 @@ namespace andengine.engine
                 }
                 catch (/* final */ InterruptedException e)
                 {
-                    Debug.e(e);
+                    Debug.E(e);
                 }
                 return handled;
             }
@@ -588,7 +588,7 @@ namespace andengine.engine
         public void OnResume()
         {
             this.mTextureManager.reloadTextures();
-            this.mFontManager.reloadFonts();
+            this.mFontManager.ReloadFonts();
             BufferObjectManager.SetActiveInstance(this.mBufferObjectManager);
             this.mBufferObjectManager.ReloadBufferObjects();
         }
@@ -714,7 +714,7 @@ namespace andengine.engine
             State threadLocker = this.mThreadLocker;
 
             this.mTextureManager.updateTextures(pGL);
-            this.mFontManager.updateFonts(pGL);
+            this.mFontManager.UpdateFonts(pGL);
             if (GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS)
             {
                 this.mBufferObjectManager.UpdateBufferObjects((GL11)pGL);
@@ -950,7 +950,7 @@ namespace andengine.engine
                 }
                 catch (/* final */ InterruptedException e)
                 {
-                    Debug.d("UpdateThread interrupted. Don't worry - this Exception is most likely expected!", e);
+                    Debug.D("UpdateThread interrupted. Don't worry - this Exception is most likely expected!", e);
                     //this.interrupt();
                     Interrupt();
                 }

@@ -5,6 +5,8 @@ namespace andengine.sensor.location
 
     using Criteria = Android.Locations.Criteria;
 
+    using Accuracy = Android.Locations.Accuracy;
+
     /**
      * @author Nicolas Gramlich
      * @since 11:02:12 - 31.10.2010
@@ -58,18 +60,20 @@ namespace andengine.sensor.location
          * @param pMinimumTriggerTime
          * @param pMinimumTriggerDistance
          */
-        public LocationSensorOptions(int pAccuracy, bool pAltitudeRequired, bool pBearingRequired, bool pCostAllowed, int pPowerRequirement, bool pSpeedRequired, bool pEnabledOnly, long pMinimumTriggerTime, long pMinimumTriggerDistance)
+        //public LocationSensorOptions(int pAccuracy, bool pAltitudeRequired, bool pBearingRequired, bool pCostAllowed, int pPowerRequirement, bool pSpeedRequired, bool pEnabledOnly, long pMinimumTriggerTime, long pMinimumTriggerDistance)
+        public LocationSensorOptions(Accuracy pAccuracy, bool pAltitudeRequired, bool pBearingRequired, bool pCostAllowed, int pPowerRequirement, bool pSpeedRequired, bool pEnabledOnly, long pMinimumTriggerTime, long pMinimumTriggerDistance)
         {
             this.mEnabledOnly = pEnabledOnly;
             this.mMinimumTriggerTime = pMinimumTriggerTime;
             this.mMinimumTriggerDistance = pMinimumTriggerDistance;
 
-            this.setAccuracy(pAccuracy);
-            this.setAltitudeRequired(pAltitudeRequired);
-            this.setBearingRequired(pBearingRequired);
-            this.setCostAllowed(pCostAllowed);
-            this.setPowerRequirement(pPowerRequirement);
-            this.setSpeedRequired(pSpeedRequired);
+            //this.SetAccuracy(pAccuracy);
+            this.Accuracy = pAccuracy;
+            this.SetAltitudeRequired(pAltitudeRequired);
+            this.SetBearingRequired(pBearingRequired);
+            this.SetCostAllowed(pCostAllowed);
+            this.SetPowerRequirement(pPowerRequirement);
+            this.SetSpeedRequired(pSpeedRequired);
         }
 
         // ===========================================================

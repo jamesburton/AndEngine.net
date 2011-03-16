@@ -376,8 +376,8 @@ namespace andengine.engine.camera
             float rotation = -this.mRotation;
             if (rotation != 0)
             {
-                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pCameraSceneTouchEvent.getX();
-                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pCameraSceneTouchEvent.getY();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_X] = pCameraSceneTouchEvent.GetX();
+                VERTICES_TOUCH_TMP[Constants.VERTEX_INDEX_Y] = pCameraSceneTouchEvent.GetY();
 
                 //MathUtils.RotateAroundCenter(VERTICES_TOUCH_TMP, rotation, this.getCenterX(), this.getCenterY());
                 MathUtils.RotateAroundCenter(VERTICES_TOUCH_TMP, rotation, this.CenterX, this.CenterY);

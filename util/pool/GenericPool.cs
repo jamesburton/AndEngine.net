@@ -99,7 +99,7 @@ namespace andengine.util.pool
             Stack<T> availableItems = this.mAvailableItems;
             for (int i = pCount - 1; i >= 0; i--)
             {
-                availableItems.Push(onHandleAllocatePoolItem());
+                availableItems.Push(OnHandleAllocatePoolItem());
             }
         }
 
@@ -125,7 +125,7 @@ namespace andengine.util.pool
                     item = this.mAvailableItems.Pop();
                 }
                 //Debug.i(this.getClass().getName() + "<" + item.getClass().getSimpleName() + "> was exhausted, with " + this.mUnrecycledCount + " item not yet recycled. Allocated " + this.mGrowth + " more.");
-                Debug.i(this.GetType().FullName + "<" + item.GetType().Name + "> was exhausted, with " + this.mUnrecycledCount.ToString() + " item(s) not yet recycled. Allocated " + this.mGrowth.ToString() + " more.");
+                Debug.I(this.GetType().FullName + "<" + item.GetType().Name + "> was exhausted, with " + this.mUnrecycledCount.ToString() + " item(s) not yet recycled. Allocated " + this.mGrowth.ToString() + " more.");
             }
             this.OnHandleObtainItem(item);
 
@@ -149,7 +149,7 @@ namespace andengine.util.pool
 
             if (this.mUnrecycledCount < 0)
             {
-                Debug.e(new Java.Lang.String("More items recycled than obtained!"));
+                Debug.E("More items recycled than obtained!");
             }
         }
 

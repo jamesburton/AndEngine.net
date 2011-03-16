@@ -133,10 +133,10 @@ namespace andengine.opengl.texture.builder
             // Fields
             // ===========================================================
 
-            private readonly int mLeft;
-            private readonly int mTop;
-            private readonly int mWidth;
-            private readonly int mHeight;
+            internal readonly int mLeft;
+            internal readonly int mTop;
+            internal readonly int mWidth;
+            internal readonly int mHeight;
 
             // ===========================================================
             // Constructors

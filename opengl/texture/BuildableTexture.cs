@@ -84,7 +84,7 @@ namespace andengine.opengl.texture
          * Use {@link BuildableTexture#addTextureSource(ITextureSource)} instead.
          */
         /// @Deprecated
-        public TextureSourceWithLocation AddTextureSource(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY)
+        public new TextureSourceWithLocation AddTextureSource(ITextureSource pTextureSource, int pTexturePositionX, int pTexturePositionY)
         {
             return base.AddTextureSource(pTextureSource, pTexturePositionX, pTexturePositionY);
         }

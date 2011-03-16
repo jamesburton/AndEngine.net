@@ -38,6 +38,8 @@ namespace andengine.opengl.view
     // Included by the next line anyway ... using Thread = Java.Lang.Thread;
     using Java.Lang;
 
+    using Monitor = System.Threading.Monitor;
+
     /**
      * An implementation of SurfaceView that uses the dedicated surface for
      * displaying OpenGL rendering.
@@ -224,7 +226,7 @@ namespace andengine.opengl.view
         public GLSurfaceView(Context context)
             : base(context)
         {
-            this.init();
+            this.Init();
         }
 
         /**
@@ -234,12 +236,12 @@ namespace andengine.opengl.view
         public GLSurfaceView(Context context, AttributeSet attrs)
             : base(context, attrs)
         {
-            this.init();
+            this.Init();
         }
 
         public static GLSurfaceView Instance = null;
 
-        private void init()
+        private void Init()
         {
             // Install a SurfaceHolder.Callback so we get notified when the
             // underlying surface is created and destroyed
@@ -269,12 +271,12 @@ namespace andengine.opengl.view
          * @param glWrapper
          *            the new GLWrapper
          */
-        public void setGLWrapper(GLWrapper glWrapper)
+        public void SetGLWrapper(GLWrapper glWrapper)
         {
             this.mGLWrapper = glWrapper;
         }
 
-        public int DebugFlags { get { return getDebugFlags(); } set { setDebugFlags(value); } }
+        public int DebugFlags { get { return GetDebugFlags(); } set { SetDebugFlags(value); } }
 
         /**
          * Set the debug flags to a new value. The value is constructed by
@@ -286,7 +288,7 @@ namespace andengine.opengl.view
          * @see #DEBUG_CHECK_GL_ERROR
          * @see #DEBUG_LOG_GL_CALLS
          */
-        public void setDebugFlags(int debugFlags)
+        public void SetDebugFlags(int debugFlags)
         {
             this.mDebugFlags = debugFlags;
         }
@@ -296,7 +298,7 @@ namespace andengine.opengl.view
          * 
          * @return the current value of the debug flags.
          */
-        public int getDebugFlags()
+        public int GetDebugFlags()
         {
             return this.mDebugFlags;
         }
@@ -330,7 +332,7 @@ namespace andengine.opengl.view
          * @param renderer
          *            the renderer to use to perform OpenGL drawing.
          */
-        public void setRenderer(Renderer renderer)
+        public void SetRenderer(Renderer renderer)
         {
             if (this.mRenderer != null)
             {
@@ -352,7 +354,7 @@ namespace andengine.opengl.view
          * 
          * @param configChooser
          */
-        public void setEGLConfigChooser(EGLConfigChooser configChooser)
+        public void SetEGLConfigChooser(EGLConfigChooser configChooser)
         {
             if (this.mRenderer != null)
             {
@@ -375,9 +377,9 @@ namespace andengine.opengl.view
          * 
          * @param needDepth
          */
-        public void setEGLConfigChooser(bool needDepth)
+        public void SetEGLConfigChooser(bool needDepth)
         {
-            this.setEGLConfigChooser(new SimpleEGLConfigChooser(needDepth));
+            this.SetEGLConfigChooser(new SimpleEGLConfigChooser(needDepth));
         }
 
         /**
@@ -393,12 +395,12 @@ namespace andengine.opengl.view
          * as close to 16 bits as possible.
          * 
          */
-        public void setEGLConfigChooser(int redSize, int greenSize, int blueSize, int alphaSize, int depthSize, int stencilSize)
+        public void SetEGLConfigChooser(int redSize, int greenSize, int blueSize, int alphaSize, int depthSize, int stencilSize)
         {
-            this.setEGLConfigChooser(new ComponentSizeChooser(redSize, greenSize, blueSize, alphaSize, depthSize, stencilSize));
+            this.SetEGLConfigChooser(new ComponentSizeChooser(redSize, greenSize, blueSize, alphaSize, depthSize, stencilSize));
         }
 
-        public int RenderMode { get { return getRenderMode(); } set { setRenderMode(value); } }
+        public int RenderMode { get { return GetRenderMode(); } set { SetRenderMode(value); } }
 
         /**
          * Set the rendering mode. When renderMode is RENDERMODE_CONTINUOUSLY, the
@@ -418,12 +420,12 @@ namespace andengine.opengl.view
          * @see #RENDERMODE_CONTINUOUSLY
          * @see #RENDERMODE_WHEN_DIRTY
          */
-        public void setRenderMode(int renderMode)
+        public void SetRenderMode(int renderMode)
         {
             this.mRenderMode = renderMode;
             if (this.mGLThread != null)
             {
-                this.mGLThread.setRenderMode(renderMode);
+                this.mGLThread.SetRenderMode(renderMode);
             }
         }
 
@@ -435,7 +437,7 @@ namespace andengine.opengl.view
          * @see #RENDERMODE_CONTINUOUSLY
          * @see #RENDERMODE_WHEN_DIRTY
          */
-        public int getRenderMode()
+        public int GetRenderMode()
         {
             return this.mRenderMode;
         }
@@ -450,9 +452,9 @@ namespace andengine.opengl.view
          * that frames are only rendered on demand. May be called from any thread.
          * Must be called after onResume() and before onPause().
          */
-        public void requestRender()
+        public void RequestRender()
         {
-            this.mGLThread.requestRender();
+            this.mGLThread.RequestRender();
         }
 
         /**
@@ -463,7 +465,7 @@ namespace andengine.opengl.view
         {
             if (this.mGLThread != null)
             {
-                this.mGLThread.surfaceCreated();
+                this.mGLThread.SurfaceCreated();
             }
             this.mHasSurface = true;
         }
@@ -477,7 +479,7 @@ namespace andengine.opengl.view
             // Surface will be destroyed when we return
             if (this.mGLThread != null)
             {
-                this.mGLThread.surfaceDestroyed();
+                this.mGLThread.SurfaceDestroyed();
             }
             this.mHasSurface = false;
         }
@@ -490,7 +492,7 @@ namespace andengine.opengl.view
         {
             if (this.mGLThread != null)
             {
-                this.mGLThread.onWindowResize(w, h);
+                this.mGLThread.OnWindowResize(w, h);
             }
             this.mSurfaceWidth = w;
             this.mSurfaceHeight = h;
@@ -504,8 +506,8 @@ namespace andengine.opengl.view
          */
         public void OnPause()
         {
-            this.mGLThread.onPause();
-            this.mGLThread.requestExitAndWait();
+            this.mGLThread.OnPause();
+            this.mGLThread.RequestExitAndWait();
             this.mGLThread = null;
         }
 
@@ -515,7 +517,7 @@ namespace andengine.opengl.view
          * recreate the OpenGL display and resume the rendering thread. Must not be
          * called before a renderer has been set.
          */
-        public void onResume()
+        public void OnResume()
         {
             if (this.mEGLConfigChooser == null)
             {
@@ -523,16 +525,16 @@ namespace andengine.opengl.view
             }
             this.mGLThread = new GLThread(this.mRenderer);
             this.mGLThread.Start();
-            this.mGLThread.setRenderMode(this.mRenderMode);
+            this.mGLThread.SetRenderMode(this.mRenderMode);
             if (this.mHasSurface)
             {
-                this.mGLThread.surfaceCreated();
+                this.mGLThread.SurfaceCreated();
             }
             if (this.mSurfaceWidth > 0 && this.mSurfaceHeight > 0)
             {
-                this.mGLThread.onWindowResize(this.mSurfaceWidth, this.mSurfaceHeight);
+                this.mGLThread.OnWindowResize(this.mSurfaceWidth, this.mSurfaceHeight);
             }
-            this.mGLThread.onResume();
+            this.mGLThread.OnResume();
         }
 
         /**
@@ -543,11 +545,11 @@ namespace andengine.opengl.view
          * @param r
          *            the runnable to be run on the GL rendering thread.
          */
-        public void queueEvent(Runnable r)
+        public void QueueEvent(IRunnable r)
         {
             if (this.mGLThread != null)
             {
-                this.mGLThread.queueEvent(r);
+                this.mGLThread.QueueEvent(r);
             }
         }
 
@@ -602,7 +604,7 @@ namespace andengine.opengl.view
                     {
                         return;
                     }
-                    this.guardedRun();
+                    this.GuardedRun();
                 }
                 catch (InterruptedException /*e*/)
                 {
@@ -615,9 +617,9 @@ namespace andengine.opengl.view
                 }
             }
 
-            private void guardedRun() /*: InterruptedException */ {
+            private void GuardedRun() /*: InterruptedException */ {
                 this.mEglHelper = new EglHelper();
-                this.mEglHelper.start();
+                this.mEglHelper.Start();
 
                 GL10 gl = null;
                 bool tellRendererSurfaceCreated = true;
@@ -640,17 +642,17 @@ namespace andengine.opengl.view
                     lock (this)
                     {
 
-                        Runnable r;
-                        while ((r = this.getEvent()) != null)
+                        IRunnable r;
+                        while ((r = this.GetEvent()) != null)
                         {
                             r.Run();
                         }
                         if (this.mPaused)
                         {
-                            this.mEglHelper.finish();
+                            this.mEglHelper.Finish();
                             needStart = true;
                         }
-                        while (this.needToWait())
+                        while (this.NeedToWait())
                         {
                             //this.wait();
                             System.Threading.Monitor.Wait(locker);
@@ -668,46 +670,46 @@ namespace andengine.opengl.view
 
                     if (needStart)
                     {
-                        this.mEglHelper.start();
+                        this.mEglHelper.Start();
                         tellRendererSurfaceCreated = true;
                         changed = true;
                     }
                     if (changed)
                     {
                         //gl = (GL10) this.mEglHelper.createSurface(GLSurfaceView.this.getHolder());
-                        gl = (GL10)this.mEglHelper.createSurface(GLSurfaceView.Instance.Holder);
+                        gl = (GL10)this.mEglHelper.CreateSurface(GLSurfaceView.Instance.Holder);
                         tellRendererSurfaceChanged = true;
                     }
                     if (tellRendererSurfaceCreated)
                     {
-                        this.mRenderer.onSurfaceCreated(gl, this.mEglHelper.mEglConfig);
+                        this.mRenderer.OnSurfaceCreated(gl, this.mEglHelper.mEglConfig);
                         tellRendererSurfaceCreated = false;
                     }
                     if (tellRendererSurfaceChanged)
                     {
-                        this.mRenderer.onSurfaceChanged(gl, w, h);
+                        this.mRenderer.OnSurfaceChanged(gl, w, h);
                         tellRendererSurfaceChanged = false;
                     }
                     if ((w > 0) && (h > 0))
                     {
                         /* draw a frame here */
-                        this.mRenderer.onDrawFrame(gl);
+                        this.mRenderer.OnDrawFrame(gl);
 
                         /*
                          * Once we're done with GL, we need to call swapBuffers() to
                          * instruct the system to display the rendered frame
                          */
-                        this.mEglHelper.swap();
+                        this.mEglHelper.Swap();
                     }
                 }
 
                 /*
                  * clean-up everything...
                  */
-                this.mEglHelper.finish();
+                this.mEglHelper.Finish();
             }
 
-            private bool needToWait()
+            private bool NeedToWait()
             {
                 if (this.mDone)
                 {
@@ -727,9 +729,9 @@ namespace andengine.opengl.view
                 return true;
             }
 
-            public int RenderMode { get { return getRenderMode(); } set { setRenderMode(value); } }
+            public int RenderMode { get { return GetRenderMode(); } set { SetRenderMode(value); } }
 
-            public void setRenderMode(int renderMode)
+            public void SetRenderMode(int renderMode)
             {
                 if (!((RENDERMODE_WHEN_DIRTY <= renderMode) && (renderMode <= RENDERMODE_CONTINUOUSLY)))
                 {
@@ -748,7 +750,7 @@ namespace andengine.opengl.view
                 }
             }
 
-            public int getRenderMode()
+            public int GetRenderMode()
             {
                 //synchronized (this) {
                 lock (locker)
@@ -757,7 +759,7 @@ namespace andengine.opengl.view
                 }
             }
 
-            public void requestRender()
+            public void RequestRender()
             {
                 //synchronized (this) {
                 lock (locker)
@@ -768,7 +770,7 @@ namespace andengine.opengl.view
                 }
             }
 
-            public void surfaceCreated()
+            public void SurfaceCreated()
             {
                 //synchronized (this) {
                 lock (locker)
@@ -779,7 +781,7 @@ namespace andengine.opengl.view
                 }
             }
 
-            public void surfaceDestroyed()
+            public void SurfaceDestroyed()
             {
                 //synchronized (this) {
                 lock (locker)
@@ -790,7 +792,7 @@ namespace andengine.opengl.view
                 }
             }
 
-            public void onPause()
+            public void OnPause()
             {
                 //synchronized (this) {
                 lock (locker)
@@ -799,7 +801,7 @@ namespace andengine.opengl.view
                 }
             }
 
-            public void onResume()
+            public void OnResume()
             {
                 //synchronized (this) {
                 lock (locker)
@@ -810,7 +812,7 @@ namespace andengine.opengl.view
                 }
             }
 
-            public void onWindowResize(int w, int h)
+            public void OnWindowResize(int w, int h)
             {
                 //synchronized (this) {
                 lock (locker)
@@ -823,7 +825,7 @@ namespace andengine.opengl.view
                 }
             }
 
-            public void requestExitAndWait()
+            public void RequestExitAndWait()
             {
                 // don't call this from GLThread thread or it is a guaranteed
                 // deadlock!
@@ -854,7 +856,7 @@ namespace andengine.opengl.view
              * @param r
              *            the runnable to be run on the GL rendering thread.
              */
-            public void queueEvent(Runnable r)
+            public void QueueEvent(IRunnable r)
             {
                 //synchronized (this) {
                 /* object myLock = new object();
@@ -865,14 +867,17 @@ namespace andengine.opengl.view
                 }
             }
 
-            private Runnable getEvent()
+            private IRunnable GetEvent()
             {
                 //synchronized (this) {
                 lock (locker)
                 {
                     if (this.mEventQueue.Count > 0)
                     {
-                        return this.mEventQueue.RemoveAt(0);
+                        //return this.mEventQueue.RemoveAt(0);
+                        IRunnable ret = this.mEventQueue[0];
+                        this.mEventQueue.RemoveAt(0);
+                        return ret;
                     }
 
                 }
@@ -909,7 +914,7 @@ namespace andengine.opengl.view
              * 
              * @param configSpec
              */
-            public void start()
+            public void Start()
             {
                 /*
                  * Get an EGL instance
@@ -942,7 +947,7 @@ namespace andengine.opengl.view
              * React to the creation of a new surface by creating and returning an
              * OpenGL interface that renders to that surface.
              */
-            public GL createSurface(SurfaceHolder holder)
+            public GL CreateSurface(SurfaceHolder holder)
             {
                 /*
                  * The window size has changed, so we need to create a new surface.
@@ -991,7 +996,7 @@ namespace andengine.opengl.view
              * 
              * @return false if the context has been lost.
              */
-            public bool swap()
+            public bool Swap()
             {
                 this.mEgl.EglSwapBuffers(this.mEglDisplay, this.mEglSurface);
 
@@ -1003,7 +1008,7 @@ namespace andengine.opengl.view
                 return this.mEgl.EglGetError() != EGL11Consts.EglContextLost;
             }
 
-            public void finish()
+            public void Finish()
             {
                 if (this.mEglSurface != null)
                 {

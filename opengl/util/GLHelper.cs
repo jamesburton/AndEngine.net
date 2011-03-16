@@ -120,9 +120,9 @@ namespace andengine.opengl.util
             /* final */
             String extensions = pGL.GlGetString(GL10Consts.GlExtensions);
 
-            Debug.d("RENDERER: " + renderer);
-            Debug.d("VERSION: " + version);
-            Debug.d("EXTENSIONS: " + extensions);
+            Debug.D("RENDERER: " + renderer);
+            Debug.D("VERSION: " + version);
+            Debug.D("EXTENSIONS: " + extensions);
 
             /* final */
             bool isOpenGL10 = version.Contains("1.0");
@@ -134,12 +134,12 @@ namespace andengine.opengl.util
             bool isDrawTextureCapable = extensions.Contains("draw_texture");
 
             //GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS = !pRenderOptions.isDisableExtensionVertexBufferObjects() && !isSoftwareRenderer && (isVBOCapable || !isOpenGL10);
-            GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS = !pRenderOptions.DisableExtensionVertexBufferObjects && !isSoftwareRenderer && (isVBOCapable || !isOpenGL10);
+            GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS = !pRenderOptions.IsDisableExtensionVertexBufferObjects() && !isSoftwareRenderer && (isVBOCapable || !isOpenGL10);
             GLHelper.EXTENSIONS_DRAWTEXTURE = isDrawTextureCapable;
 
             GLHelper.HackBrokenDevices();
-            Debug.d("EXTENSIONS_VERXTEXBUFFEROBJECTS = " + GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS);
-            Debug.d("EXTENSIONS_DRAWTEXTURE = " + GLHelper.EXTENSIONS_DRAWTEXTURE);
+            Debug.D("EXTENSIONS_VERXTEXBUFFEROBJECTS = " + GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS);
+            Debug.D("EXTENSIONS_DRAWTEXTURE = " + GLHelper.EXTENSIONS_DRAWTEXTURE);
         }
 
         private static void HackBrokenDevices()
@@ -181,7 +181,7 @@ namespace andengine.opengl.util
             if (GLHelper.sEnableVertexArray)
             {
                 GLHelper.sEnableVertexArray = false;
-                pGL.glDisableClientState(GL10Consts.GlVertexArray);
+                pGL.GlDisableClientState(GL10Consts.GlVertexArray);
             }
         }
 
@@ -463,7 +463,7 @@ namespace andengine.opengl.util
             /* final */
             Buffer pixelBuffer = GLHelper.ConvertARGBtoRGBABuffer(pixels);
 
-            pGL.GlTexSubImage2D(GL10Consts.GlTexture2d, 0, xoffset, yoffset, bitmap.Width, bitmap.Height, GL10.GlRgba, GL10.GlUnsignedByte, pixelBuffer);
+            pGL.GlTexSubImage2D(GL10Consts.GlTexture2d, 0, xoffset, yoffset, bitmap.Width, bitmap.Height, GL10Consts.GlRgba, GL10Consts.GlUnsignedByte, pixelBuffer);
         }
 
         private static Buffer ConvertARGBtoRGBABuffer(/* final */ int[] pPixels)

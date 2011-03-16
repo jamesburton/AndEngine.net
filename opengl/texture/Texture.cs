@@ -276,7 +276,7 @@ namespace andengine.opengl.texture
                     catch (IllegalArgumentException iae)
                     {
                         // TODO Load some static checkerboard or so to visualize that loading the texture has failed.
-                        Debug.e("Error loading: " + textureSourceWithLocation.ToString(), iae);
+                        Debug.E("Error loading: " + textureSourceWithLocation.ToString(), iae);
                         if (this.mTextureStateListener != null)
                         {
                             this.mTextureStateListener.OnTextureSourceLoadExeption(this, textureSourceWithLocation.mTextureSource, iae);
@@ -388,17 +388,17 @@ namespace andengine.opengl.texture
         {
             public /* override */ virtual void OnLoadedToHardware(Texture pTexture)
             {
-                Debug.d("Texture loaded: " + pTexture.ToString());
+                Debug.D("Texture loaded: " + pTexture.ToString());
             }
 
             public /* override */ virtual void OnTextureSourceLoadExeption(Texture pTexture, ITextureSource pTextureSource, Throwable pThrowable)
             {
-                Debug.e("Exception loading TextureSource. Texture: " + pTexture.ToString() + " TextureSource: " + pTextureSource, pThrowable);
+                Debug.E("Exception loading TextureSource. Texture: " + pTexture.ToString() + " TextureSource: " + pTextureSource, pThrowable);
             }
 
             public/* override */ virtual void OnUnloadedFromHardware(Texture pTexture)
             {
-                Debug.d("Texture unloaded: " + pTexture.ToString());
+                Debug.D("Texture unloaded: " + pTexture.ToString());
             }
         }
 

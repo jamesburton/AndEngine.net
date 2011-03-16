@@ -62,11 +62,11 @@ namespace andengine.opengl.font
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        protected override void drawCharacterString(String pCharacterAsString)
+        protected override void DrawCharacterString(String pCharacterAsString)
         {
             if (this.mStrokeOnly == false)
             {
-                base.drawCharacterString(pCharacterAsString);
+                base.DrawCharacterString(pCharacterAsString);
             }
             this.mCanvas.DrawText(pCharacterAsString, LETTER_LEFT_OFFSET, -this.mFontMetrics.Ascent, this.mStrokePaint);
         }
