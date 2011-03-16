@@ -965,7 +965,7 @@ namespace andengine.opengl.view
                 /*
                  * Create an EGL surface we can render into.
                  */
-                this.mEglSurface = this.mEgl.EglCreateWindowSurface(this.mEglDisplay, this.mEglConfig, holder, null);
+                this.mEglSurface = this.mEgl.EglCreateWindowSurface(this.mEglDisplay, this.mEglConfig, (Object) holder, null);
 
                 /*
                  * Before we can issue GL commands, we need to make sure the context

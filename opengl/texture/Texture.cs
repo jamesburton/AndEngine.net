@@ -125,7 +125,7 @@ namespace andengine.opengl.texture
             return this.mUpdateOnHardwareNeeded;
         }
 
-        protected void SetLoadedToHardware(bool pLoadedToHardware)
+        public /*protected*/ void SetLoadedToHardware(bool pLoadedToHardware)
         {
             this.mLoadedToHardware = pLoadedToHardware;
         }

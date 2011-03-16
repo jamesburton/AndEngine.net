@@ -168,7 +168,7 @@ namespace andengine.opengl.view
                 }
                 catch (InterruptedException e)
                 {
-                    Debug.E(new Java.Lang.String("GLThread interrupted!"), e);
+                    Debug.E("GLThread interrupted!", e);
                 }
             }
 

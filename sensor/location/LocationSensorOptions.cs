@@ -1,3 +1,5 @@
+using Android.Locations;
+
 namespace andengine.sensor.location
 {
 
@@ -61,7 +63,7 @@ namespace andengine.sensor.location
          * @param pMinimumTriggerDistance
          */
         //public LocationSensorOptions(int pAccuracy, bool pAltitudeRequired, bool pBearingRequired, bool pCostAllowed, int pPowerRequirement, bool pSpeedRequired, bool pEnabledOnly, long pMinimumTriggerTime, long pMinimumTriggerDistance)
-        public LocationSensorOptions(Accuracy pAccuracy, bool pAltitudeRequired, bool pBearingRequired, bool pCostAllowed, int pPowerRequirement, bool pSpeedRequired, bool pEnabledOnly, long pMinimumTriggerTime, long pMinimumTriggerDistance)
+        public LocationSensorOptions(Accuracy pAccuracy, bool pAltitudeRequired, bool pBearingRequired, bool pCostAllowed, Power pPowerRequirement, bool pSpeedRequired, bool pEnabledOnly, long pMinimumTriggerTime, long pMinimumTriggerDistance)
         {
             this.mEnabledOnly = pEnabledOnly;
             this.mMinimumTriggerTime = pMinimumTriggerTime;
@@ -69,11 +71,11 @@ namespace andengine.sensor.location
 
             //this.SetAccuracy(pAccuracy);
             this.Accuracy = pAccuracy;
-            this.SetAltitudeRequired(pAltitudeRequired);
-            this.SetBearingRequired(pBearingRequired);
-            this.SetCostAllowed(pCostAllowed);
-            this.SetPowerRequirement(pPowerRequirement);
-            this.SetSpeedRequired(pSpeedRequired);
+            this.AltitudeRequired = pAltitudeRequired;
+            this.BearingRequired = pBearingRequired;
+            this.CostAllowed = pCostAllowed;
+            this.PowerRequirement = pPowerRequirement;
+            this.SpeedRequired = pSpeedRequired;
         }
 
         // ===========================================================

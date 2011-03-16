@@ -126,7 +126,7 @@ namespace andengine.opengl.texture
             //for(final Texture texture : managedTextures) { // TODO Can the use of the iterator be avoided somehow?
             foreach (Texture texture in managedTextures)
             {
-                texture.setLoadedToHardware(false);
+                texture.SetLoadedToHardware(false);
             }
 
             //this.mTexturesToBeLoaded.addAll(this.mTexturesLoaded); // TODO Check if addAll uses iterator internally!
@@ -157,10 +157,10 @@ namespace andengine.opengl.texture
                 for (int i = texturesLoadedCount - 1; i >= 0; i--)
                 {
                     Texture textureToBeUpdated = texturesLoaded[i];
-                    if (textureToBeUpdated.isUpdateOnHardwareNeeded())
+                    if (textureToBeUpdated.IsUpdateOnHardwareNeeded())
                     {
-                        textureToBeUpdated.unloadFromHardware(pGL);
-                        textureToBeUpdated.loadToHardware(pGL);
+                        textureToBeUpdated.UnloadFromHardware(pGL);
+                        textureToBeUpdated.LoadToHardware(pGL);
                     }
                 }
             }
@@ -172,10 +172,11 @@ namespace andengine.opengl.texture
             {
                 for (int i = texturesToBeLoadedCount - 1; i >= 0; i--)
                 {
-                    Texture textureToBeLoaded = texturesToBeLoaded.RemoveAt(i);
-                    if (!textureToBeLoaded.isLoadedToHardware())
+                    Texture textureToBeLoaded = texturesToBeLoaded[i];
+                    texturesToBeLoaded.RemoveAt(i);
+                    if (!textureToBeLoaded.IsLoadedToHardware())
                     {
-                        textureToBeLoaded.loadToHardware(pGL);
+                        textureToBeLoaded.LoadToHardware(pGL);
                     }
                     texturesLoaded.Add(textureToBeLoaded);
                 }
@@ -188,10 +189,11 @@ namespace andengine.opengl.texture
             {
                 for (int i = texturesToBeUnloadedCount - 1; i >= 0; i--)
                 {
-                    Texture textureToBeUnloaded = texturesToBeUnloaded.RemoveAt(i);
-                    if (textureToBeUnloaded.isLoadedToHardware())
+                    Texture textureToBeUnloaded = texturesToBeUnloaded[i];
+                    texturesToBeUnloaded.RemoveAt(i);
+                    if (textureToBeUnloaded.IsLoadedToHardware())
                     {
-                        textureToBeUnloaded.unloadFromHardware(pGL);
+                        textureToBeUnloaded.UnloadFromHardware(pGL);
                     }
                     texturesLoaded.Remove(textureToBeUnloaded);
                     texturesManaged.Remove(textureToBeUnloaded);

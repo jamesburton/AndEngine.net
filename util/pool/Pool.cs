@@ -42,7 +42,7 @@ namespace andengine.util.pool
         protected /* override */ new T OnHandleAllocatePoolItem()
         {
             /* final */
-            T poolItem = /*super*/base.onHandleAllocatePoolItem();
+            T poolItem = /*super*/base.OnHandleAllocatePoolItem();
             poolItem.mParent = this;
             return poolItem;
         }
@@ -50,12 +50,12 @@ namespace andengine.util.pool
         protected /* override */ new void OnHandleObtainItem(/* final */ T pPoolItem)
         {
             pPoolItem.mRecycled = false;
-            pPoolItem.onObtain();
+            pPoolItem.OnObtain();
         }
 
         protected /* override */ new void OnHandleRecycleItem(/* final */ T pPoolItem)
         {
-            pPoolItem.onRecycle();
+            pPoolItem.OnRecycle();
             pPoolItem.mRecycled = true;
         }
 

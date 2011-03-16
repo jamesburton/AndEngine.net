@@ -34,7 +34,7 @@ namespace andengine.opengl.texture.region.buffer
         */
         public override BaseTextureRegion GetTextureRegionCore()
         {
-            (BaseTextureRegion) GetTextureRegion();
+            return (BaseTextureRegion) GetTextureRegion();
         }
         public new TextureRegion GetTextureRegion()
         {

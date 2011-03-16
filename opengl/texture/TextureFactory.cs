@@ -30,8 +30,8 @@ namespace andengine.opengl.texture
 
         public static Texture CreateForTextureRegionSize(TextureRegion pTextureRegion, TextureOptions pTextureOptions)
         {
-            int loadingScreenWidth = pTextureRegion.getWidth();
-            int loadingScreenHeight = pTextureRegion.getHeight();
+            int loadingScreenWidth = pTextureRegion.GetWidth();
+            int loadingScreenHeight = pTextureRegion.GetHeight();
             return new Texture(MathUtils.NextPowerOfTwo(loadingScreenWidth), MathUtils.NextPowerOfTwo(loadingScreenHeight), pTextureOptions);
         }
 
@@ -42,8 +42,8 @@ namespace andengine.opengl.texture
 
         public static Texture CreateForTextureSourceSize(ITextureSource pTextureSource, TextureOptions pTextureOptions)
         {
-            int loadingScreenWidth = pTextureSource.getWidth();
-            int loadingScreenHeight = pTextureSource.getHeight();
+            int loadingScreenWidth = pTextureSource.GetWidth();
+            int loadingScreenHeight = pTextureSource.GetHeight();
             return new Texture(MathUtils.NextPowerOfTwo(loadingScreenWidth), MathUtils.NextPowerOfTwo(loadingScreenHeight), pTextureOptions);
         }
 

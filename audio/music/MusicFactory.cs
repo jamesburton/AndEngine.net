@@ -27,7 +27,7 @@ namespace andengine.audio.music
         // Fields
         // ===========================================================
 
-        private static String sAssetBasePath = new String("");
+        private static String sAssetBasePath = string.Empty;
 
         // ===========================================================
         // Constructors
