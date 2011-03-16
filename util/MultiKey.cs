@@ -30,7 +30,7 @@ namespace andengine.util
         {
             this.mKeys = pKeys;
 
-            this.mCachedHashCode = hash(pKeys);
+            this.mCachedHashCode = Hash(pKeys);
         }
 
         // ===========================================================

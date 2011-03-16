@@ -17,7 +17,7 @@ namespace andengine.opengl.vertex
 
         public static readonly int VERTICES_PER_RECTANGLE = 4;
 
-        private static readonly int FLOAT_TO_RAW_INT_BITS_ZERO = Float.floatToRawIntBits(0);
+        private static readonly int FLOAT_TO_RAW_INT_BITS_ZERO = Float.FloatToRawIntBits(0);
 
         // ===========================================================
         // Fields
