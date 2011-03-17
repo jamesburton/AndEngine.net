@@ -259,9 +259,9 @@ namespace andengine.ui.activity
 		//*/
 		protected void DoProgressAsync<T>(int pTitleResID, andengine.util.progress.ProgressCallable<T> pCallable, andengine.util.Callback<T> pCallback, andengine.util.Callback<Exception> pExceptionCallback)
 		{
-            //new BaseActivityAsyncTask2<T>(this, pTitleResID, pCallable, pCallback, pExceptionCallback).Execute((object[])null);
-            new BaseActivityAsyncTask2<T>(this, pTitleResID, pCallable, pCallback, pExceptionCallback).DoInBackground((object[])null);
-        }
+			//new BaseActivityAsyncTask2<T>(this, pTitleResID, pCallable, pCallback, pExceptionCallback).Execute((object[])null);
+			new BaseActivityAsyncTask2<T>(this, pTitleResID, pCallable, pCallback, pExceptionCallback).DoInBackground((object[])null);
+		}
 
 		public class BaseActivityAsyncTask2<T> : AsyncTask
 		{
@@ -308,7 +308,7 @@ namespace andengine.ui.activity
 					this.mException = e;
 				}
 				//return null;
-                return default(T);
+				return default(T);
 			}
 
 			public class BackgroundProgressListener : IProgressListener

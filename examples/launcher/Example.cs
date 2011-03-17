@@ -1,8 +1,8 @@
 namespace andengine.examples.launcher
 {
 
-    // TODO: Restore references as examples are converted
-    /* Remaining example references:-
+	// TODO: Restore references as examples are converted
+	/* Remaining example references:-
 using AnalogOnScreenControlExample = andengine.examples.AnalogOnScreenControlExample;
 using AnalogOnScreenControlsExample  = andengine.examples.AnalogOnScreenControlsExample;
 using AnimatedSpritesExample  = andengine.examples.AnimatedSpritesExample;
@@ -21,9 +21,9 @@ using EntityModifierExample = andengine.examples.EntityModifierExample;
 using EntityModifierIrregularExample = andengine.examples.EntityModifierIrregularExample;
 using ImageFormatsExample = andengine.examples.ImageFormatsExample;
 using LevelLoaderExample = andengine.examples.LevelLoaderExample;
-     */
+	 */
 using LineExample = andengine.examples.LineExample;
-    /*
+	/*
 using LoadTextureExample = andengine.examples.LoadTextureExample;
 using MenuExample = andengine.examples.MenuExample;
 using ModPlayerExample = andengine.examples.ModPlayerExample;
@@ -44,9 +44,9 @@ using PhysicsMouseJointExample = andengine.examples.PhysicsMouseJointExample;
 using PhysicsRemoveExample = andengine.examples.PhysicsRemoveExample;
 using PhysicsRevoluteJointExample = andengine.examples.PhysicsRevoluteJointExample;
 using PinchZoomExample = andengine.examples.PinchZoomExample;
-     */
+	 */
 using R = andengine.net.examples.Resource;
-    /*
+	/*
 using RectangleExample = andengine.examples.RectangleExample;
 using RepeatingSpriteBackgroundExample = andengine.examples.RepeatingSpriteBackgroundExample;
 using Rotation3DExample = andengine.examples.Rotation3DExample;
@@ -77,9 +77,8 @@ using TickerTextBenchmark = andengine.examples.benchmark.TickerTextBenchmark;
 using PongGameActivity = andengine.examples.game.pong.PongGameActivity;
 using RacerGameActivity = andengine.examples.game.racer.RacerGameActivity;
 using SnakeGameActivity = andengine.examples.game.snake.SnakeGameActivity;
-     */
-    //using BaseGameActivity = andengine.ui.activity.BaseGameActivity;
-    // NB: Refer to this in full as "andengine.ui.activity.BaseGameActivity<T>" instead.
+	 */
+	using BaseGameActivity = andengine.ui.activity.BaseGameActivity;
 
 /**
  * @author Nicolas Gramlich
@@ -201,20 +200,22 @@ enum Example {
 }
 */
 
-    // TODO: Verify if I need to be closer to the CLASS<?... syntax, or if BaseGameActivity is fine ... will see a little further into conversion.
-	public class Example {
-        public readonly BaseGameActivity CLASS;
-        public readonly int NAMERESID;
+	// TODO: Verify if I need to be closer to the CLASS<?... syntax, or if BaseGameActivity is fine ... will see a little further into conversion.
+	public class Example<T> : BaseGameActivity
+    {
+		public readonly int NAMERESID;
 
-        internal Example(BaseGameActivity pExampleClass, int pNameResID) {
-            this.CLASS = pExampleClass;
-            this.NAMERESID = pNameResID;
-        }
+		internal Example(int pNameResID) {
+			this.NAMERESID = pNameResID;
+		}
+    }
 
-        public readonly Example LINE = new Example(LineExample, R.String.example_line);
+    public class Example
+    {
+		public readonly BaseGameActivity LINE = new Example<LineExample>(R.String.example_line);
 
-        // TODO: Convert remaining example references to C# equivalent:
-        /* Remaining java enum source example references
+		// TODO: Convert remaining example references to C# equivalent:
+		/* Remaining java enum source example references
 	ANALOGONSCREENCONTROL(AnalogOnScreenControlExample.class, R.string.example_analogonscreencontrol),
 	ANALOGONSCREENCONTROLS(AnalogOnScreenControlsExample.class, R.string.example_analogonscreencontrols),
 	ANIMATEDSPRITES(AnimatedSpritesExample.class, R.string.example_animatedsprites),
@@ -286,6 +287,6 @@ enum Example {
 	GAME_PONG(PongGameActivity.class, R.string.example_game_pong),
 	GAME_SNAKE(SnakeGameActivity.class, R.string.example_game_snake),
 	GAME_RACER(RacerGameActivity.class, R.string.example_game_racer);
-        */
-    }
+		*/
+	}
 }
