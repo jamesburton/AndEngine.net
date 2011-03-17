@@ -116,7 +116,7 @@ public class MultiplayerExample : BaseExample implements ClientMessageFlags, Ser
 		switch(pID) {
 			case DIALOG_SHOW_SERVER_IP_ID:
 				return new AlertDialog.Builder(this)
-				.setIcon(Android.Resource.drawable.ic_dialog_info)
+				.setIcon(Android.Resource.Drawable.ic_dialog_info)
 				.setTitle("Your Server-IP ...")
 				.setCancelable(false)
 				.setMessage("The IP of your Server is:\n" + IPUtils.getIPAddress(this))
@@ -125,7 +125,7 @@ public class MultiplayerExample : BaseExample implements ClientMessageFlags, Ser
 			case DIALOG_ENTER_SERVER_IP_ID:
 				final EditText ipEditText = new EditText(this);
 				return new AlertDialog.Builder(this)
-				.setIcon(Android.Resource.drawable.ic_dialog_info)
+				.setIcon(Android.Resource.Drawable.ic_dialog_info)
 				.setTitle("Enter Server-IP ...")
 				.setCancelable(false)
 				.setView(ipEditText)
@@ -145,7 +145,7 @@ public class MultiplayerExample : BaseExample implements ClientMessageFlags, Ser
 				.create();
 			case DIALOG_CHOOSE_SERVER_OR_CLIENT_ID:
 				return new AlertDialog.Builder(this)
-				.setIcon(Android.Resource.drawable.ic_dialog_info)
+				.setIcon(Android.Resource.Drawable.ic_dialog_info)
 				.setTitle("Be Server or Client ...")
 				.setCancelable(false)
 				.setPositiveButton("Client", new OnClickListener() {

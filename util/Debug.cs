@@ -188,6 +188,21 @@ namespace andengine.util
             Debug.E(DEBUGTAG, pThrowable);
         }
 
+        public static void E(String pMessage, Exception pException)
+        {
+            if (DEBUGLEVEL.IsSameOrLessThan(DebugLevel.ERROR))
+            {
+                if (pException == null)
+                {
+                    Log.Error(DEBUGTAG, pMessage, new Exception());
+                }
+                else
+                {
+                    Log.Error(DEBUGTAG, pMessage, pException.ToString());
+                }
+            }
+        }
+
         public static void E(/* final */ String pMessage, /* final */ Throwable pThrowable)
         {
             if (DEBUGLEVEL.IsSameOrLessThan(DebugLevel.ERROR))

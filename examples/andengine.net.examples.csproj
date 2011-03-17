@@ -291,7 +291,7 @@
     <Content Include="game\snake\SnakeGameActivity.java" />
     <Content Include="game\snake\util\constants\SnakeConstants.java" />
     <Content Include="ImageFormatsExample.java" />
-    <Content Include="launcher\Example.java" />
+    <Compile Include="launcher\Example.cs" />
     <Content Include="launcher\ExampleGroup.java" />
     <Compile Include="launcher\ExampleLauncher.cs" />
     <Content Include="launcher\ExpandableExampleLauncherListAdapter.java" />
