@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.pong.util.constants;
+namespace andengine.examples.game.pong.util.constants;
 
 import org.anddev.andengine.examples.game.pong.adt.PaddleUserData;
 

@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.pong.adt;
+namespace andengine.examples.game.pong.adt;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -11,7 +11,7 @@ import org.anddev.andengine.extension.multiplayer.protocol.adt.message.client.Cl
  * @author Nicolas Gramlich
  * @since 19:52:27 - 28.02.2011
  */
-public class MovePaddleClientMessage extends ClientMessage implements PongConstants {
+public class MovePaddleClientMessage : ClientMessage implements PongConstants {
 	// ===========================================================
 	// Constants
 	// ===========================================================

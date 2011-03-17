@@ -1,25 +1,25 @@
-package org.anddev.andengine.examples;
+namespace andengine.examples {
 
 import javax.microedition.khronos.opengles.GL10;
 
-import org.anddev.andengine.engine.Engine;
+using Engine = andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
+using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.modifier.MoveModifier;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.background.ColorBackground;
+using Scene = andengine.entity.scene.Scene;
+using ColorBackground = andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.scene.menu.MenuScene;
 import org.anddev.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
 import org.anddev.andengine.entity.scene.menu.item.IMenuItem;
 import org.anddev.andengine.entity.scene.menu.item.SpriteMenuItem;
-import org.anddev.andengine.entity.sprite.Sprite;
-import org.anddev.andengine.entity.util.FPSLogger;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+using Sprite = andengine.entity.sprite.Sprite;
+using FPSLogger = andengine.entity.util.FPSLogger;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
+using TextureRegion = andengine.opengl.texture.region.TextureRegion;
+using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
 
 import android.view.KeyEvent;
 
@@ -27,7 +27,7 @@ import android.view.KeyEvent;
  * @author Nicolas Gramlich
  * @since 01:30:15 - 02.04.2010
  */
-public class MenuExample extends BaseExample implements IOnMenuItemClickListener {
+public class MenuExample : BaseExample implements IOnMenuItemClickListener {
 	// ===========================================================
 	// Constants
 	// ===========================================================

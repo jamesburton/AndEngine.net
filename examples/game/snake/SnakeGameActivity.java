@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.snake;
+namespace andengine.examples.game.snake;
 
 import java.io.IOException;
 
@@ -6,23 +6,23 @@ import javax.microedition.khronos.opengles.GL10;
 
 import org.anddev.andengine.audio.sound.Sound;
 import org.anddev.andengine.audio.sound.SoundFactory;
-import org.anddev.andengine.engine.Engine;
+using Engine = andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl;
 import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl.IOnScreenControlListener;
 import org.anddev.andengine.engine.camera.hud.controls.DigitalOnScreenControl;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
+using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.modifier.RotationModifier;
 import org.anddev.andengine.entity.modifier.ScaleModifier;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.sprite.Sprite;
+using Scene = andengine.entity.scene.Scene;
+using Sprite = andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.text.ChangeableText;
 import org.anddev.andengine.entity.text.Text;
-import org.anddev.andengine.entity.util.FPSLogger;
+using FPSLogger = andengine.entity.util.FPSLogger;
 import org.anddev.andengine.examples.game.snake.adt.Direction;
 import org.anddev.andengine.examples.game.snake.adt.SnakeSuicideException;
 import org.anddev.andengine.examples.game.snake.entity.Frog;
@@ -31,10 +31,10 @@ import org.anddev.andengine.examples.game.snake.entity.SnakeHead;
 import org.anddev.andengine.examples.game.snake.util.constants.SnakeConstants;
 import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.font.FontFactory;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
+using TextureRegion = andengine.opengl.texture.region.TextureRegion;
+using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 import org.anddev.andengine.util.Debug;
@@ -47,7 +47,7 @@ import android.graphics.Color;
  * @author Nicolas Gramlich
  * @since 02:26:05 - 08.07.2010
  */
-public class SnakeGameActivity extends BaseGameActivity implements SnakeConstants {
+public class SnakeGameActivity : BaseGameActivity implements SnakeConstants {
 	// ===========================================================
 	// Constants
 	// ===========================================================

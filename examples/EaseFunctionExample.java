@@ -1,24 +1,24 @@
-package org.anddev.andengine.examples;
+namespace andengine.examples {
 
-import org.anddev.andengine.engine.Engine;
+using Engine = andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.camera.hud.HUD;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
-import org.anddev.andengine.entity.IEntity;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
+using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+using IEntity = andengine.entity.IEntity;
 import org.anddev.andengine.entity.modifier.MoveModifier;
 import org.anddev.andengine.entity.primitive.Line;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.sprite.Sprite;
+using Scene = andengine.entity.scene.Scene;
+using Sprite = andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.text.ChangeableText;
-import org.anddev.andengine.entity.util.FPSLogger;
-import org.anddev.andengine.input.touch.TouchEvent;
+using FPSLogger = andengine.entity.util.FPSLogger;
+using TouchEvent = andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.font.Font;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
+using TextureRegion = andengine.opengl.texture.region.TextureRegion;
+using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.util.modifier.ease.EaseBackIn;
 import org.anddev.andengine.util.modifier.ease.EaseBackInOut;
 import org.anddev.andengine.util.modifier.ease.EaseBackOut;
@@ -62,7 +62,7 @@ import android.graphics.Typeface;
  * @author Nicolas Gramlich
  * @since 15:12:16 - 30.07.2010
  */
-public class EaseFunctionExample extends BaseExample {
+public class EaseFunctionExample : BaseExample {
 	// ===========================================================
 	// Constants
 	// ===========================================================

@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.pong.adt;
+namespace andengine.examples.game.pong.adt;
 
 /**
  * @author Nicolas Gramlich

@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.adt.card;
+namespace andengine.examples.adt.card;
 
 /**
  * @author Nicolas Gramlich

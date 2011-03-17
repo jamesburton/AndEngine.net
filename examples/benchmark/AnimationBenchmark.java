@@ -1,18 +1,18 @@
-package org.anddev.andengine.examples.benchmark;
+namespace andengine.examples.benchmark;
 
 import javax.microedition.khronos.opengles.GL11;
 
-import org.anddev.andengine.engine.Engine;
+using Engine = andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.background.ColorBackground;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
+using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+using Scene = andengine.entity.scene.Scene;
+using ColorBackground = andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
+using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 
@@ -20,7 +20,7 @@ import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
  * @author Nicolas Gramlich
  * @since 11:28:45 - 28.06.2010
  */
-public class AnimationBenchmark extends BaseBenchmark {
+public class AnimationBenchmark : BaseBenchmark {
 	// ===========================================================
 	// Constants
 	// ===========================================================

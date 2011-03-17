@@ -1,12 +1,12 @@
-package org.anddev.andengine.examples;
+namespace andengine.examples {
 
 import javax.microedition.khronos.opengles.GL10;
 
-import org.anddev.andengine.engine.Engine;
+using Engine = andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
+using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.particle.ParticleSystem;
 import org.anddev.andengine.entity.particle.emitter.PointParticleEmitter;
 import org.anddev.andengine.entity.particle.initializer.AccelerationInitializer;
@@ -17,19 +17,19 @@ import org.anddev.andengine.entity.particle.modifier.AlphaModifier;
 import org.anddev.andengine.entity.particle.modifier.ColorModifier;
 import org.anddev.andengine.entity.particle.modifier.ExpireModifier;
 import org.anddev.andengine.entity.particle.modifier.ScaleModifier;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.background.ColorBackground;
-import org.anddev.andengine.entity.util.FPSLogger;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+using Scene = andengine.entity.scene.Scene;
+using ColorBackground = andengine.entity.scene.background.ColorBackground;
+using FPSLogger = andengine.entity.util.FPSLogger;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
+using TextureRegion = andengine.opengl.texture.region.TextureRegion;
+using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
 
 /**
  * @author Nicolas Gramlich
  * @since 16:44:30 - 29.06.2010
  */
-public class ParticleSystemNexusExample extends BaseExample {
+public class ParticleSystemNexusExample : BaseExample {
 	// ===========================================================
 	// Constants
 	// ===========================================================

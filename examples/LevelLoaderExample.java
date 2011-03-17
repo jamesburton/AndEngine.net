@@ -1,34 +1,34 @@
-package org.anddev.andengine.examples;
+namespace andengine.examples {
 
 import java.io.IOException;
 
-import org.anddev.andengine.engine.Engine;
+using Engine = andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.background.ColorBackground;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
+using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+using Scene = andengine.entity.scene.Scene;
+using ColorBackground = andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
-import org.anddev.andengine.entity.util.FPSLogger;
+using FPSLogger = andengine.entity.util.FPSLogger;
 import org.anddev.andengine.level.LevelLoader;
 import org.anddev.andengine.level.LevelLoader.IEntityLoader;
 import org.anddev.andengine.level.util.constants.LevelConstants;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
+using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.util.Debug;
 import org.anddev.andengine.util.SAXUtils;
 import org.xml.sax.Attributes;
 
-import android.widget.Toast;
+using Toast = Android.Widget.Toast;
 
 /**
  * @author Nicolas Gramlich
  * @since 17:16:10 - 11.10.2010
  */
-public class LevelLoaderExample extends BaseExample {
+public class LevelLoaderExample : BaseExample {
 	// ===========================================================
 	// Constants
 	// ===========================================================

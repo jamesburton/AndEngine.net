@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.snake.entity;
+namespace andengine.examples.game.snake.entity;
 
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.examples.game.snake.util.constants.SnakeConstants;
@@ -8,7 +8,7 @@ import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
  * @author Nicolas Gramlich
  * @since 17:13:44 - 09.07.2010
  */
-public abstract class AnimatedCellEntity extends AnimatedSprite implements SnakeConstants, ICellEntity {
+public abstract class AnimatedCellEntity : AnimatedSprite implements SnakeConstants, ICellEntity {
 	// ===========================================================
 	// Constants
 	// ===========================================================

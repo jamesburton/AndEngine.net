@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.snake.adt;
+namespace andengine.examples.game.snake.adt;
 
 /**
  * @author Nicolas Gramlich

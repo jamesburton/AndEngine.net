@@ -1,20 +1,20 @@
-package org.anddev.andengine.examples.game.pong;
+namespace andengine.examples.game.pong;
 
 import java.io.IOException;
 
-import org.anddev.andengine.engine.Engine;
+using Engine = andengine.engine.Engine;
 import org.anddev.andengine.engine.LimitedFPSEngine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.handler.IUpdateHandler;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
+using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.primitive.Line;
 import org.anddev.andengine.entity.primitive.Rectangle;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
+using Scene = andengine.entity.scene.Scene;
+using IOnSceneTouchListener = andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.anddev.andengine.entity.text.ChangeableText;
-import org.anddev.andengine.entity.util.FPSLogger;
+using FPSLogger = andengine.entity.util.FPSLogger;
 import org.anddev.andengine.examples.game.pong.PongServerConnector.IPongServerConnectorListener;
 import org.anddev.andengine.examples.game.pong.adt.MovePaddleClientMessage;
 import org.anddev.andengine.examples.game.pong.util.constants.PongConstants;
@@ -25,15 +25,15 @@ import org.anddev.andengine.extension.multiplayer.protocol.server.connector.Clie
 import org.anddev.andengine.extension.multiplayer.protocol.server.connector.SocketConnectionClientConnector.ISocketConnectionClientConnectorListener;
 import org.anddev.andengine.extension.multiplayer.protocol.shared.SocketConnection;
 import org.anddev.andengine.extension.multiplayer.protocol.util.IPUtils;
-import org.anddev.andengine.input.touch.TouchEvent;
+using TouchEvent = andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.font.FontFactory;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 import org.anddev.andengine.util.Debug;
 
-import android.app.AlertDialog;
+using AlertDialog = Android.App.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -42,13 +42,13 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
+using Toast = Android.Widget.Toast;
 
 /**
  * @author Nicolas Gramlich
  * @since 19:36:45 - 28.02.2011
  */
-public class PongGameActivity extends BaseGameActivity implements PongConstants, IPongServerConnectorListener, IOnSceneTouchListener {
+public class PongGameActivity : BaseGameActivity implements PongConstants, IPongServerConnectorListener, IOnSceneTouchListener {
 	// ===========================================================
 	// Constants
 	// ===========================================================

@@ -1,14 +1,14 @@
-package org.anddev.andengine.examples.game.snake.entity;
+namespace andengine.examples.game.snake.entity;
 
-import org.anddev.andengine.entity.sprite.Sprite;
+using Sprite = andengine.entity.sprite.Sprite;
 import org.anddev.andengine.examples.game.snake.util.constants.SnakeConstants;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
+using TextureRegion = andengine.opengl.texture.region.TextureRegion;
 
 /**
  * @author Nicolas Gramlich
  * @since 17:13:44 - 09.07.2010
  */
-public abstract class CellEntity extends Sprite implements SnakeConstants, ICellEntity {
+public abstract class CellEntity : Sprite implements SnakeConstants, ICellEntity {
 	// ===========================================================
 	// Constants
 	// ===========================================================

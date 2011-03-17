@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.benchmark;
+namespace andengine.examples.benchmark;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.concurrent.Callable;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.util.FPSCounter;
-import org.anddev.andengine.examples.R;
+using R = andengine.net.examples.Resource;
 import org.anddev.andengine.opengl.util.GLHelper;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 import org.anddev.andengine.util.Callback;
@@ -25,7 +25,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.app.AlertDialog;
+using AlertDialog = Android.App.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,13 +35,13 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
-import android.widget.Toast;
+using Toast = Android.Widget.Toast;
 
 /**
  * @author Nicolas Gramlich
  * @since 10:38:36 - 27.06.2010
  */
-public abstract class BaseBenchmark extends BaseGameActivity {
+public abstract class BaseBenchmark : BaseGameActivity {
 	// ===========================================================
 	// Constants
 	// ===========================================================

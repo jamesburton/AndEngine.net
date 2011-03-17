@@ -1,10 +1,10 @@
-package org.anddev.andengine.examples.game.snake.adt;
+namespace andengine.examples.game.snake.adt;
 
 /**
  * @author Nicolas Gramlich
  * @since 15:29:42 - 11.07.2010
  */
-public class SnakeSuicideException extends Exception {
+public class SnakeSuicideException : Exception {
 	// ===========================================================
 	// Constants
 	// ===========================================================

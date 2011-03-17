@@ -1,25 +1,25 @@
-package org.anddev.andengine.examples;
+namespace andengine.examples {
 
-import org.anddev.andengine.engine.Engine;
+using Engine = andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.handler.physics.PhysicsHandler;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.background.ColorBackground;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
+using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+using Scene = andengine.entity.scene.Scene;
+using ColorBackground = andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
-import org.anddev.andengine.entity.util.FPSLogger;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+using FPSLogger = andengine.entity.util.FPSLogger;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
+using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
 /**
  * @author Nicolas Gramlich
  * @since 11:54:51 - 03.04.2010
  */
-public class MovingBallExample extends BaseExample {
+public class MovingBallExample : BaseExample {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -96,7 +96,7 @@ public class MovingBallExample extends BaseExample {
 	// Inner and Anonymous Classes
 	// ===========================================================
 
-	private static class Ball extends AnimatedSprite {
+	private static class Ball : AnimatedSprite {
 		private final PhysicsHandler mPhysicsHandler;
 
 		public Ball(final float pX, final float pY, final TiledTextureRegion pTextureRegion) {

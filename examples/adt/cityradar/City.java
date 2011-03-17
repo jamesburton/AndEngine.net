@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.adt.cityradar;
+namespace andengine.examples.adt.cityradar;
 
 
 public class City {

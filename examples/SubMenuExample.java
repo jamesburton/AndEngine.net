@@ -1,20 +1,20 @@
-package org.anddev.andengine.examples;
+namespace andengine.examples {
 
 import org.anddev.andengine.entity.scene.menu.MenuScene;
 import org.anddev.andengine.entity.scene.menu.animator.SlideMenuAnimator;
 import org.anddev.andengine.entity.scene.menu.item.IMenuItem;
 import org.anddev.andengine.entity.scene.menu.item.SpriteMenuItem;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
+using TextureRegion = andengine.opengl.texture.region.TextureRegion;
+using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
 
 
 /**
  * @author Nicolas Gramlich
  * @since 11:33:33 - 01.04.2010
  */
-public class SubMenuExample extends MenuExample {
+public class SubMenuExample : MenuExample {
 	// ===========================================================
 	// Constants
 	// ===========================================================

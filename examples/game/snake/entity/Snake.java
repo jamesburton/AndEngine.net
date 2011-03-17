@@ -1,18 +1,18 @@
-package org.anddev.andengine.examples.game.snake.entity;
+namespace andengine.examples.game.snake.entity;
 
 import java.util.LinkedList;
 
 import org.anddev.andengine.entity.Entity;
 import org.anddev.andengine.examples.game.snake.adt.Direction;
 import org.anddev.andengine.examples.game.snake.adt.SnakeSuicideException;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
+using TextureRegion = andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
 /**
  * @author Nicolas Gramlich
  * @since 17:11:44 - 09.07.2010
  */
-public class Snake extends Entity {
+public class Snake : Entity {
 	// ===========================================================
 	// Constants
 	// ===========================================================

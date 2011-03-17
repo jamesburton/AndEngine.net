@@ -1,22 +1,22 @@
-package org.anddev.andengine.examples;
+namespace andengine.examples {
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import org.anddev.andengine.engine.Engine;
+using Engine = andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
-import org.anddev.andengine.entity.scene.Scene;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
+using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+using Scene = andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
-import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
+using IOnSceneTouchListener = andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
-import org.anddev.andengine.entity.scene.background.ColorBackground;
-import org.anddev.andengine.entity.sprite.Sprite;
-import org.anddev.andengine.entity.util.FPSLogger;
+using ColorBackground = andengine.entity.scene.background.ColorBackground;
+using Sprite = andengine.entity.sprite.Sprite;
+using FPSLogger = andengine.entity.util.FPSLogger;
 import org.anddev.andengine.extension.multiplayer.protocol.adt.message.IMessage;
 import org.anddev.andengine.extension.multiplayer.protocol.adt.message.server.IServerMessage;
 import org.anddev.andengine.extension.multiplayer.protocol.adt.message.server.ServerMessage;
@@ -34,26 +34,26 @@ import org.anddev.andengine.extension.multiplayer.protocol.util.IPUtils;
 import org.anddev.andengine.extension.multiplayer.protocol.util.MessagePool;
 import org.anddev.andengine.extension.multiplayer.protocol.util.constants.ClientMessageFlags;
 import org.anddev.andengine.extension.multiplayer.protocol.util.constants.ServerMessageFlags;
-import org.anddev.andengine.input.touch.TouchEvent;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+using TouchEvent = andengine.input.touch.TouchEvent;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
+using TextureRegion = andengine.opengl.texture.region.TextureRegion;
+using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.util.Debug;
 
-import android.app.AlertDialog;
+using AlertDialog = Android.App.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.util.SparseArray;
 import android.widget.EditText;
-import android.widget.Toast;
+using Toast = Android.Widget.Toast;
 
 /**
  * @author Nicolas Gramlich
  * @since 17:10:24 - 19.06.2010
  */
-public class MultiplayerExample extends BaseExample implements ClientMessageFlags, ServerMessageFlags {
+public class MultiplayerExample : BaseExample implements ClientMessageFlags, ServerMessageFlags {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -367,7 +367,7 @@ public class MultiplayerExample extends BaseExample implements ClientMessageFlag
 	// Inner and Anonymous Classes
 	// ===========================================================
 
-	public static class AddFaceServerMessage extends ServerMessage {
+	public static class AddFaceServerMessage : ServerMessage {
 		private int mID;
 		private float mX;
 		private float mY;
@@ -408,7 +408,7 @@ public class MultiplayerExample extends BaseExample implements ClientMessageFlag
 		}
 	}
 
-	public static class MoveFaceServerMessage extends ServerMessage {
+	public static class MoveFaceServerMessage : ServerMessage {
 		private int mID;
 		private float mX;
 		private float mY;

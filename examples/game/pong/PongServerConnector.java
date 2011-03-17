@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.pong;
+namespace andengine.examples.game.pong;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -21,7 +21,7 @@ import org.anddev.andengine.util.Debug;
  * @author Nicolas Gramlich
  * @since 19:59:01 - 28.02.2011
  */
-public class PongServerConnector extends ServerConnector<SocketConnection> implements PongConstants, ServerMessageFlags {
+public class PongServerConnector : ServerConnector<SocketConnection> implements PongConstants, ServerMessageFlags {
 	// ===========================================================
 	// Constants
 	// ===========================================================

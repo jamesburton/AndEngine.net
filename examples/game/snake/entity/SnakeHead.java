@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.snake.entity;
+namespace andengine.examples.game.snake.entity;
 
 import org.anddev.andengine.examples.game.snake.adt.Direction;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
@@ -7,7 +7,7 @@ import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
  * @author Nicolas Gramlich
  * @since 17:44:59 - 09.07.2010
  */
-public class SnakeHead extends AnimatedCellEntity {
+public class SnakeHead : AnimatedCellEntity {
 	// ===========================================================
 	// Constants
 	// ===========================================================

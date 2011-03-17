@@ -1,12 +1,12 @@
-package org.anddev.andengine.examples.game.snake.entity;
+namespace andengine.examples.game.snake.entity;
 
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
+using TextureRegion = andengine.opengl.texture.region.TextureRegion;
 
 /**
  * @author Nicolas Gramlich
  * @since 17:44:59 - 09.07.2010
  */
-public class SnakeTailPart extends CellEntity implements Cloneable {
+public class SnakeTailPart : CellEntity implements Cloneable {
 	// ===========================================================
 	// Constants
 	// ===========================================================

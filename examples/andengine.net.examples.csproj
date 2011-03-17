@@ -293,7 +293,7 @@
     <Content Include="ImageFormatsExample.java" />
     <Content Include="launcher\Example.java" />
     <Content Include="launcher\ExampleGroup.java" />
-    <Content Include="launcher\ExampleLauncher.java" />
+    <Compile Include="launcher\ExampleLauncher.cs" />
     <Content Include="launcher\ExpandableExampleLauncherListAdapter.java" />
     <Content Include="LevelLoaderExample.java" />
     <Content Include="LineExample.java" />

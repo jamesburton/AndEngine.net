@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.app.cityradar;
+namespace andengine.examples.app.cityradar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,25 +7,25 @@ import javax.microedition.khronos.opengles.GL10;
 
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.camera.hud.HUD;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.FillResolutionPolicy;
-import org.anddev.andengine.entity.IEntity;
+using IEntity = andengine.entity.IEntity;
 import org.anddev.andengine.entity.modifier.LoopEntityModifier;
 import org.anddev.andengine.entity.modifier.RotationModifier;
 import org.anddev.andengine.entity.primitive.Line;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.sprite.Sprite;
+using Scene = andengine.entity.scene.Scene;
+using Sprite = andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.text.Text;
 import org.anddev.andengine.examples.adt.cityradar.City;
 import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.texture.BuildableTexture;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
+using Texture = andengine.opengl.texture.Texture;
+using TextureOptions = andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.builder.BlackPawnTextureBuilder;
 import org.anddev.andengine.opengl.texture.builder.ITextureBuilder.TextureSourcePackingException;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+using TextureRegion = andengine.opengl.texture.region.TextureRegion;
+using TextureRegionFactory = andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.sensor.location.ILocationListener;
 import org.anddev.andengine.sensor.location.LocationProviderStatus;
 import org.anddev.andengine.sensor.location.LocationSensorOptions;
@@ -43,7 +43,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-public class CityRadarActivity extends BaseGameActivity implements IOrientationListener, ILocationListener {
+public class CityRadarActivity : BaseGameActivity implements IOrientationListener, ILocationListener {
 	// ===========================================================
 	// Constants
 	// ===========================================================

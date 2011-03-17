@@ -1,10 +1,10 @@
-package org.anddev.andengine.examples;
+namespace andengine.examples {
 
-import org.anddev.andengine.engine.Engine;
+using Engine = andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+using EngineOptions = andengine.engine.options.EngineOptions;
+using ScreenOrientation = andengine.engine.options.EngineOptions.ScreenOrientation;
+using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.Entity;
 import org.anddev.andengine.entity.modifier.LoopEntityModifier;
 import org.anddev.andengine.entity.modifier.ParallelEntityModifier;
@@ -13,22 +13,22 @@ import org.anddev.andengine.entity.modifier.ScaleModifier;
 import org.anddev.andengine.entity.modifier.SequenceEntityModifier;
 import org.anddev.andengine.entity.primitive.Line;
 import org.anddev.andengine.entity.primitive.Rectangle;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
-import org.anddev.andengine.entity.scene.background.ColorBackground;
-import org.anddev.andengine.entity.util.FPSLogger;
+using Scene = andengine.entity.scene.Scene;
+using IOnSceneTouchListener = andengine.entity.scene.Scene.IOnSceneTouchListener;
+using ColorBackground = andengine.entity.scene.background.ColorBackground;
+using FPSLogger = andengine.entity.util.FPSLogger;
 import org.anddev.andengine.entity.util.ScreenCapture;
 import org.anddev.andengine.entity.util.ScreenCapture.IScreenCaptureCallback;
-import org.anddev.andengine.input.touch.TouchEvent;
+using TouchEvent = andengine.input.touch.TouchEvent;
 import org.anddev.andengine.util.FileUtils;
 
-import android.widget.Toast;
+using Toast = Android.Widget.Toast;
 
 /**
  * @author Nicolas Gramlich
  * @since 11:54:51 - 03.04.2010
  */
-public class ScreenCaptureExample extends BaseExample {
+public class ScreenCaptureExample : BaseExample {
 	// ===========================================================
 	// Constants
 	// ===========================================================

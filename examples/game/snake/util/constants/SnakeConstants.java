@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.snake.util.constants;
+namespace andengine.examples.game.snake.util.constants;
 
 /**
  * @author Nicolas Gramlich

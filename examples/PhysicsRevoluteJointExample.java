@@ -1,13 +1,13 @@
-package org.anddev.andengine.examples;
+namespace andengine.examples {
 
 import org.anddev.andengine.entity.primitive.Line;
-import org.anddev.andengine.entity.scene.Scene;
+using Scene = andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.extension.physics.box2d.PhysicsConnector;
 import org.anddev.andengine.extension.physics.box2d.PhysicsFactory;
 import org.anddev.andengine.extension.physics.box2d.util.constants.PhysicsConstants;
 
-import android.widget.Toast;
+using Toast = Android.Widget.Toast;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -19,7 +19,7 @@ import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
  * @author Nicolas Gramlich
  * @since 18:47:08 - 19.03.2010
  */
-public class PhysicsRevoluteJointExample extends BasePhysicsJointExample {
+public class PhysicsRevoluteJointExample : BasePhysicsJointExample {
 	// ===========================================================
 	// Constants
 	// ===========================================================

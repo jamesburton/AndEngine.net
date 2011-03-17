@@ -1,6 +1,6 @@
-package org.anddev.andengine.examples.launcher;
+namespace andengine.examples.launcher;
 
-import org.anddev.andengine.examples.R;
+using R = andengine.net.examples.Resource;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import android.widget.TextView;
  * @author Nicolas Gramlich
  * @since 20:43:54 - 16.06.2010
  */
-class ExpandableExampleLauncherListAdapter extends BaseExpandableListAdapter {
+class ExpandableExampleLauncherListAdapter : BaseExpandableListAdapter {
 	// ===========================================================
 	// Constants
 	// ===========================================================

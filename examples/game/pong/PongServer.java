@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.pong;
+namespace andengine.examples.game.pong;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
  * @author Nicolas Gramlich
  * @since 20:00:09 - 28.02.2011
  */
-public class PongServer extends SocketServer<SocketConnectionClientConnector> implements IUpdateHandler, PongConstants, ContactListener {
+public class PongServer : SocketServer<SocketConnectionClientConnector> implements IUpdateHandler, PongConstants, ContactListener {
 	// ===========================================================
 	// Constants
 	// ===========================================================

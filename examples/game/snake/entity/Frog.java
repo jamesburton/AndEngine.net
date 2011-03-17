@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.game.snake.entity;
+namespace andengine.examples.game.snake.entity;
 
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
@@ -6,7 +6,7 @@ import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
  * @author Nicolas Gramlich
  * @since 14:08:58 - 11.07.2010
  */
-public class Frog extends AnimatedCellEntity {
+public class Frog : AnimatedCellEntity {
 	// ===========================================================
 	// Constants
 	// ===========================================================

@@ -1,6 +1,6 @@
-package org.anddev.andengine.examples.launcher;
+namespace andengine.examples.launcher;
 
-import org.anddev.andengine.examples.R;
+using R = andengine.net.examples.Resource;
 
 
 /**

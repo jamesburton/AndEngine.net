@@ -1,4 +1,4 @@
-package org.anddev.andengine.examples.launcher;
+namespace andengine.examples.launcher;
 
 import org.anddev.andengine.examples.AnalogOnScreenControlExample;
 import org.anddev.andengine.examples.AnalogOnScreenControlsExample;
@@ -39,7 +39,7 @@ import org.anddev.andengine.examples.PhysicsMouseJointExample;
 import org.anddev.andengine.examples.PhysicsRemoveExample;
 import org.anddev.andengine.examples.PhysicsRevoluteJointExample;
 import org.anddev.andengine.examples.PinchZoomExample;
-import org.anddev.andengine.examples.R;
+using R = andengine.net.examples.Resource;
 import org.anddev.andengine.examples.RectangleExample;
 import org.anddev.andengine.examples.RepeatingSpriteBackgroundExample;
 import org.anddev.andengine.examples.Rotation3DExample;
@@ -162,14 +162,14 @@ enum Example {
 	// Fields
 	// ===========================================================
 
-	public final Class<? extends BaseGameActivity> CLASS;
+	public final Class<? : BaseGameActivity> CLASS;
 	public final int NAMERESID;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 
-	private Example(final Class<? extends BaseGameActivity> pExampleClass, final int pNameResID) {
+	private Example(final Class<? : BaseGameActivity> pExampleClass, final int pNameResID) {
 		this.CLASS = pExampleClass;
 		this.NAMERESID = pNameResID;
 	}
