@@ -212,16 +212,16 @@ public class PongGameActivity : BaseGameActivity implements PongConstants, IPong
 		switch(pID) {
 			case DIALOG_SHOW_SERVER_IP_ID:
 				return new AlertDialog.Builder(this)
-				.setIcon(android.R.drawable.ic_dialog_info)
+				.setIcon(Android.Resource.drawable.ic_dialog_info)
 				.setTitle("Your Server-IP ...")
 				.setCancelable(false)
 				.setMessage("The IP of your Server is:\n" + IPUtils.getIPAddress(this))
-				.setPositiveButton(android.R.string.ok, null)
+				.setPositiveButton(Android.Resource.string.ok, null)
 				.create();
 			case DIALOG_ENTER_SERVER_IP_ID:
 				final EditText ipEditText = new EditText(this);
 				return new AlertDialog.Builder(this)
-				.setIcon(android.R.drawable.ic_dialog_info)
+				.setIcon(Android.Resource.drawable.ic_dialog_info)
 				.setTitle("Enter Server-IP ...")
 				.setCancelable(false)
 				.setView(ipEditText)
@@ -232,7 +232,7 @@ public class PongGameActivity : BaseGameActivity implements PongConstants, IPong
 						PongGameActivity.this.initClient();
 					}
 				})
-				.setNegativeButton(android.R.string.cancel, new OnClickListener() {
+				.setNegativeButton(Android.Resource.string.cancel, new OnClickListener() {
 					@Override
 					public void onClick(final DialogInterface pDialog, final int pWhich) {
 						PongGameActivity.this.finish();
@@ -241,7 +241,7 @@ public class PongGameActivity : BaseGameActivity implements PongConstants, IPong
 				.create();
 			case DIALOG_CHOOSE_SERVER_OR_CLIENT_ID:
 				return new AlertDialog.Builder(this)
-				.setIcon(android.R.drawable.ic_dialog_info)
+				.setIcon(Android.Resource.drawable.ic_dialog_info)
 				.setTitle("Be Server or Client ...")
 				.setCancelable(false)
 				.setPositiveButton("Client", new OnClickListener() {

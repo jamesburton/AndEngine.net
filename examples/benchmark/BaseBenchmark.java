@@ -133,7 +133,7 @@ public abstract class BaseBenchmark : BaseGameActivity {
 						BaseBenchmark.this.submitResults();
 					}
 				})
-				.setNegativeButton(android.R.string.cancel, new OnClickListener() {
+				.setNegativeButton(Android.Resource.string.cancel, new OnClickListener() {
 					@Override
 					public void onClick(final DialogInterface pDialog, final int pWhich) {
 						BaseBenchmark.this.finish();

@@ -65,7 +65,7 @@ public class BetaUtils : Constants {
 			.setIcon(R.drawable.ic_dialog_alert)
 			.setMessage(pMessageResourceID);
 
-			alertDialogBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener(){
+			alertDialogBuilder.setPositiveButton(Android.Resource.string.ok, new DialogInterface.OnClickListener(){
 				@Override
 				public void onClick(final DialogInterface pDialog, final int pWhich) {
 					if(pOkIntent != null) {
@@ -74,7 +74,7 @@ public class BetaUtils : Constants {
 					pActivity.finish();
 				}
 			});
-			alertDialogBuilder.setNegativeButton(android.R.string.cancel, new OnClickListener() {
+			alertDialogBuilder.setNegativeButton(Android.Resource.string.cancel, new OnClickListener() {
 				@Override
 				public void onClick(final DialogInterface pDialog, final int pWhich) {
 					if(pCancelIntent != null) {

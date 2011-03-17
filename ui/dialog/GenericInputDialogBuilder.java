@@ -84,7 +84,7 @@ public abstract class GenericInputDialogBuilder<T> {
 
 		this.setView(ab, etInput);
 		ab.setOnCancelListener(this.mOnCancelListener)
-		.setPositiveButton(android.R.string.ok, new OnClickListener() {
+		.setPositiveButton(Android.Resource.string.ok, new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface pDialog, final int pWhich) {
 				final T result;
@@ -99,7 +99,7 @@ public abstract class GenericInputDialogBuilder<T> {
 				pDialog.dismiss();
 			}
 		})
-		.setNegativeButton(android.R.string.cancel, new OnClickListener() {
+		.setNegativeButton(Android.Resource.string.cancel, new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface pDialog, final int pWhich) {
 				GenericInputDialogBuilder.this.mOnCancelListener.onCancel(pDialog);
