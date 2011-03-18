@@ -284,7 +284,7 @@ namespace andengine.ui.activity
 				this.pExceptionCallback = pExceptionCallback;
 			}
 
-			protected /* override */ void OnPreExecute()
+			protected override void OnPreExecute()
 			{
 				this.mPD = new ProgressDialog(_this);
 				this.mPD.SetTitle(pTitleResID);

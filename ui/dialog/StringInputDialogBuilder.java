@@ -1,8 +1,8 @@
-package org.anddev.andengine.ui.dialog;
+namespace andengine.ui.dialog;
 
 using andengine.util.Callback;
 
-import android.content.Context;
+using Context = android.content.Context;
 import android.content.DialogInterface.OnCancelListener;
 
 /**

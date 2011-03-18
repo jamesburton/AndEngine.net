@@ -1,4 +1,4 @@
-package org.anddev.andengine.ui.dialog;
+namespace andengine.ui.dialog;
 
 using andengine.util.Callback;
 using andengine.util.Debug;

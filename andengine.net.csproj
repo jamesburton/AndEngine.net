@@ -314,12 +314,12 @@
     <Compile Include="sensor\orientation\OrientationSensorOptions.cs" />
     <Compile Include="sensor\SensorDelay.cs" />
     <Compile Include="ui\activity\BaseActivity.cs" />
-    <Content Include="ui\activity\BaseGameActivity.java" />
+    <Compile Include="ui\activity\BaseGameActivity.cs" />
     <Content Include="ui\activity\BaseSplashActivity.java" />
     <Content Include="ui\activity\LayoutGameActivity.java" />
     <Content Include="ui\dialog\GenericInputDialogBuilder.java" />
     <Content Include="ui\dialog\StringInputDialogBuilder.java" />
-    <Content Include="ui\IGameInterface.java" />
+    <Compile Include="ui\IGameInterface.cs" />
     <Compile Include="util\AsyncCallable.cs" />
     <Content Include="util\Base64.java" />
     <Content Include="util\Base64InputStream.java" />

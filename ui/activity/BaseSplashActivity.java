@@ -1,4 +1,4 @@
-package org.anddev.andengine.ui.activity;
+namespace andengine.ui.activity;
 
 using andengine.engine.Engine;
 using andengine.engine.camera.Camera;
