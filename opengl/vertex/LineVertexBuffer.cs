@@ -42,23 +42,25 @@ namespace andengine.opengl.vertex
         // Methods
         // ===========================================================
 
-        //TODO: This was synchronized in Java.  Do we need to add any locking code in C#?
         public /*synchronized*/ void Update(float pX1, float pY1, float pX2, float pY2)
         {
-            int[] bufferData = this.mBufferData;
+            lock (_methodLock)
+            {
+                int[] bufferData = this.mBufferData;
 
-            bufferData[0] = Float.FloatToRawIntBits(pX1);
-            bufferData[1] = Float.FloatToRawIntBits(pY1);
+                bufferData[0] = Float.FloatToRawIntBits(pX1);
+                bufferData[1] = Float.FloatToRawIntBits(pY1);
 
-            bufferData[2] = Float.FloatToRawIntBits(pX2);
-            bufferData[3] = Float.FloatToRawIntBits(pY2);
+                bufferData[2] = Float.FloatToRawIntBits(pX2);
+                bufferData[3] = Float.FloatToRawIntBits(pY2);
 
-            FastFloatBuffer buffer = this.GetFloatBuffer();
-            buffer.Position(0);
-            buffer.Put(bufferData);
-            buffer.Position(0);
+                FastFloatBuffer buffer = this.GetFloatBuffer();
+                buffer.Position(0);
+                buffer.Put(bufferData);
+                buffer.Position(0);
 
-            base.SetHardwareBufferNeedsUpdate();
+                base.SetHardwareBufferNeedsUpdate();
+            }
         }
 
         // ===========================================================

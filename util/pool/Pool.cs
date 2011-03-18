@@ -65,34 +65,38 @@ namespace andengine.util.pool
             pPoolItem.mRecycled = true;
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public /* override */ new /*synchronized*/ void RecyclePoolItem(/* final */ T pPoolItem)
         {
-            if (pPoolItem.mParent == null)
+            lock (_methodLock)
             {
-                throw new IllegalArgumentException("PoolItem not assigned to a pool!");
-            }
-            else if (!pPoolItem.IsFromPool(this))
-            {
-                throw new IllegalArgumentException("PoolItem from another pool!");
-            }
-            else if (pPoolItem.IsRecycled())
-            {
-                throw new IllegalArgumentException("PoolItem already recycled!");
-            }
+                if (pPoolItem.mParent == null)
+                {
+                    throw new IllegalArgumentException("PoolItem not assigned to a pool!");
+                }
+                else if (!pPoolItem.IsFromPool(this))
+                {
+                    throw new IllegalArgumentException("PoolItem from another pool!");
+                }
+                else if (pPoolItem.IsRecycled())
+                {
+                    throw new IllegalArgumentException("PoolItem already recycled!");
+                }
 
-            //super.recyclePoolItem(pPoolItem);
-            base.RecyclePoolItem(pPoolItem);
+                //super.recyclePoolItem(pPoolItem);
+                base.RecyclePoolItem(pPoolItem);
+            }
         }
 
         // ===========================================================
         // Methods
         // ===========================================================
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public /* synchronized */ bool OwnsPoolItem(/* final */ T pPoolItem)
         {
-            return pPoolItem.mParent == this;
+            lock (_methodLock)
+            {
+                return pPoolItem.mParent == this;
+            }
         }
 
         // TODO: Check if anything should be added in place of this:- @SuppressWarnings("unchecked")

@@ -36,6 +36,7 @@ namespace andengine.engine.handler.runnable
 
         //private final ArrayList<Runnable> mRunnables = new ArrayList<Runnable>();
         private readonly List<IRunnable> mRunnables = new List<IRunnable>();
+        private static readonly object _methodLock = new object();
 
         // ===========================================================
         // Constructors
@@ -49,31 +50,41 @@ namespace andengine.engine.handler.runnable
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public /* override */ void OnUpdate(/* final */ float pSecondsElapsed) {
-		//final ArrayList<Runnable> runnables = this.mRunnables;
-        List<IRunnable> runnables = this.mRunnables;
-		/* final */ int runnableCount = runnables.Count;
-		for(int i = runnableCount - 1; i >= 0; i--) {
-			//runnables[i].run();
-            Thread thread = new Thread(new ThreadStart(runnables[i].Run));
-		}
-		runnables.Clear();
-	}
+        public /* override */ void OnUpdate(/* final */ float pSecondsElapsed)
+        {
+            lock (_methodLock)
+            {
+                //final ArrayList<Runnable> runnables = this.mRunnables;
+                List<IRunnable> runnables = this.mRunnables;
+                /* final */
+                int runnableCount = runnables.Count;
+                for (int i = runnableCount - 1; i >= 0; i--)
+                {
+                    //runnables[i].run();
+                    Thread thread = new Thread(new ThreadStart(runnables[i].Run));
+                }
+                runnables.Clear();
+            }
+        }
 
         public /* override */ void Reset()
         {
-            this.mRunnables.Clear();
+            lock (_methodLock)
+            {
+                this.mRunnables.Clear();
+            }
         }
 
         // ===========================================================
         // Methods
         // ===========================================================
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PostRunnable(/* final */ IRunnable pRunnable)
         {
-            this.mRunnables.Add(pRunnable);
+            lock (_methodLock)
+            {
+                this.mRunnables.Add(pRunnable);
+            }
         }
 
         // ===========================================================

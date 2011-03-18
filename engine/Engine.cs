@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace andengine.engine
@@ -146,6 +147,7 @@ namespace andengine.engine
         private OrientationData mOrientationData;
 
         private /* final */ readonly UpdateHandlerList mUpdateHandlers = new UpdateHandlerList();
+        private static readonly object _methodLock = new object();
 
         protected int mSurfaceWidth = 1; // 1 to prevent accidental DIV/0
         protected int mSurfaceHeight = 1; // 1 to prevent accidental DIV/0
@@ -207,24 +209,28 @@ namespace andengine.engine
         }
         public bool Running { get { return IsRunning(); } }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public /* synchronized */ void Start()
         {
-            if (!this.mRunning)
+            lock (_methodLock)
             {
-                //this.mLastTick = System.nanoTime();
-                this.mLastTick = System.DateTime.Now.Ticks;
-                this.mRunning = true;
+                if (!this.mRunning)
+                {
+                    //this.mLastTick = System.nanoTime();
+                    this.mLastTick = DateTime.Now.Ticks;
+                    this.mRunning = true;
+                }
             }
         }
 
         //public synchronized void stop() {
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Stop()
         {
-            if (this.mRunning)
+            lock (_methodLock)
             {
-                this.mRunning = false;
+                if (this.mRunning)
+                {
+                    this.mRunning = false;
+                }
             }
         }
 
@@ -961,42 +967,50 @@ namespace andengine.engine
         {
             static bool mDrawing = false;
 
-            [MethodImpl(MethodImplOptions.Synchronized)]
             public /* synchronized */ void NotifyCanDraw()
             {
-                // Debug.d(">>> notifyCanDraw");
-                mDrawing = true;
-                this.NotifyAll();
-                // Debug.d("<<< notifyCanDraw");
+                lock (_methodLock)
+                {
+                    // Debug.d(">>> notifyCanDraw");
+                    mDrawing = true;
+                    this.NotifyAll();
+                    // Debug.d("<<< notifyCanDraw");
+                }
             }
 
-            [MethodImpl(MethodImplOptions.Synchronized)]
             public /* synchronized */ void NotifyCanUpdate()
             {
-                // Debug.d(">>> notifyCanUpdate");
-                mDrawing = false;
-                this.NotifyAll();
-                // Debug.d("<<< notifyCanUpdate");
+                lock (_methodLock)
+                {
+                    // Debug.d(">>> notifyCanUpdate");
+                    mDrawing = false;
+                    this.NotifyAll();
+                    // Debug.d("<<< notifyCanUpdate");
+                }
             }
 
-            [MethodImpl(MethodImplOptions.Synchronized)]
             public /* synchronized */ void WaitUntilCanDraw() /* throws InterruptedException */ {
-                // Debug.d(">>> waitUntilCanDraw");
-                while (mDrawing == false)
+                lock (_methodLock)
                 {
-                    this.Wait();
+                    // Debug.d(">>> waitUntilCanDraw");
+                    while (mDrawing == false)
+                    {
+                        this.Wait();
+                    }
+                    // Debug.d("<<< waitUntilCanDraw");
                 }
-                // Debug.d("<<< waitUntilCanDraw");
             }
 
-            [MethodImpl(MethodImplOptions.Synchronized)]
             public /* synchronized */ void WaitUntilCanUpdate() /* throws InterruptedException */ {
-                // Debug.d(">>> waitUntilCanUpdate");
-                while (mDrawing == true)
+                lock (_methodLock)
                 {
-                    this.Wait();
+                    // Debug.d(">>> waitUntilCanUpdate");
+                    while (mDrawing == true)
+                    {
+                        this.Wait();
+                    }
+                    // Debug.d("<<< waitUntilCanUpdate");
                 }
-                // Debug.d("<<< waitUntilCanUpdate");
             }
         }
     }

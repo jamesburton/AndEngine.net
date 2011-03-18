@@ -28,7 +28,7 @@ namespace andengine.opengl.texture.region.buffer
         protected readonly BaseTextureRegion mTextureRegion;
         private bool mFlippedVertical;
         private bool mFlippedHorizontal;
-
+        
         // ===========================================================
         // Constructors
         // ===========================================================
@@ -99,93 +99,95 @@ namespace andengine.opengl.texture.region.buffer
         // ===========================================================
 
         //public synchronized void update() {
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Update()
         {
-            BaseTextureRegion textureRegion = this.mTextureRegion;
-            Texture texture = textureRegion.GetTexture();
-
-            if (texture == null)
+            lock (_methodLock)
             {
-                return;
-            }
+                BaseTextureRegion textureRegion = this.mTextureRegion;
+                Texture texture = textureRegion.GetTexture();
 
-            int x1 = Float.FloatToRawIntBits(this.GetX1());
-            int y1 = Float.FloatToRawIntBits(this.GetY1());
-            int x2 = Float.FloatToRawIntBits(this.GetX2());
-            int y2 = Float.FloatToRawIntBits(this.GetY2());
-
-            int[] bufferData = this.mBufferData;
-
-            if (this.mFlippedVertical)
-            {
-                if (this.mFlippedHorizontal)
+                if (texture == null)
                 {
-                    bufferData[0] = x2;
-                    bufferData[1] = y2;
+                    return;
+                }
 
-                    bufferData[2] = x2;
-                    bufferData[3] = y1;
+                int x1 = Float.FloatToRawIntBits(this.GetX1());
+                int y1 = Float.FloatToRawIntBits(this.GetY1());
+                int x2 = Float.FloatToRawIntBits(this.GetX2());
+                int y2 = Float.FloatToRawIntBits(this.GetY2());
 
-                    bufferData[4] = x1;
-                    bufferData[5] = y2;
+                int[] bufferData = this.mBufferData;
 
-                    bufferData[6] = x1;
-                    bufferData[7] = y1;
+                if (this.mFlippedVertical)
+                {
+                    if (this.mFlippedHorizontal)
+                    {
+                        bufferData[0] = x2;
+                        bufferData[1] = y2;
+
+                        bufferData[2] = x2;
+                        bufferData[3] = y1;
+
+                        bufferData[4] = x1;
+                        bufferData[5] = y2;
+
+                        bufferData[6] = x1;
+                        bufferData[7] = y1;
+                    }
+                    else
+                    {
+                        bufferData[0] = x1;
+                        bufferData[1] = y2;
+
+                        bufferData[2] = x1;
+                        bufferData[3] = y1;
+
+                        bufferData[4] = x2;
+                        bufferData[5] = y2;
+
+                        bufferData[6] = x2;
+                        bufferData[7] = y1;
+                    }
                 }
                 else
                 {
-                    bufferData[0] = x1;
-                    bufferData[1] = y2;
+                    if (this.mFlippedHorizontal)
+                    {
+                        bufferData[0] = x2;
+                        bufferData[1] = y1;
 
-                    bufferData[2] = x1;
-                    bufferData[3] = y1;
+                        bufferData[2] = x2;
+                        bufferData[3] = y2;
 
-                    bufferData[4] = x2;
-                    bufferData[5] = y2;
+                        bufferData[4] = x1;
+                        bufferData[5] = y1;
 
-                    bufferData[6] = x2;
-                    bufferData[7] = y1;
+                        bufferData[6] = x1;
+                        bufferData[7] = y2;
+                    }
+                    else
+                    {
+                        bufferData[0] = x1;
+                        bufferData[1] = y1;
+
+                        bufferData[2] = x1;
+                        bufferData[3] = y2;
+
+                        bufferData[4] = x2;
+                        bufferData[5] = y1;
+
+                        bufferData[6] = x2;
+                        bufferData[7] = y2;
+                    }
                 }
+
+                FastFloatBuffer buffer = this.GetFloatBuffer();
+                buffer.Position(0);
+                buffer.Put(bufferData);
+                buffer.Position(0);
+
+                base.SetHardwareBufferNeedsUpdate();
             }
-            else
-            {
-                if (this.mFlippedHorizontal)
-                {
-                    bufferData[0] = x2;
-                    bufferData[1] = y1;
-
-                    bufferData[2] = x2;
-                    bufferData[3] = y2;
-
-                    bufferData[4] = x1;
-                    bufferData[5] = y1;
-
-                    bufferData[6] = x1;
-                    bufferData[7] = y2;
-                }
-                else
-                {
-                    bufferData[0] = x1;
-                    bufferData[1] = y1;
-
-                    bufferData[2] = x1;
-                    bufferData[3] = y2;
-
-                    bufferData[4] = x2;
-                    bufferData[5] = y1;
-
-                    bufferData[6] = x2;
-                    bufferData[7] = y2;
-                }
-            }
-
-            FastFloatBuffer buffer = this.GetFloatBuffer();
-            buffer.Position(0);
-            buffer.Put(bufferData);
-            buffer.Position(0);
-
-            base.SetHardwareBufferNeedsUpdate();
         }
 
         // ===========================================================

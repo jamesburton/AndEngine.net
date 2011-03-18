@@ -1,4 +1,5 @@
 using System;
+using Javax.Microedition.Khronos.Opengles;
 
 namespace andengine.opengl.font
 {
@@ -65,6 +66,8 @@ namespace andengine.opengl.font
         private readonly Rect mGetLetterBoundsTemporaryRect = new Rect();
         private readonly float[] mTemporaryTextWidthFetchers = new float[1];
 
+        private static readonly object _methodLock = new object();
+
         protected readonly Canvas mCanvas = new Canvas();
 
         // ===========================================================
@@ -123,17 +126,19 @@ namespace andengine.opengl.font
         // ===========================================================
 
         //public synchronized void reload() {
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Reload()
         {
-            //final ArrayList<Letter> lettersPendingToBeDrawnToTexture = this.mLettersPendingToBeDrawnToTexture;
-            List<Letter> lettersPendingToBeDrawnToTexture = this.mLettersPendingToBeDrawnToTexture;
-            SparseArray<Letter> managedCharacterToLetterMap = this.mManagedCharacterToLetterMap;
-
-            /* Make all letters redraw to the texture. */
-            for (int i = managedCharacterToLetterMap.Count - 1; i >= 0; i--)
+            lock (_methodLock)
             {
-                lettersPendingToBeDrawnToTexture.Add(managedCharacterToLetterMap[i]);
+                //final ArrayList<Letter> lettersPendingToBeDrawnToTexture = this.mLettersPendingToBeDrawnToTexture;
+                List<Letter> lettersPendingToBeDrawnToTexture = this.mLettersPendingToBeDrawnToTexture;
+                SparseArray<Letter> managedCharacterToLetterMap = this.mManagedCharacterToLetterMap;
+
+                /* Make all letters redraw to the texture. */
+                for (int i = managedCharacterToLetterMap.Count - 1; i >= 0; i--)
+                {
+                    lettersPendingToBeDrawnToTexture.Add(managedCharacterToLetterMap[i]);
+                }
             }
         }
 
@@ -180,19 +185,21 @@ namespace andengine.opengl.font
         }
 
         //public synchronized Letter getLetter(final char pCharacter) {
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public Letter GetLetter(char pCharacter)
         {
-            SparseArray<Letter> managedCharacterToLetterMap = this.mManagedCharacterToLetterMap;
-            Letter letter = managedCharacterToLetterMap[pCharacter];
-            if (letter == null)
+            lock (_methodLock)
             {
-                letter = this.CreateLetter(pCharacter);
+                SparseArray<Letter> managedCharacterToLetterMap = this.mManagedCharacterToLetterMap;
+                Letter letter = managedCharacterToLetterMap[pCharacter];
+                if (letter == null)
+                {
+                    letter = this.CreateLetter(pCharacter);
 
-                this.mLettersPendingToBeDrawnToTexture.Add(letter);
-                managedCharacterToLetterMap[pCharacter] = letter;
+                    this.mLettersPendingToBeDrawnToTexture.Add(letter);
+                    managedCharacterToLetterMap[pCharacter] = letter;
+                }
+                return letter;
             }
-            return letter;
         }
 
         private Letter CreateLetter(char pCharacter)
@@ -224,31 +231,33 @@ namespace andengine.opengl.font
         }
 
         //public synchronized void update(final GL10 pGL) {
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Update(GL10 pGL)
         {
-            //final ArrayList<Letter> lettersPendingToBeDrawnToTexture = this.mLettersPendingToBeDrawnToTexture;
-            List<Letter> lettersPendingToBeDrawnToTexture = this.mLettersPendingToBeDrawnToTexture;
-            if (lettersPendingToBeDrawnToTexture.Count > 0)
+            lock (_methodLock)
             {
-                int hardwareTextureID = this.mTexture.GetHardwareTextureID();
-
-                float textureWidth = this.mTextureWidth;
-                float textureHeight = this.mTextureHeight;
-
-                for (int i = lettersPendingToBeDrawnToTexture.Count - 1; i >= 0; i--)
+                //final ArrayList<Letter> lettersPendingToBeDrawnToTexture = this.mLettersPendingToBeDrawnToTexture;
+                List<Letter> lettersPendingToBeDrawnToTexture = this.mLettersPendingToBeDrawnToTexture;
+                if (lettersPendingToBeDrawnToTexture.Count > 0)
                 {
-                    Letter letter = lettersPendingToBeDrawnToTexture[i];
-                    Bitmap bitmap = this.GetLetterBitmap(letter.mCharacter);
+                    int hardwareTextureID = this.mTexture.GetHardwareTextureID();
 
-                    GLHelper.BindTexture(pGL, hardwareTextureID);
-                    GLUtils.TexSubImage2D(Javax.Microedition.Khronos.Opengles.GL10Consts.GlTexture2d, 0, (int)(letter.mTextureX * textureWidth), (int)(letter.mTextureY * textureHeight), bitmap);
+                    float textureWidth = this.mTextureWidth;
+                    float textureHeight = this.mTextureHeight;
 
-                    bitmap.Recycle();
+                    for (int i = lettersPendingToBeDrawnToTexture.Count - 1; i >= 0; i--)
+                    {
+                        Letter letter = lettersPendingToBeDrawnToTexture[i];
+                        Bitmap bitmap = this.GetLetterBitmap(letter.mCharacter);
+
+                        GLHelper.BindTexture(pGL, hardwareTextureID);
+                        GLUtils.TexSubImage2D(GL10Consts.GlTexture2d, 0, (int)(letter.mTextureX * textureWidth), (int)(letter.mTextureY * textureHeight), bitmap);
+
+                        bitmap.Recycle();
+                    }
+                    lettersPendingToBeDrawnToTexture.Clear();
+                    //System.gc();
+                    // TODO: Verify if this is a good match: System.gc() -> Dispose() ... leaving it to standard GC at present
                 }
-                lettersPendingToBeDrawnToTexture.Clear();
-                //System.gc();
-                // TODO: Verify if this is a good match: System.gc() -> Dispose() ... leaving it to standard GC at present
             }
         }
 

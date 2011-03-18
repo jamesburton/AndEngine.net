@@ -29,6 +29,7 @@ namespace andengine.util.pool
         private /* final */ readonly Stack<T> mAvailableItems = new Stack<T>();
         private int mUnrecycledCount;
         private /* final */ readonly int mGrowth;
+        protected static readonly object _methodLock = new object();
 
         // ===========================================================
         // Constructors
@@ -61,10 +62,12 @@ namespace andengine.util.pool
         // Getter & Setter
         // ===========================================================
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public /* synchronized */ int GetUnrecycledCount()
         {
-            return this.mUnrecycledCount;
+            lock (_methodLock)
+            {
+                return this.mUnrecycledCount;
+            }
         }
 
         // ===========================================================
@@ -92,64 +95,70 @@ namespace andengine.util.pool
 
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public /* synchronized */ void BatchAllocatePoolItems(/* final */ int pCount)
         {
-            /* final */
-            Stack<T> availableItems = this.mAvailableItems;
-            for (int i = pCount - 1; i >= 0; i--)
+            lock (_methodLock)
             {
-                availableItems.Push(OnHandleAllocatePoolItem());
+                /* final */
+                Stack<T> availableItems = this.mAvailableItems;
+                for (int i = pCount - 1; i >= 0; i--)
+                {
+                    availableItems.Push(OnHandleAllocatePoolItem());
+                }
             }
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public /* synchronized */ T ObtainPoolItem()
         {
-            /* final */
-            T item;
+            lock (_methodLock)
+            {
+                /* final */
+                T item;
 
-            if (this.mAvailableItems.Count > 0)
-            {
-                item = this.mAvailableItems.Pop();
-            }
-            else
-            {
-                if (this.mGrowth == 1)
+                if (this.mAvailableItems.Count > 0)
                 {
-                    item = OnHandleAllocatePoolItem();
+                    item = this.mAvailableItems.Pop();
                 }
                 else
                 {
-                    this.BatchAllocatePoolItems(this.mGrowth);
-                    item = this.mAvailableItems.Pop();
+                    if (this.mGrowth == 1)
+                    {
+                        item = OnHandleAllocatePoolItem();
+                    }
+                    else
+                    {
+                        this.BatchAllocatePoolItems(this.mGrowth);
+                        item = this.mAvailableItems.Pop();
+                    }
+                    //Debug.i(this.getClass().getName() + "<" + item.getClass().getSimpleName() + "> was exhausted, with " + this.mUnrecycledCount + " item not yet recycled. Allocated " + this.mGrowth + " more.");
+                    Debug.I(this.GetType().FullName + "<" + item.GetType().Name + "> was exhausted, with " + this.mUnrecycledCount.ToString() + " item(s) not yet recycled. Allocated " + this.mGrowth.ToString() + " more.");
                 }
-                //Debug.i(this.getClass().getName() + "<" + item.getClass().getSimpleName() + "> was exhausted, with " + this.mUnrecycledCount + " item not yet recycled. Allocated " + this.mGrowth + " more.");
-                Debug.I(this.GetType().FullName + "<" + item.GetType().Name + "> was exhausted, with " + this.mUnrecycledCount.ToString() + " item(s) not yet recycled. Allocated " + this.mGrowth.ToString() + " more.");
-            }
-            this.OnHandleObtainItem(item);
+                this.OnHandleObtainItem(item);
 
-            this.mUnrecycledCount++;
-            return item;
+                this.mUnrecycledCount++;
+                return item;
+            }
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public /* synchronized */ void RecyclePoolItem(/* final */ T pItem)
         {
-            if (pItem == null)
+            lock (_methodLock)
             {
-                throw new IllegalArgumentException("Cannot recycle null item!");
-            }
+                if (pItem == null)
+                {
+                    throw new IllegalArgumentException("Cannot recycle null item!");
+                }
 
-            this.OnHandleRecycleItem(pItem);
+                this.OnHandleRecycleItem(pItem);
 
-            this.mAvailableItems.Push(pItem);
+                this.mAvailableItems.Push(pItem);
 
-            this.mUnrecycledCount--;
+                this.mUnrecycledCount--;
 
-            if (this.mUnrecycledCount < 0)
-            {
-                Debug.E("More items recycled than obtained!");
+                if (this.mUnrecycledCount < 0)
+                {
+                    Debug.E("More items recycled than obtained!");
+                }
             }
         }
 

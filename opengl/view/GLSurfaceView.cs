@@ -859,8 +859,6 @@ namespace andengine.opengl.view
             public void QueueEvent(IRunnable r)
             {
                 //synchronized (this) {
-                /* object myLock = new object();
-                lock(myLock) { */
                 lock (locker)
                 {
                     this.mEventQueue.Add(r);

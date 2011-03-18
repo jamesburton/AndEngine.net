@@ -43,52 +43,54 @@ namespace andengine.opengl.texture.buffer
         // Methods
         // ===========================================================
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public void update(Font pFont, String[] pLines)
         {
-            FastFloatBuffer textureFloatBuffer = this.GetFloatBuffer();
-            textureFloatBuffer.Position(0);
-
-            Font font = pFont;
-            String[] lines = pLines;
-
-            int lineCount = lines.Length;
-            for (int i = 0; i < lineCount; i++)
+            lock (_methodLock)
             {
-                String line = lines[i];
+                FastFloatBuffer textureFloatBuffer = this.GetFloatBuffer();
+                textureFloatBuffer.Position(0);
 
-                int lineLength = line.Length();
-                for (int j = 0; j < lineLength; j++)
+                Font font = pFont;
+                String[] lines = pLines;
+
+                int lineCount = lines.Length;
+                for (int i = 0; i < lineCount; i++)
                 {
-                    Letter letter = font.GetLetter(line.CharAt(j));
+                    String line = lines[i];
 
-                    float letterTextureX = letter.mTextureX;
-                    float letterTextureY = letter.mTextureY;
-                    float letterTextureX2 = letterTextureX + letter.mTextureWidth;
-                    float letterTextureY2 = letterTextureY + letter.mTextureHeight;
+                    int lineLength = line.Length();
+                    for (int j = 0; j < lineLength; j++)
+                    {
+                        Letter letter = font.GetLetter(line.CharAt(j));
 
-                    textureFloatBuffer.Put(letterTextureX);
-                    textureFloatBuffer.Put(letterTextureY);
+                        float letterTextureX = letter.mTextureX;
+                        float letterTextureY = letter.mTextureY;
+                        float letterTextureX2 = letterTextureX + letter.mTextureWidth;
+                        float letterTextureY2 = letterTextureY + letter.mTextureHeight;
 
-                    textureFloatBuffer.Put(letterTextureX);
-                    textureFloatBuffer.Put(letterTextureY2);
+                        textureFloatBuffer.Put(letterTextureX);
+                        textureFloatBuffer.Put(letterTextureY);
 
-                    textureFloatBuffer.Put(letterTextureX2);
-                    textureFloatBuffer.Put(letterTextureY2);
+                        textureFloatBuffer.Put(letterTextureX);
+                        textureFloatBuffer.Put(letterTextureY2);
 
-                    textureFloatBuffer.Put(letterTextureX2);
-                    textureFloatBuffer.Put(letterTextureY2);
+                        textureFloatBuffer.Put(letterTextureX2);
+                        textureFloatBuffer.Put(letterTextureY2);
 
-                    textureFloatBuffer.Put(letterTextureX2);
-                    textureFloatBuffer.Put(letterTextureY);
+                        textureFloatBuffer.Put(letterTextureX2);
+                        textureFloatBuffer.Put(letterTextureY2);
 
-                    textureFloatBuffer.Put(letterTextureX);
-                    textureFloatBuffer.Put(letterTextureY);
+                        textureFloatBuffer.Put(letterTextureX2);
+                        textureFloatBuffer.Put(letterTextureY);
+
+                        textureFloatBuffer.Put(letterTextureX);
+                        textureFloatBuffer.Put(letterTextureY);
+                    }
                 }
-            }
-            textureFloatBuffer.Position(0);
+                textureFloatBuffer.Position(0);
 
-            this.SetHardwareBufferNeedsUpdate();
+                this.SetHardwareBufferNeedsUpdate();
+            }
         }
 
         // ===========================================================

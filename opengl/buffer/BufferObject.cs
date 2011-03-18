@@ -32,6 +32,7 @@ namespace andengine.opengl.buffer
         private int mHardwareBufferID = -1;
         private bool mLoadedToHardware;
         private bool mHardwareBufferNeedsUpdate = true;
+        protected static readonly object _methodLock = new object();
 
         // ===========================================================
         // Constructors
@@ -102,8 +103,7 @@ namespace andengine.opengl.buffer
                 //			Debug.d("BufferObject.updating: ID = "  + this.mHardwareBufferID);
                 this.mHardwareBufferNeedsUpdate = false;
                 //synchronized(this) {
-                object thisLock = new object();
-                lock (thisLock)
+                lock (_methodLock)
                 {
                     GLHelper.BufferData(pGL11, this.mFloatBuffer.mByteBuffer, this.mDrawType);
                 }

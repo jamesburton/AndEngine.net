@@ -1,3 +1,6 @@
+using System.Security;
+using Android.OS;
+
 namespace andengine.ui.activity
 {
 
@@ -208,7 +211,7 @@ namespace andengine.ui.activity
             this.mEngine.RunOnUpdateThread(pRunnable);
         }
 
-        protected void onSetContentView()
+        protected void OnSetContentView()
         {
             this.mRenderSurfaceView = new RenderSurfaceView(this);
             this.mRenderSurfaceView.SetEGLConfigChooser(false);
@@ -220,14 +223,14 @@ namespace andengine.ui.activity
         private void AcquireWakeLock(WakeLockOptions pWakeLockOptions)
         {
             PowerManager pm = (PowerManager)this.GetSystemService(Context.POWER_SERVICE);
-            this.mWakeLock = pm.NewWakeLock(pWakeLockOptions.GetFlag() | PowerManager.ON_AFTER_RELEASE, "AndEngine");
+            this.mWakeLock = pm.NewWakeLock(pWakeLockOptions.GetFlag() | WakeLockFlags.OnAfterRelease, "AndEngine");
             try
             {
                 this.mWakeLock.Acquire();
             }
             catch (SecurityException e)
             {
-                Debug.e("You have to add\n\t<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>\nto your AndroidManifest.xml !", e);
+                Debug.E("You have to add\n\t<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>\nto your AndroidManifest.xml !", e);
             }
         }
 
