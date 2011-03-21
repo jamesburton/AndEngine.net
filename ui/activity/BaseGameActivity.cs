@@ -1,17 +1,19 @@
 using System.Security;
+using Android.Content.PM;
+using Android.Media;
 using Android.OS;
+using Android.Views;
 
 namespace andengine.ui.activity
 {
 
     //import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
-    using LayoutParams = Android.Views.ViewGroup.LayoutParams;
+    //using LayoutParams = Android.Views.ViewGroup.LayoutParams;
 
     using MusicManager = andengine.audio.music.MusicManager;
     using SoundManager = andengine.audio.sound.SoundManager;
     using Engine = andengine.engine.Engine;
     using EngineOptions = andengine.engine.options.EngineOptions;
-    using WakeLockOptions = andengine.engine.options.WakeLockOptions;
     using Scene = andengine.entity.scene.Scene;
     using RenderSurfaceView = andengine.opengl.view.RenderSurfaceView;
     using AccelerometerSensorOptions = andengine.sensor.accelerometer.AccelerometerSensorOptions;
@@ -32,11 +34,10 @@ namespace andengine.ui.activity
     using Gravity = Android.Views.Gravity;
     using Window = Android.Views.Window;
     using WindowManager = Android.Views.IWindowManager;
-
     //using Runnable = andengine.engine.handler.runnable.Runnable;
     using Runnable = Java.Lang.IRunnable;
     using WindowManagerFlags = Android.Views.WindowManagerFlags;
-    using WindowFeatures = Android.Views.WindowFeatures;
+    using LayoutParams = Android.Widget.FrameLayout.LayoutParams;
 
     /**
      * @author Nicolas Gramlich
@@ -119,14 +120,17 @@ namespace andengine.ui.activity
 
         protected override void OnDestroy()
         {
-            base.onDestroy();
+            base.OnDestroy();
 
             this.mEngine.InterruptUpdateThread();
 
             this.OnUnloadResources();
         }
 
-        public override void OnUnloadResources()
+        public abstract Engine OnLoadEngine();
+        public abstract void OnLoadResources();
+
+        public /*override*/ void OnUnloadResources()
         {
             if (this.mEngine.GetEngineOptions().NeedsMusic())
             {
@@ -137,6 +141,9 @@ namespace andengine.ui.activity
                 this.GetSoundManager().ReleaseAll();
             }
         }
+
+        public abstract Scene OnLoadScene();
+        public abstract void OnLoadComplete();
 
         // ===========================================================
         // Getter & Setter
@@ -161,12 +168,12 @@ namespace andengine.ui.activity
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void OnGameResumed()
+        public /*override*/ void OnGameResumed()
         {
 
         }
 
-        public override void OnGamePaused()
+        public /*override*/ void OnGamePaused()
         {
 
         }
@@ -220,10 +227,10 @@ namespace andengine.ui.activity
             this.SetContentView(this.mRenderSurfaceView, this.CreateSurfaceViewLayoutParams());
         }
 
-        private void AcquireWakeLock(WakeLockOptions pWakeLockOptions)
+        private void AcquireWakeLock(WakeLockFlags pWakeLockOptions)
         {
-            PowerManager pm = (PowerManager)this.GetSystemService(Context.POWER_SERVICE);
-            this.mWakeLock = pm.NewWakeLock(pWakeLockOptions.GetFlag() | WakeLockFlags.OnAfterRelease, "AndEngine");
+            PowerManager pm = (PowerManager)this.GetSystemService(Context.PowerService);
+            this.mWakeLock = pm.NewWakeLock(pWakeLockOptions | WakeLockFlags.OnAfterRelease, "AndEngine");
             try
             {
                 this.mWakeLock.Acquire();
@@ -236,7 +243,7 @@ namespace andengine.ui.activity
 
         private void ReleaseWakeLock()
         {
-            if (this.mWakeLock != null && this.mWakeLock.IsHeld())
+            if (this.mWakeLock != null && this.mWakeLock.IsHeld)
             {
                 this.mWakeLock.Release();
             }
@@ -251,30 +258,31 @@ namespace andengine.ui.activity
 
             if (pEngineOptions.NeedsMusic() || pEngineOptions.NeedsSound())
             {
-                this.SetVolumeControlStream(AudioManager.STREAM_MUSIC);
+                /*this.SetVolumeControlStream(AudioManager.STREAM_MUSIC);*/
+                this.VolumeControlStream = (int) Stream.Music;
             }
 
             switch (pEngineOptions.GetScreenOrientation())
             {
-                case LANDSCAPE:
-                    this.SetRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                case EngineOptions.ScreenOrientationOptions.LANDSCAPE:
+                    this.SetRequestedOrientation(ScreenOrientation.Landscape);
                     break;
-                case PORTRAIT:
-                    this.SetRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                case EngineOptions.ScreenOrientationOptions.PORTRAIT:
+                    this.SetRequestedOrientation(ScreenOrientation.Portrait);
                     break;
             }
         }
 
         protected LayoutParams CreateSurfaceViewLayoutParams()
         {
-            LayoutParams layoutParams = new LayoutParams(FILL_PARENT, FILL_PARENT);
-            layoutParams.gravity = Gravity.CENTER;
+            LayoutParams layoutParams = new LayoutParams(LayoutParams.FillParent, LayoutParams.FillParent);
+            layoutParams.Gravity = (int) GravityFlags.Center;
             return layoutParams;
         }
 
         private void RequestFullscreen()
         {
-            Window window = this.GetWindow();
+            Window window = this.Window;
             window.AddFlags(WindowManagerFlags.Fullscreen);
             window.ClearFlags(WindowManagerFlags.ForceNotFullscreen);
             window.RequestFeature(WindowFeatures.NoTitle);

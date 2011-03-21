@@ -92,7 +92,6 @@
     <Compile Include="engine\options\EngineOptions.cs" />
     <Compile Include="engine\options\RenderOptions.cs" />
     <Compile Include="engine\options\TouchOptions.cs" />
-    <Compile Include="engine\options\WakeLockOptions.cs" />
     <Compile Include="engine\SingleSceneSplitScreenEngine.cs" />
     <Compile Include="entity\Entity.cs" />
     <Compile Include="entity\IEntity.cs" />

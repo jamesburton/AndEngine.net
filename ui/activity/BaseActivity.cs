@@ -161,7 +161,7 @@ namespace andengine.ui.activity
 					}
 				}
 
-				base.OnPostExecute(result);
+				/*base.OnPostExecute(result);*/
 			}
 		}
 
@@ -364,7 +364,7 @@ namespace andengine.ui.activity
 					}
 				}
 
-				base.OnPostExecute(result);
+				/*base.OnPostExecute(result);*/
 			}
 		}
 
