@@ -1,34 +1,36 @@
-package org.anddev.andengine.entity.util;
+using andengine.util.constants;
 
-using andengine.util.constants.TimeConstants;
+namespace andengine.entity.util
+{
 
 
 /**
  * @author Nicolas Gramlich
  * @since 19:52:31 - 09.03.2010
  */
-public abstract class AverageFPSCounter extends FPSCounter : TimeConstants {
+public abstract class AverageFPSCounter : FPSCounter {
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
-	private static final float AVERAGE_DURATION_DEFAULT = 5;
+	private static float AVERAGE_DURATION_DEFAULT = 5;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
 
-	protected final float mAverageDuration;
+	protected float mAverageDuration;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 
-	public AverageFPSCounter() {
-		this(AVERAGE_DURATION_DEFAULT);
+	public AverageFPSCounter() :
+		this(AVERAGE_DURATION_DEFAULT)
+    {
 	}
 
-	public AverageFPSCounter(final float pAverageDuration) {
+	public AverageFPSCounter(float pAverageDuration) {
 		this.mAverageDuration = pAverageDuration;
 	}
 
@@ -40,14 +42,13 @@ public abstract class AverageFPSCounter extends FPSCounter : TimeConstants {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
-	protected abstract void onHandleAverageDurationElapsed(final float pFPS);
+	protected abstract void OnHandleAverageDurationElapsed(float pFPS);
 
-	@Override
-	public void onUpdate(final float pSecondsElapsed) {
-		super.onUpdate(pSecondsElapsed);
+	public override void OnUpdate(float pSecondsElapsed) {
+		base.OnUpdate(pSecondsElapsed);
 
 		if(this.mSecondsElapsed > this.mAverageDuration){
-			this.onHandleAverageDurationElapsed(this.getFPS());
+			this.OnHandleAverageDurationElapsed(this.getFPS());
 
 			this.mSecondsElapsed -= this.mAverageDuration;
 			this.mFrames = 0;
@@ -61,4 +62,5 @@ public abstract class AverageFPSCounter extends FPSCounter : TimeConstants {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+}
 }

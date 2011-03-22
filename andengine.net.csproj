@@ -50,6 +50,9 @@
     <Compile Include="engine\options\resolutionpolicy\BaseResolutionPolicy.cs" />
     <Compile Include="engine\options\resolutionpolicy\RatioResolutionPolicy.cs" />
     <Compile Include="entity\primitive\Line.cs" />
+    <Compile Include="entity\util\AverageFPSCounter.cs" />
+    <Compile Include="entity\util\FPSCounter.cs" />
+    <Compile Include="entity\util\FPSLogger.cs" />
     <Compile Include="opengl\vertex\LineVertexBuffer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoftReference.cs" />
@@ -229,9 +232,6 @@
     <Content Include="entity\text\ChangeableText.java" />
     <Content Include="entity\text\Text.java" />
     <Content Include="entity\text\TickerText.java" />
-    <Content Include="entity\util\AverageFPSCounter.java" />
-    <Content Include="entity\util\FPSCounter.java" />
-    <Content Include="entity\util\FPSLogger.java" />
     <Content Include="entity\util\FrameCountCrasher.java" />
     <Content Include="entity\util\FrameCounter.java" />
     <Content Include="entity\util\ScreenCapture.java" />
