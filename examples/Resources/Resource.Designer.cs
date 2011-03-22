@@ -373,6 +373,9 @@ namespace andengine.net.examples
 			// aapt resource value: 0x7f04000f
 			public const int examplegroup_touch = 2130968591;
 			
+			// aapt resource value: 0x7f040060
+			public const int ok = 2130968672;
+			
 			// aapt resource value: 0x7f040000
 			public const int tv_xmllayoutexample_above = 2130968576;
 			

@@ -1,5 +1,6 @@
 using System;
 using andengine.engine.camera;
+using andengine.engine.options.resolutionpolicy;
 using andengine.entity.primitive;
 using Android.Content.PM;
 

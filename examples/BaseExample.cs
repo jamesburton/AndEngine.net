@@ -55,20 +55,21 @@ namespace andengine.examples
 
         public bool onMenuItemSelected(int pFeatureId, IMenuItem pItem)
         {
-            switch (pItem.ItemId)
+            if (pItem.ItemId == MENU_TRACE)
             {
-                case MENU_TRACE:
-                    if (this.mEngine.IsMethodTracing())
-                    {
-                        this.mEngine.StopMethodTracing();
-                    }
-                    else
-                    {
-                        this.mEngine.StartMethodTracing("AndEngine_" + DateTime.Now.Ticks + ".trace");
-                    }
-                    return true;
-                default:
-                    return base.OnMenuItemSelected(pFeatureId, pItem);
+                if (this.mEngine.IsMethodTracing())
+                {
+                    this.mEngine.StopMethodTracing();
+                }
+                else
+                {
+                    this.mEngine.StartMethodTracing("AndEngine_" + DateTime.Now.Ticks + ".trace");
+                }
+                return true;
+            }
+            else
+            {
+                return base.OnMenuItemSelected(pFeatureId, pItem);
             }
         }
 
