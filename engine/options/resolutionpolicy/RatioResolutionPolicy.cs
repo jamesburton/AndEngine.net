@@ -1,14 +1,14 @@
-package org.anddev.andengine.engine.options.resolutionpolicy;
+using System;
+using andengine.opengl.view;
+using Android.Views;
 
-import org.anddev.andengine.opengl.view.RenderSurfaceView;
-
-import android.view.View.MeasureSpec;
+namespace andengine.engine.options.resolutionpolicy {
 
 /**
  * @author Nicolas Gramlich
  * @since 11:23:00 - 29.03.2010
  */
-public class RatioResolutionPolicy extends BaseResolutionPolicy {
+public class RatioResolutionPolicy : BaseResolutionPolicy {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -17,17 +17,17 @@ public class RatioResolutionPolicy extends BaseResolutionPolicy {
 	// Fields
 	// ===========================================================
 
-	private final float mRatio;
+	private float mRatio;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 
-	public RatioResolutionPolicy(final float pRatio) {
+	public RatioResolutionPolicy(float pRatio) {
 		this.mRatio = pRatio;
 	}
 
-	public RatioResolutionPolicy(final float pWidthRatio, final float pHeightRatio) {
+	public RatioResolutionPolicy(float pWidthRatio, float pHeightRatio) {
 		this.mRatio = pWidthRatio / pHeightRatio;
 	}
 
@@ -39,27 +39,26 @@ public class RatioResolutionPolicy extends BaseResolutionPolicy {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
-	@Override
-	public void onMeasure(final RenderSurfaceView pRenderSurfaceView, final int pWidthMeasureSpec, final int pHeightMeasureSpec) {
+	public override void OnMeasure(RenderSurfaceView pRenderSurfaceView, int pWidthMeasureSpec, int pHeightMeasureSpec) {
 		BaseResolutionPolicy.throwOnNotMeasureSpecEXACTLY(pWidthMeasureSpec, pHeightMeasureSpec);
 
-		final int specWidth = MeasureSpec.getSize(pWidthMeasureSpec);
-		final int specHeight = MeasureSpec.getSize(pHeightMeasureSpec);
+		int specWidth = View.MeasureSpec.GetSize(pWidthMeasureSpec);
+		int specHeight = View.MeasureSpec.GetSize(pHeightMeasureSpec);
 
-		final float desiredRatio = this.mRatio;
-		final float realRatio = (float)specWidth / specHeight;
+		float desiredRatio = this.mRatio;
+		float realRatio = (float)specWidth / specHeight;
 
 		int measuredWidth;
 		int measuredHeight;
 		if(realRatio < desiredRatio) {
 			measuredWidth = specWidth;
-			measuredHeight = Math.round(measuredWidth / desiredRatio);
+			measuredHeight = (int) Math.Round(measuredWidth / desiredRatio);
 		} else {
 			measuredHeight = specHeight;
-			measuredWidth = Math.round(measuredHeight * desiredRatio);
+			measuredWidth = (int) Math.Round(measuredHeight * desiredRatio);
 		}
 
-		pRenderSurfaceView.setMeasuredDimensionProxy(measuredWidth, measuredHeight);
+		pRenderSurfaceView.SetMeasuredDimensionProxy(measuredWidth, measuredHeight);
 	}
 
 	// ===========================================================
@@ -69,4 +68,5 @@ public class RatioResolutionPolicy extends BaseResolutionPolicy {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+}
 }

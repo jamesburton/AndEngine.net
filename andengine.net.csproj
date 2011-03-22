@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Cloneable.cs" />
     <Compile Include="engine\Engine.cs" />
+    <Compile Include="engine\options\resolutionpolicy\BaseResolutionPolicy.cs" />
+    <Compile Include="engine\options\resolutionpolicy\RatioResolutionPolicy.cs" />
     <Compile Include="entity\primitive\Line.cs" />
     <Compile Include="opengl\vertex\LineVertexBuffer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,11 +101,9 @@
     <Compile Include="entity\layer\DynamicCapacityLayer.cs" />
     <Compile Include="entity\layer\FixedCapacityLayer.cs" />
     <Compile Include="entity\layer\ILayer.cs" />
-    <Content Include="engine\options\resolutionpolicy\BaseResolutionPolicy.java" />
     <Content Include="engine\options\resolutionpolicy\FillResolutionPolicy.java" />
     <Content Include="engine\options\resolutionpolicy\FixedResolutionPolicy.java" />
     <Compile Include="engine\options\resolutionpolicy\IResolutionPolicy.cs" />
-    <Content Include="engine\options\resolutionpolicy\RatioResolutionPolicy.java" />
     <Content Include="engine\options\resolutionpolicy\RelativeResolutionPolicy.java" />
     <Content Include="entity\layer\tiled\tmx\TMXLayer.java" />
     <Content Include="entity\layer\tiled\tmx\TMXLayerProperty.java" />

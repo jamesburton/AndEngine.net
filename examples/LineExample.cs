@@ -9,7 +9,7 @@ namespace andengine.examples
     using Engine = andengine.engine.Engine;
     //import org.anddev.andengine.engine.camera.Camera;
     using EngineOptions = andengine.engine.options.EngineOptions;
-    using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+    //using RatioResolutionPolicy = andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
     //import org.anddev.andengine.entity.primitive.Line;
     using Scene = andengine.entity.scene.Scene;
     using ColorBackground = andengine.entity.scene.background.ColorBackground;
