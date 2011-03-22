@@ -46,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseExample.cs" />
+    <Compile Include="launcher\ExampleGroup.cs" />
+    <Compile Include="launcher\ExpandableExampleLauncherListAdapter.cs" />
+    <Compile Include="LineExample.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -238,7 +242,6 @@
     <Content Include="AugmentedRealityExample.java" />
     <Content Include="AugmentedRealityHorizonExample.java" />
     <Content Include="AutoParallaxBackgroundExample.java" />
-    <Content Include="BaseExample.java" />
     <Content Include="BasePhysicsJointExample.java" />
     <Content Include="benchmark\AnimationBenchmark.java" />
     <Content Include="benchmark\BaseBenchmark.java" />
@@ -292,11 +295,8 @@
     <Content Include="game\snake\util\constants\SnakeConstants.java" />
     <Content Include="ImageFormatsExample.java" />
     <Compile Include="launcher\Example.cs" />
-    <Content Include="launcher\ExampleGroup.java" />
     <Compile Include="launcher\ExampleLauncher.cs" />
-    <Content Include="launcher\ExpandableExampleLauncherListAdapter.java" />
     <Content Include="LevelLoaderExample.java" />
-    <Content Include="LineExample.java" />
     <Content Include="LoadTextureExample.java" />
     <Content Include="MenuExample.java" />
     <Content Include="ModPlayerExample.java" />

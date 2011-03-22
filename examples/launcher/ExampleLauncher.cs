@@ -1,3 +1,5 @@
+using Android.Widget;
+
 namespace andengine.examples.launcher
 {
 
@@ -172,10 +174,9 @@ namespace andengine.examples.launcher
 
         public override void OnGroupExpand(int pGroupPosition)
         {
-            switch (this.mExpandableExampleLauncherListAdapter.getGroup(pGroupPosition))
+            if(this.mExpandableExampleLauncherListAdapter.getGroup(pGroupPosition) == ExampleGroup.BENCHMARK)
             {
-                case BENCHMARK:
-                    Toast.MakeText(this, "When running a benchmark, a dialog with the results will appear after some seconds.", Toast.LENGTH_SHORT).show();
+                Toast.MakeText(this, "When running a benchmark, a dialog with the results will appear after some seconds.",ToastLength.Short).Show();
             }
             base.OnGroupExpand(pGroupPosition);
         }
@@ -185,7 +186,7 @@ namespace andengine.examples.launcher
             /* final */
             Example example = this.mExpandableExampleLauncherListAdapter.getChild(pGroupPosition, pChildPosition);
 
-            this.StartActivity(new Intent(this, example.CLASS));
+            this.StartActivity(new Intent(this, example.ExampleType));
 
             return base.OnChildClick(pParent, pV, pGroupPosition, pChildPosition, pId);
         }
