@@ -9,6 +9,7 @@ namespace andengine.examples
 
     import android.view.Menu;
     import android.view.MenuItem;*/
+    using MenuConsts = Android.Views.MenuConsts;
 
     /**
      * @author Nicolas Gramlich
@@ -20,7 +21,7 @@ namespace andengine.examples
         // Constants
         // ===========================================================
 
-        private static int MENU_TRACE = Menu.FIRST;
+        private static int MENU_TRACE = MenuConsts.First;
 
         // ===========================================================
         // Fields
