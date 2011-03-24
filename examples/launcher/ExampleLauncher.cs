@@ -164,8 +164,8 @@ namespace andengine.examples.launcher
 				return new AlertDialog.Builder(this)
 					.SetTitle(R.String.dialog_new_in_this_version_title)
 					.SetMessage(sb.ToString())
-					.SetIcon(R.Drawable.ic_dialog_info)
-					.SetPositiveButton(R.String.ok, null)
+					.SetIcon(Android.Resource.Drawable.IcDialogInfo)
+					.SetPositiveButton(R.String.ok, (IDialogInterfaceOnClickListener)null)
 					.Create();
 			//default:
             } else {

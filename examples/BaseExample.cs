@@ -40,25 +40,28 @@ namespace andengine.examples
         // ===========================================================
 
 
-        public bool onCreateOptionsMenu(IMenu pMenu)
+        public bool OnCreateOptionsMenu(IMenu pMenu)
         {
-            pMenu.Add(Menu.NONE, MENU_TRACE, Menu.NONE, "Start Method Tracing");
+            //pMenu.Add(MenuConsts.None, MENU_TRACE, MenuConsts.None, "Start Method Tracing");
+            //pMenu.Add(MenuConsts.None, MENU_TRACE, MenuConsts.None, (Java.Lang.ICharSequence)"Start Method Tracing");
+            pMenu.Add(MenuConsts.None, MENU_TRACE, MenuConsts.None, (Java.Lang.ICharSequence) new Android.Text.SpannableString("Start Method Tracing"));
             return base.OnCreateOptionsMenu(pMenu);
         }
 
 
-        public bool onPrepareOptionsMenu(IMenu pMenu)
+        public bool OnPrepareOptionsMenu(IMenu pMenu)
         {
-            pMenu.FindItem(MENU_TRACE).SetTitle(this.mEngine.IsMethodTracing() ? "Stop Method Tracing" : "Start Method Tracing");
+            //pMenu.FindItem(MENU_TRACE).SetTitle(this.mEngine.MethodTracing ? "Stop Method Tracing" : "Start Method Tracing");
+            pMenu.FindItem(MENU_TRACE).SetTitle(this.mEngine.MethodTracing ? (Java.Lang.ICharSequence) new Android.Text.SpannableString("Stop Method Tracing") : (Java.Lang.ICharSequence) new Android.Text.SpannableString("Start Method Tracing"));
             return base.OnPrepareOptionsMenu(pMenu);
         }
 
 
-        public bool onMenuItemSelected(int pFeatureId, IMenuItem pItem)
+        public bool OnMenuItemSelected(int pFeatureId, IMenuItem pItem)
         {
             if (pItem.ItemId == MENU_TRACE)
             {
-                if (this.mEngine.IsMethodTracing())
+                if (this.mEngine.MethodTracing)
                 {
                     this.mEngine.StopMethodTracing();
                 }
