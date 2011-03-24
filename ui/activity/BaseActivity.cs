@@ -111,6 +111,11 @@ namespace andengine.ui.activity
 				base.OnPreExecute();
 			}
 
+            /* NB: Neither resolves the error: ...obj\Debug\android\src\andengine\ui\activity\BaseActivity_BaseActivityAsyncTask_1.java:4: andengine.ui.activity.BaseActivity_BaseActivityAsyncTask_1 is not abstract and does not override abstract method doInBackground(java.lang.Object...) in android.os.AsyncTask
+            public T doInBackground(Java.Lang.Object parameter) { return DoInBackground(new object[] { parameter }); }
+            public T DoInBackground(Java.Lang.Object parameter) { return DoInBackground(new object[] { parameter }); }
+            */
+
 			public virtual T DoInBackground(params object[] parameters)
 			{
 				try
