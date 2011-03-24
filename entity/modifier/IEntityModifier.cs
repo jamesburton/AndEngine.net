@@ -1,14 +1,16 @@
-package org.anddev.andengine.entity.modifier;
+using andengine.util;
+using andengine.util.modifier;
 
-import org.anddev.andengine.entity.IEntity;
-import org.anddev.andengine.util.IMatcher;
-import org.anddev.andengine.util.modifier.IModifier;
+namespace andengine.entity.modifier
+{
+
+using IEntity = andengine.entity.IEntity;
 
 /**
  * @author Nicolas Gramlich
  * @since 11:17:50 - 19.03.2010
  */
-public interface IEntityModifier extends IModifier<IEntity> {
+public interface IEntityModifier : IModifier<IEntity> {
 	// ===========================================================
 	// Final Fields
 	// ===========================================================
@@ -21,7 +23,10 @@ public interface IEntityModifier extends IModifier<IEntity> {
 	// Inner and Anonymous Classes
 	// ===========================================================
 
-	public static interface IEntityModifierListener extends IModifierListener<IEntity>{
+}
+
+    //NOTE: Was previously an inner class to IEntityModifier
+	public /*static*/ interface IEntityModifierListener : IModifierListener<IEntity>{
 		// ===========================================================
 		// Final Fields
 		// ===========================================================
@@ -31,7 +36,8 @@ public interface IEntityModifier extends IModifier<IEntity> {
 		// ===========================================================
 	}
 	
-	public interface IEntityModifierMatcher extends IMatcher<IModifier<IEntity>> {
+    //NOTE: Was previously an inner class to IEntityModifier
+	public interface IEntityModifierMatcher : IMatcher<IModifier<IEntity>> {
 		// ===========================================================
 		// Constants
 		// ===========================================================

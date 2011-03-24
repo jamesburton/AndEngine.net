@@ -1,22 +1,20 @@
 namespace andengine.util
 {
 
-    using IEntity = andengine.entity.IEntity;
-
     /**
      * @author Nicolas Gramlich
-     * @since 15:45:58 - 21.06.2010
+     * @since 23:40:42 - 27.12.2010
      */
-    public interface IEntityMatcher : IMatcher<IEntity>
+    public interface ParameterCallable<T>
     {
         // ===========================================================
-        // Constants
+        // Final Fields
         // ===========================================================
 
         // ===========================================================
         // Methods
         // ===========================================================
 
+        void call(T pParameter);
     }
 }
-

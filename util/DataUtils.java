@@ -1,18 +1,13 @@
-package org.anddev.andengine.entity.modifier;
-
-import org.anddev.andengine.entity.IEntity;
-import org.anddev.andengine.util.modifier.ModifierList;
+package org.anddev.andengine.util;
 
 /**
  * @author Nicolas Gramlich
- * @since 14:19:18 - 24.12.2010
+ * @since 15:01:49 - 20.03.2011
  */
-public class EntityModifierList extends ModifierList<IEntity> {
+public class DataUtils {
 	// ===========================================================
 	// Constants
 	// ===========================================================
-
-	private static final long serialVersionUID = 161652765736600082L;
 
 	// ===========================================================
 	// Fields
@@ -22,14 +17,6 @@ public class EntityModifierList extends ModifierList<IEntity> {
 	// Constructors
 	// ===========================================================
 
-	public EntityModifierList(final IEntity pTarget) {
-		super(pTarget);
-	}
-
-	public EntityModifierList(final IEntity pTarget, final int pCapacity) {
-		super(pTarget, pCapacity);
-	}
-
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
@@ -37,6 +24,10 @@ public class EntityModifierList extends ModifierList<IEntity> {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
+
+	public static int unsignedByteToInt(final byte bByte) {
+		return bByte & 0xFF;
+	}
 
 	// ===========================================================
 	// Methods

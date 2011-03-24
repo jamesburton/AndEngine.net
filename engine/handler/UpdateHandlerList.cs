@@ -1,3 +1,5 @@
+using andengine.util;
+
 namespace andengine.engine.handler
 {
 
@@ -9,7 +11,7 @@ namespace andengine.engine.handler
      * @since 09:45:22 - 31.03.2010
      */
     //public class UpdateHandlerList extends ArrayList<IUpdateHandler> : IUpdateHandler {
-    public class UpdateHandlerList : List<IUpdateHandler>, IUpdateHandler
+    public class UpdateHandlerList : SmartList<IUpdateHandler>, IUpdateHandler
     {
         // ===========================================================
         // Constants
@@ -25,6 +27,16 @@ namespace andengine.engine.handler
         // ===========================================================
         // Constructors
         // ===========================================================
+
+        public UpdateHandlerList()
+        {
+
+        }
+
+        public UpdateHandlerList(int pCapacity)
+            : base(pCapacity)
+        {
+        }
 
         // ===========================================================
         // Getter & Setter
