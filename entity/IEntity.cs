@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using andengine.entity.modifier;
 using andengine.util;
-using Android.Views.Animations;
 
 namespace andengine.entity
 {

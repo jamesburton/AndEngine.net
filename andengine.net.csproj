@@ -446,9 +446,9 @@
     <Compile Include="util\StreamUtils.cs" />
     <Content Include="util\StringUtils.java" />
     <Content Include="util\SystemUtils.java" />
+    <Compile Include="util\Transformation.cs" />
+    <Compile Include="util\TransformationPool.cs" />
     <Compile Include="util\VerticalAlign.cs" />
-    <Content Include="util\Transformation.java" />
-    <Content Include="util\TransformationPool.java" />
     <Content Include="util\ViewUtils.java" />
   </ItemGroup>
   <ItemGroup>

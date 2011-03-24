@@ -5,7 +5,6 @@ using andengine.entity.layer;
 using andengine.entity.modifier;
 using andengine.util;
 using andengine.util.constants;
-using Android.Views.Animations;
 
 namespace andengine.entity
 {

@@ -1,6 +1,8 @@
-package org.anddev.andengine.util;
+using andengine.util;
+using andengine.util.pool;
 
-import org.anddev.andengine.util.pool.GenericPool;
+namespace andengine.util
+{
 
 /**
  * @author Nicolas Gramlich
@@ -14,10 +16,10 @@ public class TransformationPool {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	
-	private static final GenericPool<Transformation> POOL = new GenericPool<Transformation>() {
-		@Override
-		protected Transformation onAllocatePoolItem() {
+
+    private static GenericPool<Transformation> POOL = new GenericTransformationPool();
+    private class GenericTransformationPool : GenericPool<Transformation> {
+		protected override Transformation OnAllocatePoolItem() {
 			return new Transformation();
 		}
 	};
@@ -35,12 +37,12 @@ public class TransformationPool {
 	// ===========================================================
 	
 	public static Transformation obtain() {
-		return POOL.obtainPoolItem();
+		return POOL.ObtainPoolItem();
 	}
 	
-	public static void recycle(final Transformation pTransformation) {
+	public static void recycle(Transformation pTransformation) {
 		pTransformation.setToIdentity();
-		POOL.recyclePoolItem(pTransformation);
+		POOL.RecyclePoolItem(pTransformation);
 	}
 
 	// ===========================================================
@@ -50,4 +52,5 @@ public class TransformationPool {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+}
 }
