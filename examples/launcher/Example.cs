@@ -1,3 +1,5 @@
+using System;
+
 namespace andengine.examples.launcher
 {
 
@@ -200,19 +202,9 @@ enum Example {
 }
 */
 
-	// TODO: Verify if I need to be closer to the CLASS<?... syntax, or if BaseGameActivity is fine ... will see a little further into conversion.
-	public class Example<T> : BaseGameActivity
+    public class Example : Java.Lang.Object
     {
-		public readonly int NAMERESID;
-
-		internal Example(int pNameResID) {
-			this.NAMERESID = pNameResID;
-		}
-    }
-
-    public class Example
-    {
-		public readonly BaseGameActivity LINE = new Example<LineExample>(R.String.example_line);
+		public static readonly Example LINE = new Example(typeof(LineExample), R.String.example_line);
 
 		// TODO: Convert remaining example references to C# equivalent:
 		/* Remaining java enum source example references
@@ -288,5 +280,14 @@ enum Example {
 	GAME_SNAKE(SnakeGameActivity.class, R.string.example_game_snake),
 	GAME_RACER(RacerGameActivity.class, R.string.example_game_racer);
 		*/
-	}
+
+        public readonly Type ExampleType;
+        public readonly int NAMERESID;
+
+        internal Example(Type exampleType, int pNameResID)
+        {
+            ExampleType = exampleType;
+            this.NAMERESID = pNameResID;
+        }
+    }
 }

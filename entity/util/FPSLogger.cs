@@ -1,12 +1,15 @@
-package org.anddev.andengine.entity.util;
+using andengine.util;
+using andengine.util.constants;
 
-using andengine.util.Debug;
+namespace andengine.entity.util
+{
 
+    using System;
 /**
  * @author Nicolas Gramlich
  * @since 19:52:31 - 09.03.2010
  */
-public class FPSLogger extends AverageFPSCounter {
+public class FPSLogger : AverageFPSCounter {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -15,19 +18,19 @@ public class FPSLogger extends AverageFPSCounter {
 	// Fields
 	// ===========================================================
 
-	protected float mShortestFrame = Float.MAX_VALUE;
-	protected float mLongestFrame = Float.MIN_VALUE;
+	protected float mShortestFrame = float.MaxValue;
+	protected float mLongestFrame = float.MinValue;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 
-	public FPSLogger() {
-		super();
+	public FPSLogger() : base()
+    {
 	}
 
-	public FPSLogger(final float pAverageDuration) {
-		super(pAverageDuration);
+	public FPSLogger(float pAverageDuration) : base(pAverageDuration)
+    {
 	}
 
 	// ===========================================================
@@ -38,28 +41,25 @@ public class FPSLogger extends AverageFPSCounter {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
-	@Override
-	protected void onHandleAverageDurationElapsed(final float pFPS) {
+	protected override void OnHandleAverageDurationElapsed(float pFPS) {
 		this.onLogFPS();
-
-		this.mLongestFrame = Float.MIN_VALUE;
-		this.mShortestFrame = Float.MAX_VALUE;
+		
+        this.mLongestFrame = float.MinValue;
+		this.mShortestFrame = float.MaxValue;
 	}
 
-	@Override
-	public void onUpdate(final float pSecondsElapsed) {
-		super.onUpdate(pSecondsElapsed);
+	public override void OnUpdate(float pSecondsElapsed) {
+		base.OnUpdate(pSecondsElapsed);
 
-		this.mShortestFrame = Math.min(this.mShortestFrame, pSecondsElapsed);
-		this.mLongestFrame = Math.max(this.mLongestFrame, pSecondsElapsed);
+		this.mShortestFrame = Math.Min(this.mShortestFrame, pSecondsElapsed);
+		this.mLongestFrame = Math.Max(this.mLongestFrame, pSecondsElapsed);
 	}
 
-	@Override
-	public void reset() {
-		super.reset();
+	public override void Reset() {
+		base.Reset();
 
-		this.mShortestFrame = Float.MAX_VALUE;
-		this.mLongestFrame = Float.MIN_VALUE;
+		this.mShortestFrame = float.MaxValue;
+		this.mLongestFrame = float.MinValue;
 	}
 
 	// ===========================================================
@@ -67,13 +67,14 @@ public class FPSLogger extends AverageFPSCounter {
 	// ===========================================================
 
 	protected void onLogFPS() {
-		Debug.d(String.format("FPS: %.2f (MIN: %.0f ms | MAX: %.0f ms)",
+		Debug.D(String.Format("FPS: {0:f2} (MIN: {1:f0} ms | MAX: {2:f0} ms)",
 				this.mFrames / this.mSecondsElapsed,
-				this.mShortestFrame * MILLISECONDSPERSECOND,
-				this.mLongestFrame * MILLISECONDSPERSECOND));
+				this.mShortestFrame * TimeConstants.MILLISECONDSPERSECOND,
+                this.mLongestFrame * TimeConstants.MILLISECONDSPERSECOND));
 	}
 
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+}
 }

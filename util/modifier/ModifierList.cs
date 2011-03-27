@@ -36,6 +36,11 @@ namespace andengine.util.modifier
             this.mTarget = pTarget;
         }
 
+        public ModifierList(T pTarget, int pCapacity) : base(pCapacity)
+        {
+		    this.mTarget = pTarget;
+	    }
+
         // ===========================================================
         // Getter & Setter
         // ===========================================================

@@ -4,6 +4,7 @@ namespace andengine.engine.options
     using Camera = andengine.engine.camera.Camera;
     using IResolutionPolicy = andengine.engine.options.resolutionpolicy.IResolutionPolicy;
     using ITextureSource = andengine.opengl.texture.source.ITextureSource;
+    using WakeLockFlags = Android.OS.WakeLockFlags;
 
     /**
      * @author  Nicolas Gramlich
@@ -30,7 +31,7 @@ namespace andengine.engine.options
         private ITextureSource mLoadingScreenTextureSource;
         private bool mNeedsSound;
         private bool mNeedsMusic;
-        private WakeLockOptions mWakeLockOptions = WakeLockOptions.SCREEN_BRIGHT;
+        private WakeLockFlags mWakeLockOptions = WakeLockFlags.ScreenBright;
 
         // ===========================================================
         // Constructors
@@ -128,18 +129,18 @@ namespace andengine.engine.options
             return this;
         }
 
-        public WakeLockOptions GetWakeLockOptions()
+        public WakeLockFlags GetWakeLockOptions()
         {
             return this.mWakeLockOptions;
         }
 
-        public EngineOptions SetWakeLockOptions(/* final */ WakeLockOptions pWakeLockOptions)
+        public EngineOptions SetWakeLockOptions(/* final */ WakeLockFlags pWakeLockOptions)
         {
             this.mWakeLockOptions = pWakeLockOptions;
             return this;
         }
 
-        public WakeLockOptions WakeLockOptions { get { return GetWakeLockOptions(); } set { SetWakeLockOptions(value); } }
+        public WakeLockFlags WakeLockOptions { get { return GetWakeLockOptions(); } set { SetWakeLockOptions(value); } }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces

@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using andengine.util;
+
 namespace andengine.engine.handler
 {
 
@@ -20,4 +23,14 @@ namespace andengine.engine.handler
         /* public */
         void Reset();
     }
+
+    public interface IUpdateHandlerMatcher : IMatcher<IUpdateHandler> {
+		// ===========================================================
+		// Constants
+		// ===========================================================
+
+		// ===========================================================
+		// Methods
+		// ===========================================================
+	}
 }

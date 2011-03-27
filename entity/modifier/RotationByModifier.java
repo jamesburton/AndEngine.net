@@ -1,35 +1,35 @@
-package org.anddev.andengine.entity.util;
+package org.anddev.andengine.entity.modifier;
 
-using andengine.util.constants.TimeConstants;
-
+import org.anddev.andengine.entity.IEntity;
 
 /**
  * @author Nicolas Gramlich
- * @since 19:52:31 - 09.03.2010
+ * @since 16:12:52 - 19.03.2010
  */
-public abstract class AverageFPSCounter extends FPSCounter : TimeConstants {
+public class RotationByModifier extends SingleValueChangeShapeModifier {
 	// ===========================================================
 	// Constants
 	// ===========================================================
-
-	private static final float AVERAGE_DURATION_DEFAULT = 5;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
 
-	protected final float mAverageDuration;
-
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 
-	public AverageFPSCounter() {
-		this(AVERAGE_DURATION_DEFAULT);
+	public RotationByModifier(final float pDuration, final float pRotation) {
+		super(pDuration, pRotation);
 	}
 
-	public AverageFPSCounter(final float pAverageDuration) {
-		this.mAverageDuration = pAverageDuration;
+	protected RotationByModifier(final RotationByModifier pRotationByModifier) {
+		super(pRotationByModifier);
+	}
+
+	@Override
+	public RotationByModifier clone(){
+		return new RotationByModifier(this);
 	}
 
 	// ===========================================================
@@ -40,18 +40,9 @@ public abstract class AverageFPSCounter extends FPSCounter : TimeConstants {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
-	protected abstract void onHandleAverageDurationElapsed(final float pFPS);
-
 	@Override
-	public void onUpdate(final float pSecondsElapsed) {
-		super.onUpdate(pSecondsElapsed);
-
-		if(this.mSecondsElapsed > this.mAverageDuration){
-			this.onHandleAverageDurationElapsed(this.getFPS());
-
-			this.mSecondsElapsed -= this.mAverageDuration;
-			this.mFrames = 0;
-		}
+	protected void onChangeValue(final IEntity pEntity, final float pValue) {
+		pEntity.setRotation(pEntity.getRotation() + pValue);
 	}
 
 	// ===========================================================

@@ -1,3 +1,6 @@
+using Android.Content;
+using Android.Widget;
+
 namespace andengine.examples.launcher
 {
 
@@ -129,7 +132,7 @@ namespace andengine.examples.launcher
 					.SetTitle( R.String.dialog_first_app_launch_title)
 					.SetMessage(R.String.dialog_first_app_launch_message)
 					.SetIcon(Android.Resource.Drawable.IcDialogInfo)
-					.SetPositiveButton(R.String.ok, null)
+					.SetPositiveButton(R.String.ok, (IDialogInterfaceOnClickListener)null)
 					.Create();
 			//case DIALOG_BENCHMARKS_SUBMIT_PLEASE:
             } else if(pId == DIALOG_BENCHMARKS_SUBMIT_PLEASE) {
@@ -137,7 +140,7 @@ namespace andengine.examples.launcher
 					.SetTitle(R.String.dialog_benchmarks_submit_please_title)
 					.SetMessage(R.String.dialog_benchmarks_submit_please_message)
 					.SetIcon(Android.Resource.Drawable.IcDialogInfo)
-					.SetPositiveButton(Android.Resource.String.Ok, null)
+					.SetPositiveButton(Android.Resource.String.Ok,  (IDialogInterfaceOnClickListener)null)
 					.Create();
 			//case DIALOG_NEW_IN_THIS_VERSION:
             } else if(pId == DIALOG_NEW_IN_THIS_VERSION) {
@@ -161,8 +164,8 @@ namespace andengine.examples.launcher
 				return new AlertDialog.Builder(this)
 					.SetTitle(R.String.dialog_new_in_this_version_title)
 					.SetMessage(sb.ToString())
-					.SetIcon(Android.R.Drawable.ic_dialog_info)
-					.SetPositiveButton(Android.R.String.ok, null)
+					.SetIcon(Android.Resource.Drawable.IcDialogInfo)
+					.SetPositiveButton(R.String.ok, (IDialogInterfaceOnClickListener)null)
 					.Create();
 			//default:
             } else {
@@ -172,20 +175,19 @@ namespace andengine.examples.launcher
 
         public override void OnGroupExpand(int pGroupPosition)
         {
-            switch (this.mExpandableExampleLauncherListAdapter.getGroup(pGroupPosition))
+            /*if(this.mExpandableExampleLauncherListAdapter.getGroup(pGroupPosition) == ExampleGroup.BENCHMARK)
             {
-                case BENCHMARK:
-                    Toast.MakeText(this, "When running a benchmark, a dialog with the results will appear after some seconds.", Toast.LENGTH_SHORT).show();
-            }
+                Toast.MakeText(this, "When running a benchmark, a dialog with the results will appear after some seconds.",ToastLength.Short).Show();
+            }*/
             base.OnGroupExpand(pGroupPosition);
         }
 
         public bool OnChildClick(/* final */ ExpandableListView pParent, /* final */ View pV, /* final */ int pGroupPosition, /* final */ int pChildPosition, /* final */ long pId)
         {
             /* final */
-            Example example = this.mExpandableExampleLauncherListAdapter.getChild(pGroupPosition, pChildPosition);
+            Example example = (Example) this.mExpandableExampleLauncherListAdapter.GetChild(pGroupPosition, pChildPosition);
 
-            this.StartActivity(new Intent(this, example.CLASS));
+            this.StartActivity(new Intent(this, example.ExampleType));
 
             return base.OnChildClick(pParent, pV, pGroupPosition, pChildPosition, pId);
         }

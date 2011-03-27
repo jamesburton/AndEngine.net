@@ -1,20 +1,15 @@
-namespace andengine.examples {
+package org.anddev.andengine.entity.modifier;
 
-import org.anddev.andengine.ui.activity.BaseGameActivity;
-
-import android.view.Menu;
-import android.view.MenuItem;
+import org.anddev.andengine.entity.IEntity;
 
 /**
  * @author Nicolas Gramlich
- * @since 22:10:28 - 11.04.2010
+ * @since 22:55:13 - 19.03.2010
  */
-public abstract class BaseExample : BaseGameActivity {
+public class DelayModifier extends DurationShapeModifier {
 	// ===========================================================
 	// Constants
 	// ===========================================================
-
-	private static final int MENU_TRACE = Menu.FIRST;
 
 	// ===========================================================
 	// Fields
@@ -23,6 +18,23 @@ public abstract class BaseExample : BaseGameActivity {
 	// ===========================================================
 	// Constructors
 	// ===========================================================
+
+	public DelayModifier(final float pDuration, final IEntityModifierListener pEntityModifierListener) {
+		super(pDuration, pEntityModifierListener);
+	}
+
+	public DelayModifier(final float pDuration) {
+		super(pDuration);
+	}
+
+	protected DelayModifier(final DelayModifier pDelayModifier) {
+		super(pDelayModifier);
+	}
+
+	@Override
+	public DelayModifier clone(){
+		return new DelayModifier(this);
+	}
 
 	// ===========================================================
 	// Getter & Setter
@@ -33,30 +45,13 @@ public abstract class BaseExample : BaseGameActivity {
 	// ===========================================================
 
 	@Override
-	public boolean onCreateOptionsMenu(final Menu pMenu) {
-		pMenu.add(Menu.NONE, MENU_TRACE, Menu.NONE, "Start Method Tracing");
-		return super.onCreateOptionsMenu(pMenu);
+	protected void onManagedInitialize(final IEntity pEntity) {
+
 	}
 
 	@Override
-	public boolean onPrepareOptionsMenu(final Menu pMenu) {
-		pMenu.findItem(MENU_TRACE).setTitle(this.mEngine.isMethodTracing() ? "Stop Method Tracing" : "Start Method Tracing");
-		return super.onPrepareOptionsMenu(pMenu);
-	}
+	protected void onManagedUpdate(final float pSecondsElapsed, final IEntity pEntity) {
 
-	@Override
-	public boolean onMenuItemSelected(final int pFeatureId, final MenuItem pItem) {
-		switch(pItem.getItemId()) {
-			case MENU_TRACE:
-				if(this.mEngine.isMethodTracing()) {
-					this.mEngine.stopMethodTracing();
-				} else {
-					this.mEngine.startMethodTracing("AndEngine_" + System.currentTimeMillis() + ".trace");
-				}
-				return true;
-			default:
-				return super.onMenuItemSelected(pFeatureId, pItem);
-		}
 	}
 
 	// ===========================================================

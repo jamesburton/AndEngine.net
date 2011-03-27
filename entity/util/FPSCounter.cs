@@ -1,69 +1,53 @@
-using andengine.util;
-
-namespace andengine.engine.handler
+namespace andengine.entity.util
 {
 
-    //import java.util.ArrayList;
-    using System.Collections.Generic;
+    using IUpdateHandler = andengine.engine.handler.IUpdateHandler;
 
     /**
      * @author Nicolas Gramlich
-     * @since 09:45:22 - 31.03.2010
+     * @since 19:52:31 - 09.03.2010
      */
-    //public class UpdateHandlerList extends ArrayList<IUpdateHandler> : IUpdateHandler {
-    public class UpdateHandlerList : SmartList<IUpdateHandler>, IUpdateHandler
+    public class FPSCounter : IUpdateHandler
     {
         // ===========================================================
         // Constants
         // ===========================================================
 
-        //private static /* final */ readonly long serialVersionUID = -8842562717687229277L;
-        private static /* final */ readonly long serialVersionUID = -8442662717627239297L;
-
         // ===========================================================
         // Fields
         // ===========================================================
+
+        protected float mSecondsElapsed;
+
+        protected int mFrames;
 
         // ===========================================================
         // Constructors
         // ===========================================================
 
-        public UpdateHandlerList()
-        {
-
-        }
-
-        public UpdateHandlerList(int pCapacity)
-            : base(pCapacity)
-        {
-        }
-
         // ===========================================================
         // Getter & Setter
         // ===========================================================
+
+        public float getFPS()
+        {
+            return this.mFrames / this.mSecondsElapsed;
+        }
 
         // ===========================================================
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public /* override */ void OnUpdate(/* final */ float pSecondsElapsed)
+        public virtual void OnUpdate(float pSecondsElapsed)
         {
-            /* final */
-            int handlerCount = this.Count;
-            for (int i = handlerCount - 1; i >= 0; i--)
-            {
-                this[i].OnUpdate(pSecondsElapsed);
-            }
+            this.mFrames++;
+            this.mSecondsElapsed += pSecondsElapsed;
         }
 
-        public /* override */ void Reset()
+        public virtual void Reset()
         {
-            /* final */
-            int handlerCount = this.Count;
-            for (int i = handlerCount - 1; i >= 0; i--)
-            {
-                this[i].Reset();
-            }
+            this.mFrames = 0;
+            this.mSecondsElapsed = 0;
         }
 
         // ===========================================================

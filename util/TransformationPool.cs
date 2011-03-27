@@ -1,12 +1,14 @@
-package org.anddev.andengine.entity.util;
+using andengine.util;
+using andengine.util.pool;
 
-using andengine.engine.handler.IUpdateHandler;
+namespace andengine.util
+{
 
 /**
  * @author Nicolas Gramlich
- * @since 19:52:31 - 09.03.2010
+ * @since 23:07:53 - 23.02.2011
  */
-public class FPSCounter : IUpdateHandler {
+public class TransformationPool {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -15,9 +17,12 @@ public class FPSCounter : IUpdateHandler {
 	// Fields
 	// ===========================================================
 
-	protected float mSecondsElapsed;
-
-	protected int mFrames;
+    private static GenericPool<Transformation> POOL = new GenericTransformationPool();
+    private class GenericTransformationPool : GenericPool<Transformation> {
+		protected override Transformation OnAllocatePoolItem() {
+			return new Transformation();
+		}
+	};
 
 	// ===========================================================
 	// Constructors
@@ -27,24 +32,17 @@ public class FPSCounter : IUpdateHandler {
 	// Getter & Setter
 	// ===========================================================
 
-	public float getFPS() {
-		return this.mFrames / this.mSecondsElapsed;
-	}
-
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-
-	@Override
-	public void onUpdate(final float pSecondsElapsed) {
-		this.mFrames++;
-		this.mSecondsElapsed += pSecondsElapsed;
+	
+	public static Transformation obtain() {
+		return POOL.ObtainPoolItem();
 	}
-
-	@Override
-	public void reset() {
-		this.mFrames = 0;
-		this.mSecondsElapsed = 0;
+	
+	public static void recycle(Transformation pTransformation) {
+		pTransformation.setToIdentity();
+		POOL.RecyclePoolItem(pTransformation);
 	}
 
 	// ===========================================================
@@ -54,4 +52,5 @@ public class FPSCounter : IUpdateHandler {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+}
 }

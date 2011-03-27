@@ -1,12 +1,10 @@
-package org.anddev.andengine.engine.options.resolutionpolicy;
-
-import android.view.View.MeasureSpec;
+package org.anddev.andengine.util;
 
 /**
  * @author Nicolas Gramlich
- * @since 22:46:43 - 06.10.2010
+ * @since 15:01:49 - 20.03.2011
  */
-public abstract class BaseResolutionPolicy implements IResolutionPolicy {
+public class DataUtils {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -27,13 +25,8 @@ public abstract class BaseResolutionPolicy implements IResolutionPolicy {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
-	protected static void throwOnNotMeasureSpecEXACTLY(final int pWidthMeasureSpec, final int pHeightMeasureSpec) {
-		final int specWidthMode = MeasureSpec.getMode(pWidthMeasureSpec);
-		final int specHeightMode = MeasureSpec.getMode(pHeightMeasureSpec);
-
-		if (specWidthMode != MeasureSpec.EXACTLY || specHeightMode != MeasureSpec.EXACTLY) {
-			throw new IllegalStateException("This IResolutionPolicy requires MeasureSpec.EXACTLY ! That means ");
-		}
+	public static int unsignedByteToInt(final byte bByte) {
+		return bByte & 0xFF;
 	}
 
 	// ===========================================================
