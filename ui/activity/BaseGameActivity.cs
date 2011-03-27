@@ -37,6 +37,8 @@ namespace andengine.ui.activity
     using Runnable = Java.Lang.IRunnable;
     using WindowManagerFlags = Android.Views.WindowManagerFlags;
     using WindowFeatures = Android.Views.WindowFeatures;
+    using ScreenOrientationOptions = andengine.engine.options.EngineOptions.ScreenOrientationOptions;
+    using ScreenOrientation = Android;
 
     /**
      * @author Nicolas Gramlich
@@ -161,12 +163,12 @@ namespace andengine.ui.activity
         // Methods for/from SuperClass/Interfaces
         // ===========================================================
 
-        public override void OnGameResumed()
+        public /* override */ virtual void OnGameResumed()
         {
 
         }
 
-        public override void OnGamePaused()
+        public /* override */ virtual void OnGamePaused()
         {
 
         }
@@ -222,7 +224,7 @@ namespace andengine.ui.activity
 
         private void AcquireWakeLock(WakeLockOptions pWakeLockOptions)
         {
-            PowerManager pm = (PowerManager)this.GetSystemService(Context.POWER_SERVICE);
+            PowerManager pm = (PowerManager)this.GetSystemService(Context.PowerService);
             this.mWakeLock = pm.NewWakeLock(pWakeLockOptions.GetFlag() | WakeLockFlags.OnAfterRelease, "AndEngine");
             try
             {
@@ -256,18 +258,18 @@ namespace andengine.ui.activity
 
             switch (pEngineOptions.GetScreenOrientation())
             {
-                case LANDSCAPE:
-                    this.SetRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                case ScreenOrientationOptions.LANDSCAPE:
+                    this.SetRequestedOrientation(ScreenOrientation.Content.PM.ScreenOrientation.Landscape);
                     break;
-                case PORTRAIT:
-                    this.SetRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                case ScreenOrientationOptions.PORTRAIT:
+                    this.SetRequestedOrientation(ScreenOrientation.Content.PM.ScreenOrientation.Portrait);
                     break;
             }
         }
 
         protected LayoutParams CreateSurfaceViewLayoutParams()
         {
-            LayoutParams layoutParams = new LayoutParams(FILL_PARENT, FILL_PARENT);
+            LayoutParams layoutParams = new LayoutParams(LayoutParams.FillParent, LayoutParams.FillParent);
             layoutParams.gravity = Gravity.CENTER;
             return layoutParams;
         }
