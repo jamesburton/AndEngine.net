@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "andengine.net", "andengine.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "andengine.net.examples", "examples\andengine.net.examples.csproj", "{BE537322-5C9C-424E-A179-8BF10F030CA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidBaseReplacements", "..\AndroidBaseReplacements\AndroidBaseReplacements.csproj", "{87864330-FDD9-4E31-9A91-9119ED8AEE95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidBaseReplacements", "AndroidBaseReplacements\AndroidBaseReplacements.csproj", "{87864330-FDD9-4E31-9A91-9119ED8AEE95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

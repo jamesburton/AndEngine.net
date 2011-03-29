@@ -45,8 +45,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AbstractExecutorService.java" />
     <Content Include="AsyncTask.java" />
+    <Content Include="README.txt" />
+    <Content Include="TimeoutException.java" />
+    <Content Include="TimeUnit.java" />
     <None Include="ThreadPoolExecutor.cs.exclude" />
+    <Content Include="Callable.java" />
+    <Content Include="Executor.java" />
+    <Content Include="ExecutorService.java" />
+    <Content Include="Future.java" />
+    <Content Include="FutureTask.java" />
     <Content Include="ThreadPoolExecutor.java" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
