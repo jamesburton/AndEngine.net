@@ -82,7 +82,8 @@ namespace andengine.ui.activity
             new BaseActivityAsyncTask<T>(this, pTitleResID, pMessageResID, pCallable, pCallback, pExceptionCallback).DoInBackground((object[])null);
         }
 
-        internal class BaseActivityAsyncTask<T> : Android.OS.AsyncTask<System.Void, System.Void, T> //AsyncTask
+        //internal class BaseActivityAsyncTask<T> : Android.OS.AsyncTask<System.Void, System.Void, T> //AsyncTask
+        internal class BaseActivityAsyncTask<T> : Android.OS.AsyncTask<void, void, T> //AsyncTask
         {
             internal readonly BaseActivity _this;
             internal readonly int pTitleResID;
@@ -269,7 +270,8 @@ namespace andengine.ui.activity
             }
 
             //public class BaseActivityAsyncTask2<T> : AsyncTask
-            public class BaseActivityAsyncTask2/*<T>*/ : Android.OS.AsyncTask<System.Void, int, T>
+            //public class BaseActivityAsyncTask2/*<T>*/ : Android.OS.AsyncTask<System.Void, int, T>
+            public class BaseActivityAsyncTask2/*<T>*/ : Android.OS.AsyncTask<void, int, T>
             {
                 private ProgressDialog mPD;
                 private Exception mException = null;
@@ -320,7 +322,7 @@ namespace andengine.ui.activity
                 public class BackgroundProgressListener : IProgressListener
                 {
                     internal BaseActivityAsyncTask2/*<T>*/ _this;
-                    public BackgroundProgressListener(BaseActivityAsyncTask2<T> _this)
+                    public BackgroundProgressListener(BaseActivityAsyncTask2/*<T>*/ _this)
                     {
                         this._this = _this;
                     }
