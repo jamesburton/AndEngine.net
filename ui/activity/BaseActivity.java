@@ -1,11 +1,11 @@
-package org.anddev.andengine.ui.activity;
+﻿package org.anddev.andengine.ui.activity;
 
 import java.util.concurrent.Callable;
 
-using andengine.util.AsyncCallable;
-using andengine.util.Callback;
-using andengine.util.Debug;
-using andengine.util.ProgressCallable;
+import org.anddev.andengine.util.AsyncCallable;
+import org.anddev.andengine.util.Callback;
+import org.anddev.andengine.util.Debug;
+import org.anddev.andengine.util.ProgressCallable;
 import org.anddev.progressmonitor.IProgressListener;
 
 import android.app.Activity;
@@ -152,7 +152,7 @@ public abstract class BaseActivity extends Activity {
 			public void onPreExecute() {
 				this.mPD = new ProgressDialog(BaseActivity.this);
 				this.mPD.setTitle(pTitleResID);
-				this.mPD.setIcon(Android.Resource.drawable.ic_menu_save);
+				this.mPD.setIcon(android.R.drawable.ic_menu_save);
 				this.mPD.setIndeterminate(false);
 				this.mPD.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 				this.mPD.show();
